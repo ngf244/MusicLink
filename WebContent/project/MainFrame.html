@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MainFrame</title>
+
+<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+<!-- backCategory, inBigCategory 폰트 -->
+<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+<!-- inSmallCategory 폰트 -->
+<link href="css/calender.css" rel="stylesheet">
+<style>
+	html, body{background: #FFE9E9; height: 100%;}
+	
+	#fullArea{margin: 0; padding: 0; height: 100%; text-align: center;}
+	
+	#layoutArea {
+		height: 100%;
+		margin-top: 10%;
+		position: relative;
+	}
+	#backArea{
+		position: absolute;
+		z-index: 1;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	#backCategory {
+		font-family: 'Bungee', cursive;
+		font-size: 100px;
+		color: lightgray;
+	}
+	#contentArea{
+		position: absolute;
+		z-index: 2;
+		left: 50%;
+		top: 150px;
+		transform: translateX(-50%);
+		width: 70%;
+		height: 100%;
+		background: white;
+		display: inline-block;
+		text-align: left;
+	}
+	
+	#categoryArea{margin-top: 1%; margin-left: 5%;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
+	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
+	#block{
+		background: #8AFF00;
+		width: 55px;
+		height: 7px;
+		position: absolute;
+		top: 5%;
+	}
+	.tab {
+  width: 100%;
+  height: 50px;
+}
+
+.tablinks {
+  float: left;
+  width: 25%;
+  height: 100%;
+  border: 1px;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #a6a6a6;
+}
+
+.tablinks.active {
+  color: #000;
+  background-color: #fff;
+}
+
+.follow.fixed{
+	position: fixed;
+	left: 20px;
+	top: 50px;
+}
+.cal_top{
+    text-align: center;
+    font-size: 30px;
+}
+.cal{
+    text-align: center;    
+}
+table.calendar{
+    border: 1px solid black;
+    display: inline-table;
+    text-align: left;
+}
+table.calendar td{
+    vertical-align: top;
+    border: 1px solid skyblue;
+    width: 100px;
+}
+</style>
+
+</head>
+<body>
+
+	<div id="fullArea">
+		
+		<div id="layoutArea">
+			<div id="backArea">
+				<label id="backCategory">ARTIST</label>
+			</div>
+			
+			<div id="contentArea">
+				<div id="categoryArea">
+					<div id="block"></div>
+						<label id="inSmallCategory">ARTIST</label>
+
+					<label id="inBigCategory">- Profile</label>
+						<div class="tab">
+					  <button class="tablinks active" onclick="openTab(event, 'tab1')">프로필</button>
+					  <button class="tablinks" onclick="openTab(event, 'tab2')">별점/리뷰</button>
+					  <button class="tablinks" onclick="openTab(event, 'tab3')">소통 게시판</button>
+					  <button class="tablinks" onclick="openTab(event, 'tab4')">갤러리 게시판</button>
+					</div>
+
+					<div id="tab1" class="tabcontent" style="display: block;">
+
+						<div style="width:150px; height:200px; float:left; padding-right: 50px"> <!--프로필사진 시작-->
+							<img src="chang.jpg" width="150" height="200">
+								<div align="center" style="padding-top: 10px">
+									<button type="submit" style="background-color: #00BFFF; width:100px; height:40px; font-size:1em;
+									border:none; border-radius: 3px;">팔로우</button>
+								</div>
+						</div> <!-- 프로필사진 끝 -->
+
+						<div>
+							<table>
+								<tr>
+									<td style="width: 270px">팀명(활동명)</td>
+									<td>창모</td>
+									<td rowspan="7" style="width:70px; border-right:1px solid gray;"></td>
+								</tr>
+								<tr>
+									<td style="padding-top: 10px">유형</td>
+									<td style="padding-top: 10px">솔로(남성)</td>
+								</tr>
+								<tr>
+									<td style="padding-top: 10px">데뷔</td>
+									<td style="padding-top: 10px">2014</td>
+								</tr>
+								<tr>
+									<td style="padding-top: 10px">국적</td>
+									<td style="padding-top: 10px">대한민국</td>
+								</tr>
+								<tr>
+									<td style="padding-top: 10px">장르</td>
+									<td style="padding-top: 10px">랩/힙합</td>
+								</tr>
+								<tr>
+									<td style="padding-top: 20px">아티스트 한줄 소개 및 개인SNS</td>
+								</tr>
+								<tr>
+									<td style="height: 70px;" valign=top>내용</td>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<table style="border-bottom:1px solid gray; border-top:1px solid gray; width:100%">
+								<tr>
+									<td>아티스트 소개</td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr>
+									<td>내용</td>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<table style="width:100%; border-collapse: collapse;">
+								<tr align="center">
+									<td style="border-right:1px solid gray; border-bottom:1px solid gray;">캘린더</td>
+									<td style="border-bottom:1px solid gray;">활동 리스트</td>
+								</tr>
+								<tr>
+									<td style="border-right:1px solid gray; height:415px; width:60%">
+										<div class="container">
+									  <div class="my-calendar clearfix">
+									    <div class="clicked-date">
+									      <div class="cal-day"></div>
+									      <div class="cal-date"></div>
+									    </div>
+									    <div class="calendar-box">
+									      <div class="ctr-box clearfix">
+									        <button type="button" title="prev" class="btn-cal prev">
+									        </button>
+									        <span class="cal-month"></span>
+									        <span class="cal-year"></span>
+									        <button type="button" title="next" class="btn-cal next">
+									        </button>
+									      </div>
+									      <table class="cal-table">
+									        <thead>
+									          <tr>
+									            <th>S</th>
+									            <th>M</th>
+									            <th>T</th>
+									            <th>W</th>
+									            <th>T</th>
+									            <th>F</th>
+									            <th>S</th>
+									          </tr>
+									        </thead>
+									        <tbody class="cal-body"></tbody>
+									      </table>
+									    </div>
+									  </div>
+									  <!-- // .my-calendar -->
+									</div>
+									</td>
+									<td align="center" style="width:40%">활동~~~~</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div id="tab2" class="tabcontent" style="display: none;">
+						<div>
+							<table style="width:100%; height:700px; border-collapse: collapse;">
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;">
+									<td style="width:10%">☆☆☆☆☆☆</td>
+									<td style="width:5%">점수</td>
+									<td style="width:85%">내용</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id="tab3" class="tabcontent" style="display: none;">
+						<div>
+							<table style="width:100%; height:700px; border-collapse: collapse;">
+								<tr style="height:10%; border-bottom:3px double gray;" align="center">
+									<th style="width:10%; border-right:1px solid gray;">번호</th>
+									<th style="width:50%; border-right:1px solid gray;">제목</th>
+									<th style="width:15%; border-right:1px solid gray;">작성자</th>
+									<th style="width:15%; border-right:1px solid gray;">작성일</th>
+									<th style="width:10%">조회수</th>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								<tr style="height:10%; border-bottom:1px solid gray;" align="center">
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+									<td style="width:50%; border-right:1px solid gray;">떄려쳐</td>
+									<td style="width:15%; border-right:1px solid gray;">나</td>
+									<td style="width:15%; border-right:1px solid gray;">2020.02.01</td>
+									<td style="width:10%; border-right:1px solid gray;">1</td>
+								</tr>
+								
+							</table>
+						</div>
+					</div>
+					<div id="tab4" class="tabcontent" style="display: none;"> 탭4 내용</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<script type="text/javascript">
+	function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+	  }
+</script>
+   <script src="js/cal.js"></script>
+</body>
+</html>

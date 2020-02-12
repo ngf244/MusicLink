@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<title>뮤직링크-신고</title>
+<style>
+    #popUp{width:500px; height:500px; background: black;}
+    .pup-body{padding:50px 100px 30px 100px;}
+    header{text-align: center; margin-bottom:50px;}
+    .title-h{display:inline-block; margin-top: 50px; color:#F7FE2E;}
+    label{margin-bottom:15px; color:#F7FE2E;    }
+    button{cursor: pointer; padding: 5px 30px;}
+    
+    .bt-1{background:#fff; font-weight:bold; border-radius:5px; background:rgb(47, 235, 78); color:#fff; }
+    .bt-2{margin-left:15px; background:#fff; font-weight:bold; border-radius:5px; color:rgb(47, 235, 78);}
+    
+    
+    
+</style>
+</head>
+<body>
+    <div id="popUp">
+        <div class="pup-body">
+            <header>
+                <h1 class="title-h">신 고 하 기</h1>
+            </header>
+            <section>
+                <div style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 10px;"><label>내&nbsp;용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><label>&nbsp;xx 자식아</label></div>
+                    <div><label>작&nbsp;성&nbsp;자&nbsp;&nbsp;: </label><label>&nbsp;qkrtlsdn</label></div>
+                </div>
+                <div>
+                    <select style="width:100%; margin-bottom:10px; height:30px;">
+                        <option>선택</option>
+                        <option>부적절한 홍보 게시물</option>
+                        <option>음란성 또는 청소년에게 부적잘한 내용</option>
+                        <option>명예회손/사생활 침해 및 저작권침해등</option>
+                        <option>기타</option>
+                    </select>
+                    <textarea placeholder="내용을 입력하세요." style="width:98%; resize: none; height:120px;"></textarea>
+                </div>
+            </section>
+            <footer style="text-align: center; margin-top:15px;">
+                <button class="bt-1" type="submit">신 고</button>
+                <button class="bt-2" type="reset">취 소</button>
+            </footer>
+        </div>
+        
+    </div>
+</body>
+</html>

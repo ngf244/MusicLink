@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/mfooter.css" rel="stylesheet" />
+<title>Insert title here</title>
+<style>
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: #fff; height:800px;} 
+    
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    
+    /* selection common */
+    #sectionBox {position: relative; background-color: white; width: 100%; height: 100%;}
+    #sectionBox div{position: absolute;}
+    /* common end */
+
+    /* 메뉴 시작 */
+    #menuList div div {display: none; opacity: 0.5;}
+
+    #menuList1:hover div{display: block;}
+    #menuList2:hover div{display: block;}
+
+    #menuList div div div:hover{color: black; font-weight: bolder; opacity: 1;}
+
+    #menuList{width: 100%; height: 7%; top: 5%;}
+    #menuList1{background-color: #FDF1F1; width: 50%; height: 100%; text-align: center; line-height: 50px; font-size: larger;}
+    #menuList2{background-color: #FDF1F1; width: 50%; height: 100%; right: 0%; text-align: center; line-height: 50px; font-size: larger;}
+    .menuSelect1{background-color: thistle; width: 100%; height: 180%; line-height: 35px; z-index: 5;}
+    .menuSelect2{background-color: thistle; width: 100%; height: 120%; line-height: 35px; z-index: 5;}
+    .menuSelect1-1{width: 100%; height: 33%;}
+    .menuSelect1-2{width: 100%; height: 33%; top: 33%;}
+    .menuSelect1-3{width: 100%; height: 33%; top: 66%;}
+    .menuSelect2-1{width: 100%; height: 50%;}
+    .menuSelect2-2{width: 100%; height: 50%; top: 50%;}
+
+    /* 끝 */
+    
+    /* section 3 */
+    .searchBox{width: 50%; height: 5%; top: 16%; left: 24%; z-index: 1;}
+    .searchBox-inputText{width: 75%; height: 85%;}
+    .searchBox-submitButton{width: 20%; height: 100%; right: 0%;}
+    
+    #reason, #reasonDetail{display: none;}
+
+    .userDetailBox{width: 80%; height: 30%; bottom: 15%; left: 10%;}
+    .userDetailBox-imgBox{background-color: seashell; width: 35%; height: 100%; top: 0%; left: 5%;}
+    .userDetailBox-nameBox{width: 50%; height: 30%; top: 0%; right: 5%;}
+    .userDetailBox-addressBox{width: 50%; height: 30%; top: 35%; right: 5%;}
+    .userDetailBox-usertypeBox{width: 50%; height: 30%; top: 70%; right: 5%;}
+    
+    fieldset{border: 1px solid black; height: 100%;}
+    legend{font-size: larger;}
+    input[readonly]{width: 99%; height: 55%; margin-top: 10px;}
+
+    button[type="button"]{background-color: red; float: right;}
+
+    .districtReason{width: 20%; height: 30%; bottom: 15%; left: 14%;}
+
+
+    .detailReason{width: 50%; height: 30%; bottom: 15%; right: 14%;}
+    .detailReason-textareaBox{width: 100%; height: 78%; bottom: 22%; right: 0%;}
+    .submitButton{width: 10%; height: 20%; bottom: 0%; right: 0%;}
+
+    /* section 3 끝 */
+
+
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+            logo
+            </div>
+            <div id="toggle">
+                <div class="span" id="one"></div>
+                <div class="span" id="two"></div>
+                <div class="span" id="three"></div>
+            </div>
+        </nav>
+
+        <div id="resize">
+            <ul class="menu">
+                <li class="m-name1 m-name">
+                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
+                    <ul class="hidden-manu1 drop">
+                        <li class="menu-h"><a href="#">About us</a></li>
+                        <li class="menu-h"><a href="#">F A Q</a></li>
+                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
+                    </ul>
+                </li>
+                <li class="m-name2 m-name">
+                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
+                    <ul class="hidden-manu2 drop">
+                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
+                        <li class="menu-h"><a href="#">A - l i s t</a></li>
+                        <li class="menu-h"><a href="#">r a n k</a></li>
+                    </ul>
+                </li>
+                <li class="m-name3 m-name">
+                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
+                    <ul class="hidden-manu3 drop">
+                        <li class="menu-h"><a href="#">F - l i s t</a></li>
+                        <li class="menu-h"><a href="#">r a n k</a></li>
+                    </ul>
+                </li>
+                <li class="m-name4 m-name">
+                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
+                </li>
+            </ul>
+        </div>
+        <div class="side-icon">
+            <div class="image1 icon">
+                <a href="#" class="icon-a"><img src="img/user.png" alt="" /></a>
+            </div>
+            <div class="image2 icon">
+                <a href="#" ><img src="img/bell.png" alt="" /></a>
+            </div>
+            <div class="image3 icon">
+                <img src="img/pin.png" alt="" />
+            </div>
+            <div class="side-text">
+                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
+            </div>
+        </div>    
+    </header>   
+   
+    <section style="z-index: 1;">
+        <div id="sectionBox">
+            <div id="menuList">
+                <div id="menuList1">
+                    회원 관리
+                    <div class="menuSelect1">
+                        <div class="menuSelect1-1">회원 열람</div>
+                        <div class="menuSelect1-2">회원 금지</div>
+                        <div class="menuSelect1-3">금지 해제</div>
+                    </div>
+                </div>
+                <div id="menuList2">
+                    등록 관리
+                    <div class="menuSelect2">
+                            <div class="menuSelect2-1">아티스트 등록 관리</div>
+                            <div class="menuSelect2-2">기획자 등록 관리</div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="searchBox">
+                <input type="text" placeholder="검색할 사용자 아이디" class="searchBox-inputText">
+                <button class="searchBox-submitButton">검색</button>
+            </div>
+
+            <div style="background-color: yellow; position: absolute; width: 80%; height: 27%; top: 25%; left: 10%;">
+                <table style="background-color: yellow; position: absolute; width: 100%; height: 100%; left: 0%; text-align: center;">
+                    <tr style="border: 1px groove black; height: 40px; line-height: 40px;">
+                        <th>신고번호</th>
+                        <th>대상 아이디</th>
+                        <th>신고자 아이디</th>
+                        <th>사유</th>
+                        <th>신고일자</th>
+                    </tr>
+                    <tr onclick="showUserInfo(this);">
+                        <td>1</td>
+                        <td>hyunho-im</td>
+                        <td>daeho-kim</td>
+                        <td>잦은 부상</td>
+                        <td>2020-02-03</td>
+                    </tr>
+                </table>
+
+
+            </div>
+        
+            <div class="userDetailBox" id="userDetailBox">
+                <div class="userDetailBox-imgBox">
+                    img 사진 들어갈 곳
+                </div>
+                <div class="userDetailBox-nameBox">
+                    <fieldset>
+                        <legend>이름</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div class="userDetailBox-addressBox">
+                    <fieldset>
+                        <legend>주소</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div class="userDetailBox-usertypeBox">
+                    <fieldset>
+                        <legend>회원 유형</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                    <button type="button" onclick="showWritePage();">보기</button>
+                </div>
+            </div>
+            <form>
+                <div class="districtReason" id="reason">
+                    <h2>제재 사유</h2><br>
+                    <select name="restrictReason">
+                        <option>비속어 사용</option>
+                        <option>회원간 불화 유발</option>
+                        <option>스토킹</option>
+                        <option>뭐라도 더 있겠지뭐</option>
+                        <option>기타</option>
+                    </select>
+                </div>
+                <div class="detailReason" id="reasonDetail">
+                    <div class="detailReason-textareaBox">
+                        <h2>제재 사유 상세 입력</h2><br>
+                        <textarea name="rectrictReasonDetail" cols="71" rows="10"></textarea>
+                    </div>
+                    <div class="submitButton">
+                    <button type="submit" style="background-color: red;" onclick="return restrictSubmit();">등록</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <h1 class="htext">M Y P A G E</h1>
+    
+    
+    <footer>
+        <div class="ft-text">
+            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
+            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
+        </div>
+        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
+        <h1 class="ft-txt2">MUSIC LINK</h1>
+        <div class="ft-content">
+            <div class="content-left">
+                <div class="left-top">
+                    <ul class="lt">COMPANY
+                        <li>(주)뮤직링크</li>
+                    </ul>
+                    <ul class="rt">ADDRESS
+                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
+                    </ul>
+                </div>
+                <div class="left-bot">
+                    <ul class="lbl">BUSINESS LICENSE
+                        <li>000-11-22222</li>
+                    </ul>
+                    <ul class="lbm">TEL
+                        <li>02-562-2378</li>
+                    </ul>
+                    <ul class="lbr">E-MAIL
+                        <li>qkrtlsdn@qkr.tlsdn</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-right">
+                <a href="#">&nbsp;&nbsp;&nbsp;
+                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
+                <a href="#">&nbsp;&nbsp;&nbsp;
+                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
+            </div>
+        </div>
+    </footer>
+    <div class="map">
+        <div class="map-bg">
+            <h1 class="map-h1">&#215;</h1>
+            <h1 class="map-txt">오시는길</h1>
+            <div class="map-cont">
+                <div class="map-cont-left"></div>
+                <div class="map-cont-right">
+                    <div class="cont-right1">
+                        <div class="right-txt1">ADDRESS</div>
+                        <div class="right-txt2">서울시 강남구..</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">TEL</div>
+                        <div class="right-txt2">02-1111-1111</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">SUB</div>
+                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">BUS</div>
+                        <div class="right-txt2">146번, 360번</div>
+                    </div>
+                    <div class="cont-right2">
+                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="js/respond.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/parallax.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script>
+
+	$("#toggle").click(function(){
+		$(this).toggleClass("on");
+		$("#resize").toggleClass("active");	
+	});
+    
+    $(".image3").click(function(){
+        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
+    });
+    $(".map-h1").click(function(){
+        $(".map").css("display","none");
+    });
+    
+    function restrictSubmit() {
+        var check = confirm("정말 재제 하시겠습니까?");
+
+        if(check == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function showWritePage(){
+        $('#reason').css('display','block');
+        $('#reasonDetail').css('display','block');
+        $('#userDetailBox').css('display','none');
+    }
+
+    function showUserInfo() {
+        $('#reason').css('display','none');
+        $('#reasonDetail').css('display','none');
+        $('#userDetailBox').css('display','block');
+
+    }
+    
+	//new WOW().init();
+	
+	
+</script>
+</body>
+</html>
