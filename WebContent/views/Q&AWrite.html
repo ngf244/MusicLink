@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 
+    <link href="../css/style.css" rel="stylesheet">
+    
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -12,7 +14,7 @@
     <link href="../css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
-<title>Q&A 작성 수정</title>
+<title>Q&A 작성</title>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff;} 
@@ -111,7 +113,9 @@
 			<div id="table_show">
 				<table class="detail">
 					<tr>
-						<td colspan="2" class="input_qna" id="qna_title">큐엔에이입니다.(제목)</td>
+						<td colspan="2" class="input_qna" id="qna_title">
+							<input type="text"  class="form-control input-default">
+						</td>
 					</tr>
 					<tr>
 						<td class="input_qna2" id="qna_writer"><label>작성자 : </label>신수정</td>
@@ -224,6 +228,15 @@
             </div>
         </div>
     </div>
+    
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    <script src="../js/styleSwitcher.js"></script>
     
 <script src="../js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
