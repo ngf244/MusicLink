@@ -1,142 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-    
-	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/slick.css" rel="stylesheet" />
-    <link href="../css/slick-theme.css" rel="stylesheet" />
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
-<title>Insert title here</title>
+<title>알림창 HISTROY</title>
 <style>
-	section {
-		width: 70%;
-		margin: 0 auto;
-		box-shadow: 5px 5px 10px 8px lightgray;
-		margin-top: 250px;
-		position: relative;
-		background: #fff;
-		height: 700px;
-		display: block;
-	}
-	
-	.htext {
-		text-align: center;
-		font-size: 100px;
-		height: 0;
-		position: absolute;
-		top: 355px;
-		left: 50%;
-		transform: translateX(-50%);
-		color: rgb(224, 224, 224);
-	}
-	
-	#categoryArea {
-		padding-top: 35px;
-		padding-left: 30px;
-		color: #76838f;
-	}
-	
-	#contentArea{
-		padding-top: 45px; 
-		padding-bottom: 45px;
-		text-align: center;
-	}
-	
-	#inBigCategory {
-		font-family: 'Bungee', cursive;
-		font-size: 50px;
-	}
-	
-	#inSmallCategory {
-		font-family: 'Comfortaa', cursive;
-		font-size: 30px;
-	}
-	
-	#block {
-		background: #8AFF00;
-		width: 55px;
-		height: 8px;
-		top: 5%;
-	}
-	
-	.table-responsive {
-		text-align: center;
-		border-radius: 3px;
-		box-shadow: 0px;
-	}
-	
-	th {
-		text-align: inherit;
-	}
-	
-	.table {
-		width: 90%;
-		margin-left: 5%;
-		margin-bottom: 1rem;
-		text-align: center;
-	}
-	
-	.table th, .table td {
-		padding: 0.75rem;
-		vertical-align: top;
-		border-top: 1px solid #dee2e6;
-	}
-	
-	.table thead th {
-		vertical-align: bottom;
-		border-bottom: 2px solid #dee2e6;
-	}
-	
-	.table tbody+tbody {
-		border-top: 2px solid #dee2e6;
-	}
-	
-	.badge-primary {
-		background-color: #f29d56;
-		color: white;
-	}
-	
-	.badge-success {
-		background-color: #7780b7;
-		color: white;
-	}
-	
-	.px-2 {
-		padding-left: 0.5rem !important;
-		padding-right: 0.5rem !important;
-		border-radius: 0.25rem;
-		padding: 5px;
-		font-size: 13px;
-	}
-	
-	
-	.btnArea{
-		display: inline-block;
-		margin-left: 15%;
-	}
-	
-	#write_box{
-		display: inline-block;
-		float: right;
-		margin-right: 11%;
-	}
-	
-	.btn_style{
-		margin-left: 0;
-    	border-radius: 0.25rem;
-    	position: relative;
-    	padding: 0.5rem 0.75rem;
-    	line-height: 1.25;
-    	color: #7571f9;
-    	background-color: #fff;
-    	border: 1px solid #dee2e6;
-	}	
-	
+    
+    
+    /* 섹션 */
+    .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
+                    position: absolute; bottom:-25%; left:28%;}
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
+    
+    
+    /* 사이드 메뉴 */
+    .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
+    .sec-mtxt{margin-left:5%; margin-top: -15px;}
+    .sec-mtxt > p{ display: inline-block; font-size:20px;}
+    .sec-nav{width:22%; height:85%; border-right: 1px solid rgba(0,0,0,0.4); box-sizing: border-box; float:left;}
+    .smenu{color:#ccc; font-size: 30px; margin:0; margin-top:20px;}
+    .s-smenu{font-size:14px;margin-top:20px; color:#000;}
+    .s-smenu > li{padding:5px 10px;}    
+    
+    /* 알림창 */
+    .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
+    .views1{display: block;}
+    .notice{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
+    .notice-nav{width:24.5%; display: inline-block; text-align: center; padding:10px 0;}
+    .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
+    .notice-sum{width:24.5%; display: inline-block; margin:0; padding: 0; text-align: center; vertical-align: middle;}
+    .views1 h3{background: #af9ce6;}
+    
+    
 </style>
 </head>
 <body>
@@ -196,129 +99,86 @@
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
             </div>
         </div>    
-    </header>
-
-	<section style="z-index: 1;">
-		<div id="categoryArea">
-			<div id="block"></div><br>
-			<label id="inBigCategory">MUSICLINK</label> 
-			<label id="inSmallCategory"> - Q&A</label>
-		</div>
-		
-		<div id="contentArea">
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>No</th>
-							<th>작성자</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>답변상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th>1</th>
-							<td>신수정</td>
-							<td>큐엔에이입니다.</td>
-							<td>2020-02-06</td>
-							<td><span class="badge badge-primary px-2">답변대기</span></td>
-						</tr>
-						<tr>
-							<th>2</th>
-							<td>강인애</td>
-							<td>큐엔에이 투 입니다!</td>
-							<td>2020-02-05</td>
-							<td><span class="badge badge-primary px-2">답변대기</span></td>
-						</tr>
-						<tr>
-							<th>3</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>4</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>5</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-primary px-2">답변대기</span></td>
-						</tr>
-						<tr>
-							<th>6</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>7</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>8</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>9</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-						<tr>
-							<th>10</th>
-							<td>김대호</td>
-							<td>트로트~~노래왕</td>
-							<td>2020-02-04</td>
-							<td><span class="badge badge-success px-2">답변완료</span></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class='paginaArea'>
-				<div class="btnArea">
-					<!-- 맨 처음으로 -->
-					<button class="btn_style">&lt;&lt;</button>
-					
-					<!-- 이전 페이지로 -->
-					<button class="btn_style" id="beforeBtn">&lt;</button>
-					
-					<!-- 10개의 페이지 목록 -->
-					<button class="btn_style" id="numBtn">1</button>
-					<button class="btn_style" id="numBtn">2</button>
-					<button class="btn_style" id="numBtn">3</button>
-					<button class="btn_style" id="numBtn">4</button>
-					
-					
-					<!-- 다음 페이지로 -->
-					<button class="btn_style" id="afterBtn">&gt;</button>
-					
-					<!-- 맨 끝으로 -->
-					<button class="btn_style">&gt;&gt;</button>
-				</div>
-				<div id="write_box">
-					<button class="btn_style" id="write">글쓰기</button>
-				</div>
-			</div>
-		</div>
-	</section>
-	<h1 class="htext">Q & A</h1>
+    </header>   
+    
+    
+    <section style="z-index: 1;">
+        <div class="sec-line"></div>
+        <h1 class="sec-mtxt">MyPage<p>-notice</p></h1>
+        <ul class="sec-nav">
+            <li class="sec-menu-1 smenu">INFORMATION
+                <ul class="s-smenu">
+                    <li><a href='PwdCheckForm.jsp'>회원정보 열람/수정/탈퇴</a></li>
+                    <li><a href='MyPostView.jsp'>내가 작성한 글/댓글</a></li>
+                    <li><a href='MypageNoticeView.jsp'>알람창</a></li>
+                </ul>
+            </li>
+            <li class="sec-menu-2 smenu">FOLLOW
+                <uL class="s-smenu">
+                    <li><a href='MyArtistView.jsp'>나의 아티스트</a></li>
+                    <li><a href='MyArtistSchedule.jsp'>팔로잉 아티스트의 행사</a></li>
+                </uL>
+            </li>
+            <li class="sec-menu-3 smenu">BECOME
+                <ul class="s-smenu">
+                    <li><a href='BecomeArtistForm.jsp'>아티스트 등록</a></li>
+                    <li><a href='BecomePlannerForm.jsp'>행사기획자 등록</a></li>
+                </ul>
+            </li>
+            <li class="sec-menu-4 smenu">EVENT-1
+                <ul class="s-smenu">
+                    <li>공연스케줄</li>
+                    <li>지원한 행사</li>
+                    <li>러브콜(receive)</li>
+                    <li>행사 후기</li>
+                </ul>
+            </li>
+            <li class="sec-menu-5 smenu">EVENT-2
+                <ul class="s-smenu">
+                    <li>등록한 행사</li>
+                    <li>러브콜(send)</li>
+                    <li>아티스트 후기</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="sec-menu-views views1">
+            <h3>알림창 </h3>
+            <ul class="notice">
+                <li class="notice-nav">알림시간</li>
+                <li class="notice-nav">유형</li>
+                <li class="notice-nav">보낸사람</li>
+                <li class="notice-nav">메시지 내용</li>
+            </ul>
+            <div class="padding-1">
+                <div class="notice-time notice-sum">2020-02-03-21-32-42</div>
+                <div class="notice-class notice-sum">러브콜</div>
+                <div class="sender notice-sum">행사기획자 아이디</div>
+                <div class="msg notice-sum">00님이 러브콜을 보냈습니다.</div>
+            </div>
+            <div class="padding-1">
+                <div class="notice-time notice-sum">2020-01-03-06-52-37</div>
+                <div class="notice-class notice-sum">팔로잉</div>
+                <div class="sender notice-sum">회원 아이디</div>
+                <div class="msg notice-sum">00님이 팔로우 하셨습니다.</div>
+            </div>
+            <div class="padding-1">
+                <div class="notice-time notice-sum">2020-01-01-02-52-12</div>
+                <div class="notice-class notice-sum">행사지원신청</div>
+                <div class="sender notice-sum">아티스트 아이디</div>
+                <div class="msg notice-sum">00님이 행사지원신청을 하셨습니다.</div>
+            </div>
+            <div class="padding-1">
+                <div class="notice-time notice-sum">2020-01-01-01-01-01</div>
+                <div class="notice-class notice-sum">관리자메시지</div>
+                <div class="sender notice-sum">관리자 아이디</div>
+                <div class="msg notice-sum">Welcome to MusicLink</div>
+            </div>
+        </div>
+        
+    </section>
+    <h1 class="htext">M Y P A G E</h1>
+    <div class="clear-both"></div>
     
     
     <footer>
@@ -389,12 +249,12 @@
         </div>
     </div>
     
-<script src="../js/respond.min.js"></script>
+<script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/parallax.min.js"></script>
-<script src="../js/slick.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/parallax.min.js"></script>
+<script src="js/slick.min.js"></script>
 <script>
 
 	$("#toggle").click(function(){
