@@ -9,6 +9,25 @@
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
+    
+    <script src="../js/jquery-3.4.1.min.js"></script>
+	
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    
+    
 <title>행사기획자 등록</title>
 <style>
     
@@ -34,7 +53,7 @@
     /* 행사기획자 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
     .views1{display: block;}   
-    .become-planner{line-height: 30px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 25%; border: 1px solid black;}
+    .become-planner{line-height: 30px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 32%; border: 1px solid black;}
     .views1 h3{background: #af9ce6;}
     .companyReg td{width: 150px;}
 
@@ -150,21 +169,29 @@
                             <td><input type="text" name="commpanyName"></td>
                         </tr>
                         <tr>
-                            <td>회사주소</td>
+                            <td>회사 주소</td>
                             <td><input type="text" name="commpanyAddress"></td>
                         </tr>
                         <tr>
-                            <td>회사전화번호</td>
+                            <td>회사 전화번호</td>
                             <td><input type="tel" name="commpanyPhone"></td>
                         </tr>
                         <tr>
                             <td>담당자명</td>
                             <td><input type="text" name="plannerName"></td>
                         </tr>
+                        <tr>
+                            <td>담당자 전화번호</td>
+                            <td><input type="text" name="plannerPhone"></td>
+                        </tr>
+                        <tr>
+                            <td>담당자 이메일</td>
+                            <td><input type="text" name="plannerEmail"></td>
+                        </tr>
                     </table>
                     <br>
-                    <input type="submit" value="등록" style="margin-left: 33%;">
-                    <input type="button" value="취소" onclick="">
+                    <input type="submit" class="btn mb-1 btn-dark" value="등록" style="margin-left: 33%;">
+                    <input type="button" class="btn mb-1 btn-dark" value="취소" onclick="">
                 </form>                           
                         
             </div>            
