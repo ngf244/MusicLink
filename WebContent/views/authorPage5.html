@@ -2,19 +2,20 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link href="css/slick.css" rel="stylesheet" />
-    <link href="css/slick-theme.css" rel="stylesheet" />
-    <link href="css/common.css" rel="stylesheet" />
-    <link href="css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link href="../css/slick.css" rel="stylesheet" />
+    <link href="../css/slick-theme.css" rel="stylesheet" />
+    <link href="../css/common.css" rel="stylesheet" />
+    <link href="../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff; height:800px;} 
     
-    .htext{text-align: center; font-size: 100px; height:0;  top:355px; left:30%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    
     /* selection common */
-    #sectionBox {position: relative; background-color: white; width: 100%; height: 100%;}
+    #sectionBox {position: relative;  width: 100%; height: 100%;}
     #sectionBox div{position: absolute;}
     /* common end */
 
@@ -38,28 +39,15 @@
     .menuSelect2-2{width: 100%; height: 50%; top: 50%;}
 
     /* 끝 */
+    .requestBox{background-color: beige; width: 80%; height: 80%; bottom: 5%; left: 10%;}
+    .requestBox ul{background-color: yellow; position: relative; width: 100%; height: 23%; left: 0%; margin-top: 10px;}
+    .requestBox-li1{background-color: violet; position: absolute; width: 30%; height: 100%; left: 0%;}
+    .requestBox-li2{background-color: green; position: absolute; width: 10%; height: 15%; left: 35%; top: 5%;}
+    .requestBox-li3{background-color: green; position: absolute; width: 20%; height: 15%; right: 5%; top: 5%;}
+    .requestBox-li4{background-color: beige; position: absolute; width: 60%; height: 50%; left: 35%; top: 25%;}
+    .requestBox-reject{background-color: blue; position: absolute; width: 20%; height: 15%; left: 40%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
+    .requestBox-showDetail{background-color: red; position: absolute; width: 20%; height: 15%; left: 70%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
 
-    /* section1 */
-    .searchBox{background-color: white;  width: 50%; height: 5%; top: 16%; left: 24%; z-index: 1;}
-    .searchBox-inputText{width: 75%; height: 85%;}
-    .searchBox-submitButton{width: 20%; height: 100%; right: 0%;}
-
-    .normalUserBox{width: 46%; height: 70%; bottom: 3%; left: 3%;}
-    .normalUserBox-title{background-color: #FDF1F1;  width: 100%; height: 8%; top: 0%; text-align: center; line-height: 42px;}
-    .normalUserBox-list{background-color: violet;  width: 100%; height: 90%; top: 10%;}
-    .normalUserBox-list>table{width: 100%; border: 1px solid black;}
-    
-    .rightSideBox{width: 46%; height: 70%; bottom: 3%; right: 3%;}
-    .artistUserBox{width: 100%; height: 50%; top: 0%;}
-    .artistUserBox-title{background-color: #FDF1F1;  width: 100%; height: 16%; top: 0%; text-align: center; line-height: 42px;}
-    .artistUserBox-list{background-color: violet;  width: 100%; height: 80%; top: 20%;}
-    .artistUserBox-list>table{width: 100%; border: 1px solid black;}
-
-    .plannerUserBox{width: 100%; height: 50%; top: 50%;}
-    .plannerUserBox-title{background-color: #FDF1F1;  width: 100%; height: 16%; top: 0%; text-align: center; line-height: 42px;}
-    .plannerUserBox-list{background-color: violet;  width: 100%; height: 80%; top: 20%;}
-    .plannerUserBox-list>table{width: 100%; border: 1px solid black;}
-    /* section1 종료 */
 </style>
 </head>
 <body>
@@ -141,50 +129,36 @@
                 </div>
             </div>
         
-            <div class="searchBox">
-                    <input type="text" placeholder="검색할 사용자 아이디" class="searchBox-inputText">
-                    <button type="button" class="searchBox-submitButton">검색</button>
+            <!-- ul의 포지션을 relative를 놓아서 이후 absolute들이 ul의 범위 안에서 놀 수 있도록 유도 -->
+            <div class="requestBox" >
+                <ul>
+                    <li class="requestBox-li1">사진 넣는 공간</li>
+                    <li class="requestBox-li2">이름</li class="requestBox-li1">
+                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
+                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
+                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
+                    <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
+                </ul>
+                <ul>
+                    <li class="requestBox-li1">사진 넣는 공간</li>
+                    <li class="requestBox-li2">이름</li class="requestBox-li1">
+                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
+                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
+                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
+                    <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
+                </ul>
+                <ul>
+                    <li class="requestBox-li1">사진 넣는 공간</li>
+                    <li class="requestBox-li2">이름</li class="requestBox-li1">
+                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
+                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
+                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
+                    <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
+                </ul>
             </div>
         
-            <div class="normalUserBox">
-                <div class="normalUserBox-title">일반 회원 리스트</div>
-                <div class="normalUserBox-list">
-                    <table>
-                        <tr>
-                            <th>No.</th>
-                            <th>Id</th>
-                            <th>Name</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="rightSideBox">
-                <div class="artistUserBox">
-                    <div class="artistUserBox-title">아티스트 회원 리스트</div>
-                    <div class="artistUserBox-list">
-                        <table>
-                            <tr>
-                                <th>No.</th>
-                                <th>Id</th>
-                                <th>Name</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="plannerUserBox">
-                    <div class="plannerUserBox-title">기획자 회원 리스트</div>
-                    <div class="plannerUserBox-list">
-                        <table>
-                            <tr>
-                                <th>No.</th>
-                                <th>Id</th>
-                                <th>Name</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
+
 
     </section>
     <h1 class="htext">M Y P A G E</h1>
@@ -277,8 +251,6 @@
     $(".map-h1").click(function(){
         $(".map").css("display","none");
     });
-    
-    
     
 	//new WOW().init();
 	

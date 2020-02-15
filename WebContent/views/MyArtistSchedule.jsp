@@ -236,8 +236,7 @@
                     <div class="eventInfo">
                         <ul>행사 명
                             <li>장소</li>
-                            <li>날짜</li>
-                            <li>시간</li>
+                            <li>기간</li>
                             <li>출연 아티스트</li>
                         </ul>
                     </div><div style="clear:both;"></div>                    
@@ -252,8 +251,7 @@
                     <div class="eventInfo">
                         <ul>행사 명
                             <li>장소</li>
-                            <li>날짜</li>
-                            <li>시간</li>
+                            <li>기간</li>
                             <li>출연 아티스트</li>
                         </ul>
                     </div><div style="clear:both;"></div>                    

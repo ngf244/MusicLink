@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link href="css/slick.css" rel="stylesheet" />
-    <link href="css/slick-theme.css" rel="stylesheet" />
-    <link href="css/common.css" rel="stylesheet" />
-    <link href="css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link href="../css/slick.css" rel="stylesheet" />
+    <link href="../css/slick-theme.css" rel="stylesheet" />
+    <link href="../css/common.css" rel="stylesheet" />
+    <link href="../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
@@ -14,21 +14,45 @@
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
     
-    /* 시작 */
-    #menuList div div {display: none;}
+    /* selection common */
+    #sectionBox {position: relative;  width: 100%; height: 100%;}
+    #sectionBox div{position: absolute;}
+    /* common end */
+
+    /* 메뉴 시작 */
+    #menuList div div {display: none; opacity: 0.5;}
 
     #menuList1:hover div{display: block;}
     #menuList2:hover div{display: block;}
 
-    #menuList div div div:hover{color: brown;}
+    #menuList div div div:hover{color: black; font-weight: bolder; opacity: 1;}
 
-    #pictureBrowser button{opacity: 0.08;}
+    #menuList{width: 100%; height: 7%; top: 5%;}
+    #menuList1{background-color: #FDF1F1; width: 50%; height: 100%; text-align: center; line-height: 50px; font-size: larger;}
+    #menuList2{background-color: #FDF1F1; width: 50%; height: 100%; right: 0%; text-align: center; line-height: 50px; font-size: larger;}
+    .menuSelect1{background-color: thistle; width: 100%; height: 180%; line-height: 35px; z-index: 5;}
+    .menuSelect2{background-color: thistle; width: 100%; height: 120%; line-height: 35px; z-index: 5;}
+    .menuSelect1-1{width: 100%; height: 33%;}
+    .menuSelect1-2{width: 100%; height: 33%; top: 33%;}
+    .menuSelect1-3{width: 100%; height: 33%; top: 66%;}
+    .menuSelect2-1{width: 100%; height: 50%;}
+    .menuSelect2-2{width: 100%; height: 50%; top: 50%;}
+
+    /* 끝 */
+    #pictureBrowser{background-color: yellow; width: 100%; height: 50%; top: 15%;}
+    #pictureBrowser button{opacity: 0.03; background-color: black; position: absolute;}
     #pictureBrowser button:hover{opacity: 1; color: white;}
+    
+    #showDetail{top: 45%; left: 45%; width: 10%; height: 10%;}
+    #prev{width: 8%; height: 8%; bottom: 8%; left: 35%;}
+    #next{width: 8%; height: 8%; bottom: 8%; right: 35%;}
+    #nowDay{background-color: yellow; top: 82.5%; left: 45%; width: 10%; height: 10%; text-align: center; line-height: 40px; font-size: larger;}
+    #monthDays{background-color: beige; top: 100%; width: 100%; min-height: 10%; text-align: center; line-height: 40px; font-size: small;}
 
     .dayNum{padding-left: 10px; padding-right: 10px;}
     .dayNum:hover{transform: perspective(100px) translateZ(50px); color: red; display: inline-block;}
     
-    /* 끝 */
+
     
 </style>
 </head>
@@ -92,88 +116,83 @@
     </header>   
    
     <section style="z-index: 1;">
-        <div id="1" style="background-color: white; width: 100%; height: 100%; position: relative;">
-            <div style="background-color: #FDF1F1; position: absolute; width: 100%; height: 7%; top: 5%;" id="menuList">
-                <div style="background-color: #FDF1F1; position: absolute; width: 50%; height: 100%; text-align: center; line-height: 50px; font-size: larger;" id="menuList1" onmouseup="">
+        <div id="sectionBox">
+            <div id="menuList">
+                <div id="menuList1">
                     회원 관리
-                    <div style="background-color: thistle; width: 100%; height: 180%; line-height: 35px; border-radius: 25px; position: absolute; z-index: 5;">
-                        <div style="position: absolute; width: 100%; height: 33%;">회원 열람</div>
-                        <div style="position: absolute; width: 100%; height: 33%; top: 33%;">회원 금지</div>
-                        <div style="position: absolute; width: 100%; height: 33%; top: 66%;">금지 해제</div>
+                    <div class="menuSelect1">
+                        <div class="menuSelect1-1">회원 열람</div>
+                        <div class="menuSelect1-2">회원 금지</div>
+                        <div class="menuSelect1-3">금지 해제</div>
                     </div>
                 </div>
-                <div style="background-color: #FDF1F1; position: absolute; width: 50%; height: 100%; right: 0%; text-align: center; line-height: 50px; font-size: larger;" id="menuList2">
+                <div id="menuList2">
                     등록 관리
-                    <div style="background-color: thistle; width: 100%; height: 120%; line-height: 35px; border-radius: 25px; position: absolute; z-index: 5;">
-                            <div style="position: absolute; width: 100%; height: 50%;">아티스트 등록 관리</div>
-                            <div style="position: absolute; width: 100%; height: 50%; top: 50%;">기획자 등록 관리</div>
+                    <div class="menuSelect2">
+                            <div class="menuSelect2-1">아티스트 등록 관리</div>
+                            <div class="menuSelect2-2">기획자 등록 관리</div>
                     </div>
                 </div>
             </div>
         
-        <div style="background-color: yellow; position: absolute; width: 100%; height: 50%; top: 15%;" id="pictureBrowser">
-            <button id="showDetail" style="background-color: black; position: absolute; top: 45%; left: 45%; width: 10%; height: 10%;">상세 보기</button>
-            <button style="background-color: black; position: absolute; width: 8%; height: 8%; bottom: 8%; left: 35%;" id="prev" onclick="prev();">&lt;prev</button>
-            <button style="background-color: black; position: absolute; width: 8%; height: 8%; bottom: 8%; right: 35%;" id="next" onclick="next();">&gt;next</button>
-            <div style="background-color: yellow; position: absolute; top: 82.5%; left: 45%; width: 10%; height: 10%; text-align: center; line-height: 40px; font-size: larger;" id="nowDay"></div>
-            <script>
-                var date = new Date();
-                var year = date.getFullYear();
-                var month = date.getMonth()+1;
-                var day = date.getDate();
-                document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-            </script>
-            <div style="background-color: beige; position: absolute; top: 100%; width: 100%; min-height: 10%; text-align: center; line-height: 40px; font-size: small;" id="monthDays"></div>
-            <script>
-                var lastDay = (new Date(date.getFullYear(), date.getMonth()+1, 0)).getDate();
-                var days = "";
-                for(var i = 1; i <= lastDay; i++){
-                    days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
-                }
-                document.getElementById("monthDays").innerHTML = days;
-
-
-                function printDays() {
-                    var lastDay = (new Date(year, month, 0)).getDate();
+            <div id="pictureBrowser">
+                <button id="showDetail">상세 보기</button>
+                <button id="prev" onclick="prev();">&lt;prev</button>
+                <button id="next" onclick="next();">next&gt;</button>
+                <div id="nowDay"></div>
+                <script>
+                    var date = new Date();
+                    var year = date.getFullYear();
+                    var month = date.getMonth()+1;
+                    var day = date.getDate();
+                    document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
+                </script>
+                <div id="monthDays"></div>
+                <script>
+                    var lastDay = (new Date(date.getFullYear(), date.getMonth()+1, 0)).getDate();
                     var days = "";
                     for(var i = 1; i <= lastDay; i++){
-                    days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
+                        days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
                     }
                     document.getElementById("monthDays").innerHTML = days;
-                }
 
-                function pickDate(num) {
-                    day = num;
-                    console.log(num);
-                    document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                }
-                function prev() {
-                    month -= 1;
-                    if(month<1){
-                        year -= 1;
-                        month = 12;
+
+                    function printDays() {
+                        var lastDay = (new Date(year, month, 0)).getDate();
+                        var days = "";
+                        for(var i = 1; i <= lastDay; i++){
+                        days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
+                        }
+                        document.getElementById("monthDays").innerHTML = days;
                     }
-                    document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                    printDays();
-                }
-                function next() {
-                    month += 1;
-                    if(month>12){
-                        year += 1;
-                        month = 1;
+
+                    function pickDate(num) {
+                        day = num;
+                        console.log(num);
+                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
                     }
-                    document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                    printDays();
-                }
-                
-            </script>
+                    function prev() {
+                        month -= 1;
+                        if(month<1){
+                            year -= 1;
+                            month = 12;
+                        }
+                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
+                        printDays();
+                    }
+                    function next() {
+                        month += 1;
+                        if(month>12){
+                            year += 1;
+                            month = 1;
+                        }
+                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
+                        printDays();
+                    }
+                    
+                </script>
 
-        </div>    
-
-
-
-
-        
+            </div>    
         </div>
 
 

@@ -162,8 +162,18 @@
                     <input type="radio" name="artistCategory" value="solo"><label for="">솔로</label>
                     <input type="radio" name="artistCategory" value="group"><label for="">그룹</label><br>                
                     
-                    <label for="">한 줄 소개</label><br>
-                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br>
+                    <label for="">활동지역</label><br>
+                    <input type="radio" name="activeLocal" value="seoul">서울
+                    <input type="radio" name="activeLocal" value="seoul">경기도
+                    <input type="radio" name="activeLocal" value="seoul">충청도
+                    <input type="radio" name="activeLocal" value="seoul">강원도
+                    <input type="radio" name="activeLocal" value="seoul">경상도
+                    <input type="radio" name="activeLocal" value="seoul">전라도
+                    <input type="radio" name="activeLocal" value="seoul">제주도<br>
+                    
+                    
+                    <!-- <label for="">한 줄 소개</label><br>
+                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br> -->
 
                     <label for="">아티스트 소개</label><br>
                     <textarea name="artistInfo" id="" cols="100" rows="10" placeholder="내용을 입력해주세요." style="resize: none;"></textarea><br>

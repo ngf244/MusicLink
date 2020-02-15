@@ -220,7 +220,7 @@
 		                <div class="call-time call-sum"><input type="checkbox" name="select"></div>
 		                <div class="call-artist call-sum">아티스트명1</div>
 		                <div class="artist-proplie call-sum">DANCE</div>
-		                <div class="call-yn call-sum">대구</div>
+		                <div class="call-yn call-sum">경상도</div>
 		                <div class="call-artist call-sum">팔로우</div>
 		            </div>
 		            <div class="padding-1">
@@ -234,7 +234,7 @@
 		                <div class="call-time call-sum"><input type="checkbox" name="select"></div>
 		                <div class="call-artist call-sum">아티스트명3</div>
 		                <div class="artist-proplie call-sum">TROT</div>
-		                <div class="call-yn call-sum">인천</div>
+		                <div class="call-yn call-sum">경기도</div>
 		                <div class="call-artist call-sum">팔로우</div>
                     </div>
                     <br>

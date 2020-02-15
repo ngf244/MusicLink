@@ -2,55 +2,46 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-	
 
+    <link href="../css/style.css" rel="stylesheet">
+    
+	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="../css/slick.css" rel="stylesheet" />
     <link href="../css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
-<title>Insert title here</title>
+<title>Q&A 작성</title>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height: 950px; font-family: "Roboto", sans-serif;} 
+    background: #fff;} 
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
-    
-	#enrollForm{width: 70%; height: 100%; position: absolute; left:50%; transform: translateX(-50%); text-align: center;}
-	#insertInfo{width: 80%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px;} 
-	.label{width: 35%; font-size: 12pt;}
-	#enrollSubmit{margin-top:30px;}
-    #btn{text-align: center;}
-	.btn{
-		padding: 7px 18px;
-		color: #fff;
-    	background-color: #333333;
-    	border-color: #333333;
-    	text-align: center;
-    	font-weight: 400;
-        font-size: 0.875rem;
-    	line-height: 1.5;
-    	border-radius: 0.25rem;
-    	font-family: "Roboto", sans-serif;
-    	vertical-align: middle;
-    	white-space: nowrap;
-    	border: 1px solid transparent;
-	}
-	.form-control{
-		width: 150px;
-    	border-radius: 4px;
-    	box-shadow: none;
-    	padding: 0.375rem 0.75rem;
-    	font-size: 0.875rem;
-   		line-height: 1.5;
-    	vertical-align: middle;
-    	border: 1px solid #ced4da;
-    	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-	}
-	#user_year{width: 58px;}
-    #user_month, #user_day{width: 40px;}
 	
+    #categoryArea {padding-top: 35px; padding-left: 30px; color: #76838f;}
+	#contentArea{padding-top: 45px; padding-bottom: 45px;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
+	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
+	#block {background: #8AFF00; width: 55px; height: 8px; top: 5%;}
+	
+	#contentArea{padding-top: 60px; padding-bottom: 80px; font-family: 'Noto Sans KR', sans-serif;}
+	#table_show{width: 90%; margin-left: auto; margin-right: auto;}
+	#qna_title{padding: 10px; border-bottom: 2px solid lightgray; font-size: 20px; height: 20px; vertical-align: middle;}
+	.input_qna2{padding: 10px; border-bottom: 2px solid lightgray;}
+	#qna_date{text-align: right;}
+	#qna_content{padding: 10px;}
+	.input_qna4{border-bottom: 3px double lightgray;}
+	#qna_btn2{text-align: right;}
+	
+	.detail_btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
+	}
+	
+	#qna_comment{margin-top: 10px; border: 1px solid lightgray; border-radius: 0.2rem; padding: 10px;}
 </style>
 </head>
 <body>
@@ -110,80 +101,64 @@
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
             </div>
         </div>    
-    </header>
-
-	<section style="z-index: 1;">
+    </header>   
+   
+    <section style="z-index: 1;">
+    	<div id="categoryArea">
+			<div id="block"></div><br>
+			<label id="inBigCategory">MUSICLINK</label> 
+			<label id="inSmallCategory"> - Q&A Write</label>
+		</div>
 		<div id="contentArea">
-			<form id="enrollForm">
-			<h2 class="mj">MEMBER JOIN</h2>
-				<table border="1" id="insertInfo">
+			<div id="table_show">
+				<table class="detail">
 					<tr>
-						<td class="label"><label>아이디</label></td>
-						<td class="input">
-						<input type="text" id="user_id" class="form-control input-default enroll" placeholder="아이디를 입력하세요">
-						<input type="button"  class="btn mb-1 btn-dark" id="id_check" value="중복확인"></td>
-					</tr>
-					<tr>
-						<td class="label"><label>비밀번호</label></td>
-						<td class="input"><input type="password" id="user_pwd" class="form-control input-default enroll" placeholder="비밀번호를 입력하세요"></td>
-					</tr>
-					<tr>
-						<td class="label"><label>비밀번호 재확인</label></td>
-						<td class="input"><input type="password" id="user_pwd2" class="form-control input-default enroll" placeholder="비밀번호를 확인하세요"></td>
-					</tr>
-					<tr>
-						<td class="label"><label>이름</label></td>
-						<td class="input"><input type="text" id="user_name" class="form-control input-default enroll" placeholder="이름를 입력하세요"></td>
-					</tr>
-					<tr>
-						<td class="label"><label>생년월일</label></td>
-						<td class="input">
-							<input type="text" id="user_year" class="form-control input-default enroll" placeholder="년">
-							<input type="text" id="user_month" class="form-control input-default enroll" placeholder="월">
-							<input type="text" id="user_day" class="form-control input-default enroll" placeholder="일">
-       					</td>
-					</tr>
-					<tr>
-						<td class="label"><label>성별</label></td>
-						<td class="input">
-							<input type="radio" class="text_input" id="gender" value="M">남자
-       						<input type="radio" class="text_input" id="gender" value="F">여자
+						<td colspan="2" class="input_qna" id="qna_title">
+							<input type="text"  class="form-control input-default">
 						</td>
 					</tr>
 					<tr>
-						<td class="label"><label>이메일</label></td>
-						<td class="input"><input type="email" id="user_email" class="form-control input-default enroll" placeholder="이메일을 입력하세요"></td>
+						<td class="input_qna2" id="qna_writer"><label>작성자 : </label>신수정</td>
+						<td class="input_qna2" id="qna_date"><label>작성일 : </label>2020-02-06</td>
 					</tr>
 					<tr>
-						<td class="label"><label>전화번호</label></td>
-						<td class="input"><input type="tel" id="user_phone" class="form-control input-default enroll" placeholder="전화번호를 입력하세요"></td>
-					</tr>
-					<tr>
-						<td class="label"><label>아티스트</label></td>
-						<td class="input">
-							<input type="radio" class="text_input" id="artist_check_Y" value="Y">Y
-       						<input type="radio" class="text_input" id="artist_check_N" value="N">N
+						<td colspan="2" class="input_qna" id="qna_content">
+								Anim pariatur cliche reprehenderit,
+								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+								moon officia aute, non cupidatat skateboard dolor brunch. Food
+								truck quinoa nesciunt laborum eiusmod.
+								Anim pariatur cliche reprehenderit,
+								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+								moon officia aute, non cupidatat skateboard dolor brunch. Food
+								truck quinoa nesciunt laborum eiusmod.
+								Anim pariatur cliche reprehenderit,
+								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+								moon officia aute, non cupidatat skateboard dolor brunch. Food
+								truck quinoa nesciunt laborum eiusmod.
+								Anim pariatur cliche reprehenderit,
+								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+								moon officia aute, non cupidatat skateboard dolor brunch. Food
+								truck quinoa nesciunt laborum eiusmod.
 						</td>
 					</tr>
 					<tr>
-						<td colspan=2>
-							개인정보 동의서<br>
-       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 14px;">동의합니다.</label>
-       						<br>자세한 내용은 구현할 때
+						<td class="input_qna4" id="qna_btn1">
+							<button type="submit" class="detail_btn" id="backBtn">목록</button>
 						</td>
-					</tr>
-					<tr>
-						<td id="btn" colspan=2>
-							<input type="submit"  class="btn mb-1 btn-dark" id="enrollSubmit" value="가입">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button"  class="btn mb-1 btn-dark" id="enrollSubmit" value="취소">
+						<td class="input_qna4" id="qna_btn2">
+							<button type="submit" class="detail_btn" id="updateBtn">수정</button>
+							<button type="button" class="detail_btn" id="deleteBtn">삭제</button>
 						</td>
 					</tr>
 				</table>
-			</form>
+				<div id="qna_comment">
+					<label>답변 : </label>
+					답변입니다. dlkfsjofnroafdflomaldskjflninkblsl
+				</div>
+			</div>
 		</div>
-	</section>
-	<h1 class="htext">J O I N</h1>
+    </section>
+    <h1 class="htext">Q & A</h1>
     
     
     <footer>
@@ -253,6 +228,15 @@
             </div>
         </div>
     </div>
+    
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    <script src="../js/styleSwitcher.js"></script>
     
 <script src="../js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
