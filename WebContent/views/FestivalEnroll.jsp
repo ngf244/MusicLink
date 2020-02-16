@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,12 +70,12 @@
 		    margin-left: 24px;
 		}
 		
-    section {width:70%; min-height:105%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 19.5%; position: relative;
+    section {width:70%; height:213%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 19.5%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
     
-	#categoryArea{position: absolute; top: 4%; left: 3%; display: inline;}
+	#categoryArea{position: absolute; top: 2.2%; left: 3%; display: inline;}
 	#contentArea{padding-top: 12%; text-align:center; display:inline-block;}
 	
 	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
@@ -103,7 +105,7 @@
     
     #festivalInfo{resize: none; border: 1px solid #ced4da; border-radius: 4px;}
     
-    .postergroup{width:420px;}
+    .postergroup{width:420px; top:25%; transform: translateY(25%);}
     
     #enrollSubmit{margin-top:30px;}
     

@@ -16,7 +16,7 @@
     <link href="../css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
-<title>Q&A 작성</title>
+<title>소통 게시판 작성</title>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
@@ -31,17 +31,17 @@
 	
 	#contentArea{width: 100%; text-align:center; padding-top: 5%; padding-bottom: 5%; font-family: 'Noto Sans KR', sans-serif;}
 	#table_show{width: 85%; margin-left: auto; margin-right: auto; text-align:center;}
-	.qna_title{padding: 10px; /*border-bottom: 2px solid lightgray;*/ height: 20px; vertical-align: middle;}
-	.qna_content{padding: 10px;}
-	#qna_btn2{text-align: right;}
+	.board_title{padding: 10px; /*border-bottom: 2px solid lightgray;*/ height: 20px; vertical-align: middle;}
+	.board_content{padding: 10px;}
+	#btntd{text-align: right;}
+	.labeltd{width:12%; font-size: 15px;}
 	
 	#inputTable{width:100%;}
-	.labeltd{width:12%; font-size: 15px;}
-	.inputqna{height:40px;}
+	.inputboard{height:40px;}
 	.inputtextarea{border-radius: 4px; resize:none;}
 	
 	#updateBtn{margin-right: 2%;}
-	#qna_btn2 button{margin-top: 1%;}
+	#btntd button{margin-top: 1%;}
 	
 	.ft-content{width: 70%;}
 </style>
@@ -109,26 +109,26 @@
     	<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">MUSICLINK</label> 
-			<label id="inSmallCategory"> - FAQ WRITE</label>
+			<label id="inSmallCategory"> - Artist 맘대로 (소통게시글 작성)</label>
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
 				<table id="inputTable">
 					<tr>
-						<td class="qna_title labeltd">제목</td>
-						<td class="qna_title">
-							<input type="text" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
+						<td class="board_title labeltd">제목</td>
+						<td class="board_title">
+							<input type="text" class="form-control input-default inputboard" placeholder="제목을 입력해주세요">
 						</td>
 					</tr>
 					<tr>
-						<td class="qna_content labeltd">내용</td>
-						<td class="qna_content">
+						<td class="board_content labeltd">내용</td>
+						<td class="board_content">
 							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td id="qna_btn2">
+						<td id="btntd">
 							<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
 							<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
 						</td>
@@ -137,7 +137,7 @@
 			</div>
 		</div>
     </section>
-	<h1 class="htext">F A Q</h1>
+    <h1 class="htext">수정해주세요</h1>
     
     
     <footer>
