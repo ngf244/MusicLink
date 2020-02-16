@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,7 +18,7 @@
     <link href="../css/mfooter.css" rel="stylesheet" />
 <title>Q&A 작성</title>
 <style>
-    section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
@@ -27,18 +29,20 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
 	#block {background: #8AFF00; width: 55px; height: 8px; top: 5%;}
 	
-	#contentArea{padding-top: 60px; padding-bottom: 80px; font-family: 'Noto Sans KR', sans-serif;}
-	#table_show{width: 90%; margin-left: auto; margin-right: auto;}
-	#qna_title{padding: 10px; border-bottom: 2px solid lightgray; font-size: 20px; height: 20px; vertical-align: middle;}
-	.input_qna2{padding: 10px; border-bottom: 2px solid lightgray;}
-	#qna_date{text-align: right;}
-	#qna_content{padding: 10px;}
-	.input_qna4{border-bottom: 3px double lightgray;}
+	#contentArea{width: 100%; text-align:center; padding-top: 60px; padding-bottom: 60px; font-family: 'Noto Sans KR', sans-serif;}
+	#table_show{width: 85%; margin-left: auto; margin-right: auto; text-align:center;}
+	.qna_title{padding: 10px; /*border-bottom: 2px solid lightgray;*/ height: 20px; vertical-align: middle;}
+	.qna_content{padding: 10px;}
 	#qna_btn2{text-align: right;}
+	
+	#inputTable{width:100%;}
+	.labeltd{width:12%; font-size: 15px;}
+	.inputqna{height:40px;}
+	.inputtextarea{border-radius: 4px; resize:none;}
 	
 	.detail_btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
 	}
 	
 	#qna_comment{margin-top: 10px; border: 1px solid lightgray; border-radius: 0.2rem; padding: 10px;}
@@ -107,54 +111,31 @@
     	<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">MUSICLINK</label> 
-			<label id="inSmallCategory"> - Q&A Write</label>
+			<label id="inSmallCategory"> - Q&A WRITE</label>
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
-				<table class="detail">
+				<table id="inputTable">
 					<tr>
-						<td colspan="2" class="input_qna" id="qna_title">
-							<input type="text"  class="form-control input-default">
+						<td class="qna_title labeltd">제목</td>
+						<td class="qna_title">
+							<input type="text" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
 						</td>
 					</tr>
 					<tr>
-						<td class="input_qna2" id="qna_writer"><label>작성자 : </label>신수정</td>
-						<td class="input_qna2" id="qna_date"><label>작성일 : </label>2020-02-06</td>
-					</tr>
-					<tr>
-						<td colspan="2" class="input_qna" id="qna_content">
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
+						<td class="qna_content labeltd">내용</td>
+						<td class="qna_content">
+							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td class="input_qna4" id="qna_btn1">
-							<button type="submit" class="detail_btn" id="backBtn">목록</button>
-						</td>
-						<td class="input_qna4" id="qna_btn2">
-							<button type="submit" class="detail_btn" id="updateBtn">수정</button>
-							<button type="button" class="detail_btn" id="deleteBtn">삭제</button>
+						<td id="qna_btn1"></td>
+						<td id="qna_btn2">
+							<button type="submit" class="detail_btn" id="updateBtn">문의하기</button>
+							<button type="button" class="detail_btn" id="deleteBtn">취소하기</button>
 						</td>
 					</tr>
 				</table>
-				<div id="qna_comment">
-					<label>답변 : </label>
-					답변입니다. dlkfsjofnroafdflomaldskjflninkblsl
-				</div>
 			</div>
 		</div>
     </section>
