@@ -4,27 +4,19 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+    
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
     
-    <script src="../js/jquery-3.4.1.min.js"></script>
-	
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <script src="../js/jquery-3.4.1.min.js"></script>	
+
 <title>아티스트 등록</title>
 <style>
     
@@ -48,10 +40,13 @@
     
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}  
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}  
     .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px;}
     .views1 h3{background: #af9ce6;}
-
+	.artistReg_btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
+	}
 
 
 </style>
@@ -203,8 +198,8 @@
                     <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="50"><br>
                     <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br>
                     <br>
-                    <input type="submit" value="등록" class="btn mb-1 btn-dark" style="margin-left: 330px;">
-                    <input type="button" value="취소" class="btn mb-1 btn-dark" onclick="">
+                    <input type="submit" value="등록하기" class="artistReg_btn" style="margin-left: 300px;">
+                    <input type="button" value="취소하기" class="artistReg_btn" onclick="">
                 </form>      
             </div>
         </div>
