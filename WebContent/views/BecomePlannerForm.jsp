@@ -42,7 +42,7 @@
     /* 행사기획자 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
     .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}   
-    .become-planner{line-height: 30px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 32%; border: 1px solid black;}
+    .become-planner{line-height: 45px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 45%; border: 1px solid gray;}
     .views1 h3{background: #af9ce6;}
     .companyReg td{width: 150px;}
 	.plannerReg_btn{
