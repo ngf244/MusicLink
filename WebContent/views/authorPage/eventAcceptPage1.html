@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/slick.css" rel="stylesheet" />
-    <link href="../css/slick-theme.css" rel="stylesheet" />
-    <link href="../css/common.css" rel="stylesheet" />
-    <link href="../css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+    <link href="../../css/slick.css" rel="stylesheet" />
+    <link href="../../css/slick-theme.css" rel="stylesheet" />
+    <link href="../../css/common.css" rel="stylesheet" />
+    <link href="../../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
@@ -39,21 +39,15 @@
     .menuSelect2-2{width: 100%; height: 50%; top: 50%;}
 
     /* 끝 */
-    #pictureBrowser{background-color: yellow; width: 100%; height: 50%; top: 15%;}
-    #pictureBrowser button{opacity: 0.03; background-color: black; position: absolute;}
-    #pictureBrowser button:hover{opacity: 1; color: white;}
-    
-    #showDetail{top: 45%; left: 45%; width: 10%; height: 10%;}
-    #prev{width: 8%; height: 8%; bottom: 8%; left: 35%;}
-    #next{width: 8%; height: 8%; bottom: 8%; right: 35%;}
-    #nowDay{background-color: yellow; top: 82.5%; left: 45%; width: 10%; height: 10%; text-align: center; line-height: 40px; font-size: larger;}
-    #monthDays{background-color: beige; top: 100%; width: 100%; min-height: 10%; text-align: center; line-height: 40px; font-size: small;}
 
-    .dayNum{padding-left: 10px; padding-right: 10px;}
-    .dayNum:hover{transform: perspective(100px) translateZ(50px); color: red; display: inline-block;}
-    
+    .eventRequestList{background-color: beige; width: 80%; height: 80%; bottom: 5%; left: 10%;}
+    table{background-color: yellow; width: 100%; min-height: 0%; left: 0%; text-align: center;}
+    table tr{margin-top: 10px; height: 30px; line-height: 30px;}
+    table tr:first-child{border: 1px groove black;}
 
-    
+
+
+
 </style>
 </head>
 <body>
@@ -135,64 +129,51 @@
                 </div>
             </div>
         
-            <div id="pictureBrowser">
-                <button id="showDetail">상세 보기</button>
-                <button id="prev" onclick="prev();">&lt;prev</button>
-                <button id="next" onclick="next();">next&gt;</button>
-                <div id="nowDay"></div>
-                <script>
-                    var date = new Date();
-                    var year = date.getFullYear();
-                    var month = date.getMonth()+1;
-                    var day = date.getDate();
-                    document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                </script>
-                <div id="monthDays"></div>
-                <script>
-                    var lastDay = (new Date(date.getFullYear(), date.getMonth()+1, 0)).getDate();
-                    var days = "";
-                    for(var i = 1; i <= lastDay; i++){
-                        days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
-                    }
-                    document.getElementById("monthDays").innerHTML = days;
-
-
-                    function printDays() {
-                        var lastDay = (new Date(year, month, 0)).getDate();
-                        var days = "";
-                        for(var i = 1; i <= lastDay; i++){
-                        days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
-                        }
-                        document.getElementById("monthDays").innerHTML = days;
-                    }
-
-                    function pickDate(num) {
-                        day = num;
-                        console.log(num);
-                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                    }
-                    function prev() {
-                        month -= 1;
-                        if(month<1){
-                            year -= 1;
-                            month = 12;
-                        }
-                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                        printDays();
-                    }
-                    function next() {
-                        month += 1;
-                        if(month>12){
-                            year += 1;
-                            month = 1;
-                        }
-                        document.getElementById("nowDay").innerHTML = year + "-" + month + "-" + day;
-                        printDays();
-                    }
-                    
-                </script>
-
-            </div>    
+            <div class="eventRequestList">
+                <table>
+                    <tr>
+                        <th>글번호</th>
+                        <th>행사명</th>
+                        <th>행사내용</th>
+                        <th>행사기간</th>
+                        <th>기획자아이디</th>
+                        <th>요청일시</th>
+                    </tr>
+                    <tr>
+                        <td>시부레</td>
+                        <td>인</td>
+                        <td>생</td>
+                        <td>ㅈ</td>
+                        <td>ㄴ</td>
+                        <td>빡치넹 ㅎ</td>
+                    </tr>
+                    <tr>
+                        <td>시부레2</td>
+                        <td>인</td>
+                        <td>생</td>
+                        <td>ㅈ</td>
+                        <td>ㄴ</td>
+                        <td>빡치넹 ㅎ</td>
+                    </tr>
+                    <tr>
+                        <td>시부레3</td>
+                        <td>인</td>
+                        <td>생</td>
+                        <td>ㅈ</td>
+                        <td>ㄴ</td>
+                        <td>빡치넹 ㅎ</td>
+                    </tr>
+                    <tr>
+                        <td>시부레4</td>
+                        <td>인</td>
+                        <td>생</td>
+                        <td>ㅈ</td>
+                        <td>ㄴ</td>
+                        <td>빡치넹 ㅎ</td>
+                    </tr>
+                </table>
+            </div>
+        
         </div>
 
 
@@ -288,11 +269,6 @@
         $(".map").css("display","none");
     });
     
-
-
-
-
-
 	//new WOW().init();
 	
 	
