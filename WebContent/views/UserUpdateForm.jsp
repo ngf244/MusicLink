@@ -4,6 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
@@ -32,11 +37,15 @@
     
     /* 회원정보 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}
-    .userInfoFrm{border: 1px solid black; margin-left: 15%; padding-left: 10%; padding-top: 3%; width: 55%; line-height: 30px;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .userInfoFrm{border: 1px solid gray; margin-left: 15%; padding-left: 10%; padding-top: 3%; width: 55%; line-height: 30px;}
     .userInfoFrm td {width: 200px;}
-    .btnArea{margin-left: 25%;}
+    .btnArea{margin-left: 23%;}
     .views1 h3{background: #af9ce6;}
+    .btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    	
+    }
 
 
 
@@ -189,9 +198,9 @@
                     <br>
 
                     <div class="btnArea">
-                        <button type="submit">수정</button>
-                        <button type="button">탈퇴</button>
-                        <button type="reset">취소</button>
+                        <button type="submit" class="btn">수정</button>
+                        <button type="button" class="btn">탈퇴</button>
+                        <button type="reset" class="btn">취소</button>
                         <br><br>
                     </div>
                 </form>

@@ -4,6 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
@@ -32,13 +37,17 @@
     
     /* 비밀번호 재확인 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}
-    .frm{margin-left: 20%; padding-left: 5%; width: 55%; height: 30%; border: 1px solid black;}
-    .submit{margin-left: 38%;}
-    .idPwdFind{margin-left: 31%; margin-top: 5%;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .frm{margin-left: 20%; padding-left: 5%; width: 55%; height: 30%; border: 1px solid gray; padding-bottom: 2%;}
+    .submit{margin-left: 35%;}
+    .idPwdFind{margin-left: 33%; margin-top: 5%;}
     .frm p {width: 85%; height: 10%; line-height: 20px; padding-left:3%; margin:0; margin-top:16px; background:#af9ce6; font-weight: bold; color:#fff;}
     .idPwdFind a{font-size: small;}
     .ConfirmFrm{margin-left: 15%;}
+    .btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;   
+    }
 
 </style>
 </head>
@@ -165,8 +174,8 @@
                     <br>
                     <br>
                     <div class="submit">
-                        <input type="submit" value="확인" onclick="location.href='UserUpdateForm.jsp'">
-                        <input type="reset" value="취소">
+                        <input type="submit" class="btn" value="확인" onclick="location.href='UserUpdateForm.jsp'">
+                        <input type="reset" class="btn" value="취소">
                     </div>
                     <div class="idPwdFind"> 
                         <a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">아이디 찾기</a>&nbsp;&nbsp;<a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">비밀번호 찾기</a>
