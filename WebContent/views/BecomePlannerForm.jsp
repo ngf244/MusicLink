@@ -158,7 +158,7 @@
                 <form action="">
                     <table class="companyReg">
                         <tr>
-                            <td>회사명</td>
+                            <td>회사 명</td>
                             <td><input type="text" name="commpanyName"></td>
                         </tr>
                         <tr>
@@ -170,7 +170,7 @@
                             <td><input type="tel" name="commpanyPhone"></td>
                         </tr>
                         <tr>
-                            <td>담당자명</td>
+                            <td>담당자 명</td>
                             <td><input type="text" name="plannerName"></td>
                         </tr>
                         <tr>
