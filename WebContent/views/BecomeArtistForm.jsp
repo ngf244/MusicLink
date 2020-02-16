@@ -9,6 +9,22 @@
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
+    
+    <script src="../js/jquery-3.4.1.min.js"></script>
+	
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 <title>아티스트 등록</title>
 <style>
     
@@ -17,7 +33,7 @@
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1100px; padding-top: 30px;} 
+    background: rgba(255,255,255,1); height:1200px; padding-top: 30px;} 
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
@@ -149,31 +165,31 @@
                     <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br>
                     <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br>
                     <label for="">장르 </label><br>
-                    <input type="checkbox" name="genre" value="ballad"><label for="">발라드</label>
-                    <input type="checkbox" name="genre" value="dance"><label for="">댄스</label>
-                    <input type="checkbox" name="genre" value="hiphop"><label for="">랩/힙합</label><br>
-                    <input type="checkbox" name="genre" value="pop"><label for="">POP</label>
-                    <input type="checkbox" name="genre" value="rock"><label for="">ROCK</label>
-                    <input type="checkbox" name="genre" value="etc"><label for="">기타</label><br>
+                    <input type="checkbox" name="genre" value="발라드" id="ballad"><label for="ballad">발라드</label>
+                    <input type="checkbox" name="genre" value="댄스" id="dance"><label for="dance">댄스</label>
+                    <input type="checkbox" name="genre" value="힙합" id="hiphop"><label for="hiphop">랩/힙합</label><br>
+                    <input type="checkbox" name="genre" value="팝" id="pop"><label for="pop">POP</label>
+                    <input type="checkbox" name="genre" value="락" id="rock"><label for="rock">ROCK</label>
+                    <input type="checkbox" name="genre" value="기타" id="etc"><label for="etc">기타</label><br>
                     <label for="">유형 </label><br>
-                    <input type="radio" name="artistGender" value="male"><label for="">남성</label>
-                    <input type="radio" name="artistGender" value="female"><label for="">여성</label>
-                    <input type="radio" name="artistGender" value="mixed"><label for="">혼성</label><br>
-                    <input type="radio" name="artistCategory" value="solo"><label for="">솔로</label>
-                    <input type="radio" name="artistCategory" value="group"><label for="">그룹</label><br>                
+                    <input type="radio" name="artistGender" value="남성" id="male"><label for="male">남성</label>
+                    <input type="radio" name="artistGender" value="여성" id="female"><label for="female">여성</label>
+                    <input type="radio" name="artistGender" value="혼성" id="mixed"><label for="mixed">혼성</label><br>
+                    <input type="radio" name="artistCategory" value="솔로" id="solo"><label for="solo">솔로</label>
+                    <input type="radio" name="artistCategory" value="그룹" id="group"><label for="group">그룹</label><br>                
                     
                     <label for="">활동지역</label><br>
-                    <input type="radio" name="activeLocal" value="seoul">서울
-                    <input type="radio" name="activeLocal" value="seoul">경기도
-                    <input type="radio" name="activeLocal" value="seoul">충청도
-                    <input type="radio" name="activeLocal" value="seoul">강원도
-                    <input type="radio" name="activeLocal" value="seoul">경상도
-                    <input type="radio" name="activeLocal" value="seoul">전라도
-                    <input type="radio" name="activeLocal" value="seoul">제주도<br>
+                    <input type="radio" name="activeLocal" value="서울" id="seoul"><label for="seoul">서울</label>
+                    <input type="radio" name="activeLocal" value="경기도" id="Gyeonggi"><label for="Gyeonggi">경기도</label>
+                    <input type="radio" name="activeLocal" value="경상도" id="Gyeongsang"><label for="Gyeongsang">경상도</label>
+                    <input type="radio" name="activeLocal" value="강원도" id="Gangwon"><label for="Gangwon">강원도</label>
+                    <input type="radio" name="activeLocal" value="전라도" id="Jeolla"><label for="Jeolla">전라도</label>
+                    <input type="radio" name="activeLocal" value="충청도" id="Chungcheong"><label for="Chungcheong">충청도</label>
+                    <input type="radio" name="activeLocal" value="제주도" id="Jeju"><label for="Jeju">제주도</label><br>
                     
                     
-                    <!-- <label for="">한 줄 소개</label><br>
-                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br> -->
+                    <label for="">한 줄 소개</label><br>
+                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br>
 
                     <label for="">아티스트 소개</label><br>
                     <textarea name="artistInfo" id="" cols="100" rows="10" placeholder="내용을 입력해주세요." style="resize: none;"></textarea><br>
@@ -187,8 +203,8 @@
                     <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="50"><br>
                     <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br>
                     <br>
-                    <input type="submit" value="등록" style="margin-left: 330px;">
-                    <input type="button" value="취소" onclick="">
+                    <input type="submit" value="등록" class="btn mb-1 btn-dark" style="margin-left: 330px;">
+                    <input type="button" value="취소" class="btn mb-1 btn-dark" onclick="">
                 </form>      
             </div>
         </div>
