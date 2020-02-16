@@ -4,6 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
@@ -11,22 +16,6 @@
     <link href="../css/mfooter.css" rel="stylesheet" />
     
     <script src="../js/jquery-3.4.1.min.js"></script>
-	
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    
-    
     
 <title>행사기획자 등록</title>
 <style>
@@ -52,10 +41,14 @@
 
     /* 행사기획자 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}   
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}   
     .become-planner{line-height: 30px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 32%; border: 1px solid black;}
     .views1 h3{background: #af9ce6;}
     .companyReg td{width: 150px;}
+	.plannerReg_btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
+	}    
 
 </style>
 </head>
@@ -190,8 +183,8 @@
                         </tr>
                     </table>
                     <br>
-                    <input type="submit" class="btn mb-1 btn-dark" value="등록" style="margin-left: 33%;">
-                    <input type="button" class="btn mb-1 btn-dark" value="취소" onclick="">
+                    <input type="submit" class="plannerReg_btn" value="등록하기" style="margin-left: 24%;">
+                    <input type="button" class="plannerReg_btn" value="취소하기" onclick="">
                 </form>                           
                         
             </div>            
