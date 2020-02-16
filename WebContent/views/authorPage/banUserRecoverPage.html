@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/slick.css" rel="stylesheet" />
-    <link href="../css/slick-theme.css" rel="stylesheet" />
-    <link href="../css/common.css" rel="stylesheet" />
-    <link href="../css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+    <link href="../../css/slick.css" rel="stylesheet" />
+    <link href="../../css/slick-theme.css" rel="stylesheet" />
+    <link href="../../css/common.css" rel="stylesheet" />
+    <link href="../../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
@@ -40,14 +40,31 @@
 
     /* 끝 */
 
-    .eventRequestList{background-color: beige; width: 80%; height: 80%; bottom: 5%; left: 10%;}
-    table{background-color: yellow; width: 100%; min-height: 0%; left: 0%; text-align: center;}
-    table tr{margin-top: 10px; height: 30px; line-height: 30px;}
-    table tr:first-child{border: 1px groove black;}
+    /* section2 */
+    .searchBox{  width: 50%; height: 5%; top: 16%; left: 24%; z-index: 1;}
+    .searchBox-inputText{width: 75%; height: 85%;}
+    .searchBox-submitButton{width: 20%; height: 100%; right: 0%;}
+    
+    .userDetailBox{width: 80%; height: 30%; top: 25%; left: 10%;}
+    .userDetailBox-imgBox{background-color: seashell; width: 35%; height: 100%; top: 0%; left: 5%;}
+    .userDetailBox-nameBox{width: 50%; height: 30%; top: 0%; right: 5%;}
+    .userDetailBox-addressBox{width: 50%; height: 30%; top: 35%; right: 5%;}
+    .userDetailBox-usertypeBox{width: 50%; height: 30%; top: 70%; right: 5%;}
+    
+    fieldset{border: 1px solid black; height: 100%;}
+    legend{font-size: larger;}
+    input[readonly]{width: 99%; height: 55%; margin-top: 10px;}
 
+    .preDistrictReason{width: 80%; height: 10%; bottom: 33%; left: 10%;}
+    .preDetailReason{width: 80%; height: 18%; bottom: 12%; right: 10%;}
 
+    .preDistrictReason fieldset, .preDetailReason fieldset{border: 1px solid black; height: 100%;}
+    .preDistrictReason legend, .preDetailReason legend{font-size: larger;}
+    .preDistrictReason input{width: 99%; height: 55%; margin-top: 10px;}
+    .preDetailReason input{width: 99%; height: 70%; margin-top: 10px;}
 
-
+    .preDetailReason+div{width: 5%; height: 5%; bottom: 5%; right: 10%;}
+    .preDetailReason+div button{background-color: red;}
 </style>
 </head>
 <body>
@@ -129,51 +146,49 @@
                 </div>
             </div>
         
-            <div class="eventRequestList">
-                <table>
-                    <tr>
-                        <th>글번호</th>
-                        <th>행사명</th>
-                        <th>행사내용</th>
-                        <th>행사기간</th>
-                        <th>기획자아이디</th>
-                        <th>요청일시</th>
-                    </tr>
-                    <tr>
-                        <td>시부레</td>
-                        <td>인</td>
-                        <td>생</td>
-                        <td>ㅈ</td>
-                        <td>ㄴ</td>
-                        <td>빡치넹 ㅎ</td>
-                    </tr>
-                    <tr>
-                        <td>시부레2</td>
-                        <td>인</td>
-                        <td>생</td>
-                        <td>ㅈ</td>
-                        <td>ㄴ</td>
-                        <td>빡치넹 ㅎ</td>
-                    </tr>
-                    <tr>
-                        <td>시부레3</td>
-                        <td>인</td>
-                        <td>생</td>
-                        <td>ㅈ</td>
-                        <td>ㄴ</td>
-                        <td>빡치넹 ㅎ</td>
-                    </tr>
-                    <tr>
-                        <td>시부레4</td>
-                        <td>인</td>
-                        <td>생</td>
-                        <td>ㅈ</td>
-                        <td>ㄴ</td>
-                        <td>빡치넹 ㅎ</td>
-                    </tr>
-                </table>
+            <div class="searchBox">
+                <input type="text" placeholder="검색할 사용자 아이디" class="searchBox-inputText">
+                <button type="button" class="searchBox-submitButton">검색</button>
             </div>
         
+            <div class="userDetailBox">
+                <div class="userDetailBox-imgBox">
+                    img 사진 들어갈 곳
+                </div>
+                <div class="userDetailBox-nameBox">
+                    <fieldset>
+                        <legend>이름</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div class="userDetailBox-addressBox">
+                    <fieldset>
+                        <legend>주소</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div class="userDetailBox-usertypeBox">
+                    <fieldset>
+                        <legend>회원 유형</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+            </div>
+                <div class="preDistrictReason">
+                    <fieldset>
+                        <legend>이전 제재 사유</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div class="preDetailReason">
+                    <fieldset>
+                        <legend>이전 제재 사유 상세</legend>
+                        <input type="text" readonly>
+                    </fieldset>
+                </div>
+                <div>
+                    <button type="button" onclick="return restrictCanelSubmit();">해제</button>
+                </div>
         </div>
 
 
@@ -268,6 +283,17 @@
     $(".map-h1").click(function(){
         $(".map").css("display","none");
     });
+    
+    function restrictCanelSubmit() {
+        var check = confirm("정말 해제 하시겠습니까?");
+
+        if(check == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
 	//new WOW().init();
 	
