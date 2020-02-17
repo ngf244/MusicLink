@@ -1,6 +1,7 @@
     html, body{height:100%; background: rgb(253, 241, 241);} /**/
     h1, h2, h3, h4, h5, h6, p, span, a{-webkit-transition:0.5s ease-out; transition:0.5s ease-out;}
     a:focus, a:hover{text-decoration:none;}
+    ul{padding:0;}
     p{font-size:14px;}
     
     header{height:150px;}
@@ -28,6 +29,10 @@
     .side-text p{font-size:12px; background:#fff; width:65%; border-radius:5px;}
     .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px; border: va}
     
+    
+    /*·Î±×ÀÎ ¾Æ¿ô*/
+    .log-inOut{float: right; margin-top:15px; margin-right: 50px;}
+    .log-inOut > a{display: inline-block;}
     
     
     .map{background: rgba(0,0,0,0.8); height:100%; padding-top: 10%; position:fixed; bottom:0%; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; display:none;  opacity:0; filter:alpha(opacity=0);}
@@ -104,14 +109,14 @@
     .content-right{width:30%; float: right;}
     .lt{width:30%; float:left; margin-bottom:30px;}
     .lt > li{margin: 10px 0; color:#F7FE2E; font-weight: bold;}
-    .rt{width:70%; float:right; margin-bottom:30px;}
+    .rt{width:70%; float:left; margin-bottom:30px;}
     .rt > li{margin: 10px 0;}
     
-    .lbl{width:30%; display: inline-block;}
+    .lbl{width:32%; display: inline-block;}
     .lbl > li{margin: 10px 0;}
-    .lbm{width:30%; display: inline-block;}
+    .lbm{width:32%; display: inline-block;}
     .lbm > li{margin: 10px 0;}
-    .lbr{width:30%; display: inline-block;}
+    .lbr{width:32%; display: inline-block;}
     .lbr > li{margin: 10px 0;}
     
     .content-right a{padding:15px 10px;}
