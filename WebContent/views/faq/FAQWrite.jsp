@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
     <link href="../../css/slick.css" rel="stylesheet" />
     <link href="../../css/slick-theme.css" rel="stylesheet" />
-    <link href="../../css/common.css" rel="stylesheet" />
     <link href="../../css/mfooter.css" rel="stylesheet" />
 <title>FAQ 작성</title>
 <style>
