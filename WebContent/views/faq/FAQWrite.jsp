@@ -5,18 +5,18 @@
 <head>
 <meta charset="utf-8">
 
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
     
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/slick.css" rel="stylesheet" />
-    <link href="../css/slick-theme.css" rel="stylesheet" />
-    <link href="../css/common.css" rel="stylesheet" />
-    <link href="../css/mfooter.css" rel="stylesheet" />
-<title>Q&A 작성</title>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+    <link href="../../css/slick.css" rel="stylesheet" />
+    <link href="../../css/slick-theme.css" rel="stylesheet" />
+    <link href="../../css/common.css" rel="stylesheet" />
+    <link href="../../css/mfooter.css" rel="stylesheet" />
+<title>FAQ 작성</title>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
@@ -91,13 +91,13 @@
         </div>
         <div class="side-icon">
             <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="../img/user.png" alt="" /></a>
+                <a href="#" class="icon-a"><img src="../../img/user.png" alt="" /></a>
             </div>
             <div class="image2 icon">
-                <a href="#" ><img src="../img/bell.png" alt="" /></a>
+                <a href="#" ><img src="../../img/bell.png" alt="" /></a>
             </div>
             <div class="image3 icon">
-                <img src="../img/pin.png" alt="" />
+                <img src="../../img/pin.png" alt="" />
             </div>
             <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
@@ -113,27 +113,29 @@
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
-				<table id="inputTable">
-					<tr>
-						<td class="qna_title labeltd">제목</td>
-						<td class="qna_title">
-							<input type="text" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
-						</td>
-					</tr>
-					<tr>
-						<td class="qna_content labeltd">내용</td>
-						<td class="qna_content">
-							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td id="qna_btn2">
-							<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
-							<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
-						</td>
-					</tr>
-				</table>
+				<form action="<%= request.getContextPath() %>/insert.faq" method="post">
+					<table id="inputTable">
+						<tr>
+							<td class="qna_title labeltd">제목</td>
+							<td class="qna_title">
+								<input type="text" name="title" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
+							</td>
+						</tr>
+						<tr>
+							<td class="qna_content labeltd">내용</td>
+							<td class="qna_content">
+								<textarea name="content" class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td id="qna_btn2">
+								<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
+								<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
+							</td>
+						</tr>
+					</table>					
+				</form>
 			</div>
 		</div>
     </section>
@@ -211,18 +213,18 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../plugins/common/common.min.js"></script>
-    <script src="../js/custom.min.js"></script>
-    <script src="../js/settings.js"></script>
-    <script src="../js/gleek.js"></script>
-    <script src="../js/styleSwitcher.js"></script>
+    <script src="../../plugins/common/common.min.js"></script>
+    <script src="../../js/custom.min.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/gleek.js"></script>
+    <script src="../../js/styleSwitcher.js"></script>
     
-<script src="../js/respond.min.js"></script>
+<script src="../../js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/parallax.min.js"></script>
-<script src="../js/slick.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/wow.min.js"></script>
+<script src="../../js/parallax.min.js"></script>
+<script src="../../js/slick.min.js"></script>
 <script>
 
 	$("#toggle").click(function(){
