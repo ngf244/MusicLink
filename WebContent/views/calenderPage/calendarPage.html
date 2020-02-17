@@ -3,19 +3,16 @@
 <head>
 <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
-    <link href="../../css/slick.css" rel="stylesheet" />
-    <link href="../../css/slick-theme.css" rel="stylesheet" />
-    <link href="../../css/common.css" rel="stylesheet" />
     <link href="../../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height:800px;} 
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 300px; position: relative;
+    background: #fff; min-height:600px;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:25%; color: rgb(224, 224, 224); clear: both;} 
     
     /* selection common */
-    #sectionBox {position: relative;  width: 100%; height: 100%;}
+    #sectionBox {position: relative;  width: 100%; height: 500px;}
     #sectionBox div{position: absolute;}
     /* common end */
 
@@ -25,9 +22,9 @@
     #menuList1:hover div{display: block;}
     #menuList2:hover div{display: block;}
 
-    #menuList div div div:hover{color: black; font-weight: bolder; opacity: 1;}
+    #menuList div div div:hover{color: black; font-weight: bolder; opacity: 1; cursor: pointer;}
 
-    #menuList{width: 100%; height: 7%; top: 5%;}
+    #menuList{width: 100%; height: 50px; top: 5%;}
     #menuList1{background-color: #FDF1F1; width: 50%; height: 100%; text-align: center; line-height: 50px; font-size: larger;}
     #menuList2{background-color: #FDF1F1; width: 50%; height: 100%; right: 0%; text-align: center; line-height: 50px; font-size: larger;}
     .menuSelect1{background-color: thistle; width: 100%; height: 180%; line-height: 35px; z-index: 5;}
@@ -39,7 +36,7 @@
     .menuSelect2-2{width: 100%; height: 50%; top: 50%;}
 
     /* 끝 */
-    #pictureBrowser{background-color: yellow; width: 100%; height: 50%; top: 15%;}
+    #pictureBrowser{background-color: yellow; width: 100%; height: 350px; top: 20%;}
     #pictureBrowser button{opacity: 0.03; background-color: black; position: absolute;}
     #pictureBrowser button:hover{opacity: 1; color: white;}
     
@@ -52,7 +49,7 @@
     .dayNum{padding-left: 10px; padding-right: 10px;}
     .dayNum:hover{transform: perspective(100px) translateZ(50px); color: red; display: inline-block;}
     
-
+    #festivalList{min-height: 100px; width: 100%; top: 55%; background-color: blue;}
     
 </style>
 </head>
@@ -101,13 +98,13 @@
         </div>
         <div class="side-icon">
             <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="img/user.png" alt="" /></a>
+                <a href="#" class="icon-a"><img src="../../img/user.png" alt="" /></a>
             </div>
             <div class="image2 icon">
-                <a href="#" ><img src="img/bell.png" alt="" /></a>
+                <a href="#" ><img src="../../img/bell.png" alt="" /></a>
             </div>
             <div class="image3 icon">
-                <img src="img/pin.png" alt="" />
+                <img src="../../img/pin.png" alt="" />
             </div>
             <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
@@ -194,10 +191,31 @@
 
             </div>    
         </div>
+        <div id="festivalList">공연 정보 인쇄 위치
+            <pre>
+                1
+                2
+                9
+                10
+                1
+                2
+                3
+                4
+                5
+                5
+                6
+                6
+                7
+                7
+                8
+                8
+                
+            </pre>
+        </div>
 
 
     </section>
-    <h1 class="htext">M Y P A G E</h1>
+    <h1 class="htext">C A L E N D A R</h1>
     
     
     <footer>

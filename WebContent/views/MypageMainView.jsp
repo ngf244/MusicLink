@@ -4,6 +4,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
@@ -17,7 +22,7 @@
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
+    background: rgba(255,255,255,1); height:1100px; padding-top: 30px;} 
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
@@ -32,7 +37,7 @@
     
     /* 마이페이지 메인 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
 
 
     .userInfo{margin-left: 10%; width: 80%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
@@ -51,6 +56,7 @@
     }
     .profileInfo{display: inline-block; margin-left: 10%; line-height: 20px;}
     
+    .listArea{line-height: 30px;}
     .postInfo{line-height: 30px; margin-left: 10%; width: 75%; padding-left: 5%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
     .write{width: 45%; display: inline-block;}
     .comment{width: 45%; display: inline-block;}
@@ -62,6 +68,14 @@
     .call-nav{width:18%; display: inline-block; text-align: center; padding:10px 0; }
     .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
     .call-sum{width:18%; display: inline-block; margin:0; padding: 0; text-align: center;}
+    .btn1{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    
+    }
+    .selectBtn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: lightgray; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    
+    }    
 
 </style>
 </head>
@@ -173,8 +187,8 @@
                 </div>
                 <div class="profileInfo">
                     <h4 style="display: inline-block;">김민수님</h4>&nbsp;&nbsp;
-                    <button onclick="location.href='PwdCheckForm.jsp'">정보 수정</button>
-                    <ul>
+                    <button onclick="location.href='PwdCheckForm.jsp'" class="btn1">정보 수정</button>
+                    <ul class="listArea">
                         <li>회원구분 </li>
                         <li>전화번호 </li>
                         <li>이메일 </li>
@@ -239,9 +253,9 @@
                     </div>
                     <br>
                     <div class="selectArea" style="float: right;">
-                        <button>전체선택</button>
-                        <button>전체해제</button>
-                        <button>삭제</button>
+                        <button class="selectBtn">전체선택</button>
+                        <button class="selectBtn">전체해제</button>
+                        <button class="selectBtn">삭제</button>
                     </div><div style="clear:both;"></div>
 	       		</div>
                 

@@ -29,7 +29,7 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
 	#block {background: #8AFF00; width: 55px; height: 8px; top: 5%;}
 	
-	#contentArea{width: 100%; text-align:center; padding-top: 60px; padding-bottom: 60px; font-family: 'Noto Sans KR', sans-serif;}
+	#contentArea{width: 100%; text-align:center; padding-top: 5%; padding-bottom: 5%; font-family: 'Noto Sans KR', sans-serif;}
 	#table_show{width: 85%; margin-left: auto; margin-right: auto; text-align:center;}
 	.qna_title{padding: 10px; /*border-bottom: 2px solid lightgray;*/ height: 20px; vertical-align: middle;}
 	.qna_content{padding: 10px;}
@@ -40,12 +40,10 @@
 	.inputqna{height:40px;}
 	.inputtextarea{border-radius: 4px; resize:none;}
 	
-	.detail_btn{
-		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
-	}
+	#updateBtn{margin-right: 2%;}
+	#qna_btn2 button{margin-top: 1%;}
 	
-	#qna_comment{margin-top: 10px; border: 1px solid lightgray; border-radius: 0.2rem; padding: 10px;}
+	.ft-content{width: 70%;}
 </style>
 </head>
 <body>
@@ -129,10 +127,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td id="qna_btn1"></td>
+						<td></td>
 						<td id="qna_btn2">
-							<button type="submit" class="detail_btn" id="updateBtn">등록</button>
-							<button type="button" class="detail_btn" id="deleteBtn">취소</button>
+							<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
+							<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
 						</td>
 					</tr>
 				</table>

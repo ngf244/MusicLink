@@ -4,27 +4,19 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+    
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
     
-    <script src="../js/jquery-3.4.1.min.js"></script>
-	
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <script src="../js/jquery-3.4.1.min.js"></script>	
+
 <title>아티스트 등록</title>
 <style>
     
@@ -33,7 +25,7 @@
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1200px; padding-top: 30px;} 
+    background: rgba(255,255,255,1); height:1600px; padding-top: 30px;} 
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
@@ -48,10 +40,13 @@
     
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block;}  
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}  
     .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px;}
     .views1 h3{background: #af9ce6;}
-
+	.artistReg_btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
+	}
 
 
 </style>
@@ -161,22 +156,22 @@
             <br>
             <div class="become-artist">
                 <form action="">
-                    <label for="artistName">활동명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br>
-                    <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br>
-                    <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br>
+                    <label for="artistName">활동 명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br><br>
+                    <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br><br>
+                    <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br><br>
                     <label for="">장르 </label><br>
                     <input type="checkbox" name="genre" value="발라드" id="ballad"><label for="ballad">발라드</label>
                     <input type="checkbox" name="genre" value="댄스" id="dance"><label for="dance">댄스</label>
                     <input type="checkbox" name="genre" value="힙합" id="hiphop"><label for="hiphop">랩/힙합</label><br>
                     <input type="checkbox" name="genre" value="팝" id="pop"><label for="pop">POP</label>
                     <input type="checkbox" name="genre" value="락" id="rock"><label for="rock">ROCK</label>
-                    <input type="checkbox" name="genre" value="기타" id="etc"><label for="etc">기타</label><br>
+                    <input type="checkbox" name="genre" value="기타" id="etc"><label for="etc">기타</label><br><br>
                     <label for="">유형 </label><br>
                     <input type="radio" name="artistGender" value="남성" id="male"><label for="male">남성</label>
                     <input type="radio" name="artistGender" value="여성" id="female"><label for="female">여성</label>
                     <input type="radio" name="artistGender" value="혼성" id="mixed"><label for="mixed">혼성</label><br>
                     <input type="radio" name="artistCategory" value="솔로" id="solo"><label for="solo">솔로</label>
-                    <input type="radio" name="artistCategory" value="그룹" id="group"><label for="group">그룹</label><br>                
+                    <input type="radio" name="artistCategory" value="그룹" id="group"><label for="group">그룹</label><br><br>                
                     
                     <label for="">활동지역</label><br>
                     <input type="radio" name="activeLocal" value="서울" id="seoul"><label for="seoul">서울</label>
@@ -185,26 +180,26 @@
                     <input type="radio" name="activeLocal" value="강원도" id="Gangwon"><label for="Gangwon">강원도</label>
                     <input type="radio" name="activeLocal" value="전라도" id="Jeolla"><label for="Jeolla">전라도</label>
                     <input type="radio" name="activeLocal" value="충청도" id="Chungcheong"><label for="Chungcheong">충청도</label>
-                    <input type="radio" name="activeLocal" value="제주도" id="Jeju"><label for="Jeju">제주도</label><br>
+                    <input type="radio" name="activeLocal" value="제주도" id="Jeju"><label for="Jeju">제주도</label><br><br>
                     
                     
                     <label for="">한 줄 소개</label><br>
-                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br>
+                    <textarea name="introduce" id="" cols="100" rows="3" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요." style="resize: none;"></textarea><br><br>
 
                     <label for="">아티스트 소개</label><br>
-                    <textarea name="artistInfo" id="" cols="100" rows="10" placeholder="내용을 입력해주세요." style="resize: none;"></textarea><br>
+                    <textarea name="artistInfo" id="" cols="100" rows="10" placeholder="내용을 입력해주세요." style="resize: none;"></textarea><br><br>
                             
                     <label for="">활동 이력</label><br>
-                    <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br>
+                    <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br><br>
 
-                    <label for="">아티스트 이미지 첨부 : </label><input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br>
-                    <label for="">아티스트 동영상 첨부 : </label><input type="file" name="videoFile" accept="video/mp4, video/avi"/><br>
-                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" placeholder="인스타 주소를 입력해주세요." size="50"><br>
-                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="50"><br>
-                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br>
+                    <label for="">아티스트 이미지 첨부 : </label><input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
+                    <label for="">아티스트 동영상 첨부 : </label><input type="file" name="videoFile" accept="video/mp4, video/avi"/><br><br>
+                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" placeholder="인스타 주소를 입력해주세요." size="50"><br><br>
+                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="50"><br><br>
+                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br><br>
                     <br>
-                    <input type="submit" value="등록" class="btn mb-1 btn-dark" style="margin-left: 330px;">
-                    <input type="button" value="취소" class="btn mb-1 btn-dark" onclick="">
+                    <input type="submit" value="등록하기" class="artistReg_btn" style="margin-left: 300px;">
+                    <input type="button" value="취소하기" class="artistReg_btn" onclick="">
                 </form>      
             </div>
         </div>
