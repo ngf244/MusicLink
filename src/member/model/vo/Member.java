@@ -139,6 +139,14 @@ public class Member {
 		this.userStatus = userStatus;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [userCode=" + userCode + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
+				+ ", userBirth=" + userBirth + ", userEmail=" + userEmail + ", userGender=" + userGender
+				+ ", userPhone=" + userPhone + ", userJoinDay=" + userJoinDay + ", userClass=" + userClass
+				+ ", userStatus=" + userStatus + "]";
+	}
+
 	
 	
 }

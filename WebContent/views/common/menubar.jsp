@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <style>
 	

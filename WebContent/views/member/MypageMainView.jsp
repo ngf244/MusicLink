@@ -1,5 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%
+	Member member = (Member)request.getAttribute("member");
+
+	String userCode = member.getUserCode();
+	String userId = member.getUserId();
+	String userName = member.getUserName();
+	String userBirth = member.getUserBirth();
+	String userGender = member.getUserGender();
+	String userEmail = member.getUserEmail();
+	String userPhone = member.getUserPhone();
+	String userClass = member.getUserClass();
+		
+	String division = "";
+	
+	switch(userClass) {
+	case "1": division = "일반회원"; break;
+	case "2": division = "아티스트"; break;
+	case "3": division = "기획자"; break;
+	}
+	
+	String imgPath = "";
+	
+	switch(userGender) {
+	case "남자": imgPath = "default_profile_male.png"; break;
+	case "여자": imgPath = "default_profile_female.png"; break;
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +36,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="../../js/jquery-3.4.1.min.js"></script>
 <title>마이페이지</title>
 <style>
     
@@ -60,10 +87,10 @@
     .comment a {display: inline-block;}
     .followView{width: 100%; height: 40%; margin-left: 10%;}
     
-    .love-call{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
-    .call-nav{width:18%; display: inline-block; text-align: center; padding:10px 0; }
+    .followingAT{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
+    .follow-nav{width:18%; display: inline-block; text-align: center; padding:10px 0; }
     .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
-    .call-sum{width:18%; display: inline-block; margin:0; padding: 0; text-align: center;}
+    .follow-sum{width:18%; display: inline-block; margin:0; padding: 0; text-align: center;}
     .btn1{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    
@@ -76,8 +103,9 @@
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
     
+   
     <section style="z-index: 1;">
         <div class="sec-line"></div>
         <h1 class="sec-mtxt">MyPage<p>-Main</p></h1>
@@ -122,20 +150,30 @@
            
             <div class="userInfo">
                 <div class="profileBox" style="background: #e8c8ac;">
-                    <img class="profile" src="">
+                    <img class="profile" src="<%= request.getContextPath() %>/img/<%= imgPath%>">
                 </div>
                 <div class="profileInfo">
-                    <h4 style="display: inline-block;">김민수님</h4>&nbsp;&nbsp;
-                    <button onclick="location.href='PwdCheckForm.jsp'" class="btn1">정보 수정</button>
+                    <h4 style="display: inline-block;"><%= userName %>님</h4>&nbsp;&nbsp;
+                    <button onclick="location.href='views/member/PwdCheckForm.jsp'" class="btn1">정보 수정</button>
                     <ul class="listArea">
-                        <li>회원구분 </li>
-                        <li>전화번호 </li>
-                        <li>이메일 </li>
-                        <li>대표 SNS주소 </li>
+                        <li>회원구분 - <%= division %></li>
+                        <li>전화번호 - <%= userPhone %></li>
+                        <li>이메일 - <%= userEmail %></li>
+                        <li>생년월일 - <%= userBirth %></li>
                     </ul>
-                    <p>회원님은 일반회원이십니다. 행사 등록 및 지원을 하기 위해서는 <br>
+                    <% if(division.equals("일반회원")){ %>
+                    <p>회원님은 일반회원입니다. 행사 등록 및 행사 지원을 하기 위해서는 <br>
                         아티스트 등록, 행사기획자 등록 메뉴를 이용해주세요.
                     </p>
+                    <% } else if(division.equals("아티스트")){ %>
+                    <p>회원님은 아티스트입니다. 행사 지원을 할 수 있고 기획자로부터 <br>
+                    러브콜을 받을 수 있습니다.                     
+                    </p>
+                    <% } else if(division.equals("기획자")){ %>
+                    <p>회원님은 행사 기획자입니다. 행사를 등록하여 아티스트를 모집할 수 있습니다.<br>
+                    또한 섭외하길 원하는 아티스트에게 러브콜을 보낼 수 있습니다.
+                    </p>
+                    <% } %>
                 </div>
                                           
             </div>
@@ -162,45 +200,55 @@
             <div class="followView">
               	<div class="sec-menu-views views2">
 		            <h4>팔로잉 아티스트</h4>
-		            <ul class="love-call">
-		                <li class="call-nav">선택</li>
-		                <li class="call-nav">아티스트명</li>
-		                <li class="call-nav">장르</li>
-		                <li class="call-nav">활동지역</li>
-		                <li class="call-nav">상태</li>
+		            <ul class="followingAT">
+		                <li class="follow-nav">선택</li>
+		                <li class="follow-nav">아티스트명</li>
+		                <li class="follow-nav">장르</li>
+		                <li class="follow-nav">활동지역</li>
+		                <li class="follow-nav">상태</li>
 		            </ul>
 		            <div class="padding-1">
-		                <div class="call-time call-sum"><input type="checkbox" name="select"></div>
-		                <div class="call-artist call-sum">아티스트명1</div>
-		                <div class="artist-proplie call-sum">DANCE</div>
-		                <div class="call-yn call-sum">경상도</div>
-		                <div class="call-artist call-sum">팔로우</div>
+		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
+		                <div class="artistName follow-sum">아티스트명1</div>
+		                <div class="Genre follow-sum">DANCE</div>
+		                <div class="local follow-sum">경상도</div>
+		                <div class="followYN follow-sum">팔로우</div>
 		            </div>
 		            <div class="padding-1">
-		                <div class="call-time call-sum"><input type="checkbox" name="select"></div>
-		                <div class="call-artist call-sum">아티스트명2</div>
-		                <div class="artist-proplie call-sum">HIPHOP</div>
-		                <div class="call-yn call-sum">서울</div>
-		                <div class="call-artist call-sum">팔로우</div>
+		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
+		                <div class="followYN follow-sum">아티스트명2</div>
+		                <div class="Genre follow-sum">HIPHOP</div>
+		                <div class="local follow-sum">서울</div>
+		                <div class="followYN follow-sum">팔로우</div>
 		            </div>
 		            <div class="padding-1">
-		                <div class="call-time call-sum"><input type="checkbox" name="select"></div>
-		                <div class="call-artist call-sum">아티스트명3</div>
-		                <div class="artist-proplie call-sum">TROT</div>
-		                <div class="call-yn call-sum">경기도</div>
-		                <div class="call-artist call-sum">팔로우</div>
+		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
+		                <div class="followYN follow-sum">아티스트명3</div>
+		                <div class="Genre follow-sum">TROT</div>
+		                <div class="local follow-sum">경기도</div>
+		                <div class="followYN follow-sum">팔로우</div>
                     </div>
                     <br>
                     <div class="selectArea" style="float: right;">
-                        <button class="selectBtn">전체선택</button>
-                        <button class="selectBtn">전체해제</button>
-                        <button class="selectBtn">삭제</button>
+                        <button class="selectBtn" id="all" onclick="selectAll();">전체선택</button>
+                        <button class="selectBtn" id="clear" onclick="clearAll();">전체해제</button>
+                        <button class="selectBtn" id="delete" onclick="delete();">삭제</button>
                     </div><div style="clear:both;"></div>
 	       		</div>
                 
             </div>
 
         </div>
+        <script>
+        	function selectAll(){
+        		$('[name=select]').prop('checked', true);
+        	}
+        	
+        	function clearAll(){
+        		$('[name=select]').prop('checked', false);
+        	}
+        	
+        </script>
         
 
         
@@ -208,7 +256,7 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>    
+	<%@ include file="../common/footer.jsp" %>    
 
 </body>
 </html>

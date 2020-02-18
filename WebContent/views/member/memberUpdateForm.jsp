@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member" %>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	String userId = loginUser.getUserId();
+	String userPwd = loginUser.getUserPwd();
+	String userName = loginUser.getUserName();
+	String userBirth = loginUser.getUserBirth();
+	String gender = loginUser.getUserGender();
+	String userEmail = loginUser.getUserEmail();
+	String userPhone = loginUser.getUserPhone();
+	
+	String[] checked = new String[2];
+	if(gender.equals("남자")){
+		checked[0] = "checked";
+		checked[1] = "";
+	} else{
+		checked[0] = "";
+		checked[1] = "checked";
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,10 +27,10 @@
     <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-	
-	<script src="../js/jquery-3.4.1.min.js"></script>	
 
-<title>비밀번호 재확인</title>
+	<script src="../../js/jquery-3.4.1.min.js"></script>
+	
+<title>회원 정보 수정</title>
 <style>
     
     
@@ -32,24 +51,24 @@
     .s-smenu{font-size:14px;margin-top:20px; color:#000;}
     .s-smenu > li{padding:5px 10px;}    
     
-    /* 비밀번호 재확인 */
+    /* 회원정보 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
     .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
-    .frm{margin-left: 20%; padding-left: 5%; width: 55%; height: 30%; border: 1px solid gray; padding-bottom: 2%;}
-    .submit{margin-left: 35%;}
-    .idPwdFind{margin-left: 33%; margin-top: 5%;}
-    .frm p {width: 85%; height: 10%; line-height: 20px; padding-left:3%; margin:0; margin-top:16px; background:#af9ce6; font-weight: bold; color:#fff;}
-    .idPwdFind a{font-size: small;}
-    .ConfirmFrm{margin-left: 15%;}
+    .userInfoFrm{border: 1px solid gray; margin-left: 15%; padding-left: 10%; padding-top: 3%; width: 55%; line-height: 30px;}
+    .userInfoFrm td {width: 200px;}
+    .btnArea{margin-left: 23%;}
+    .views1 h3{background: #af9ce6;}
     .btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;   
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    	
     }
+
+
 
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>    
+	<%@ include file="../common/menubar.jsp" %>   
     
     <section style="z-index: 1;">
         <div class="sec-line"></div>
@@ -92,37 +111,69 @@
         </ul>
         
         <div class="sec-menu-views views1">
-            <h3 class="confirmtext">비밀번호 재확인</h3>
-            <br><br>
-            <div class="frm">
-                <br>
-                <p style="text-decoration: underline;">안전한 MusicLink 사용을 위하여 비밀번호를 다시 한번 확인해주세요.</p>
-                <br>
-                <br>
-                <form> 
-                    <table class="ConfirmFrm">
+            <h3>회원 정보</h3>
+            <br>
+            <div class="userInfoFrm">
+                <form action="<%= request.getContextPath() %>/update.me" method="post" id="updateForm" name="updateForm">
+                    <table>
                         <tr>
-                            <td><label>아이디</label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userId" id="userId" value="" readonly></td>
+                            <td>아이디</td>
+                            <td><input type="text" name="userId" value="<%= userId %>" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>새 비밀번호<input type="hidden" name="userPwd" value="<%= userPwd%>"></td>
+                            <td><input type="password" name="newPwd"></td>
+                        </tr>
+                        <tr>
+                            <td>새 비밀번호 확인</td>
+                            <td><input type="password" name="newPwd2"></td>
+                        </tr>
+                        <tr>
+                            <td>이름</td>
+                            <td><input type="text" name="userName" value="<%= userName %>"></td>
+                        </tr>
+                        <tr>
+                            <td>생년월일</td>
+                            <td><input type="text" name="userBirth" value="<%= userBirth %>"></td>
+                        </tr>
+                        <tr>
+                            <td>성별</td>
+                            <td>
+                                <input type="radio" id="male" name="gender" value="남자" <%= checked[0] %>><label for="male">남자</label>
+                                <input type="radio" id="female" name="gender" value="여자" <%= checked[1] %>><label for="female">여자</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>이메일</td>
+                            <td><input type="email" name="userEmail" value="<%= userEmail %>"></td>
+                        </tr>
+                        <tr>
+                            <td>전화번호</td>
+                            <td><input type="text" name="userPhone" value="<%= userPhone %>"></td>
                         </tr>
 
-                        <tr>
-                            <td><label>비밀번호</label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="userPwd" id="userPwd" required></td>
-                        </tr>
                     </table>
+                    
                     <br>
-                    <br>
-                    <div class="submit">
-                        <input type="submit" class="btn" value="확인" onclick="location.href='UserUpdateForm.jsp'">
-                        <input type="reset" class="btn" value="취소">
-                    </div>
-                    <div class="idPwdFind"> 
-                        <a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">아이디 찾기</a>&nbsp;&nbsp;<a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">비밀번호 찾기</a>
-                    </div> 
 
+                    <div class="btnArea">
+                        <button type="submit" class="btn">수정</button>
+                        <button type="button" class="btn" onclick="deleteMember();">탈퇴</button>
+                        <button type="reset" class="btn">취소</button>
+                        <br><br>
+                    </div>
                 </form>
             </div>
+	<script>
+		function deleteMember(){
+			var bool = confirm("정말로 삭제하시겠습니까?");
+			if(bool){
+				$('#myInfoForm').attr('action', '<%= request.getContextPath() %>/delete.me');
+				$('#myInfoForm').submit();
+			}
+		}
+	</script>
+            
             
         </div>
         
@@ -130,7 +181,7 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>    
+	<%@ include file="../common/footer.jsp" %>    
 
 </body>
 </html>

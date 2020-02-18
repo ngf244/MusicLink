@@ -9,8 +9,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
      
-    <script src="../js/jquery-3.4.1.min.js"></script>	
-
 <title>아티스트 등록</title>
 <style>
     
@@ -46,7 +44,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
     
     <section style="z-index: 1;">
         <div class="sec-line"></div>
@@ -92,7 +90,7 @@
             <h3>아티스트 등록</h3>
             <br>
             <div class="become-artist">
-                <form action="">
+                <form action="<%= request.getContextPath() %>/insert.at">
                     <label for="artistName">활동 명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br><br>
                     <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br><br>
                     <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br><br>
@@ -136,7 +134,7 @@
                     <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br><br>
                     <br>
                     <input type="submit" value="등록하기" class="artistReg_btn" style="margin-left: 300px;">
-                    <input type="button" value="취소하기" class="artistReg_btn" onclick="">
+                    <input type="button" value="취소하기" class="artistReg_btn" onclick="location.href='<%= request.getContextPath() %>/views/member/MypageMainView.jsp'">
                 </form>      
             </div>
         </div>
@@ -146,6 +144,6 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

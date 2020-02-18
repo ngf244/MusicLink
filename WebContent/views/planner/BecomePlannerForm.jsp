@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	String userCode = loginUser.getUserCode();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,9 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-	<script src="../js/jquery-3.4.1.min.js"></script>
-	
-<title>회원 정보 수정</title>
+<title>행사기획자 등록</title>
 <style>
     
     
@@ -32,28 +34,26 @@
     .s-smenu{font-size:14px;margin-top:20px; color:#000;}
     .s-smenu > li{padding:5px 10px;}    
     
-    /* 회원정보 */
+
+    /* 행사기획자 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
-    .userInfoFrm{border: 1px solid gray; margin-left: 15%; padding-left: 10%; padding-top: 3%; width: 55%; line-height: 30px;}
-    .userInfoFrm td {width: 200px;}
-    .btnArea{margin-left: 23%;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}   
+    .become-planner{line-height: 45px; margin-left: 20%; padding-left: 10%; padding-top: 3%; width: 48%; height: 30%; border: 1px solid gray;}
     .views1 h3{background: #af9ce6;}
-    .btn{
+    .companyReg td{width: 150px;}
+	.plannerReg_btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;    	
-    }
-
-
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
+	}    
 
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>   
+	<%@ include file="../common/menubar.jsp" %>
     
     <section style="z-index: 1;">
         <div class="sec-line"></div>
-        <h1 class="sec-mtxt">MyPage<p>-user info</p></h1>
+        <h1 class="sec-mtxt">MyPage<p>-become planner</p></h1>
         <ul class="sec-nav">
             <li class="sec-menu-1 smenu">INFORMATION
                 <ul class="s-smenu">
@@ -92,69 +92,36 @@
         </ul>
         
         <div class="sec-menu-views views1">
-            <h3>회원 정보</h3>
-            <br>
-            <div class="userInfoFrm">
-                <form action="">
-                    <table>
+            <h3>행사기획자 등록</h3>
+            <div class="become-planner">
+                <form action="<%= request.getContextPath() %>/insert.pn">
+                    <table class="companyReg">
                         <tr>
-                            <td>아이디</td>
-                            <td><input type="text" readonly></td>
+                            <td>회사 명<input type="hidden" name="userCode" value="<%= userCode %>"></td>
+                            <td><input type="text" name="companyName"></td>
                         </tr>
                         <tr>
-                            <td>비밀번호</td>
-                            <td><input type="password"></td>
+                            <td>회사 주소</td>
+                            <td><input type="text" name="companyAddress"></td>
                         </tr>
                         <tr>
-                            <td>비밀번호 재확인</td>
-                            <td><input type="password"></td>
+                            <td>회사 전화번호</td>
+                            <td><input type="tel" name="companyPhone"></td>
                         </tr>
-                        <tr>
-                            <td>이름</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>생년월일</td>
-                            <td><input type="date"></td>
-                        </tr>
-                        <tr>
-                            <td>성별</td>
-                            <td>
-                                <input type="radio" name="gender" value="male"><label for="">남자</label>
-                                <input type="radio" name="gender" value="female"><label for="">여자</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>이메일</td>
-                            <td><input type="email"></td>
-                        </tr>
-                        <tr>
-                            <td>전화번호</td>
-                            <td><input type="tel"></td>
-                        </tr>
-
+                        
                     </table>
-                    
                     <br>
-
-                    <div class="btnArea">
-                        <button type="submit" class="btn">수정</button>
-                        <button type="button" class="btn">탈퇴</button>
-                        <button type="reset" class="btn">취소</button>
-                        <br><br>
-                    </div>
-                </form>
-            </div>
-
-            
-            
+                    <input type="submit" class="plannerReg_btn" value="등록하기" style="margin-left: 24%;">
+                    <input type="button" class="plannerReg_btn" value="취소하기" onclick="">
+                </form>                           
+                        
+            </div>            
         </div>
         
     </section>
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>    
-
+	<%@ include file="../common/footer.jsp" %>  
 </body>
 </html>
