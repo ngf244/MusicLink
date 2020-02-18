@@ -40,6 +40,8 @@ public class CommonFilter implements Filter {
 		// 1. 酉곗뿉�꽌 �쟾�떖諛쏆� 媛믪뿉 �븳湲��씠 �엳�뒗 寃쎌슦
 		request.setCharacterEncoding("UTF-8");
 		
+
+
 		// 2. 酉곕줈 �쟾�떖�븷 媛믪뿉 �븳湲��씠 �엳�뒗 寃쎌슦
 //		response.setContentType("text/html; charset=UTF-8");
 		
