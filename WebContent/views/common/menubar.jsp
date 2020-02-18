@@ -209,13 +209,13 @@ img{	border:0;}
         </div>
         <div class="side-icon">
             <div class="image1 icon">
-                <img src="img/user.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/user.png" alt="" />
             </div>
             <div class="image2 icon">
-                <img src="img/bell.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/bell.png" alt="" />
             </div>
             <div class="image3 icon">
-                <img src="img/pin.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
             </div>
             <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
