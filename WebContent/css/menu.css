@@ -22,15 +22,32 @@
     .side-icon{width:15%; position: fixed; top:40%; left: 5%; z-index:99;}
     .icon{width: 50px; height: 50px; margin-bottom:20px; position: relative}
     .icon img{width:30px; height:30px; margin:10px;}
-    .icon:hover{background: #F7FE2E; border-radius: 50px; box-sizing: border-box;}
+    .icon:hover{background: #F7FE2E; border-radius: 50px; box-sizing: border-box; cursor: pointer;}
     
     
     .side-text{margin-top:130px;}
     .side-text p{font-size:12px; background:#fff; width:65%; border-radius:5px;}
-    .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px; border: va}
+    .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px;}
+
+    /*히든 정보*/
+    .user-wrap{position: fixed; top:33%; left:10%; background:#fff; width:15%; z-index:3; text-align: center; border-radius: 30px; display: none;}
+    .user-nickName{width:30%; margin:15px auto;}
+    .user-id{width:30%; margin:15px auto;}
+    .user-mypage{width:30%; margin:15px auto;}
+    .user-coin{width:50%; margin:15px auto;}
+    .user-charging{width:30%; margin:15px auto;}
+
+    /*알람*/
+    .alram-wrap{position: fixed; width:20%; height:150px; background:#fff; z-index:3; top:43%; left: 10%; border-radius: 20px; overflow: hidden; display: none;}
+    .alram-wrap.alon{display: block;}
+    .alram-con{width:100%; height:50px; box-sizing: border-box; border-bottom:1px dashed #ccc;}
+    .alram-img{width:15%; height: 50px; float: left;}
+    .alram-time{width:20%;height: 50px; float: left;}
+    .alram-msg{width:50%; height: 50px; float: left;}
+    .alram-close{width:15%; height: 50px; float: left;}
     
     
-    /*�α��� �ƿ�*/
+    /*로그인 아웃*/
     .log-inOut{float: right; margin-top:15px; margin-right: 50px;}
     .log-inOut > a{display: inline-block;}
     
@@ -38,7 +55,7 @@
     .map{background: rgba(0,0,0,0.8); height:100%; padding-top: 10%; position:fixed; bottom:0%; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; display:none;  opacity:0; filter:alpha(opacity=0);}
     .map-bg{background: #fff; height:60%; width:70%; margin:12% auto; position: relative; border-radius: 15px;}
     .map-h1{position: absolute; left:45%; top:-65px; font-size:40px; width: 80px; height:80px; line-height: 70px; background:#F7FE2E; color:#000; border-radius: 50px; color:#fff; text-align: center;}
-    .map-h1:hover{-webkit-transform:rotate(180deg) translateX(0px) translateY(0px); transform:rotate(180deg) translateX(0px) translateY(0px); background:#000;}
+    .map-h1:hover{-webkit-transform:rotate(180deg) translateX(0px) translateY(0px); transform:rotate(180deg) translateX(0px) translateY(0px); background:#000; cursor: pointer;}
     .map-txt{position: absolute; top:50px; left:10%; border-top:5px solid black; line-height: 40px;}
     
     .map.on{ opacity:0.98; filter:alpha(opacity=98); display: block; width:100%; height:100%; padding-top: 10%; position:fixed; bottom:0%; z-index:9;}
