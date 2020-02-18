@@ -129,17 +129,18 @@
     .dategroup{width: 250px;}
     .datestyle{border-radius: 4px;}
     
-    #map{border: 1px solid #ced4da; border-radius: 4px; width:500px; height:300px;}
+    #wrap{display:none; border:1px solid #DDDDDD; width:500px; margin-top:5px;}
+    #fesmap{border: 1px solid #ced4da; border-radius: 4px; width:80%; height:300px;}
     #zonecodeInput{width: 180px; display:inline-block; margin-bottom: 7px;}
     #addressInput{width: 54%; display:inline-block;}
     #detailAddressInput{width: 30%; display:inline-block;}
     
     #moneyRange{width: 400px;}
     
-    #festivalInfo{resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
+    #festivalInfo{width:85%; resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
     
     .postergroup{width:60%; top:25%; transform: translateY(25%);}
-    #posterPath, #bannerPath{font-size:13px;}
+    #posterPath, #bannerPath{font-size:13px; overflow:hidden;}
     
     .space{margin:0; padding:0;}
     
@@ -148,7 +149,7 @@
 	.ft-content{width: 70%;}
 </style>
 </head>
-<body onload="mapSetting();">
+<body onload="fesMapSetting();">
     
 	<%@ include file="../views/common/menubar.jsp" %>
     
@@ -162,7 +163,7 @@
 		</div>
 		
 		<div id="contentArea">
-			<form action="<%= request.getContextPath() %>/insert.fes" method="post" id="enrollForm" name="enrollForm" onsubmit="return submitForm();">
+			<form action="<%= request.getContextPath() %>/insert.fes" method="post" id="enrollForm" name="enrollForm" encType="multipart/form-data" onsubmit="return submitForm();">
 				<table id="insertInfo">
 					<tr>
 						<td class="label">행사명 &nbsp;<span class="text-danger">*</span></td>
@@ -208,12 +209,12 @@
 							
 							<input type="text" class="form-control input-default enroll inputValCk" id="addressInput" name="addressInput" readonly/>
 							<input type="text" class="form-control input-default enroll" id="detailAddressInput" name="detailAddressInput" placeholder="상세주소"/>
-							<div id="wrap" style="display:none;border:1px solid #DDDDDD;width:500px;margin-top:5px"></div>
+							<div id="wrap"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div id="map"></div>
+							<div id="fesmap"></div>
 						</td>
 					</tr>
 					<tr>
@@ -237,9 +238,8 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file test">
-									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
+									<input type="file" multiple="multiple" name="posterPath" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
 									<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
-									<input type="hidden" id="posHid" name="posterPath">
 								</div>
 							</div>
 						</td>
@@ -249,9 +249,8 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
+									<input type="file" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
 									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
-									<input type="hidden" id="banHid" name="bannerPath">
 								</div>
 							</div>
 						</td>
@@ -329,11 +328,7 @@
 	    	
 	    	console.log(idStr);
 
-	    	if(emptyCk == false) {
-	    		document.getElementById("posHid").value = $('#posterPath').text();
-	    		document.getElementById("banHid").value = $('#bannerPath').text();
-	    		
-	    	} else {
+	    	if(emptyCk == true) {
 	    		alert('필수항목을 기재해주세요');
 	    	}
     		
@@ -345,10 +340,11 @@
 	    	var fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
 	    	var fileKind = fileName.split(".")[1];
 	    	
-	    	if(where == '0')
+	    	if(where == '0') {
 	    		$("#posterPath").text(fileName);
-	    	else
+	    	} else {
 	    		$("#bannerPath").text(fileName);
+	    	}
 	    }
     </script>
     
@@ -358,8 +354,8 @@
 		var address = '서울 강남구 테헤란로14길 6';
 		var zonecode = "";
 		
-		function mapSetting() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		function fesMapSetting() {
+			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 3 // 지도의 확대 레벨
@@ -414,7 +410,7 @@
 	                   	console.log(data.zonecode);
 	                    $('#addressInput').val(address);
 	                    $('#zonecodeInput').val(zonecode);
-	                    mapSetting();
+	                    fesMapSetting();
 	                }
 	
 	                // 사용자가 값을 주소를 선택해서 레이어를 닫을 경우
