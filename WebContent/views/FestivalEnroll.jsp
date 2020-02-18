@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.Date, java.util.Calendar, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,48 +29,81 @@
     <link href="../css/mfooter.css" rel="stylesheet" />
     
 <title>행사 등록</title>
+
 <style>
-		.toggle-switch, .toggle-switch .toggle-knob {
-		    -moz-transition: all 0.2s ease-in;
-		    -webkit-transition: all 0.2s ease-in;
-		    -o-transition: all 0.2s ease-in;
-		    transition: all 0.2s ease-in;
+		label.switch {  
+		  text-align: left;
+		  width: 70px;
+		  height: calc(70px / 2);
+		  border-radius:30px;    
+		  background-color:#4ed164;
+		  display: inline-block;
+		  position: relative;
+		  cursor: pointer;
 		}
 		
-		.toggle-switch {
-		    height: 30px;
-		    width: 55px;
-		    display: inline-block;
-		    background-color: #ffffff;
-		    margin: 2px;
-		    margin-bottom: 15px;
-		    border-radius: 30px;
-		    cursor: pointer;
-		    border: solid 1px #d2d6de;
-		    box-shadow: inset 1px 1px 9px -3px rgba(4, 4, 4, 0.08), 1px 2px 6px -2px rgba(0, 0, 0, 0.01);
+		label.switch > span {
+		  display: block;
+		  width: 100%;
+		  height: 100%;
 		}
 		
-		.toggle-switch .toggle-knob {
-		    width: 28px;
-		    height: 26px;
-		    display: inline-block;
-		    background-color: #ffffff;
-		    border: solid 1px rgba(126, 126, 126, 0.07);
-		    box-shadow: 0 1px 3px rgba(107, 106, 106, 0.26), 0 5px 1px rgba(107, 106, 106, 0.13);
-		    border-radius: 26px;
-		    margin: 1px 1px;
+		label.switch > input[type="checkbox"] {
+		  opacity: 0;
+		  position: absolute;
+		} 
+		
+		label.switch > span:before, label.switch > span:after {
+		  content: "";
+		  cursor: pointer;
+		  position: absolute;
 		}
 		
-		.toggle-switch.active {
-		    background-color: #77e189;
-		    border: solid 1px transparent;
+		/*label.switch > input[type="checkbox"]:focus ~ span {
+		  box-shadow: 0 0 0 4px #43b556;
+		}*/
+		
+		label.switch > input[type="checkbox"]:checked:focus ~ span {
+		  box-shadow: 0 0 0 4px #fff;
 		}
 		
-		.toggle-switch.active .toggle-knob {
-		    margin-left: 24px;
+		label.switch > span {
+		  border-radius: 60px;
 		}
 		
-    section {width:70%; height:213%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 19.5%; position: relative;
+		label.switch > span:before {
+		  width: 100%;
+		  height: 100%;
+		  box-sizing: border-box;
+		  background-color: #f1f1f1;
+		  border-radius: 60px;
+		  transition: opacity .2s ease-out .1s, transform .2s ease-out .1s;
+		  transform: scale(1);
+		  opacity: 1;
+		}
+		
+		label.switch > span:after{
+		  top: 50%;
+		  z-index: 3;
+		  transition: transform .4s cubic-bezier(0.44,-0.12, 0.07, 1.15);
+		  width: calc(70px / 2);
+		  height: calc(70px / 2);
+		  transform: translate3d(0, -50%, 0);
+		  background-color: #fff;
+		  border-radius: 100%;
+		  box-shadow: 0 2px 5px rgba(0, 0, 0, .3);  
+		}
+		
+		label.switch > input[type="checkbox"]:checked ~ span:before {
+		  transform: scale(0);
+		  opacity: .7;
+		}
+		
+		label.switch > input[type="checkbox"]:checked ~ span:after {
+		  transform: translate3d(100%, -50%, 0);
+		}
+		
+    section {width:70%; height:243%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 18.5%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
@@ -82,19 +115,20 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
     #block{background: #8AFF00; width: 55px; height: 8px; top: 5%; margin-left:1%;}
     
-    #enrollForm{width: 82%; position:absolute; left: 50%; transform: translateX(-50%);}
+    #enrollForm{width: 85%; position:absolute; left: 50%; transform: translateX(-50%);}
     #insertInfo{width: 100%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate; text-align: left;}
     #insertInfo textarea{border-radius: 4px; border: 1px solid #ced4da;}
     td{vertical-align:middle;}
     
-    .label{width:300px; font-size:12pt; font-weight: regular; text-align:center; line-height:20px;}
-    .tdcenter{text-align:center; color: #DB0000;}
+    .label{width:30%; font-size:12pt; font-weight: regular; text-align:center; line-height:20px;}
+    .tdcenter{text-align:center; font-size:13px; color: #FF9090;}
     .enroll{width: 100px; height: calc(2.0625rem + 2px);}
     
-    #fesName{width:300px;}
+    #fesName{width:70%;}
     
     #datePickerStyle{background: #000; color: white; line-height: 35px;}
     .dategroup{width: 250px;}
+    .datestyle{border-radius: 4px;}
     
     #map{border: 1px solid #ced4da; border-radius: 4px; width:500px; height:300px;}
     #zonecodeInput{width: 180px; display:inline-block; margin-bottom: 7px;}
@@ -103,12 +137,16 @@
     
     #moneyRange{width: 400px;}
     
-    #festivalInfo{resize: none; border: 1px solid #ced4da; border-radius: 4px;}
+    #festivalInfo{resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
     
-    .postergroup{width:420px; top:25%; transform: translateY(25%);}
+    .postergroup{width:60%; top:25%; transform: translateY(25%);}
+    #posterPath, #bannerPath{font-size:13px;}
+    
+    .space{margin:0; padding:0;}
     
     #enrollSubmit{margin-top:30px;}
     
+	.ft-content{width: 70%;}
 </style>
 </head>
 <body onload="mapSetting();">
@@ -179,40 +217,52 @@
 		</div>
 		
 		<div id="contentArea">
-			<form id="enrollForm">
+			<form action="<%= request.getContextPath() %>/insert.fes" method="post" id="enrollForm" name="enrollForm" onsubmit="return submitForm();">
 				<table id="insertInfo">
 					<tr>
-						<td class="label"><label>행사 명</label></td>
+						<td class="label">행사명 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<input type="text" id="fesName" class="form-control input-default enroll">
+							<input type="text" name="fesName" id="fesName" class="form-control input-default enroll inputValCk">
 						</td>
 					</tr>
+
+					<%
+						Date date = new Date();
+						
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						cal.add(Calendar.DATE, 7);
+					
+						SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
+						String strDate = formatDate.format(date);
+						String endDate = formatDate.format(cal.getTime());
+					%>
 					<tr>
-						<td class="label">행사 기간</td>
+						<td class="label">행사 기간 &nbsp;<span class="text-danger">*</span></td>
 						<td>
 							<div class="input-group dategroup">
-								<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">
+								<input class="form-control input-daterange-datepicker datestyle" type="text" id="feativalDate" name="feativalDate" value="<%=strDate%> - <%=endDate%>">
 								<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">아티스트 모집 기간</td>
+						<td class="label">아티스트 모집 기간 &nbsp;<span class="text-danger">*</span></td>
 						<td>
 			                <div class="input-group dategroup">
-								<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">
+								<input class="form-control input-daterange-datepicker datestyle" type="text" id="artistDate" name="artistDate" value="<%=strDate%> - <%=endDate%>">
 								<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label" rowspan=2>행사 장소</td>
+						<td class="label" rowspan=2>행사 장소 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<input type="text" class="form-control input-default enroll" id="zonecodeInput" readonly/>&nbsp;
+							<input type="text" class="form-control input-default enroll inputValCk" id="zonecodeInput" name="zonecodeInput" readonly/>&nbsp;
 							<input type="button" class="btn mb-1 btn-dark" onClick="openDaumZipAddress();" value = "우편번호"/><br>
 							
-							<input type="text" class="form-control input-default enroll" id="addressInput" readonly/>
-							<input type="text" class="form-control input-default enroll" id="detailAddressInput" placeholder="상세주소"/>
+							<input type="text" class="form-control input-default enroll inputValCk" id="addressInput" name="addressInput" readonly/>
+							<input type="text" class="form-control input-default enroll" id="detailAddressInput" name="detailAddressInput" placeholder="상세주소"/>
 							<div id="wrap" style="display:none;border:1px solid #DDDDDD;width:500px;margin-top:5px"></div>
 						</td>
 					</tr>
@@ -222,57 +272,135 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="label">공연비</td>
+						<td class="label">공연비 &nbsp;<span class="text-danger">*</span></td>
 						<td>
 							<div class="input-group" id="moneyRange">
-								<input type="text" name="start" class="form-control input-default enroll"> 
+								<input type="text" id="moneyMin" name="moneyMin" class="form-control input-default enroll inputValCk" placeholder="최소금액">
 								<span id="datePickerStyle">&nbsp;&nbsp;~&nbsp;&nbsp;</span> 
-								<input type="text" name="end" class="form-control input-default enroll">
+								<input type="text" id="moneyMax" name="moneyMax" class="form-control input-default enroll inputValCk" placeholder="최대금액">
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">모집 인원 수<br>(팀 수)</td>
+						<td class="label">모집 인원 수 &nbsp;<span class="text-danger">*</span><br>(팀 수)</td>
 						<td>
-							<input type="number" class="form-control input-default enroll" min=1 max=20>
+							<input type="number" id="needCount" name="needCount" class="form-control input-default enroll inputValCk" min=1 max=20>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">행사 포스터</td>
+						<td class="label">행사 포스터 &nbsp;<span class="text-danger">*</span></td>
 						<td>
 							<div class="input-group mb-3 postergroup">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input">
-									<label class="custom-file-label">Choose file</label>
+								<div class="custom-file test">
+									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
+									<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
+									<input type="hidden" id="posHid" name="posterPath">
 								</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">행사 설명</td>
+						<td class="label">행사 배너</td>
 						<td>
-							<textarea id="festivalInfo" rows="10" cols="80"></textarea>
+							<div class="input-group mb-3 postergroup">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
+									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
+									<input type="hidden" id="banHid" name="bannerPath">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="tdcenter" colspan=2>
+							<span>※ 배너 이미지 생략 시 리스트에 정상적으로 출력되지만 홍보영역에 나타나지 않습니다. (홍보리스트, 캘린더 등)</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">행사 설명 &nbsp;<span class="text-danger">*</span></td>
+						<td>
+							<textarea id="festivalInfo" name="festivalInfo" class="inputValCk" rows="10" cols="80"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td class="label">비공개 옵션</td>
 						<td>
-							<span class="toggle-switch" data-toggle="tooltip" data-placement="right" title="행사수정을 통해 변경 가능합니다.">
-							  <span class="toggle-knob"></span>
-							</span><br>
+							<label class="switch space">
+								<input type="checkbox" id="secretOp" name="secretOp">
+								<span class="toggle-switch" data-toggle="tooltip" data-placement="right" title="행사수정을 통해 변경 가능합니다."></span>
+							</label>
 						</td>
 					</tr>
 					<tr>
 						<td class="tdcenter" colspan=2>
-							<span>※ 비공개로 등록시 해당 행사는 행사리스트에 표시되지 않고 러브콜 받은 아디스트에게만 표시됩니다.</span>
+							<span>※ 비공개 등록 시 해당 행사는 행사리스트에 표시되지 않고 러브콜 받은 아디스트에게만 표시됩니다.</span>
 						</td>
 					</tr>
 				</table>
 				<br>
-				<input type="submit"  class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
+				<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
 			</form>
 		</div>
     </section>
+    
+    <script>
+    	
+    	$(function() {
+    		$('#moneyMin, #moneyMax').on({'keyup':function() {
+    			var regExp = /[^0-9]/gi;
+    			var val = $(this).val().trim();
+				
+    			if(regExp.test(val) == true) {
+    				$(this).val(null);
+    			}
+    		}})
+    	})
+    	
+	    function submitForm() {
+	    	
+	    	var idStr = "";
+	    	var emptyCk = false;
+	    	
+	    	$(".inputValCk").filter(function() {
+	    		if(!$(this).val()) {
+	    			idStr+=$(this).attr('id')+" / ";
+	    			emptyCk = true;
+	    			return true;
+	    		}
+	    	}).css('border', '1px solid red');
+	    	
+	    	$(".inputTextCk").filter(function() {
+	    		if(($(this).text().trim() == "파일을 선택해주세요") || (!$(this).text())) {
+	    			idStr+=$(this).attr('id')+" / ";
+	    			emptyCk = true;
+	    			return true;
+	    		}
+	    	}).css('border', '1px solid red');
+	    	
+	    	console.log(idStr);
+
+	    	if(emptyCk == false) {
+	    		document.getElementById("posHid").value = $('#posterPath').text();
+	    		document.getElementById("banHid").value = $('#bannerPath').text();
+	    		
+	    	} else {
+	    		alert('필수항목을 기재해주세요');
+	    	}
+    		
+	    	return !emptyCk;
+	    }
+	    
+	    function reviewUploadImg(fileObj, where) {
+	    	var filePath = fileObj.value;
+	    	var fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+	    	var fileKind = fileName.split(".")[1];
+	    	
+	    	if(where == '0')
+	    		$("#posterPath").text(fileName);
+	    	else
+	    		$("#bannerPath").text(fileName);
+	    }
+    </script>
     
     <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
@@ -370,12 +498,6 @@
 	    function offDaumZipAddress() {
 	        // 슬라이드 업 기능을 이용해 레이어 창을 닫는다.
 	        jQuery("#wrap").slideUp();
-	    }
-	    
-	    var toggler = document.querySelector('.toggle-switch');
-	
-	    toggler.onclick = function(){
-	      toggler.classList.toggle('active');
 	    }
 	</script>
     
