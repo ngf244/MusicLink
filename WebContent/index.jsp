@@ -282,6 +282,52 @@
     
     <%@ include file="views/common/footer.jsp" %>
     
+    <script>
+    $(window).scroll(function() {
+    	var scTop = $(window).scrollTop();
+    	head_nav(scTop);
+    });
+
+
+    /* �믪씠 蹂��� */
+    function head_nav(scTop) {
+    	if (scTop > 9) {
+    		$('#wrap').removeClass('off');
+    		$('#wrap').addClass('off')
+    	} else {
+    		$('#wrap').removeClass('off');
+    	}
+    	
+    	if (scTop > 250) {
+    		$('#contents').removeClass('navifixed');
+    		$('#contents').addClass('navifixed')
+    	} else {
+    		$('#contents').removeClass('navifixed');
+    	}
+    }
+    
+    
+    
+	    $(function(){
+	        var lastScrollTop = 0, delta = 15;
+	        $(window).scroll(function(event){
+	           var st = $(this).scrollTop();
+	           
+	           if(Math.abs(lastScrollTop - st) <= delta)
+	              return; // 스크롤값을 받아서 리턴한다.
+	    if ((st > lastScrollTop) && (lastScrollTop>0)) {
+	           // downscroll code
+	          $("#banner").css("top","-1000px"); // 스크롤을 내렸을때 #header의 CSS 속성중 top 값을 -50px로 변경한다.
+	      
+	       } else {
+	          // upscroll code
+	          $("#banner").css("top","0px"); // 스크롤을 올렸을때 #header의 CSS 속성중 top 값을 0px로 변경한다.
+	       }
+	           lastScrollTop = st;
+	        });
+	    });
+    	
+    </script>
    
 </body>
 </html>
