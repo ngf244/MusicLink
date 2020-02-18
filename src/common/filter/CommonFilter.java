@@ -41,7 +41,7 @@ public class CommonFilter implements Filter {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 2. 뷰로 전달할 값에 한글이 있는 경우
-		response.setContentType("text/html; charset=UTF-8");
+		/*response.setContentType("text/html; charset=UTF-8");*/
 		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
