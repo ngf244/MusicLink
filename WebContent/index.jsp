@@ -1,17 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
+
 <head>
-<meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link href="css/mfooter.css" rel="stylesheet" />
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>뮤링 메인</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
+	
     body{margin:0;}
     /*베너*/
-    #banner{width:100%; height:100%; }
+    #banner{width:100%; height:100%;}
     .bar-left{width:50%; height: inherit; position: absolute; top:0; left:0;/*background:#fff;*/}
     .bar-right{width:50%; height: inherit; position: absolute; top:0; left:50%; /*background:#fff;*/}
     .slide-bg{width:100%; height: inherit; float: right; }
@@ -41,6 +46,11 @@
     .ban-top-txt > h4{margin:0; padding:0; font-weight: 800; margin-bottom:5px;}
     .banner-more{position: absolute; bottom: 27%; left:15%;}
     .banner-more > a{ font-weight: bold; color:#000; padding:15px 30px; background: #fff; box-sizing: border-box; box-shadow: 1px 1px 10px black; border-radius: 5px;} 
+    
+    .bg-scroll{width: 50px; height:30px; text-align: center; position: absolute; bottom:3%; left: 48.7%;}
+    .scroll-line{width:20px; height: 30px; border:1px solid black; margin: 0 auto; box-sizing: border-box; border-radius: 8px;}
+    .scr-point{width:5px; height:8px; background:#000; margin:0 auto; border-radius:8px;}
+    .scr-txt{}
     
     
     /* 섹션 */
@@ -89,65 +99,8 @@
 </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-            logo
-            </div>
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
-        </nav>
-
-        <div id="resize">
-            <ul class="menu">
-                <li class="m-name1 m-name">
-                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
-                    <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
-                        <li class="menu-h"><a href="#">F A Q</a></li>
-                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
-                    </ul>
-                </li>
-                <li class="m-name2 m-name">
-                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
-                    <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name3 m-name">
-                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
-                    <ul class="hidden-manu3 drop">
-                        <li class="menu-h"><a href="#">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
-            </ul>
-        </div>
-        <div class="side-icon">
-            <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="img/user.png" alt="" /></a>
-            </div>
-            <div class="image2 icon">
-                <a href="#" ><img src="img/bell.png" alt="" /></a>
-            </div>
-            <div class="image3 icon">
-                <img src="img/pin.png" alt="" />
-            </div>
-            <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
-            </div>
-        </div>    
-    </header>   
-    
-    <div id="banner">
+	<%@ include file="views/common/menubar.jsp" %>
+	<div id="banner">
         <div class="bar-left">
             <div class="slide-bg">
                 <div class="bg-slide">
@@ -189,7 +142,12 @@
                 <a href="#" >MORE</a>
             </div>
         </div>
-        <div class="scroll"></div>
+        <div class="bg-scroll">
+            <div class="scroll-line">
+                <div class="scr-point"></div>
+            </div>
+            <div class="scr-txt">scroll</div>
+        </div>
     </div>
     <div class="clear-both"></div>
     
@@ -309,7 +267,6 @@
             <img src="img/bgbgbg.png">
         </div>
         
-        
     </section>
     <h1 class="htext">A R T I S T</h1>
     <div class="clear-both"></div>
@@ -320,96 +277,9 @@
     <div class="clear-both"></div>
     
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div id="map-cont-left"></div>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=80db889fc9ec7bbae521ed1f6bd06c6e"></script>	
-				<script>
-					$(function(){
-						var container = document.getElementById('map-cont-left');
-						var options = {
-							center: new kakao.maps.LatLng(37.49896717315922, 127.03284925485772),
-							level: 3
-						};
-		
-						var map = new kakao.maps.Map(container, options);
-                        
-					});
-					
-				</script>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <%@ include file="views/common/footer.jsp" %>
     
-<!-- <script src="js/respond.min.js"></script> -->
-
-<!-- <script src="js/bootstrap.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/parallax.min.js"></script> -->
-<!-- <script src="js/slick.min.js"></script> -->
-
-<script>
+   <script>
 
 	$("#toggle").click(function(){
 		$(this).toggleClass("on");
@@ -423,11 +293,13 @@
         $(".map").css("display","none");
     });
     
+    $(".image2").click(function(){
+        $(".alram-wrap").toggleClass("alon");
+    });
+    $(".image2").click(function(){
+        
+    });
     
-    
-	//new WOW().init();
-	
-	
-</script>
+	</script>
 </body>
 </html>
