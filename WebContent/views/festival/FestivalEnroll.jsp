@@ -7,23 +7,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
     
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 	
     <!-- Favicon icon -->
-    <link rel="icon" type="../image/png" sizes="16x16" href="../images/favicon.png">
+    <link rel="icon" type="<%= request.getContextPath() %>/image/png" sizes="16x16" href="<%= request.getContextPath() %>/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
     
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     
 <title>행사 등록</title>
 
@@ -110,9 +110,9 @@
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
 	#contentArea{width:100%; padding-top: 12%; text-align:center; position: absolute; left: 8%; display:inline-block;}
 	
-	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; margin-top: -9%;}
-	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px; margin-top: -9%;}
-    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 13%; margin-left: 2px;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
+	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
+    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
     #enrollForm{width: 90%; position:absolute; left: 50%; transform: translateX(-50%);}
     #insertInfo{width: 100%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate; text-align: left;}
@@ -146,12 +146,12 @@
     
     #enrollSubmit{margin-top:30px;}
     
-	.ft-content{width: 70%;}
+    footer .ft-content{width:70%; !important;}
 </style>
 </head>
 <body onload="fesMapSetting();">
     
-	<%@ include file="../views/common/menubar.jsp" %>
+	<%@ include file="../../views/common/menubar.jsp" %>
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
@@ -450,13 +450,13 @@
     <h1 class="htext">F E S T I V A L</h1>
     <!-- 행사 지원 코딩 끝 -->
     
-	<%@ include file="../views/common/footer.jsp" %>
+	<%@ include file="../../views/common/footer.jsp" %>
 	
-<script src="../js/respond.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/parallax.min.js"></script>
-<script src="../js/slick.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 <script>
 
 	$("#toggle").click(function(){
@@ -481,26 +481,26 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../plugins/common/common.min.js"></script>
-    <script src="../js/custom.min.js"></script>
-    <script src="../js/settings.js"></script>
-    <script src="../js/gleek.js"></script>
-    <script src="../js/styleSwitcher.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
 
-    <script src="../plugins/moment/moment.js"></script>
-    <script src="../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/moment/moment.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <!-- Date Picker Plugin JavaScript -->
-    <script src="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="../plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <!-- Color Picker Plugin JavaScript -->
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
     <!-- Date range Plugin JavaScript -->
-    <script src="../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="../plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <script src="../js/plugins-init/form-pickers-init.js"></script>
+    <script src="<%= request.getContextPath() %>/js/plugins-init/form-pickers-init.js"></script>
 </body>
 </html>
