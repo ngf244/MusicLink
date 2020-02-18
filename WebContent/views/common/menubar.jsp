@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header>
-        <nav>
+        <nav> 
             <div class="logo">
             logo
             </div>
