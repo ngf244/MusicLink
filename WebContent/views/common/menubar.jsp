@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <title>Insert title here</title>
 <style>
 	html, body{height:100%; background: rgb(253, 241, 241);} /**/
