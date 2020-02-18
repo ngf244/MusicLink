@@ -174,7 +174,7 @@
                         <option>기타</option>
                     </select>
                 </div>
-            </div>
+            </div> 
             <div class="ranking-box">
                 <div class="vedio-left"></div>
                 <div class="rank-right">
