@@ -191,5 +191,28 @@
             </div>
         </div>
     </header>
+    
+    <script>
+
+	$("#toggle").click(function(){
+		$(this).toggleClass("on");
+		$("#resize").toggleClass("active");	
+	});
+    
+    $(".image3").click(function(){
+        $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
+    });
+    $(".map-h1").click(function(){
+        $(".map").css("display","none");
+    });
+    
+    $(".image2").click(function(){
+        $(".alram-wrap").toggleClass("alon");
+    });
+    $(".image2").click(function(){
+        
+    });
+    
+	</script>
 </body>
 </html>
