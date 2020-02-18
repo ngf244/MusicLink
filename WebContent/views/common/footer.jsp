@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/footer.css" />
 <title>Insert title here</title>
 <style>
 	.ft-text{text-align: center; margin-top:100px; }
@@ -113,7 +115,7 @@ img{	border:0;}
 	
 </style>
 </head> 
-<body>
+<body onload="mapSetting();">
 <footer>
         <div class="ft-text">
             <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
@@ -156,21 +158,8 @@ img{	border:0;}
             <h1 class="map-h1">&#215;</h1>
             <h1 class="map-txt">오시는길</h1>
             <div class="map-cont">
-                <div id="map-cont-left"></div>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=80db889fc9ec7bbae521ed1f6bd06c6e"></script>	
-				<script>
-					$(function(){
-						var container = document.getElementById('map-cont-left');
-						var options = {
-							center: new kakao.maps.LatLng(37.49896717315922, 127.03284925485772),
-							level: 3
-						};
-		
-						var map = new kakao.maps.Map(container, options);
-                        
-					});
-					
-				</script>
+                <div id="map"></div>
+				
                 <div class="map-cont-right">
                     <div class="cont-right1">
                         <div class="right-txt1">ADDRESS</div>
@@ -195,5 +184,55 @@ img{	border:0;}
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=80db889fc9ec7bbae521ed1f6bd06c6e"></script>	
+<script>
+var address = '서울 강남구 테헤란로14길 6';
+var zonecode = "";
+
+function mapSetting() {
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            //content: '<div style="width:auto;display:inline-block;white-space:nowrap;text-align:center;padding:7px 0;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+	        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});
+}
+					
+				
+$(".map-h1").click(function(){
+       $(".map").css("display","none");
+   });
+</script>
 </body>
 </html>
