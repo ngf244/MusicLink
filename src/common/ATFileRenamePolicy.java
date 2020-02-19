@@ -26,7 +26,7 @@ public class ATFileRenamePolicy implements FileRenamePolicy{
 		
 		String fileName = sdf.format(new Date(currentTime)) + ranNum + ext; 
 		File newFile = new File(originFile.getParent(), fileName);
-		
+		 
 		return newFile;
 	}
 }

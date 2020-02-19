@@ -71,7 +71,7 @@ public class InsertArtistServlet extends HttpServlet {
 			String twitter = multipartRequest.getParameter("twitterURL");
 			String facebook = multipartRequest.getParameter("facebookURL");
 			
-			String selfiePath = savePath + saveFiles.get(0);
+			String selfiePath = savePath + saveFiles.get(0); 
 			
 		}	
 			
