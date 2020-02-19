@@ -255,11 +255,10 @@
 	<script>
 	var isUsable = false;
 	var inIdChecked = false;
-	
 	var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
 	
 	function idCheck(){
-		var userId = $('#user_id');
+		var userId = $('#company_id');
 		
 		if(userIdCheck.test(userId.val())){
 			$.ajax({
@@ -310,7 +309,7 @@
 		}
 	});
 	
-	$('#user_pwd').blur(function(){
+	$('#company_pwd').blur(function(){
 		if(pwdCheck.test($(this).val())){
 			$('#pwdResult').text('정상입력').css('color', 'green');
 		} else{
@@ -319,7 +318,7 @@
 		}
 	});
 	
-	$('#user_pwd2').blur(function(){
+	$('#company_pwd2').blur(function(){
 		if(pwdCheck.test($(this).val())){
 			$('#pwd2Result').text('정상입력').css('color', 'green');
 		} else{

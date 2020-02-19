@@ -24,7 +24,7 @@
                 <div class="span" id="three"></div>
             </div>
             <div class="log-inOut">
-                <a href="">login</a>
+                <a href="<%= request.getContextPath() %>/views/member/ssj_loginForm.jsp">login</a>
                 <a href="">logOut</a>
             </div>
         </nav>

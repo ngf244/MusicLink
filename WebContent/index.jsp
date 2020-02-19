@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
 
 
 
