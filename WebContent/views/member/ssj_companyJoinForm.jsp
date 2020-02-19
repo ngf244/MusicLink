@@ -10,16 +10,16 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height:930px; font-family: "Roboto", sans-serif;} 
+    background: #fff; height:1100px; font-family: "Roboto", sans-serif;} 
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:300px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
 	#enrollForm{width: 70%; position: absolute; left:50%; transform: translateX(-50%); text-align: right;}
-	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px;} 
+	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate; font-size: 20px;}
+	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px;} 
 	
 	.input{width: 510px;}
-	.label{width: 170px;; font-size: 12pt;}
+	.label{width: 250px;}
 	
 	#enrollBtn{margin-top:30px;}
 	.text_input{height: 34.4px;}
@@ -27,13 +27,13 @@
     #btn{padding: 10px;}
     
     .btn{
-		padding: 7px 18px;
+		padding: 12.5px 18px;
 		color: #fff;
-    	background-color: #333333;
+    	background-color: #7780b7;
     	border-color: #333333;
     	text-align: center;
     	font-weight: 400;
-        font-size: 0.875rem;
+        font-size: 0.99rem;
     	line-height: 1.5;
     	border-radius: 0.25rem;
     	font-family: "Roboto", sans-serif;
@@ -42,11 +42,11 @@
     	border: 1px solid transparent;
 	}
 	.form-control{
-		width: 150px;
+		width: 200px;
     	border-radius: 4px;
     	box-shadow: none;
-    	padding: 0.375rem 0.75rem;
-    	font-size: 0.875rem;
+    	padding: 0.8rem 0.75rem;
+    	font-size: 0.99rem;
    		line-height: 1.5;
     	vertical-align: middle;
     	border: 1px solid #ced4da;
@@ -59,7 +59,7 @@
     #addressInput{display:inline-block;}
     #detailAddressInput{display:inline-block;}
     
-    #infor_agree{overflow: scroll; width: 500px; height: 100px; border: 1px solid lightgray; font-size: 10px;}
+    #infor_agree{overflow: scroll; width: 600px; height: 100px; border: 1px solid lightgray; font-size: 15px;}
 	
 	
 </style>
@@ -142,7 +142,7 @@
 							네이버에서 제공하는 위치기반 서비스에 대해서는 '네이버 위치정보 이용약관'에서 자세하게 규정하고 있습니다.<br>
 							이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.<br>
 							</div>
-       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 14px;">동의합니다.</label>
+       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 18px;">동의합니다.</label>
 						</td>
 					</tr>
 					<tr>
@@ -198,7 +198,7 @@
 
 				// 슬라이드 다운 기능을 이용해 레이어 창을 오픈한다.
 				jQuery("#wrap").slideDown();
-				$('section').css('height','1450px');
+				$('section').css('height','1620px');
 			}
 
 			// warp 레이어가 open된 상태라면 다음 우편번호 레이어를 off 상태로 변경한다.
@@ -215,7 +215,7 @@
 		function offDaumZipAddress() {
 			// 슬라이드 업 기능을 이용해 레이어 창을 닫는다.
 			jQuery("#wrap").slideUp();
-			$('section').css('height','930px');
+			$('section').css('height','1100px');
 		}
 	</script>
     

@@ -5,9 +5,6 @@
 <head>
 <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
-    <link href="<%= request.getContextPath() %>/css/slick.css" rel="stylesheet" />
-    <link href="<%= request.getContextPath() %>/css/slick-theme.css" rel="stylesheet" />
-    <link href="<%= request.getContextPath() %>/css/common.css" rel="stylesheet" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>joinPickForm</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
@@ -15,18 +12,18 @@
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff; height:500px;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:300px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
-    .section{width: 450px; padding: 50px 50px; vertical-align: middle;
+    .section{width: 600px; padding: 30px 30px; vertical-align: middle; text-align: center;
              position: absolute; margin-left: center; margin-top: center; left: 50%; top:50%; transform: translate(-50%, -50%);}
     .login1{margin-left: center; margin-top: center; left: 50%; top: 50;}
-    #ment1{font-weight: bold; font-size: 20px;}
-    #ment2{font-size: 11px; margin-top: 15px; color: blue;}
-    #ml{font-size: 40px; color: orange; display: inline-block;}
-    #choose{margin-top: 20px; }
-    .div_ch{text-align: center; display: inline-block; margin: 20px; background: lightgray; 
-    		width: 120px; padding: 20px; font-weight: 800; color: white;}
-    .icon{width: 40px; height: 40px;}
+    #ment1{font-weight: bold; font-size: 35px;}
+    #ment2{font-size: 16px; margin-top: 15px; color: #7780b7;}
+    #ml{font-size: 60px; color: orange; display: inline-block;}
+    #choose{margin-top: 20px; margin-bottom: 10px;}
+    .div_ch{text-align: center; display: inline-block; margin: 20px; background: lightgray; font-size: 17px;
+    		width: 150px; padding: 20px; font-weight: 800; color: white; border-radius: 0.25rem;}
+    .icon{width: 50px; height: 50px;}
     
 </style>
 </head>
@@ -36,9 +33,10 @@
     <section style="z-index: 1;">
        <div class="section">
        		<div class="login1" id="ment1">
-       			<p id="ml">Music Link</p>에 오신것을<br><br>
+       			<p id="ml">Music Link</p>에 오신것을<br>
        			진심으로 환영합니다.<br>
        		</div>
+       		<br>
        		<div class="login1" id="ment2">
        			일반 회원가입 후 회원 종류(아티스트와 기획자)를 변경할 수 있습니다.
        		</div>

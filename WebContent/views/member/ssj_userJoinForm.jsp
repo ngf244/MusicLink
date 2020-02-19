@@ -4,56 +4,56 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-	
-
+	<link href="https://fonts.googleapis.com/css?family=Roboto=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>userJoinForm</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height: 800px; font-family: "Roboto", sans-serif;} 
+    background: #fff; height: 1000px; font-family: "Roboto", sans-serif;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:300px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
 	#enrollForm{width: 70%; height: 100%; position: absolute; left:50%; transform: translateX(-50%); text-align: center;}
-	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px;} 
-	.label{width: 35%; font-size: 12pt;}
-	#enrollBtn{margin-top:30px;}
+	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate; font-size: 20px;}
+	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px;} 
+	.label{width: 250px;}
 	.text_input{height: 34.4px;}
 	#idResult{height: 20px;}
     #btn{text-align: center; padding: 10px;}
 	.btn{
-		padding: 7px 18px;
+		padding: 12.5px 18px;
 		color: #fff;
-    	background-color: #333333;
+    	background-color: #7780b7;
     	border-color: #333333;
     	text-align: center;
     	font-weight: 400;
-        font-size: 0.875rem;
+        font-size: 0.99rem;
     	line-height: 1.5;
     	border-radius: 0.25rem;
     	font-family: "Roboto", sans-serif;
     	vertical-align: middle;
     	white-space: nowrap;
     	border: 1px solid transparent;
+    	
 	}
 	.form-control{
-		width: 150px;
+		width: 200px;
     	border-radius: 4px;
     	box-shadow: none;
-    	padding: 0.375rem 0.75rem;
-    	font-size: 0.875rem;
+    	padding: 0.8rem 0.75rem;
+    	font-size: 0.99rem;
    		line-height: 1.5;
     	vertical-align: middle;
     	border: 1px solid #ced4da;
     	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 	}
+	#enrollBtn{margin-top:30px;}
 	#user_year{width: 58px;}
     #user_month, #user_day{width: 40px;}
     
-    #infor_agree{overflow: scroll; width: 400px; height: 100px; border: 1px solid lightgray; font-size: 10px;}
+    #infor_agree{overflow: scroll; width: 500px; height: 100px; border: 1px solid lightgray; font-size: 15px;}
 </style>
 </head>
 <body>
@@ -119,7 +119,7 @@
 					</tr>
 					<tr>
 						<td class="input" colspan=2>
-							개인정보 동의서<br><br>
+							<br>개인정보 동의서<br><br>
 							<div id="infor_agree">
 							정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 							<br><br>
@@ -138,7 +138,7 @@
 							네이버에서 제공하는 위치기반 서비스에 대해서는 '네이버 위치정보 이용약관'에서 자세하게 규정하고 있습니다.<br>
 							이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.<br>
 							</div>
-       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 14px;">동의합니다.</label>
+       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 18px;">동의합니다.</label>
 						</td>
 					</tr>
 					<tr>
