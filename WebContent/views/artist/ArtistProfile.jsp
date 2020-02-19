@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-    <%@ include file="../common/menubar.jsp" %>
+    <%@ include file="../common/menubar.jsp" %> 
    
     <section style="z-index: 1;">
         <div id="categoryArea">

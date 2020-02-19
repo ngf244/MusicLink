@@ -66,7 +66,7 @@
     .paging .btn_arr{text-decoration:none;}
     .paging .btn_arr, .paging .on{margin:0 3px;padding-top:0;border:1px solid #ddd; border-radius:30px;}
     .paging .on{padding-top:1px;height:22px;color:#fff;font-weight:bold;background:#000;}
-    .paging .on:hover{text-decoration:none;}
+    .paging .on:hover{text-decoration:none;} 
 
 </style>
 </head>
