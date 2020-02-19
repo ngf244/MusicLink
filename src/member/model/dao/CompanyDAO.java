@@ -70,6 +70,7 @@ private Properties prop = new Properties();
 			result2 = pstmt3.executeUpdate();
 			result = result1 * result2;
 			
+			System.out.println("pass : " + member.getUserPwd());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

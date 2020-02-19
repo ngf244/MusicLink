@@ -26,9 +26,11 @@
                 <div class="span" id="three"></div>
             </div>
             <div class="log-inOut">
+
             	<% if (loginUser == null){ %>
                 <a href="<%= request.getContextPath() %>/views/member/ssj_loginForm.jsp">login</a>
                 <% } else { %>
+
                 <a href="">logOut</a>
                 <% } %>
             </div>
