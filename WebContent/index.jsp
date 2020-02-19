@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html> 
 <html>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
@@ -16,11 +17,9 @@
 
 <style>
 	
-	
-	
     body{margin:0;}
     /*베너*/
-    #banner{width:100%; height:100%;}
+    #banner{width:100%; height:967px; position: fixed; top:0; background:#fff; z-index:-11;}
     .bar-left{width:50%; height: inherit; position: absolute; top:0; left:0;/*background:#fff;*/}
     .bar-right{width:50%; height: inherit; position: absolute; top:0; left:50%; /*background:#fff;*/}
     .slide-bg{width:100%; height: inherit; float: right; }
@@ -58,11 +57,12 @@
     
     
     /* 섹션 */
+    #sWrap{width:100%; height:1404px; margin-top:969px; position: relative; background: #fff; padding-top:150px; z-index:1;}
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 35px black; margin-top: 250px; position: relative;
+    #section {width:70%; margin:0 auto; box-shadow: 5px 5px 35px black;/*  margin-top:969px;position: absolute;*/  
     background: #fff; height:1404px;} 
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 130%; left:36%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:1%; left:36%; color: rgb(224, 224, 224); } 
     
     .s-header{width:100%; padding-top:100px; padding-left:8%;}
     .msec-line{width:7%; height:10px; background: rgb(138, 255, 0); margin-bottom:-65px;}
@@ -96,7 +96,7 @@
     .img-bg{width:100%;}
     .img-bg > img{width:100%;}
     
-    .sec-ybg{width:100%; height:450px; padding:0; margin:0; background: rgb(179, 255, 0); position: relative; top:-150px;}
+    .sec-ybg{width:100%; /* height:450px; */ padding:0; margin:0; background: rgb(179, 255, 0); position: relative; top:-150px;}
     .ybg-txt1{font-size:100px; font-weight: bold; position: absolute; bottom:25%; left: 21%; color:rgba(255,255,255,0.5); text-shadow: 1px 1px 400px black;}
     .ybg-txt2{font-size:30px; font-weight: bold; position: absolute; bottom: 23%; left: 32%;}
     
@@ -157,7 +157,10 @@
     
     <div class="section-txt">성공적인 매칭을 해드립니다.</div>
     
-    <section style="z-index: 1;">
+    <div id="sWrap">
+    
+    <section style="z-index:1;" id="section">
+    	
         <div class="s-header">
             <div class="msec-line"></div>
             <h1>ARTIST<p> - R a n k</p></h1>
@@ -268,12 +271,12 @@
             </div>
         </div>
         <div class="img-bg">
-            <img src="img/bgbgbg.png">
+            <img src="<%= request.getContextPath() %>/img/bgbgbg.png">
         </div>
-        
+        <h1 class="htext" style="z-index:-1">A R T I S T</h1>
     </section>
-    <h1 class="htext">A R T I S T</h1>
-    <div class="clear-both"></div>
+    </div>
+    
     <div class="sec-ybg">
         <div class="ybg-txt1">FESTIVAL COMPLETION</div>
         <div class="ybg-txt2">2020년, 현재까지 134개의 행사가 완료되었습니다.</div>
@@ -284,29 +287,20 @@
     <%@ include file="views/common/footer.jsp" %>
     
     <script>
-    $(window).scroll(function() {
-    	var scTop = $(window).scrollTop();
-    	head_nav(scTop);
+    $(window).scroll(function() { 
+        if ($(this).scrollTop() == 0) { 
+        	$('#sWrap').css('margin-top','969px');
+        	$('#sWrap').css('transition','2s');
+        	$('#section').css();
+        	$('#section').css();
+        	/* $('.htext').css({'top':'130%'}); */
+        	
+        } else {
+        	$('#sWrap').css('margin-top','0');
+        	$('#sWrap').css('transition','2s');
+        	/* $('.htext').css({'top':'10%','transition':'2s'}); */
+        }
     });
-
-
-    /* �믪씠 蹂��� */
-    function head_nav(scTop) {
-    	if (scTop > 9) {
-    		$('#wrap').removeClass('off');
-    		$('#wrap').addClass('off')
-    	} else {
-    		$('#wrap').removeClass('off');
-    	}
-    	
-    	if (scTop > 250) {
-    		$('#contents').removeClass('navifixed');
-    		$('#contents').addClass('navifixed')
-    	} else {
-    		$('#contents').removeClass('navifixed');
-    	}
-    }
-    
     	
     </script>
    
