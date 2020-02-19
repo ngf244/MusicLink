@@ -10,6 +10,8 @@ import java.util.Properties;
 
 import festival.model.vo.Festival;
 
+import static common.JDBCTemplate.*;
+
 public class FestivalDAO {
 	private Properties prop = new Properties();
 	
@@ -24,20 +26,34 @@ public class FestivalDAO {
 		}
 	}
 
-	public int insertFestival(Connection conn, Festival festival, String userId) {
+	public int insertFestival(Connection conn, Festival festival) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertFes");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, festival.getFesName());
+			pstmt.setString(2, festival.getFesLoc());
+			pstmt.setString(3, festival.getFesTerm());
+			pstmt.setString(4, festival.getFesInfo());
+			pstmt.setString(5, festival.getPayRange());
+			pstmt.setInt(6, festival.getRecCount());
+			pstmt.setString(7, festival.getRecTerm());
+			pstmt.setString(8, festival.getPosPath());
+			pstmt.setString(9, festival.getBanPath());
+			pstmt.setString(10, festival.getSecOp());
+			pstmt.setString(11, festival.getCpCode());
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
-		
-		return 0;
+		return result;
 	}
 
 }

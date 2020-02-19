@@ -14,16 +14,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet(name="LoginServlet", urlPatterns="/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/myPage.me")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +32,26 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		String user_id = request.getParameter("user_id");
-		String user_password = request.getParameter("user_password");
+		String loginUserId = ((Member)session.getAttribute("loginUser")).getUserId();
 		
-		System.out.println(user_id + "/" + user_password);
+		Member member = new MemberService().selectMember(loginUserId);
 		
-		Member member = new Member(user_id, user_password);
+		System.out.println(member);
 		
-		Member loginUser = new MemberService().loginMember(member);
-		
-		if(loginUser != null) {
-			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(1800);  // 로그인 30분 유지
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect("index.jsp");
+		String page = null;
+		if(member != null) {
+			page = "views/member/MypageMainView.jsp";
+			request.setAttribute("member", member);
 		} else {
-			request.setAttribute("msg", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/member/ssj_loginForm.jsp");
-			view.forward(request, response);
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "회원조회에 실패하였습니다.");
 		}
 		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+				
 	}
 
 	/**

@@ -20,7 +20,7 @@ public class CommonFilter implements Filter {
      */
     public CommonFilter() {
         // TODO Auto-generated constructor stub
-    	System.out.println("CommonFilter �옉�룞");
+    	System.out.println("CommonFilter 작동");
     }
 
 	/**
@@ -37,10 +37,12 @@ public class CommonFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		
-		// 1. 酉곗뿉�꽌 �쟾�떖諛쏆� 媛믪뿉 �븳湲��씠 �엳�뒗 寃쎌슦
+		// 1. 뷰에서 전달받은 값에 한글이 있는 경우
 		request.setCharacterEncoding("UTF-8");
 		
-		// 2. 酉곕줈 �쟾�떖�븷 媛믪뿉 �븳湲��씠 �엳�뒗 寃쎌슦
+
+
+		// 2. 뷰로 전달할 값에 한글이 있는 경우
 //		response.setContentType("text/html; charset=UTF-8");
 		
 		// pass the request along the filter chain

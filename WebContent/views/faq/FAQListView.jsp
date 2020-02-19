@@ -8,8 +8,6 @@
 <head>
 <meta charset="utf-8">
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="../../css/style.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
@@ -248,49 +246,7 @@ zzzrod
 		<div id="contentArea">
 			<div class="card-body">
 				<div id="accordion-two" class="accordion">
-					<!-- <div class="card">
-						<div class="card-header">
-							<h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne1"
-								aria-expanded="true" aria-controls="collapseOne1">
-								<i class="fa" aria-hidden="true"></i> 정기결제 금액이 어떻게 되나요?
-							</h5>
-						</div>
-						<div id="collapseOne1" class="collapse show"
-							data-parent="#accordion-two">
-							<div class="card-body">Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.</div>
-						</div>
-					</div>
-					<div class="card">
-						<div class="card-header">
-							<h5 class="mb-0 collapsed" data-toggle="collapse"
-								data-target="#collapseTwo2" aria-expanded="false"
-								aria-controls="collapseTwo2">
-								<i class="fa" aria-hidden="true"></i> 아티스트, 기획자로 전환할 수 있는 조건이 뭔가요?
-							</h5>
-						</div>
-						<div id="collapseTwo2" class="collapse" data-parent="#accordion-two">
-							<div class="card-body">Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								Anim pariatur cliche reprehenderit,
-								enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food
-								truck quinoa nesciunt laborum eiusmod.
-								</div>
-						</div>
-					</div> -->
+					
 					<% if(list.isEmpty()){ %>
 					<div class="card">
 						<div class="card-header">

@@ -22,6 +22,15 @@ public class Member {
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
+	
+	public Member(String userId, String userPwd, String userName, String userEmail, String userPhone) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+	}
 
 	public Member(String userId, String userPwd, String userName, String userBirth, String userEmail, String userGender,
 			String userPhone) {
@@ -137,6 +146,14 @@ public class Member {
 
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [userCode=" + userCode + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
+				+ ", userBirth=" + userBirth + ", userEmail=" + userEmail + ", userGender=" + userGender
+				+ ", userPhone=" + userPhone + ", userJoinDay=" + userJoinDay + ", userClass=" + userClass
+				+ ", userStatus=" + userStatus + "]";
 	}
 
 	

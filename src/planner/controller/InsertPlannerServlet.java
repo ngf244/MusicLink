@@ -1,4 +1,4 @@
-package faq.controller;
+package planner.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import faq.model.service.FAQService;
-import faq.model.vo.FAQ;
+import planner.model.service.PlannerService;
+import planner.model.vo.Planner;
 
 /**
- * Servlet implementation class FAQInsertServlet
+ * Servlet implementation class InsertPlannerServlet
  */
-@WebServlet("/insert.faq")
-public class FAQInsertServlet extends HttpServlet {
+@WebServlet("/insert.pn")
+public class InsertPlannerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FAQInsertServlet() {
+    public InsertPlannerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +33,24 @@ public class FAQInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String userCode = request.getParameter("userCode");
+		String cpName = request.getParameter("companyName");
+		String cpAddress = request.getParameter("companyAddress");
+		String cpPhone = request.getParameter("companyPhone");
 		
-		FAQ faq = new FAQ(title, content);
+		Planner pn = new Planner(userCode, cpName, cpAddress, cpPhone);
+		int result = new PlannerService().insertPlanner(pn);
 		
-		int result = new FAQService().insertFAQ(faq);
-		
+		String page = "";
 		if(result > 0) {
-			response.sendRedirect("list.faq");
+			page = "index.jsp";
 		} else {
-			request.setAttribute("msg", "FAQ 등록에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}		
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "행사기획자 등록에 실패하였습니다.");
+		}
 		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**

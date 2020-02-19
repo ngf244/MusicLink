@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,30 +7,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
     
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 	
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= request.getContextPath() %>/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- Page plugins css -->
-    <link href="../plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- Color picker plugins css -->
-    <link href="../plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
     
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/slick.css" rel="stylesheet" />
-    <link href="../css/slick-theme.css" rel="stylesheet" />
-    <link href="../css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     
 <title>행사 수정</title>
 <style>
@@ -116,66 +115,13 @@
     
     #tdcenter{text-align:center; color: #DB0000;}
     
+    footer .ft-content{width:70%; !important;}
+    
 </style>
 </head>
 <body onload="mapSetting();">
-    <header>
-        <nav>
-            <div class="logo">
-            logo
-            </div>
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
-        </nav>
 
-        <div id="resize">
-            <ul class="menu">
-                <li class="m-name1 m-name">
-                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
-                    <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
-                        <li class="menu-h"><a href="#">F A Q</a></li>
-                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
-                    </ul>
-                </li>
-                <li class="m-name2 m-name">
-                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
-                    <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name3 m-name">
-                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
-                    <ul class="hidden-manu3 drop">
-                        <li class="menu-h"><a href="#">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
-            </ul>
-        </div>
-        <div class="side-icon">
-            <div class="image1 icon">
-                <a href="member/login.html" class="icon-a"><img src="../img/user.png" alt="" /></a>
-            </div>
-            <div class="image2 icon">
-                <a href="#" ><img src="../img/bell.png" alt="" /></a>
-            </div>
-            <div class="image3 icon">
-                <img src="../img/pin.png" alt="" />
-            </div>
-            <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
-            </div>
-        </div>
-    </header>
+	<%@ include file="../../views/common/menubar.jsp" %>
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
@@ -411,79 +357,13 @@
     <h1 class="htext">F E S T I V A L</h1>
     <!-- 행사 지원 코딩 끝 -->
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div class="map-cont-left"></div>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<%@ include file="../../views/common/footer.jsp" %>
     
-<script src="../js/respond.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/parallax.min.js"></script>
-<script src="../js/slick.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 <script>
 
 	$("#toggle").click(function(){
@@ -508,26 +388,26 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../plugins/common/common.min.js"></script>
-    <script src="../js/custom.min.js"></script>
-    <script src="../js/settings.js"></script>
-    <script src="../js/gleek.js"></script>
-    <script src="../js/styleSwitcher.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
 
-    <script src="../plugins/moment/moment.js"></script>
-    <script src="../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/moment/moment.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="../plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <!-- Color Picker Plugin JavaScript -->
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
     <!-- Date Picker Plugin JavaScript -->
-    <script src="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- Date range Plugin JavaScript -->
-    <script src="../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="../plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <script src="../js/plugins-init/form-pickers-init.js"></script>
+    <script src="<%= request.getContextPath() %>/js/plugins-init/form-pickers-init.js"></script>
 </body>
 </html>

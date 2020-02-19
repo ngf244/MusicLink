@@ -7,23 +7,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
     
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 	
     <!-- Favicon icon -->
-    <link rel="icon" type="../image/png" sizes="16x16" href="../images/favicon.png">
+    <link rel="icon" type="<%= request.getContextPath() %>/image/png" sizes="16x16" href="<%= request.getContextPath() %>/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
-    <link href="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Daterange picker plugins css -->
-    <link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
     
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     
 <title>행사 등록</title>
 
@@ -110,9 +110,9 @@
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
 	#contentArea{width:100%; padding-top: 12%; text-align:center; position: absolute; left: 8%; display:inline-block;}
 	
-	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; margin-top: -9%;}
-	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px; margin-top: -9%;}
-    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 13%; margin-left: 2px;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
+	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
+    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
     #enrollForm{width: 90%; position:absolute; left: 50%; transform: translateX(-50%);}
     #insertInfo{width: 100%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate; text-align: left;}
@@ -129,28 +129,29 @@
     .dategroup{width: 250px;}
     .datestyle{border-radius: 4px;}
     
-    #map{border: 1px solid #ced4da; border-radius: 4px; width:500px; height:300px;}
+    #wrap{display:none; border:1px solid #DDDDDD; width:500px; margin-top:5px;}
+    #fesmap{border: 1px solid #ced4da; border-radius: 4px; width:80%; height:300px;}
     #zonecodeInput{width: 180px; display:inline-block; margin-bottom: 7px;}
     #addressInput{width: 54%; display:inline-block;}
     #detailAddressInput{width: 30%; display:inline-block;}
     
     #moneyRange{width: 400px;}
     
-    #festivalInfo{resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
+    #festivalInfo{width:85%; resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
     
     .postergroup{width:60%; top:25%; transform: translateY(25%);}
-    #posterPath, #bannerPath{font-size:13px;}
+    #posterPath, #bannerPath{font-size:13px; overflow:hidden;}
     
     .space{margin:0; padding:0;}
     
     #enrollSubmit{margin-top:30px;}
     
-	.ft-content{width: 70%;}
+    footer .ft-content{width:70%; !important;}
 </style>
 </head>
-<body onload="mapSetting();">
+<body onload="fesMapSetting();">
     
-	<%@ include file="../views/common/menubar.jsp" %>
+	<%@ include file="../../views/common/menubar.jsp" %>
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
@@ -162,7 +163,7 @@
 		</div>
 		
 		<div id="contentArea">
-			<form action="<%= request.getContextPath() %>/insert.fes" method="post" id="enrollForm" name="enrollForm" onsubmit="return submitForm();">
+			<form action="<%= request.getContextPath() %>/insert.fes" method="post" id="enrollForm" name="enrollForm" encType="multipart/form-data" onsubmit="return submitForm();">
 				<table id="insertInfo">
 					<tr>
 						<td class="label">행사명 &nbsp;<span class="text-danger">*</span></td>
@@ -208,12 +209,12 @@
 							
 							<input type="text" class="form-control input-default enroll inputValCk" id="addressInput" name="addressInput" readonly/>
 							<input type="text" class="form-control input-default enroll" id="detailAddressInput" name="detailAddressInput" placeholder="상세주소"/>
-							<div id="wrap" style="display:none;border:1px solid #DDDDDD;width:500px;margin-top:5px"></div>
+							<div id="wrap"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div id="map"></div>
+							<div id="fesmap"></div>
 						</td>
 					</tr>
 					<tr>
@@ -237,9 +238,8 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file test">
-									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
+									<input type="file" multiple="multiple" name="posterPath" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
 									<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
-									<input type="hidden" id="posHid" name="posterPath">
 								</div>
 							</div>
 						</td>
@@ -249,9 +249,8 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
+									<input type="file" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
 									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
-									<input type="hidden" id="banHid" name="bannerPath">
 								</div>
 							</div>
 						</td>
@@ -329,11 +328,7 @@
 	    	
 	    	console.log(idStr);
 
-	    	if(emptyCk == false) {
-	    		document.getElementById("posHid").value = $('#posterPath').text();
-	    		document.getElementById("banHid").value = $('#bannerPath').text();
-	    		
-	    	} else {
+	    	if(emptyCk == true) {
 	    		alert('필수항목을 기재해주세요');
 	    	}
     		
@@ -345,10 +340,11 @@
 	    	var fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
 	    	var fileKind = fileName.split(".")[1];
 	    	
-	    	if(where == '0')
+	    	if(where == '0') {
 	    		$("#posterPath").text(fileName);
-	    	else
+	    	} else {
 	    		$("#bannerPath").text(fileName);
+	    	}
 	    }
     </script>
     
@@ -358,8 +354,8 @@
 		var address = '서울 강남구 테헤란로14길 6';
 		var zonecode = "";
 		
-		function mapSetting() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		function fesMapSetting() {
+			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 3 // 지도의 확대 레벨
@@ -414,7 +410,7 @@
 	                   	console.log(data.zonecode);
 	                    $('#addressInput').val(address);
 	                    $('#zonecodeInput').val(zonecode);
-	                    mapSetting();
+	                    fesMapSetting();
 	                }
 	
 	                // 사용자가 값을 주소를 선택해서 레이어를 닫을 경우
@@ -454,13 +450,13 @@
     <h1 class="htext">F E S T I V A L</h1>
     <!-- 행사 지원 코딩 끝 -->
     
-	<%@ include file="../views/common/footer.jsp" %>
+	<%@ include file="../../views/common/footer.jsp" %>
 	
-<script src="../js/respond.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/parallax.min.js"></script>
-<script src="../js/slick.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 <script>
 
 	$("#toggle").click(function(){
@@ -485,26 +481,26 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../plugins/common/common.min.js"></script>
-    <script src="../js/custom.min.js"></script>
-    <script src="../js/settings.js"></script>
-    <script src="../js/gleek.js"></script>
-    <script src="../js/styleSwitcher.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
 
-    <script src="../plugins/moment/moment.js"></script>
-    <script src="../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/moment/moment.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <!-- Date Picker Plugin JavaScript -->
-    <script src="../plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="../plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <!-- Color Picker Plugin JavaScript -->
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="../plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
     <!-- Date range Plugin JavaScript -->
-    <script src="../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="../plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <script src="../js/plugins-init/form-pickers-init.js"></script>
+    <script src="<%= request.getContextPath() %>/js/plugins-init/form-pickers-init.js"></script>
 </body>
 </html>
