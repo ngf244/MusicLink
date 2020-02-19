@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="member.model.vo.Member" %>
+<%-- <%@ page import="member.model.vo.Member" %> --%>
 <%
-	Member loginUser = (Member)session.getAttribute("loginUser");
+	/* Member loginUser = (Member)session.getAttribute("loginUser"); */
 	String msg = (String)request.getAttribute("msg");
 %>
 <!DOCTYPE html>
