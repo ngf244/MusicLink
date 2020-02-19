@@ -9,6 +9,7 @@ public class Artist {
 	private String atGenre;
 	private String atClass;
 	private String atPicPath;
+	private String atVideoPath;
 	private String atOneLine;
 	private String atIntro;
 	private String atLocal;
@@ -29,22 +30,23 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atLocal = atLocal;
 	}
-	
-	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath, String atOneLine,
-			String atLocal) {
+
+	public Artist(String atCode, String atName, String atGenre, String atPicPath, String atVideoPath, int atGrade,
+			String atInsta, String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
 		this.atName = atName;
 		this.atGenre = atGenre;
-		this.atClass = atClass;
 		this.atPicPath = atPicPath;
-		this.atOneLine = atOneLine;
-		this.atLocal = atLocal;
+		this.atVideoPath = atVideoPath;
+		this.atGrade = atGrade;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
 	}
 
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate, String atGender,
-			int atGrade, String atInsta, String atTwitter, String atFacebook) {
+			String atVideoPath, String atOneLine, String atLocal, String atGender) {
 		super();
 		this.atCode = atCode;
 		this.atName = atName;
@@ -52,6 +54,45 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
+		this.atVideoPath = atVideoPath;
+		this.atOneLine = atOneLine;
+		this.atLocal = atLocal;
+		this.atGender = atGender;
+	}
+
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
+			String atVideoPath, String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate,
+			String atGender, String atInsta, String atTwitter, String atFacebook) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atVideoPath = atVideoPath;
+		this.atOneLine = atOneLine;
+		this.atIntro = atIntro;
+		this.atLocal = atLocal;
+		this.atRecode = atRecode;
+		this.atDebutDate = atDebutDate;
+		this.atGender = atGender;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
+	}
+
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
+			String atVideoPath, String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate,
+			String atGender, int atGrade, String atInsta, String atTwitter, String atFacebook) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atVideoPath = atVideoPath;
 		this.atOneLine = atOneLine;
 		this.atIntro = atIntro;
 		this.atLocal = atLocal;
@@ -110,6 +151,14 @@ public class Artist {
 
 	public void setAtPicPath(String atPicPath) {
 		this.atPicPath = atPicPath;
+	}
+
+	public String getAtVideoPath() {
+		return atVideoPath;
+	}
+
+	public void setAtVideoPath(String atVideoPath) {
+		this.atVideoPath = atVideoPath;
 	}
 
 	public String getAtOneLine() {
@@ -195,10 +244,10 @@ public class Artist {
 	@Override
 	public String toString() {
 		return "Artist [atCode=" + atCode + ", atName=" + atName + ", atMember=" + atMember + ", atGenre=" + atGenre
-				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atOneLine=" + atOneLine + ", atIntro="
-				+ atIntro + ", atLocal=" + atLocal + ", atRecode=" + atRecode + ", atDebutDate=" + atDebutDate
-				+ ", atGender=" + atGender + ", atGrade=" + atGrade + ", atInsta=" + atInsta + ", atTwitter="
-				+ atTwitter + ", atFacebook=" + atFacebook + "]";
+				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atVideoPath=" + atVideoPath + ", atOneLine="
+				+ atOneLine + ", atIntro=" + atIntro + ", atLocal=" + atLocal + ", atRecode=" + atRecode
+				+ ", atDebutDate=" + atDebutDate + ", atGender=" + atGender + ", atGrade=" + atGrade + ", atInsta="
+				+ atInsta + ", atTwitter=" + atTwitter + ", atFacebook=" + atFacebook + "]";
 	}
 
 

@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member, artist.model.vo.Artist"%>
 <%
 	Member member = (Member)request.getAttribute("member");
+	Artist artist = (Artist)request.getAttribute("artist");
+	String fileName = (String)request.getAttribute("fileName");
 
+	System.out.println(fileName);
+	
 	String userCode = member.getUserCode();
 	String userId = member.getUserId();
 	String userName = member.getUserName();
@@ -23,9 +27,16 @@
 	String imgPath = "";
 	
 	switch(userGender) {
-	case "남자": imgPath = "default_profile_male.png"; break;
-	case "여자": imgPath = "default_profile_female.png"; break;
+	case "남자": imgPath = "img/default_profile_male.png"; break;
+	case "여자": imgPath = "img/default_profile_female.png"; break;
 	}
+	
+	if(userClass.equals("2")) {
+		//imgPath = artist.getAtPicPath().substring(39);
+		//System.out.println(imgPath);
+		imgPath = "artistProfile_uploadFiles/" + fileName;
+	}
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -150,7 +161,7 @@
            
             <div class="userInfo">
                 <div class="profileBox" style="background: #e8c8ac;">
-                    <img class="profile" src="<%= request.getContextPath() %>/img/<%= imgPath%>">
+                    <img class="profile" src="<%= imgPath%>">
                 </div>
                 <div class="profileInfo">
                     <h4 style="display: inline-block;"><%= userName %>님</h4>&nbsp;&nbsp;
@@ -233,7 +244,8 @@
                         <button class="selectBtn" id="all" onclick="selectAll();">전체선택</button>
                         <button class="selectBtn" id="clear" onclick="clearAll();">전체해제</button>
                         <button class="selectBtn" id="delete" onclick="delete();">삭제</button>
-                    </div><div style="clear:both;"></div>
+                    </div>
+                    <div style="clear: both;"></div>
 	       		</div>
                 
             </div>

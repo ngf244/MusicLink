@@ -36,7 +36,7 @@
 			<span class="find_pwd">비밀번호 찾기</span>
 		</div>
 		<div class="find_id">
-			<form>
+			<form action="<%= request.getContextPath() %>/find.id" method="post">
 				<table>
 					<tr>
 						<td colspan="3">아이디 찾기</td>
@@ -57,7 +57,7 @@
 		</div>
 		
 		<div class="find_pwd">
-			<form>
+			<form action="<%= request.getContextPath() %>/find.pwd" method="post">
 				<table>
 					<tr>
 						<td colspan="3">비밀번호 찾기</td>
@@ -65,7 +65,7 @@
 						
 					<tr>
 						<td>ID</td>
-						<td><input type="text" name="name"></td>
+						<td><input type="text" name="id"></td>
 						<td rowspan="2"><input type="submit" class="findBtn" value="비밀번호 찾기"></td>
 					</tr>
 					

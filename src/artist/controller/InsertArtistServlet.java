@@ -1,9 +1,13 @@
 package artist.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +18,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import artist.model.service.ArtistService;
+import artist.model.vo.Artist;
 import common.ATFileRenamePolicy;
 
 /**
@@ -56,11 +62,36 @@ public class InsertArtistServlet extends HttpServlet {
 					saveFiles.add(multipartRequest.getFilesystemName(name));
 				}
 			}			
-			
+			String userCode = "UC5";
 			String name = multipartRequest.getParameter("artistName");
-			String number = multipartRequest.getParameter("number");
+			int number = Integer.parseInt(multipartRequest.getParameter("number"));
 			String debut = multipartRequest.getParameter("debutDate");
-			String[] genre = multipartRequest.getParameterValues("genre");
+			
+			Date sqlDate = null;
+			String[] dateArr = debut.split("-");
+			int year = Integer.parseInt(dateArr[0]);
+			int month = Integer.parseInt(dateArr[1])-1;
+			int day = Integer.parseInt(dateArr[2]);
+			
+			if(debut != "") {
+				sqlDate = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			} else {
+				sqlDate = new Date(new GregorianCalendar().getTimeInMillis());
+			}			
+			
+			String[] genreArr = multipartRequest.getParameterValues("genre");
+			
+			String genre = "";
+			if(genreArr != null) {
+				for(int i = 0; i < genreArr.length; i++) {
+					if(i == genreArr.length - 1) {
+						genre += genreArr[i];
+					} else {
+						genre += genreArr[i] +" / ";
+					}
+				}
+			}
+			
 			String gender = multipartRequest.getParameter("artistGender");
 			String category = multipartRequest.getParameter("artistCategory");
 			String local = multipartRequest.getParameter("activeLocal");
@@ -70,20 +101,32 @@ public class InsertArtistServlet extends HttpServlet {
 			String insta = multipartRequest.getParameter("instaURL");
 			String twitter = multipartRequest.getParameter("twitterURL");
 			String facebook = multipartRequest.getParameter("facebookURL");
+			String videoLink = multipartRequest.getParameter("videoLink");
 			
 			String selfiePath = savePath + saveFiles.get(0); 
 			
-		}	
-			
-			
-			
-			
-			
-			
-			
+			Artist artist = new Artist(userCode, name, number, genre, category, selfiePath, videoLink, intro, info, local, activity, sqlDate, gender, insta, twitter, facebook);
 		
-		
-		
+			int result = new ArtistService().insertArtist(artist);
+			
+			if(result > 0) {
+				System.out.println("아티스트 등록 성공");
+				request.setAttribute("saveFileName", saveFiles.get(0));
+				
+				RequestDispatcher view = request.getRequestDispatcher("myPage.me");
+				view.forward(request, response);
+				
+				//response.sendRedirect("myPage.me");
+			} else {
+				for(int i = 0; i < saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					failedFile.delete();
+				}
+				
+				System.out.println("아티스트 등록 실패");
+				response.sendRedirect("index.jsp");
+			}		
+		}		
 		
 	}
 

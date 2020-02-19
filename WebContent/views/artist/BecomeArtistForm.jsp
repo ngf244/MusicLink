@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+%>    
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -127,11 +131,11 @@
                     <label for="">활동 이력</label><br>
                     <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br><br>
 
-                    <label for="">아티스트 이미지 첨부 : </label><input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
-                    <!-- <label for="">아티스트 동영상 첨부 : </label><input type="file" name="videoFile" accept="video/mp4, video/avi"/><br><br> -->
-                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" value="http://" placeholder="인스타 주소를 입력해주세요." size="50"><br><br>
-                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" value="http://" placeholder="트위터 주소를 입력해주세요." size="50"><br><br>
-                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" value="http://" placeholder="페이스북 주소를 입력해주세요." size="50"><br><br>
+                    <label for="">아티스트 이미지 첨부 </label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
+                    <label for="">아티스트 동영상 링크 주소 </label>&nbsp;&nbsp;<input type="text" name="videoLink" placeholder="동영상 링크 주소를 입력해주세요." size="70"><br><br>
+                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" placeholder="인스타 주소를 입력해주세요." size="70"><br><br>
+                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="70"><br><br>
+                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="70"><br><br>
                     <br>
                     <input type="submit" value="등록하기" class="artistReg_btn" style="margin-left: 300px;">
                     <input type="button" value="취소하기" class="artistReg_btn" onclick="location.href='<%= request.getContextPath() %>/views/member/MypageMainView.jsp'">

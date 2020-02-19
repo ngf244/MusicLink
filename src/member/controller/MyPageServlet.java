@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import artist.model.service.ArtistService;
+import artist.model.vo.Artist;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -35,8 +37,11 @@ public class MyPageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String loginUserId = ((Member)session.getAttribute("loginUser")).getUserId();
+		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+		String fileName = (String)request.getAttribute("saveFileName");
 		
 		Member member = new MemberService().selectMember(loginUserId);
+		Artist artist = new ArtistService().selectArtist(userCode);
 		
 		System.out.println(member);
 		
@@ -44,6 +49,8 @@ public class MyPageServlet extends HttpServlet {
 		if(member != null) {
 			page = "views/member/MypageMainView.jsp";
 			request.setAttribute("member", member);
+			request.setAttribute("artist", artist);
+			request.setAttribute("fileName", fileName);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패하였습니다.");
