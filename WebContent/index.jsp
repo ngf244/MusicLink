@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
