@@ -192,14 +192,14 @@
 		var isUsable = false;
 		var inIdChecked = false;
 		
-		/* $('#user_id').on('change paste keyup', function(){
-			isIdChecked = false;
-		}); */
 		
 		var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
 		
 		function idCheck(){
 			var userId = $('#user_id');
+			
+			isUsable = false;
+			inIdChecked = false;
 			
 			if(userIdCheck.test(userId.val())){
 				$.ajax({
@@ -228,15 +228,19 @@
 			}
 		}
 		
-		/* $('#user_id').change(function(){
-			
-		}); */
+		
 		
 		function validate(){
-			if(isUsable && idIdChecked){
+			var infoAgree = $('#agree').is(":checked");
+			console.log(infoAgree);
+			if(isUsable && idIdChecked && infoAgree){
 				return true;
-			} else{
-				alert('아이디 중복확인을 해주세요');
+			} else {
+				if(isUsable == false && idIdChecked == false){
+					alert('아이디 중복확인을 해주세요');
+				} else if(infoAgree == false){
+					alert('개인정보 동의서에 동의를 체크해주세요.');
+				}
 				return false;
 			}
 		}
