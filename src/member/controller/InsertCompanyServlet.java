@@ -33,7 +33,7 @@ public class InsertCompanyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String companyId = request.getParameter("company_id");
-		String companyPwd = request.getParameter("company_pwd");
+		String userPwd = request.getParameter("company_pwd");
 		String companyName = request.getParameter("company_name");
 		String address1 = request.getParameter("addressInput");
 		String address2 = request.getParameter("detailAddressInput");
@@ -44,7 +44,7 @@ public class InsertCompanyServlet extends HttpServlet {
 		
 		String companyAddress = address1 + "/" + address2;
 		
-		Member member = new Member(companyId, companyPwd, userName, userEmail, userPhone);
+		Member member = new Member(companyId, userPwd, userName, userEmail, userPhone);
 		Company company = new Company(companyName, companyAddress, companyTel);
 		
 		int result = new CompanyService().insertCompany(member, company);
