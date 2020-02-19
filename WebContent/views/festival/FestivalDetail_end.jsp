@@ -31,12 +31,12 @@
     
 <title>행사 상세 페이지</title>
 <style>
-    section {width:70%; height:120%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
+    section {width:70%; height:130%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
     
-    #scale{/*transform:scale(1.2);*/}
+    #scale{transform:scale(1.2);}
     
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
 	#contentArea{width:83.5%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
@@ -50,7 +50,7 @@
     #promotionImg{width:240px; height:360px; background:lightgray; text-align:right;}
     .alignspan{font-size:11px; font-weight: bold; margin-top: 330px; margin-right:12px;}
     
-    #festivalPosterArea{width:30%; display:inline-block; vertical-align:top; margin-top: 2%; margin-right:2%;}
+    #festivalPosterArea{width:30%; display:inline-block; vertical-align:top; margin-top: 2%;}
     #festivalInfoArea{width:65%; display:inline-block; font-size:15px; margin-bottom:5%;}
     #infoTable{border-spacing: 20px; border-collapse: separate; text-align: left; line-height:1.8em}
     #infoTable td{vertical-align:middle;}
@@ -58,16 +58,17 @@
     #ticketLink{font-size: 12px; cursor:pointer;}
     #companyStar{color: #FFCD12;}
     
-    #map{width:100%; height:350px; border: 1px solid #ced4da; border-radius: 4px;}
+    #fesmap{width:100%; height:350px; border: 1px solid #ced4da; border-radius: 4px;}
     
     footer .ft-content{width:70%; !important;}
 </style>
 </head>
-<body onload="mapSetting();">
+<body onload="fesMapSetting();">
 	<%@ include file="../../views/common/menubar.jsp" %>
     
     <!-- 행사 상세 페이지 코딩 시작 -->
 	<section style="z-index: 1;">
+		<div id="scale">
 		<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">FESTIVAL</label>
@@ -127,8 +128,9 @@
 				</div>
 				
 				<br>
-				<div id="map"></div>
+				<div id="fesmap"></div>
 			</div>
+		</div>
 		</div>
     </section>
     
@@ -150,8 +152,8 @@
 		var address = "서울 서초구 반포대로 150";
 		//var addressDetail = "흰물결아트센터";
 		
-		function mapSetting() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		function fesMapSetting() {
+			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 3 // 지도의 확대 레벨
@@ -195,32 +197,6 @@
     <!-- 행사 지원 코딩 끝 -->
     
 	<%@ include file="../../views/common/footer.jsp" %>
-    
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 
     <!--**********************************
         Scripts

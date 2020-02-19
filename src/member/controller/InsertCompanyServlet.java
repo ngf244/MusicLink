@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
+import member.model.service.CompanyService;
+import member.model.vo.Company;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class InsertMemberServlet
+ * Servlet implementation class InsertCompanyServlet
  */
-@WebServlet(name="InsertMemberServlet", urlPatterns="/insert.me")
-public class InsertMemberServlet extends HttpServlet {
+@WebServlet(name="InsertCompanyServlet", urlPatterns="/insert.co")
+public class InsertCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertMemberServlet() {
+    public InsertCompanyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +32,29 @@ public class InsertMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("user_id");
-		String userPwd = request.getParameter("user_pwd");
+		String companyId = request.getParameter("company_id");
+		String companyPwd = request.getParameter("company_pwd");
+		String companyName = request.getParameter("company_name");
+		String address1 = request.getParameter("addressInput");
+		String address2 = request.getParameter("detailAddressInput");
+		String companyTel = request.getParameter("company_tel");
 		String userName = request.getParameter("user_name");
-		String user_year = request.getParameter("user_year");
-		String user_month = request.getParameter("user_month");
-		String user_day = request.getParameter("user_day");
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("user_email");
-		String phone = request.getParameter("user_phone");
+		String userPhone = request.getParameter("user_phone");
+		String userEmail = request.getParameter("user_email");
 		
-		String birth = user_year + "-" + user_month + "-" + user_day;
+		String companyAddress = address1 + "/" + address2;
 		
-		Member member = new Member(userId, userPwd, userName, birth, email, gender, phone);
-		int result = new MemberService().insertMember(member);
+		Member member = new Member(companyId, companyPwd, userName, userEmail, userPhone);
+		Company company = new Company(companyName, companyAddress, companyTel);
+		
+		int result = new CompanyService().insertCompany(member, company);
 		
 		String page = "";
 		if(result > 0) {
 			page = "index.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원가입에 실패하였습니다.");
+			request.setAttribute("msg", "기획자회원가입에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);

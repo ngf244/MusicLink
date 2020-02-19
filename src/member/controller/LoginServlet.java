@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(1800);  // 로그인 30분 유지
 			session.setAttribute("loginUser", loginUser);
 			
-			response.sendRedirect("index.html");
+			response.sendRedirect("index.jsp");
 		} else {
 			request.setAttribute("msg", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/ssj_loginForm.jsp");

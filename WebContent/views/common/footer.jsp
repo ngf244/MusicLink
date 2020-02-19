@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
@@ -8,11 +8,12 @@
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/footer.css" />
 <title>Insert title here</title>
 <style>
-	.ft-text{text-align: center; margin-top:100px; }
-    .ft-text1{border-bottom: 5px solid #F7FE2E; display: inline-block; margin-bottom: 10px;}
-    .ft-h2{margin-bottom: 80px;}
-    .ft-txt1{margin-bottom:80px; text-align: center; font-size:3em; color: #fff;}
-    .ft-txt2{position: relative; font-size:80px; text-align:center; color: rgb(224, 224, 224);}
+	footer{height:540px; background:#fff; }
+	.ft-text{text-align: center; }
+    .ft-text1{border-bottom: 5px solid #F7FE2E; display: inline-block; margin-bottom: 10px; }
+    .ft-h2{margin-bottom: 80px; background:#f0f0f0;}
+    .ft-txt1{margin-bottom:80px; text-align: center; font-size:3em; color: #f0f0f0; }
+    .ft-txt2{font-size:80px; text-align:center; color: rgb(224, 224, 224); }
     
     .ft-content{width:60%; background:#000; margin: 0 auto; margin-top:22px; z-index:2; position: absolute; left:15%; color:#fff; padding:5%;}
     .content-left{width:70%; float: left;}
@@ -58,65 +59,12 @@
     .right-txt2{width:60%; display: inline-block; margin-top:20px; margin-bottom: 20px;}
     .map-button{width: 70%; padding:15px 30px; background:#F7FE2E; margin-top:20px; text-align: center; color:#fff; font-weight: bold; border-radius:10px;}
     .map-button:hover{background:black; transition: 0.5s;}
-    
-    
-    
-    /* 
-html5doctor.com Reset Stylesheet v1.6.1
-Last Updated: 2010-09-17
-Author: Richard Clark - http://richclarkdesign.com 
-*/
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp, 
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video,{
-    margin:0; padding:0; border:0; outline:0; vertical-align:baseline; background:transparent; }
 
-html, body{height:100%; background: rgb(253, 241, 241);} /**/
-    h1, h2, h3, h4, h5, h6, p, span, a{-webkit-transition:0.5s ease-out; transition:0.5s ease-out;}
-    a:focus, a:hover{text-decoration:none;}
-    ul{padding:0;}
-    p{font-size:14px;}
-body { line-height:1em; }
-
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { display:block; }
-
-ul { list-style:none; }
-
-blockquote, q { quotes:none;}
-
-blockquote:before, blockquote:after,q:before, q:after { content:''; content:none;}
-
-a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; text-decoration:none;	display:block;	-webkit-transition:0.5s ease-in; transition:0.5s ease-in; color:black;}
- 
-/* change colours to suit your needs */
-ins {background-color:#ff9; color:#000;  text-decoration:none;}
-
-/* change colours to suit your needs */
-mark { background-color:#ff9; color:#000;  font-style:italic; font-weight:bold;}
-del { text-decoration: line-through;}
-abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help;}
-table {border-collapse:collapse; border-spacing:0;}
-/* change border colour to suit your needs 
-hr { display:block; height:1px;  border:0;  border-top:1px solid #cccccc; margin:0; padding:0;}*/
-hr { display:block; border:0;  border-top:1px solid #F0F0F0; margin:0; padding:0;}
-input, select {vertical-align:middle;}
-img{	border:0;}
-.clear-both{clear: both;}
 	
 </style>
 </head> 
-<body onload="mapSetting();">
-<footer>
+<body>
+<footer id="footer">
         <div class="ft-text">
             <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
             <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
@@ -189,45 +137,45 @@ img{	border:0;}
 var address = '서울 강남구 테헤란로14길 6';
 var zonecode = "";
 
-function mapSetting() {
+$(function(){
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(address, function(result, status) {
-	
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            //content: '<div style="width:auto;display:inline-block;white-space:nowrap;text-align:center;padding:7px 0;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
-	        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
-	        });
-	        infowindow.open(map, marker);
-	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});
-}
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(address, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            //content: '<div style="width:auto;display:inline-block;white-space:nowrap;text-align:center;padding:7px 0;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});
+});
 					
 				
 $(".map-h1").click(function(){

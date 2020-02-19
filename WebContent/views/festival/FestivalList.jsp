@@ -52,18 +52,19 @@
     
     #listSearch{min-width: 30%; text-align:right; float: right; margin-right:5%; margin-top:-11px; display: inline-block; text-align: center;}
     #icon{width: 20px; height: 20px;}
-    .dropdown{width: 33%; height: 40px; font-size: 13px; margin-right: 3px; padding-left: 1.4%; text-align:center;}
+    .dropdown{width: 40%; height: 40px; font-size: 13px; margin-right: 3px; padding-left: 1.4%; text-align:center;}
     .searchtext{height: 40px; font-size: 13px; margin-left: 3px;}
     
     #festivalList{display:block;}
     .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
     .alignspanlist, .alignspan{font-weight: bold;}
-    .festival{display:inline-block; width:80%; margin-top:25px; text-align:left;}
+    .festival{display:inline-block; width:65%; margin-top: 5%; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     #festivalName{font-size:17px;}
-    .festivalDetail{margin-top:5px; font-size:13px; line-height:2.1; /*border-spacing: 5px; border-collapse: separate;*/}
+    .festivalDetail{margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
+    .listlabel{width: 45%;}
     
     #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
     
@@ -185,21 +186,25 @@
 							</div>
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=4>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>아티스트 모집 기간</td>
+									<td class="listlabel">아티스트 모집 기간</td>
 									<td>2020.07.01 ~ 2020.07.21</td>
 								</tr>
 								<tr>
-									<td>모집 아티스트 팀 수</td>
+									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td>6팀</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -211,13 +216,17 @@
 							<label id="festivalName">행사명</label><br>
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=2>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=3>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -229,13 +238,17 @@
 							<label id="festivalName">행사명</label><br>
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=2>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=3>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -277,6 +290,14 @@
     		for(var i = 2; i < 5; i++) {
     			$('#banner_img' + i).css('visibility', 'hidden');
     		}
+			
+			$('.dropdown').on({'mouseout':function() {
+				$(this).css({'background':'white', 'color':'#333333', 'border':'1px solid #333333'});
+			}, 'mouseenter':function() {
+				$(this).css({'background':'#333333', 'color':'white', 'border':'null'});
+			}, 'click':function() {
+				$(this).css({'background':'#333333', 'color':'white', 'border':'null'});
+			}});
     	})
     
     	function paging(where) {
@@ -340,30 +361,5 @@
     <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
     
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 </body>
 </html>

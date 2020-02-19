@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/mfooter.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="css/calender.css" rel="stylesheet">
+<title>아티스트 프로필</title>
+<style>
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: #fff; height:800px;} 
+    
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);}
+
+    #categoryArea{position: absolute; top: 2%; left: 3%; display: inline;}
+    #contentArea{padding-top: 5%; text-align:center;}
+
+    #inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
+    #inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
+    #block{background: #8AFF00; width: 55px; height: 8px; top: 5%; margin-left:1%;}
+
+    .promotionArea{margin-top:1%;}
+    .subTitle{font-size:20px; font-weight:bold;}
+
+    .follow{font-size:11px; height:30px; width:50%; margin-top:10px;}
+    .request{font-size:11px; margin-top:260px; height:30px; width:50%; float:right;}
+    #hrstyle{border:0.4px solid lightgray; margin-top:1%;}
+
+    .artistBtn {width: 100%; height: 40px;}
+    .newpage {float: left; width: 25%; height: 100%; border: 1px; outline: none; font-size: 16px; font-weight: bold; color: #fff; background-color: #a6a6a6;}
+
+    .main{width:100%; height:300px; border-bottom:1px solid; border-color:lightgray;}
+    .com1{float:left; width:15%; height:300px; margin-left: 4%;}
+    .com2{float:left; width:34%; height:300px; border-right:1px solid; border-color:lightgray;}
+    .com3{float:left; width:46%; height:300px;}
+
+    /*.artistMedia{width:50%; height:300px; background-color:green; float:right;}*/
+    .arimg{width:150px; height:auto;}
+    .content{margin-left:9%; margin-top:2%;}
+    .td1{width:200px; height:35px; vertical-align:middle}
+    .td2{width:200px; height:35px; vertical-align:middle}
+
+    .main2{width:100%; height:300px;}
+    .com4{float:left; width:70%; height:300px; border-right:1px solid; border-color:lightgray;}
+    .com5{float:left; width:29.5%; height:300px;}
+
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+            logo
+            </div>
+            <div id="toggle">
+                <div class="span" id="one"></div>
+                <div class="span" id="two"></div>
+                <div class="span" id="three"></div>
+            </div>
+        </nav>
+
+        <div id="resize">
+            <ul class="menu">
+                <li class="m-name1 m-name">
+                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
+                    <ul class="hidden-manu1 drop">
+                        <li class="menu-h"><a href="#">About us</a></li>
+                        <li class="menu-h"><a href="#">F A Q</a></li>
+                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
+                    </ul>
+                </li>
+                <li class="m-name2 m-name">
+                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
+                    <ul class="hidden-manu2 drop">
+                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
+                        <li class="menu-h"><a href="#">A - l i s t</a></li>
+                        <li class="menu-h"><a href="#">r a n k</a></li>
+                    </ul>
+                </li>
+                <li class="m-name3 m-name">
+                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
+                    <ul class="hidden-manu3 drop">
+                        <li class="menu-h"><a href="#">F - l i s t</a></li>
+                        <li class="menu-h"><a href="#">r a n k</a></li>
+                    </ul>
+                </li>
+                <li class="m-name4 m-name">
+                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
+                </li>
+            </ul>
+        </div>
+        <div class="side-icon">
+            <div class="image1 icon">
+                <a href="#" class="icon-a"><img src="img/user.png" alt="" /></a>
+            </div>
+            <div class="image2 icon">
+                <a href="#" ><img src="img/bell.png" alt="" /></a>
+            </div>
+            <div class="image3 icon">
+                <img src="img/pin.png" alt="" />
+            </div>
+            <div class="side-text">
+                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
+            </div>
+        </div>    
+    </header>   
+   
+    <section style="z-index: 1;">
+        <div id="categoryArea">
+            <div id="block"></div><br>
+            <label id="inBigCategory">ARTIST</label>
+            <label id="inSmallCategory"> - Profile</label>
+        </div>
+
+        <div id="contentArea">
+           <div class="promotionArea">
+                <label class="subTitle">아티스트 프로필</label><br>
+                <hr id="hrstyle">
+                <div class="artistBtn">
+                    <button type="button" class="newpage" onClick="location.href='artistprofile.html'">프로필</button>
+                    <button type="button" class="newpage" onClick="location.href='reviewgrade.html'">별점/리뷰</button>
+                    <button type="button" class="newpage" onClick="location.href='community.html'">소통 게시판</button>
+                    <button type="button" class="newpage" onClick="location.href='gallery.html'">갤러리 게시판</button>
+                </div>
+                <div class="main">
+                    <div class="com1">
+                        <img class="arimg" src="img/chang.jpg">
+                        <p>팔로워</p>
+                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
+                    </div>
+                    <div class="com2">
+                        <table class="content">
+                            <tr align="left">
+                                <td class="td1">팀명(활동명)</td>
+                                <td class="td2">창모</td>
+                            </tr>
+                            <tr align="left">
+                                <td class="td1">유형</td>
+                                <td class="td2">솔로(남성)</td>
+                            </tr>
+                            <tr align="left">
+                                <td class="td1">데뷔</td>
+                                <td class="td2">2014</td>
+                            </tr>
+                            <tr align="left">
+                                <td class="td1">국적</td>
+                                <td class="td2">대한민국</td>
+                            </tr>
+                            <tr align="left">
+                                <td class="td1">장르</td>
+                                <td class="td2">랩/힙합</td>
+                            </tr>
+                            <tr align="left">
+                                <td class="td1" colspan="2">아티스트 한줄소개 및 개인 SNS</td>
+                            </tr>
+                            <tr align="left">
+                                <td colspan="2">내용</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="com3">
+
+                    </div>
+                </div>
+                <div class="main2">
+                    <div class="com4">
+                        <div class="my-calendar clearfix">
+                                        <div class="clicked-date">
+                                          <div class="cal-day"></div>
+                                          <div class="cal-date"></div>
+                                        </div>
+                                        <div class="calendar-box">
+                                          <div class="ctr-box clearfix">
+                                            <button type="button" title="prev" class="btn-cal prev">
+                                            </button>
+                                            <span class="cal-month"></span>
+                                            <span class="cal-year"></span>
+                                            <button type="button" title="next" class="btn-cal next">
+                                            </button>
+                                          </div>
+                                          <table class="cal-table">
+                                            <thead>
+                                              <tr>
+                                                <th>S</th>
+                                                <th>M</th>
+                                                <th>T</th>
+                                                <th>W</th>
+                                                <th>T</th>
+                                                <th>F</th>
+                                                <th>S</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody class="cal-body"></tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                    </div>
+                    <div class="com5">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h1 class="htext" align="cneter">A - l i s t</h1>
+    
+    
+    <footer>
+        <div class="ft-text">
+            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
+            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
+        </div>
+        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
+        <h1 class="ft-txt2">MUSIC LINK</h1>
+        <div class="ft-content">
+            <div class="content-left">
+                <div class="left-top">
+                    <ul class="lt">COMPANY
+                        <li>(주)뮤직링크</li>
+                    </ul>
+                    <ul class="rt">ADDRESS
+                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
+                    </ul>
+                </div>  
+                <div class="left-bot">
+                    <ul class="lbl">BUSINESS LICENSE
+                        <li>000-11-22222</li>
+                    </ul>
+                    <ul class="lbm">TEL
+                        <li>02-562-2378</li>
+                    </ul>
+                    <ul class="lbr">E-MAIL
+                        <li>qkrtlsdn@qkr.tlsdn</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-right">
+                <a href="#">&nbsp;&nbsp;&nbsp;
+                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
+                <a href="#">&nbsp;&nbsp;&nbsp;
+                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
+            </div>
+        </div>
+    </footer>
+    <div class="map">
+        <div class="map-bg">
+            <h1 class="map-h1">&#215;</h1>
+            <h1 class="map-txt">오시는길</h1>
+            <div class="map-cont">
+                <div class="map-cont-left"></div>
+                <div class="map-cont-right">
+                    <div class="cont-right1">
+                        <div class="right-txt1">ADDRESS</div>
+                        <div class="right-txt2">서울시 강남구..</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">TEL</div>
+                        <div class="right-txt2">02-1111-1111</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">SUB</div>
+                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
+                    </div>
+                    <div class="cont-right1">
+                        <div class="right-txt1">BUS</div>
+                        <div class="right-txt2">146번, 360번</div>
+                    </div>
+                    <div class="cont-right2">
+                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="js/respond.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/parallax.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script>
+
+	$("#toggle").click(function(){
+		$(this).toggleClass("on");
+		$("#resize").toggleClass("active");	
+	});
+    
+    $(".image3").click(function(){
+        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
+    });
+    $(".map-h1").click(function(){
+        $(".map").css("display","none");
+    });    
+	//new WOW().init();
+	
+	function fol_clcik(){
+        if (confirm("팔로우 하시겠습니까?") == true){    //확인
+            document.form.submit();
+        }else{   //취소
+            return;
+        }
+    }
+</script>
+<script src="js/cal.js"></script>
+</body>
+</html>

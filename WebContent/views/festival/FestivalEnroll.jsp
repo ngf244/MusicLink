@@ -100,7 +100,7 @@
 		  transform: translate3d(100%, -50%, 0);
 		}
 		
-    section {width:70%; height:230%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
+    section {width:70%; height:220%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
@@ -144,7 +144,8 @@
     
     .space{margin:0; padding:0;}
     
-    #enrollSubmit{margin-top:30px;}
+    .tdcenter{text-align:center; color: #DB0000;}
+    .tdcenter input{margin-top: 2%;}
     
     footer .ft-content{width:70%; !important;}
 </style>
@@ -283,6 +284,8 @@
 					<tr>
 						<td class="tdcenter" colspan=2>
 							<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn mb-1 btn-dark" value="취소">
 						</td>
 					</tr>
 				</table>
@@ -451,32 +454,6 @@
     <!-- 행사 지원 코딩 끝 -->
     
 	<%@ include file="../../views/common/footer.jsp" %>
-	
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 
     <!--**********************************
         Scripts
