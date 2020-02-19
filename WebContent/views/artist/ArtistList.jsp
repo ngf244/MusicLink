@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />
     <link href="css/slick-theme.css" rel="stylesheet" />
-    <link href="css/common.css" rel="stylesheet" /> 
+    <link href="css/common.css" rel="stylesheet" />
     <link href="css/mfooter.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
