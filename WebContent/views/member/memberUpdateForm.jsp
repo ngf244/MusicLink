@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.model.vo.Member" %>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	String userId = loginUser.getUserId();
-	String userPwd = loginUser.getUserPwd();
-	String userName = loginUser.getUserName();
-	String userBirth = loginUser.getUserBirth();
-	String gender = loginUser.getUserGender();
-	String userEmail = loginUser.getUserEmail();
-	String userPhone = loginUser.getUserPhone();
-	
-	String[] checked = new String[2];
-	if(gender.equals("남자")){
-		checked[0] = "checked";
-		checked[1] = "";
-	} else{
-		checked[0] = "";
-		checked[1] = "checked";
-	}
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -69,7 +51,25 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>   
-    
+    <%
+	/* Member loginUser = (Member)session.getAttribute("loginUser"); */
+	String userId = loginUser.getUserId();
+	String userPwd = loginUser.getUserPwd();
+	String userName = loginUser.getUserName();
+	String userBirth = loginUser.getUserBirth();
+	String gender = loginUser.getUserGender();
+	String userEmail = loginUser.getUserEmail();
+	String userPhone = loginUser.getUserPhone();
+	
+	String[] checked = new String[2];
+	if(gender.equals("남자")){
+		checked[0] = "checked";
+		checked[1] = "";
+	} else{
+		checked[0] = "";
+		checked[1] = "checked";
+	}
+%>
     <section style="z-index: 1;">
         <div class="sec-line"></div>
         <h1 class="sec-mtxt">MyPage<p>-user info</p></h1>

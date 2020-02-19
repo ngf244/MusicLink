@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.model.vo.Member" %>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	String userId = loginUser.getUserId();
-	String userPwd = loginUser.getUserPwd();
-%>    
+ 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -56,7 +52,11 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>    
-    
+    <%
+	/* Member loginUser = (Member)session.getAttribute("loginUser"); */
+	String userId = loginUser.getUserId();
+	String userPwd = loginUser.getUserPwd();
+	%>   
     <section style="z-index: 1;">
         <div class="sec-line"></div>
         <h1 class="sec-mtxt">MyPage<p>-user info</p></h1>
