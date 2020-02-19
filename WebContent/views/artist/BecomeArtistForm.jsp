@@ -13,7 +13,7 @@
 <style>
     
     
-    /* 섹션 */
+    /* 섹션 */ 
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
@@ -90,7 +90,7 @@
             <h3>아티스트 등록</h3>
             <br>
             <div class="become-artist">
-                <form action="<%= request.getContextPath() %>/insert.at">
+                <form action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
                     <label for="artistName">활동 명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br><br>
                     <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br><br>
                     <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br><br>
@@ -128,10 +128,10 @@
                     <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br><br>
 
                     <label for="">아티스트 이미지 첨부 : </label><input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
-                    <label for="">아티스트 동영상 첨부 : </label><input type="file" name="videoFile" accept="video/mp4, video/avi"/><br><br>
-                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" placeholder="인스타 주소를 입력해주세요." size="50"><br><br>
-                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="50"><br><br>
-                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" placeholder="페이스북 주소를 입력해주세요." size="50"><br><br>
+                    <!-- <label for="">아티스트 동영상 첨부 : </label><input type="file" name="videoFile" accept="video/mp4, video/avi"/><br><br> -->
+                    <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" value="http://" placeholder="인스타 주소를 입력해주세요." size="50"><br><br>
+                    <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" value="http://" placeholder="트위터 주소를 입력해주세요." size="50"><br><br>
+                    <label for="">페이스북 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="facebookURL" value="http://" placeholder="페이스북 주소를 입력해주세요." size="50"><br><br>
                     <br>
                     <input type="submit" value="등록하기" class="artistReg_btn" style="margin-left: 300px;">
                     <input type="button" value="취소하기" class="artistReg_btn" onclick="location.href='<%= request.getContextPath() %>/views/member/MypageMainView.jsp'">

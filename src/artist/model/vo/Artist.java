@@ -1,0 +1,207 @@
+package artist.model.vo;
+
+import java.sql.Date;
+
+public class Artist {
+	private String atCode;
+	private String atName;
+	private int atMember;
+	private String atGenre;
+	private String atClass;
+	private String atPicPath;
+	private String atOneLine;
+	private String atIntro;
+	private String atLocal;
+	private String atRecode;
+	private Date atDebutDate;
+	private String atGender;
+	private int atGrade;
+	private String atInsta;
+	private String atTwitter;
+	private String atFacebook;
+	 
+	public Artist() {}
+
+	public Artist(String atCode, String atName, String atGenre, String atLocal) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atGenre = atGenre;
+		this.atLocal = atLocal;
+	}
+	
+	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath, String atOneLine,
+			String atLocal) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atOneLine = atOneLine;
+		this.atLocal = atLocal;
+	}
+
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
+			String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate, String atGender,
+			int atGrade, String atInsta, String atTwitter, String atFacebook) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atOneLine = atOneLine;
+		this.atIntro = atIntro;
+		this.atLocal = atLocal;
+		this.atRecode = atRecode;
+		this.atDebutDate = atDebutDate;
+		this.atGender = atGender;
+		this.atGrade = atGrade;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
+	}
+
+	public String getAtCode() {
+		return atCode;
+	}
+
+	public void setAtCode(String atCode) {
+		this.atCode = atCode;
+	}
+
+	public String getAtName() {
+		return atName;
+	}
+
+	public void setAtName(String atName) {
+		this.atName = atName;
+	}
+
+	public int getAtMember() {
+		return atMember;
+	}
+
+	public void setAtMember(int atMember) {
+		this.atMember = atMember;
+	}
+
+	public String getAtGenre() {
+		return atGenre;
+	}
+
+	public void setAtGenre(String atGenre) {
+		this.atGenre = atGenre;
+	}
+
+	public String getAtClass() {
+		return atClass;
+	}
+
+	public void setAtClass(String atClass) {
+		this.atClass = atClass;
+	}
+
+	public String getAtPicPath() {
+		return atPicPath;
+	}
+
+	public void setAtPicPath(String atPicPath) {
+		this.atPicPath = atPicPath;
+	}
+
+	public String getAtOneLine() {
+		return atOneLine;
+	}
+
+	public void setAtOneLine(String atOneLine) {
+		this.atOneLine = atOneLine;
+	}
+
+	public String getAtIntro() {
+		return atIntro;
+	}
+
+	public void setAtIntro(String atIntro) {
+		this.atIntro = atIntro;
+	}
+
+	public String getAtLocal() {
+		return atLocal;
+	}
+
+	public void setAtLocal(String atLocal) {
+		this.atLocal = atLocal;
+	}
+
+	public String getAtRecode() {
+		return atRecode;
+	}
+
+	public void setAtRecode(String atRecode) {
+		this.atRecode = atRecode;
+	}
+
+	public Date getAtDebutDate() {
+		return atDebutDate;
+	}
+
+	public void setAtDebutDate(Date atDebutDate) {
+		this.atDebutDate = atDebutDate;
+	}
+
+	public String getAtGender() {
+		return atGender;
+	}
+
+	public void setAtGender(String atGender) {
+		this.atGender = atGender;
+	}
+
+	public int getAtGrade() {
+		return atGrade;
+	}
+
+	public void setAtGrade(int atGrade) {
+		this.atGrade = atGrade;
+	}
+
+	public String getAtInsta() {
+		return atInsta;
+	}
+
+	public void setAtInsta(String atInsta) {
+		this.atInsta = atInsta;
+	}
+
+	public String getAtTwitter() {
+		return atTwitter;
+	}
+
+	public void setAtTwitter(String atTwitter) {
+		this.atTwitter = atTwitter;
+	}
+
+	public String getAtFacebook() {
+		return atFacebook;
+	}
+
+	public void setAtFacebook(String atFacebook) {
+		this.atFacebook = atFacebook;
+	}
+
+	@Override
+	public String toString() {
+		return "Artist [atCode=" + atCode + ", atName=" + atName + ", atMember=" + atMember + ", atGenre=" + atGenre
+				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atOneLine=" + atOneLine + ", atIntro="
+				+ atIntro + ", atLocal=" + atLocal + ", atRecode=" + atRecode + ", atDebutDate=" + atDebutDate
+				+ ", atGender=" + atGender + ", atGrade=" + atGrade + ", atInsta=" + atInsta + ", atTwitter="
+				+ atTwitter + ", atFacebook=" + atFacebook + "]";
+	}
+
+
+	
+	
+}
