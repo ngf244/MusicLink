@@ -31,100 +31,139 @@
     
 <title>행사 수정</title>
 <style>
-		.toggle-switch, .toggle-switch .toggle-knob {
-		    -moz-transition: all 0.2s ease-in;
-		    -webkit-transition: all 0.2s ease-in;
-		    -o-transition: all 0.2s ease-in;
-		    transition: all 0.2s ease-in;
+		label.switch {  
+		  text-align: left;
+		  width: 70px;
+		  height: calc(70px / 2);
+		  border-radius:30px;    
+		  background-color:#4ed164;
+		  display: inline-block;
+		  position: relative;
+		  cursor: pointer;
 		}
 		
-		.toggle-switch {
-		    height: 30px;
-		    width: 55px;
-		    display: inline-block;
-		    background-color: #ffffff;
-		    margin: 2px;
-		    margin-bottom: 15px;
-		    border-radius: 30px;
-		    cursor: pointer;
-		    border: solid 1px #d2d6de;
-		    box-shadow: inset 1px 1px 9px -3px rgba(4, 4, 4, 0.08), 1px 2px 6px -2px rgba(0, 0, 0, 0.01);
+		label.switch > span {
+		  display: block;
+		  width: 100%;
+		  height: 100%;
 		}
 		
-		.toggle-switch .toggle-knob {
-		    width: 28px;
-		    height: 26px;
-		    display: inline-block;
-		    background-color: #ffffff;
-		    border: solid 1px rgba(126, 126, 126, 0.07);
-		    box-shadow: 0 1px 3px rgba(107, 106, 106, 0.26), 0 5px 1px rgba(107, 106, 106, 0.13);
-		    border-radius: 26px;
-		    margin: 1px 1px;
+		label.switch > input[type="checkbox"] {
+		  opacity: 0;
+		  position: absolute;
+		} 
+		
+		label.switch > span:before, label.switch > span:after {
+		  content: "";
+		  cursor: pointer;
+		  position: absolute;
 		}
 		
-		.toggle-switch.active {
-		    background-color: #77e189;
-		    border: solid 1px transparent;
+		/*label.switch > input[type="checkbox"]:focus ~ span {
+		  box-shadow: 0 0 0 4px #43b556;
+		}*/
+		
+		label.switch > input[type="checkbox"]:checked:focus ~ span {
+		  box-shadow: 0 0 0 4px #fff;
 		}
 		
-		.toggle-switch.active .toggle-knob {
-		    margin-left: 24px;
+		label.switch > span {
+		  border-radius: 60px;
 		}
 		
-    section {width:70%; min-height:245%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 19.5%; position: relative;
+		label.switch > span:before {
+		  width: 100%;
+		  height: 100%;
+		  box-sizing: border-box;
+		  background-color: #f1f1f1;
+		  border-radius: 60px;
+		  transition: opacity .2s ease-out .1s, transform .2s ease-out .1s;
+		  transform: scale(1);
+		  opacity: 1;
+		}
+		
+		label.switch > span:after{
+		  top: 50%;
+		  z-index: 3;
+		  transition: transform .4s cubic-bezier(0.44,-0.12, 0.07, 1.15);
+		  width: calc(70px / 2);
+		  height: calc(70px / 2);
+		  transform: translate3d(0, -50%, 0);
+		  background-color: #fff;
+		  border-radius: 100%;
+		  box-shadow: 0 2px 5px rgba(0, 0, 0, .3);  
+		}
+		
+		label.switch > input[type="checkbox"]:checked ~ span:before {
+		  transform: scale(0);
+		  opacity: .7;
+		}
+		
+		label.switch > input[type="checkbox"]:checked ~ span:after {
+		  transform: translate3d(100%, -50%, 0);
+		}
+		
+    section {width:70%; height:255%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+    
+    #scale{transform:scale(1.2);}
+    
+	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
+	#contentArea{width:100%; padding-top: 12%; text-align:center; position: absolute; left: 8%; display:inline-block;}
 	
-	#categoryArea{position: absolute; top: 1.8%; left: 3%; display: inline;}
-	#contentArea{padding-top: 12%; text-align: center; display: inline-block;}
-	
-	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
-    #block{background: #8AFF00; width: 55px; height: 8px; top: 5%; margin-left:1%;}
+    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
-    .alert{font-size: 13px;}
+    .alert{font-size: 13px; width:82.5%; }
     
-    #enrollForm{width: 82%; position:absolute; left: 50%; transform: translateX(-50%);}
+    #enrollForm{width: 90%; position:absolute; left: 50%; transform: translateX(-50%);}
     #insertInfo{width: 100%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate; text-align: left;}
     #insertInfo textarea{border-radius: 4px; border: 1px solid #ced4da;}
     td{vertical-align:middle;}
     
-    .label{width:300px; font-size:12pt; font-weight: regular; text-align:center; line-height:20px;}
-    .#dcenter{text-align:center;}
+    .label{width:30%; font-size:12pt; font-weight: regular; text-align:center; line-height:20px;}
+    .tdcenter{text-align:center; font-size:13px; color: #FF9090;}
     .enroll{width: 100px; height: calc(2.0625rem + 2px);}
     
-    #fesName{width:300px;}
+    #fesName{width:70%;}
     
     #datePickerStyle{background: #000; color: white; line-height: 35px;}
     .dategroup{width: 250px;}
+    .datestyle{border-radius: 4px;}
     
-    #map{border: 1px solid #ced4da; border-radius: 4px; width:500px; height:300px;}
+    #wrap{display:none; border:1px solid #DDDDDD; width:500px; margin-top:5px;}
+    #fesmap{border: 1px solid #ced4da; border-radius: 4px; width:80%; height:300px;}
     #zonecodeInput{width: 180px; display:inline-block; margin-bottom: 7px;}
     #addressInput{width: 54%; display:inline-block;}
     #detailAddressInput{width: 30%; display:inline-block;}
     
     #moneyRange{width: 400px;}
-    .inputMoney{width: 250px;}
     
-    #festivalInfo{resize: none; border: 1px solid #ced4da; border-radius: 4px;}
+    #festivalInfo{width:85%; resize: none; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;}
     
-    .postergroup{width:420px;}
+    .postergroup{width:60%; top:25%; transform: translateY(25%);}
+    #posterPath, #bannerPath{font-size:13px; overflow:hidden;}
     
-    #enrollSubmit{margin-top:18px;}
+    .feesize{width:50%;}
+    .urlsize{width: 90%;}
     
-    #tdcenter{text-align:center; color: #DB0000;}
+    .tdcenter{text-align:center; color: #DB0000;}
+    .tdcenter input{margin-top: 2%;}
     
     footer .ft-content{width:70%; !important;}
     
 </style>
 </head>
-<body onload="mapSetting();">
-
+<body onload="fesMapSetting();">
+	
 	<%@ include file="../../views/common/menubar.jsp" %>
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
+		<div id="scale">
 		<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">FESTIVAL</label>
@@ -163,15 +202,15 @@
 						<td class="label" rowspan=2>행사 장소</td>
 						<td>
 							<input type="text" class="form-control input-default enroll" id="zonecodeInput" readonly/>&nbsp;
-							<input type="button" class="btn mb-1 btn-dark" onClick="openDaumZipAddress();" value = "우편번호" disabled/><br>							
+							<input type="button" class="btn mb-1 btn-dark" onClick="openDaumZipAddress();" value = "우편번호"/><br>							
 							<input type="text" class="form-control input-default enroll" id="addressInput" readonly/>
-							<input type="text" class="form-control input-default enroll" id="detailAddressInput" placeholder="상세주소" readonly/>
-							<div id="wrap" style="display:none;border:1px solid #DDDDDD;width:500px;margin-top:5px"></div>
+							<input type="text" class="form-control input-default enroll" id="detailAddressInput" placeholder="상세주소"/>
+							<div id="wrap"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div id="map"></div>
+							<div id="fesmap"></div>
 						</td>
 					</tr>
 					<tr>
@@ -196,9 +235,25 @@
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file">
 									<input type="file" class="custom-file-input">
-									<label class="custom-file-label">Choose file</label>
+									<label class="custom-file-label">파일을 선택해주세요</label>
 								</div>
 							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">행사 배너</td>
+						<td>
+							<div class="input-group mb-3 postergroup">
+								<div class="custom-file">
+									<input type="file" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
+									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="tdcenter" colspan=2>
+							<span>※ 배너 이미지 생략 시 리스트에 정상적으로 출력되지만 홍보영역에 나타나지 않습니다. (홍보리스트, 캘린더 등)</span>
 						</td>
 					</tr>
 					<tr>
@@ -210,7 +265,7 @@
 					<tr>
 						<td class="label">관람비</td>
 						<td>
-							<div class="input-group mb-3 inputMoney" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
+							<div class="input-group mb-3 feesize" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
 								<input type="text" class="form-control input-default" disabled>
 								<div class="input-group-append">
 									<span class="input-group-text">&#8361;</span>
@@ -221,7 +276,7 @@
 					<tr>
 						<td class="label">티켓 구매처</td>
 						<td>
-							<div class="input-group mb-3" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
+							<div class="input-group mb-3 urlsize" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
 								<input type="text" class="form-control input-default" disabled>
 								<div class="input-group-append">
 									<span class="input-group-text">https://example.com</span>
@@ -232,31 +287,38 @@
 					<tr>
 						<td class="label">비공개 옵션</td>
 						<td>
-							<span class="toggle-switch" data-toggle="tooltip" data-placement="right" title="행사수정을 통해 변경 가능합니다.">
-							  <span class="toggle-knob"></span>
-							</span>
+							<label class="switch space">
+								<input type="checkbox" id="secretOp" name="secretOp">
+								<span class="toggle-switch" data-toggle="tooltip" data-placement="right" title="행사수정을 통해 변경 가능합니다."></span>
+							</label>
 						</td>
 					</tr>
 					<tr>
-						<td id="tdcenter" colspan=2>
-							<span>※ 비공개로 등록시 해당 행사는 행사리스트에 표시되지 않고 러브콜 받은 아디스트에게만 표시됩니다.</span>
+						<td class="tdcenter" colspan=2>
+							<span>※ 비공개 등록 시 해당 행사는 행사리스트에 표시되지 않고 러브콜 받은 아디스트에게만 표시됩니다.</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="tdcenter" colspan=2>
+							<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn mb-1 btn-dark" value="취소">
 						</td>
 					</tr>
 				</table>
-				<br>
-				<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="저장">
 			</form>
+		</div>
 		</div>
     </section>
     
-    <script type="../text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script type="../text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
+    <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
 	<script>
 		var address = '서울 강남구 테헤란로14길 6';
 		var zonecode = "";
 		
-		function mapSetting() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		function fesMapSetting() {
+			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 3 // 지도의 확대 레벨
@@ -346,44 +408,12 @@
 	        // 슬라이드 업 기능을 이용해 레이어 창을 닫는다.
 	        jQuery("#wrap").slideUp();
 	    }
-	    
-	    var toggler = document.querySelector('.toggle-switch');
-	
-	    toggler.onclick = function(){
-	      toggler.classList.toggle('active');
-	    }
 	</script>
     
     <h1 class="htext">F E S T I V A L</h1>
     <!-- 행사 지원 코딩 끝 -->
     
 	<%@ include file="../../views/common/footer.jsp" %>
-    
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 
     <!--**********************************
         Scripts

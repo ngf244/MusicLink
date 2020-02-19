@@ -16,17 +16,19 @@
     
 <title>행사 지원</title>
 <style>
-    section {width:70%; min-height:105%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 19.5%; position: relative;
+    section {width:70%; height:130%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+    
+    #scale{transform:scale(1.2);}
+    
+	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
+	#contentArea{width:83.5%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
 	
-	#categoryArea{position: absolute; top: 3.3%; left: 3%; display: inline;}
-	#contentArea{padding-top: 12%; text-align: center; display: inline-block;}
-	
-	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
+	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
-    #block{background: #8AFF00; width: 55px; height: 8px; top: 5%; margin-left:1%;}
+    #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
     #searchArea{width: 80%; height:40px; display: inline-block; text-align: center;}
     #searchArea select, input, #alignImg{vertical-align: middle; display: inline-block; text-align: center;}
@@ -42,17 +44,17 @@
     #festivalList{display:block;}
     .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
     .alignspanlist{font-weight: bold;}
-    .festival{display:inline-block; width:80%; margin-top:25px; text-align:left;}
+    .festival{display:inline-block; width:80%; margin-top: 5%; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label, button{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     #festivalName{font-size:17px;}
-    .festivalDetail{margin-top:5px; font-size:13px; line-height:2.1; /*border-spacing: 5px; border-collapse: separate;*/}
+    .festivalDetail{margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
+    .listlabel{width: 45%;}
     
     .approachBtn{float: right; font-size: 13px; width: 90px; height: 25px; margin-top:-4px; line-height: 0.9; color:white;}
     
     #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
-    .listPaging{}
     
     footer .ft-content{width:70%; !important;}
     
@@ -64,6 +66,7 @@
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
+		<div id="scale">
 		<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">FESTIVAL</label>
@@ -81,7 +84,7 @@
 							<option>주최사명</option>
 						</select>
                         <input type="text" class="form-control input-default searchtext">
-                        <div id="alignImg"><img src="../icons/search.png" id="icon" /></div>
+                        <div id="alignImg"><img src="<%= request.getContextPath() %>/icons/search.png" id="icon" /></div>
 					</div>
 				</div>
 				
@@ -105,21 +108,25 @@
 							
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=4>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>아티스트 모집 기간</td>
+									<td class="listlabel">아티스트 모집 기간</td>
 									<td>2020.07.01 ~ 2020.07.21</td>
 								</tr>
 								<tr>
-									<td>모집 아티스트 팀 수</td>
+									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td>6팀</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -130,25 +137,28 @@
 							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
 							<label id="festivalName">행사명</label>
 							<button type="button" class="btn mb-1 btn-warning approachBtn">행사 지원</button>
-
 							
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=4>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>아티스트 모집 기간</td>
+									<td class="listlabel">아티스트 모집 기간</td>
 									<td>2020.07.01 ~ 2020.07.21</td>
 								</tr>
 								<tr>
-									<td>모집 아티스트 팀 수</td>
+									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td>6팀</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -159,25 +169,28 @@
 							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
 							<label id="festivalName">행사명</label>
                             <button type="button" class="btn mb-1 btn-secondary approachBtn">지원 완료</button>
-
 							
 							<table class="festivalDetail">
 								<tr>
-									<td>행사 기간</td>
-									<td rowspan=4>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="listlabel">행사 기간</td>
+									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td>2020.08.30 ~ 2020.09.05</td>
 								</tr>
 								<tr>
-									<td>아티스트 모집 기간</td>
+									<td class="listlabel">아티스트 모집 기간</td>
 									<td>2020.07.01 ~ 2020.07.21</td>
 								</tr>
 								<tr>
-									<td>모집 아티스트 팀 수</td>
+									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td>6팀</td>
 								</tr>
 								<tr>
-									<td>확정 아티스트</td>
+									<td class="listlabel">확정 아티스트</td>
 									<td>윤하</td>
+								</tr>
+								<tr>
+									<td class="listlabel">주최사명</td>
+									<td>KH</td>
 								</tr>
 							</table>
 						</div>
@@ -211,9 +224,18 @@
 				</div>
 			</div>
 		</div>
+		</div>
     </section>
-    
     <script>
+		$(function() {
+			$('.dropdown').on({'mouseout':function() {
+				$(this).css({'background':'white', 'color':'#333333', 'border':'1px solid #333333'});
+			}, 'mouseenter':function() {
+				$(this).css({'background':'#333333', 'color':'white', 'border':'null'});
+			}, 'click':function() {
+				$(this).css({'background':'#333333', 'color':'white', 'border':'null'});
+			}});
+		})
     </script>
     
     <h1 class="htext">F E S T I V A L</h1>
@@ -230,31 +252,6 @@
     <script src="<%= request.getContextPath() %>/js/settings.js"></script>
     <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
-    
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
+ 
 </body>
 </html>
