@@ -23,7 +23,6 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 	
-
 	public Member(String userCode, String userId, String userName, String userClass) {
 		super();
 		this.userCode = userCode;
@@ -31,13 +30,15 @@ public class Member {
 		this.userName = userName;
 		this.userClass = userClass;
 	}
+
 	public Member(String userId, String userPwd, String userName, String userEmail, String userPhone) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.userEmail = userEmail;
-		this.userPhone = userPhone; 
+		this.userPhone = userPhone;
+
 	}
 
 	public Member(String userId, String userPwd, String userName, String userBirth, String userEmail, String userGender,

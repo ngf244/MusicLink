@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import authorPage.model.service.AuthorService;
-import authorPage.model.vo.Member;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class showUserList
@@ -53,6 +53,8 @@ public class showUserList extends HttpServlet {
 		request.setAttribute("normalMem", normalMem);
 		request.setAttribute("artistMem", artistMem);
 		request.setAttribute("companyMem", companyMem);
+		
+		System.out.println(memArr.size());
 		
 		String path = "views/authorPage/showUserList.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
