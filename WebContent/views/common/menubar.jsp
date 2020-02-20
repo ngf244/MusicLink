@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
-	
 %> 
 
 <!DOCTYPE html>
@@ -97,10 +96,10 @@
         <div class="user-wrap">
             <div class="user-nickName"><%= uName %></div>
             <div class="user-id"><%= uId %></div>
-            <div class="user-mypage" onclick="myPage();">마이페이지</div>
             <div class="user-coin">
                 <lable>coin</lable><lable style="margin-left:15px;">20</lable>
             </div>
+            <div class="user-mypage" onclick="myPage();">마이페이지</div>
             <div class="user-charging">충전</div>
         </div>
         <div class="alram-wrap">
