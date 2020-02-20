@@ -5,7 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import festival.model.vo.Festival;
@@ -54,6 +57,73 @@ public class FestivalDAO {
 		}
 		
 		return result;
+	}
+
+	public int getListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Festival> selectList(Connection conn, int currentPage) {
+		PreparedStatement pstmt = null;
+		ArrayList<Festival> list = null;
+		ResultSet rset = null;
+		int posts = 10; //한 페이지에 보여질 게시글 개수
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Festival>();
+			
+			while(rset.next()) {
+				Festival f = new Festival(rset.getString("fes_code"),
+										  rset.getString("fes_name"),
+										  rset.getString("fes_location"),
+										  rset.getString("fes_term"),
+										  rset.getInt("recruit_num"),
+										  rset.getString("recruit_term"),
+										  rset.getString("event_poster_path"),
+										  rset.getString("fes_banner_path"),
+										  rset.getString("secret_option"),
+										  rset.getInt("ticket_fee"));
+				list.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

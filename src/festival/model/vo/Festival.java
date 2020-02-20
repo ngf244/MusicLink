@@ -3,6 +3,7 @@ package festival.model.vo;
 import java.sql.Date;
 
 public class Festival {
+	private String fesCode;
 	private String fesName;
 	private String fesLoc;
 	private String fesTerm;
@@ -19,9 +20,10 @@ public class Festival {
 	
 	public Festival() {}
 
-	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
+	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
 			String recTerm, String posPath, String secOp, String cpCode) {
 		super();
+		this.fesCode = fesCode;
 		this.fesName = fesName;
 		this.fesLoc = fesLoc;
 		this.fesTerm = fesTerm;
@@ -34,6 +36,22 @@ public class Festival {
 		this.cpCode = cpCode;
 	}
 	
+	
+	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, int recCount, String recTerm,
+			String posPath, String banPath, String secOp, int ticFee) {
+		super();
+		this.fesCode = fesCode;
+		this.fesName = fesName;
+		this.fesLoc = fesLoc;
+		this.fesTerm = fesTerm;
+		this.recCount = recCount;
+		this.recTerm = recTerm;
+		this.posPath = posPath;
+		this.banPath = banPath;
+		this.secOp = secOp;
+		this.ticFee = ticFee;
+	}
+
 	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
 			String recTerm, String posPath, String banPath, String secOp, String cpCode) {
 		super();
@@ -50,9 +68,10 @@ public class Festival {
 		this.cpCode = cpCode;
 	}
 
-	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
+	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
 			String recTerm, String posPath, String banPath, String secOp, int ticFee, String ticUrl, String cpCode) {
 		super();
+		this.fesCode = fesCode;
 		this.fesName = fesName;
 		this.fesLoc = fesLoc;
 		this.fesTerm = fesTerm;
@@ -66,6 +85,17 @@ public class Festival {
 		this.ticFee = ticFee;
 		this.ticUrl = ticUrl;
 		this.cpCode = cpCode;
+	}
+	
+	
+	
+
+	public String getFesCode() {
+		return fesCode;
+	}
+
+	public void setFesCode(String fesCode) {
+		this.fesCode = fesCode;
 	}
 
 	public String getFesName() {

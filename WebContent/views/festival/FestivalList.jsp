@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
+<%
+	ArrayList<Festival> list = (ArrayList<Festival>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,6 +20,9 @@
 	
     <!-- Custom Stylesheet -->
     <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/slick.css">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/slick-theme.css">
 	
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
@@ -24,14 +38,13 @@
     #scale{transform:scale(1.2);}
     
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
-	#contentArea{width:83.5%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
+	#contentArea{width:83.38%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
 	
 	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
     #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
-    #banner{width:100%; height:400px; overflow:hidden; display: flex; justify-content:center; align-items:center;}
-    .banner_image{height:100%;}
+    #banner{width:100%; height:400px; overflow:hidden; display: flex; justify-content:center; align-items:center; position: fixed;}
     #banner_paging_area{text-align:center; position:absolute; top:490px; left: 50%; transform: translateX(-50%);}
     #banner_paging{color: white; font-size: 10px;}
     #banner_left, #banner_right{border:0; background: none; color: white;}
@@ -69,6 +82,25 @@
     #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
     
     footer .ft-content{width:70%; !important;}
+    
+    ul,li{list-style:none;}
+    .slide{height:400px;overflow:hidden;}
+    .slide ul{width:calc(100% * 3);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(100% / 3);height:400px;}
+    .slide li:nth-child(1){background:#ffa;}
+    .slide li:nth-child(2){background:#faa;}
+    .slide li:nth-child(3){background:#afa;}
+    @keyframes slide {
+      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-200%;}
+      60% {margin-left:-200%;}
+      75% {margin-left:-300%;}
+      85% {margin-left:-300%;}
+      100% {margin-left:0;}
+    }
 </style>
 </head>
 <body>
@@ -84,17 +116,45 @@
 		</div>
 		
 		<div id="contentArea">
-			<div id="banner">
-				<input class="banner_image" type="image" id="banner_img1" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_3.jpg">
-				<div class="banner_image" id="banner_img2" style="background:red; width:100%;"></div>
-				<div class="banner_image" id="banner_img3" style="background:orange; width:100%;"></div>
-				<div class="banner_image" id="banner_img4" style="background:yellow; width:100%;"></div>
+	
+			<!-- 
+			<div class="banner animation">
+				<img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt="">
+				<img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt="">
+				<img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt="">
 			</div>
+			 -->
+			 
+			 <div class="banner slide">
+			 <ul>
+			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt=""></li>
+			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt=""></li>
+			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt=""></li>
+			 </ul>
+			 </div>
+			
+			<%-- 
+			<script type="text/javascript" src="<%= request.getContextPath() %>/js/slick.min.js"></script>
+			<script>
+				$('.animation').slick({
+					infinite: true,
+					autoplay:true,
+					autoplaySpeed:3000,
+					fade:true,
+					dots:true,
+					arrows:true,
+					cssEase:'ease',
+					easing:'ease',
+		    	});
+			</script>
+			 --%>
+			<!-- 
 			<div id="banner_paging_area">
 				<input type="button" value="<" id="banner_left" onclick="paging(this);">
 				<label id="banner_paging">● ○ ○ ○</label>
 				<input type="button" value=">" id="banner_right" onclick="paging(this);">
 			</div>
+			 -->
 			
 			<div class="promotionArea">
 				<label class="subTitle">아티스트 확정 행사</label><br>
@@ -177,26 +237,30 @@
 				</div>
 				
 				<div id="festivalList">
+					<% if(list.isEmpty()) { %>
+						<label>등록된 행사가 없습니다.</label>
+					<% } else {
+							for(Festival f : list) {%>
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
 							<div>
 								<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
-								<label id="festivalName">행사명</label>
+								<label id="festivalName"><%= f.getFesName() %></label>
 							</div>
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
 									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
+									<td><%= f.getFesTerm() %></td>
 								</tr>
 								<tr>
 									<td class="listlabel">아티스트 모집 기간</td>
-									<td>2020.07.01 ~ 2020.07.21</td>
+									<td><%= f.getRecTerm() %></td>
 								</tr>
 								<tr>
 									<td class="listlabel">모집 아티스트 팀 수</td>
-									<td>6팀</td>
+									<td><%= f.getRecCount() %>팀</td>
 								</tr>
 								<tr>
 									<td class="listlabel">확정 아티스트</td>
@@ -209,6 +273,8 @@
 							</table>
 						</div>
 					</div>
+						 <% }
+					   } %>
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
