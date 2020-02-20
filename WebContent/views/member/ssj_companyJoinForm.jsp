@@ -12,16 +12,17 @@
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff; height:1100px; font-family: "Roboto", sans-serif;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:300px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
 	#enrollForm{width: 70%; position: absolute; left:50%; transform: translateX(-50%); text-align: right;}
 	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate; font-size: 20px;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px;} 
+	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px; color: #6600cc;} 
 	
 	.input{width: 510px;}
-	.label{width: 250px;}
+	.label{width: 250px; font-weight: 600; color: #76838f;}
 	
 	#enrollBtn{margin-top:30px;}
+	#enrollBtnSubmit{margin-left: 230px;}
 	.text_input{height: 34.4px;}
 	#idResult{height: 20px;}
     #btn{padding: 10px;}
@@ -71,7 +72,7 @@
 		<div id="contentArea">
 			<form action="<%= request.getContextPath() %>/insert.co" method="post" id="enrollForm" name="enrollForm" onsubmit="return validate();">
 			<h2 class="mj">COMPANY JOIN</h2>
-				<table border="1" id="insertInfo">
+				<table id="insertInfo">
 					<tr>
 						<td class="label"><label>아이디</label></td>
 						<td class="input">
@@ -123,7 +124,7 @@
 					</tr>
 					<tr>
 						<td colspan=2>
-							개인정보 동의서<br><br>
+							<span class="label">개인정보 동의서</span><br><br>
 							<div id="infor_agree">
 							정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 							<br><br>
@@ -147,7 +148,6 @@
 					</tr>
 					<tr>
 						<td id="btn" colspan=2>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="submit"  class="btn mb-1 btn-dark" id="enrollBtnSubmit" value="가입">
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="button" onclick="location.href='ssj_loginForm.jsp'" class="btn mb-1 btn-dark" id="enrollBtnCancel" value="취소">
