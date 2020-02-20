@@ -64,6 +64,9 @@
                 <li class="m-name4 m-name">
                     <a href="#" class="m-mname m-mname4">C a n l d e r</a>
                 </li>
+                <li class="m-name5 m-name">
+                    <a href="<%= request.getContextPath() %>/howUserList.au" class="m-mname m-mname4">A D M I N</a>
+                </li>
             </ul>
         </div>
         <div class="side-icon">
