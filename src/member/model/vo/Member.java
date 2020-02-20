@@ -30,7 +30,7 @@ public class Member {
 		this.userName = userName;
 		this.userClass = userClass;
 	}
-	
+
 	public Member(String userId, String userPwd, String userName, String userEmail, String userPhone) {
 		super();
 		this.userId = userId;
@@ -38,6 +38,7 @@ public class Member {
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userPhone = userPhone;
+
 	}
 
 	public Member(String userId, String userPwd, String userName, String userBirth, String userEmail, String userGender,

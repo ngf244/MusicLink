@@ -20,7 +20,7 @@ nav{width:100%; position:fixed; z-index:99999; }
 #toggle.on #two{opacity:0; filter:alpha(opacity=0);}
 #toggle.on #three{-webkit-transform:rotate(-45deg) translateX(8px) translateY(-10px); transform:rotate(-45deg) translateX(8px) translateY(-10px);}
 
-.side-icon{width:15%; position: fixed; top:40%; left: 5%; z-index:99;}
+.side-icon{width:5%; position: fixed; top:40%; left: 5%; z-index:2;}
 .icon{width: 50px; height: 50px; margin-bottom:20px; position: relative}
 .icon img{width:30px; height:30px; margin:10px;}
 .icon:hover{background: #F7FE2E; border-radius: 50px; box-sizing: border-box; cursor: pointer;}
@@ -31,7 +31,8 @@ nav{width:100%; position:fixed; z-index:99999; }
 .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px;}
 
 /*�엳�뱺 �젙蹂�*/
-.user-wrap{position: fixed; top:33%; left:10%; background:#fff; width:15%; z-index:3; text-align: center; border-radius: 30px; display: none;}
+.user-wrap{position: fixed; top:33%; left:10%; background:#fff; width:15%; z-index:3; text-align: center; border-radius: 30px; display: none; }
+.user-wrap.userOn{display:block;}
 .user-nickName{width:30%; margin:15px auto;}
 .user-id{width:30%; margin:15px auto;}
 .user-mypage{width:30%; margin:15px auto;}

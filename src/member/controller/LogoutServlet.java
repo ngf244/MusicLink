@@ -30,7 +30,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();  // 세션 무효화 시키기!
-		
+		 
 		response.sendRedirect("index.jsp");
 	}
 
