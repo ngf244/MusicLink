@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, artist.model.vo.*, festival.model.vo.*" %>
 <%
-	ArrayList<FollowArtist> list = (ArrayList<FollowArtist>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	request.getAttribute("list");
+	request.getAttribute("pi");
 %>    
 <!DOCTYPE html>
 <html lang="ko">
@@ -202,11 +195,6 @@
     <%@ include file="../common/MyPage_Menubar.jsp" %>
         
         <div class="sec-menu-views views1">
-            <% if(list.isEmpty()){ %>
-            	<div>팔로잉한 아티스트가 없습니다.</div>            
-            <% } else{
-            		for(FollowArtist fa : list){
-            %>
             <div class="artist">
                 <h3>나의 아티스트</h3>
                 <div class="artistInfo">
@@ -215,18 +203,14 @@
                     </div>
                     <div class="artistDesc">
                         <ul>
-                            <li>아티스트 명 : <%= fa.getAtName() %></li>
-                            <li>장르 : <%= fa.getAtGenre() %></li>
-                            <li>유형 : <%= fa.getAtClass() %></li>
-                            <li>한 줄 소개 : <%=fa.getAtOneLine() %></li>
+                            <li>아티스트 명 : </li>
+                            <li>장르 : </li>
+                            <li>유형 : </li>
+                            <li>한 줄 소개 : </li>
                         </ul>
                     </div>                   
                 </div>
             </div>
-            <% 		}
-            	}
-            %>
-            
 			<div id="pagingarea">
                	<ul class="pagination">
                		<li class="page-item">
