@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Properties;
 
 import member.model.vo.Member;
@@ -82,6 +83,8 @@ public class MemberDAO {
 			pstmt.setString(6, member.getUserGender());
 			pstmt.setString(7, member.getUserPhone());
 			
+			System.out.println("pass : "+member.getUserPwd());
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,6 +116,110 @@ public class MemberDAO {
 			e.printStackTrace();
 		} finally {
 			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Member selectMember(Connection conn, String loginUserId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginUserId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member = new Member(rset.getString("USER_CODE"),
+									rset.getString("USER_ID"),
+									rset.getString("USER_PWD"),
+									rset.getString("USER_NAME"),
+									rset.getString("USER_BIRTH"),
+									rset.getString("USER_EMAIL"),
+									rset.getString("USER_GENDER"),
+									rset.getString("USER_PHONE"),
+									rset.getDate("USER_JOIN_DAY"),
+									rset.getString("USER_CLASS"),
+									rset.getString("USER_STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+
+	public int deleteMember(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMember(Connection conn, HashMap<String, String> map) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, map.get("new"));
+			pstmt.setString(2, map.get("name"));
+			pstmt.setString(3, map.get("birth"));
+			pstmt.setString(4, map.get("email"));
+			pstmt.setString(5, map.get("gender"));
+			pstmt.setString(6, map.get("phone"));
+			pstmt.setString(7, map.get("id"));
+			pstmt.setString(8, map.get("old"));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;		
+	}
+
+	public int updateMemberClass(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMemberClass");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		

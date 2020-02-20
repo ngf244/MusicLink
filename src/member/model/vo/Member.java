@@ -23,12 +23,22 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 	
+<<<<<<< HEAD
 	public Member(String userCode, String userId, String userName, String userClass) {
 		super();
 		this.userCode = userCode;
 		this.userId = userId;
 		this.userName = userName;
 		this.userClass = userClass;
+=======
+	public Member(String userId, String userPwd, String userName, String userEmail, String userPhone) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+>>>>>>> branch 'master' of https://github.com/ngf244/MusicLink.git
 	}
 
 	public Member(String userId, String userPwd, String userName, String userBirth, String userEmail, String userGender,
@@ -145,6 +155,14 @@ public class Member {
 
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [userCode=" + userCode + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
+				+ ", userBirth=" + userBirth + ", userEmail=" + userEmail + ", userGender=" + userGender
+				+ ", userPhone=" + userPhone + ", userJoinDay=" + userJoinDay + ", userClass=" + userClass
+				+ ", userStatus=" + userStatus + "]";
 	}
 
 	

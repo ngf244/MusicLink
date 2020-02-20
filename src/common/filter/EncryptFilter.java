@@ -18,6 +18,7 @@ import common.wrapper.EncryptWrapper;
  */
 @WebFilter(
 		servletNames = { 
+				"InsertCompanyServlet", 
 				"InsertMemberServlet", 
 				"LoginServlet"
 		})
@@ -48,7 +49,7 @@ public class EncryptFilter implements Filter {
 		HttpServletRequest hsr = (HttpServletRequest)request;
 		
 		EncryptWrapper ew = new EncryptWrapper(hsr);
-
+		
 		// pass the request along the filter chain
 		chain.doFilter(ew, response);
 	}

@@ -1,167 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%
+	 Member loginUser = (Member)session.getAttribute("loginUser"); 
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
-<style>
-	html, body{height:100%; background: rgb(253, 241, 241);} /**/
-    h1, h2, h3, h4, h5, h6, p, span, a{-webkit-transition:0.5s ease-out; transition:0.5s ease-out;}
-    a:focus, a:hover{text-decoration:none;}
-    ul{padding:0;}
-    p{font-size:14px;}
-    
-    .clear-both{clear: both;}
-    
-    header{height:150px;}
-    #resize{width:100%; height:100%; background-color:rgba(0,0,0,0.8); position:fixed; top:0; left:0;z-index:9; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; visibility: hidden; opacity:0; filter:alpha(opacity=0);}
-    #resize.active{opacity:0.98; filter:alpha(opacity=98); visibility:visible;}
-    .menu{width:50%; margin: 0 auto; margin-top:300px;} 
-    .m-name{width:50%; margin:15px auto; text-align: center;}
-    nav{width:100%; position:fixed; z-index:99999; }
-    .logo{position: absolute; top:50px; left:100px; width: 180px; height: 100px; background:#000; color:#999; text-align: center; line-height: 100px;}
-   
 
-    #toggle{position:absolute; top:50px; right:100px; width:30px; height:40px; cursor:pointer;}
-    #toggle .span{height:4px; background-color:#000; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; backface-visibility:hidden; margin:5px auto;}
-    #toggle.on #one{-webkit-transform:rotate(45deg) translateX(3px) translateY(4px); transform:rotate(45deg) translateX(3px) translateY(4px);}
-    #toggle.on #two{opacity:0; filter:alpha(opacity=0);}
-    #toggle.on #three{-webkit-transform:rotate(-45deg) translateX(8px) translateY(-10px); transform:rotate(-45deg) translateX(8px) translateY(-10px);}
-    
-    .side-icon{width:15%; position: fixed; top:40%; left: 5%; z-index:99;}
-    .icon{width: 50px; height: 50px; margin-bottom:20px; position: relative}
-    .icon img{width:30px; height:30px; margin:10px;}
-    .icon:hover{background: #F7FE2E; border-radius: 50px; box-sizing: border-box; cursor: pointer;}
-    
-    
-    .side-text{margin-top:130px;}
-    .side-text p{font-size:12px; background:#fff; width:65%; border-radius:5px;}
-    .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px;}
-
-    /*히든 정보*/
-    .user-wrap{position: fixed; top:33%; left:10%; background:#fff; width:15%; z-index:3; text-align: center; border-radius: 30px; display: none;}
-    .user-nickName{width:30%; margin:15px auto;}
-    .user-id{width:30%; margin:15px auto;}
-    .user-mypage{width:30%; margin:15px auto;}
-    .user-coin{width:50%; margin:15px auto;}
-    .user-charging{width:30%; margin:15px auto;}
-
-    /*알람*/
-    .alram-wrap{position: fixed; width:20%; height:150px; background:#fff; z-index:3; top:43%; left: 10%; border-radius: 20px; overflow: hidden; display: none;}
-    .alram-wrap.alon{display: block;}
-    .alram-con{width:100%; height:50px; box-sizing: border-box; border-bottom:1px dashed #ccc;}
-    .alram-img{width:15%; height: 50px; float: left;}
-    .alram-time{width:20%;height: 50px; float: left;}
-    .alram-msg{width:50%; height: 50px; float: left;}
-    .alram-close{width:15%; height: 50px; float: left;}
-    
-    
-    /*로그인 아웃*/
-    .log-inOut{float: right; margin-top:15px; margin-right: 50px;}
-    .log-inOut > a{display: inline-block;}
-    
-    /*메뉴*/
-    .m-mname{width:60%; margin:0 auto; height:50px; line-height: 50px; font-size: 30px; color: #fff; position: relative;}
-    .m-mname1{width:58%;}
-    .m-mname2{width:36%;}
-    .m-mname3{width:48%;}
-    .m-mname4{width:46%;}
-    
-    .menu-h > a{color:#fff;}
-    .m-name > .drop{text-align: center; overflow: hidden; height:0;
-        -webkit-transition: height 0.5s ease-out;
-        transition: height 0.5s ease-out;
-        opacity: 0;
-        filter: alpha(opacity=0);
-        margin:0; padding:0;
-        width:inherit;
-        text-align: center;
-        display: inline-block;
-    }
-    .drop{width:50%;}
-    .menu-h{height:30px; line-height: 30px;}
-    
-    .m-name1:hover{height:140px; }
-    .m-name2:hover{height:100px; }
-    .m-name3:hover{height:100px; }
-    .m-name4:hover{height:120px; }
-    
-    .m-name1:hover .m-mname{border-bottom: 3px solid #F7FE2E;}
-    .m-name2:hover .m-mname{border-bottom: 3px solid #F7FE2E;}
-    .m-name3:hover .m-mname{border-bottom: 3px solid #F7FE2E;}
-    .m-name4:hover .m-mname{border-bottom: 3px solid #F7FE2E;}
-    
-    .menu-h:hover a{color:#F7FE2E; }
-    
-    .m-name:hover .drop{opacity: 1; filter: alpha(opacity=100);}
-    .m-name:hover .hidden-manu1{height:120px;}
-    .m-name:hover .hidden-manu2{height:60px;}
-    .m-name:hover .hidden-manu3{height:60px;}
-    
-    
-    
-    
-    
-    
-    /* 
-html5doctor.com Reset Stylesheet v1.6.1
-Last Updated: 2010-09-17
-Author: Richard Clark - http://richclarkdesign.com 
-*/
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp, 
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video,{
-    margin:0; padding:0; border:0; outline:0; vertical-align:baseline; background:transparent; }
-
-html, body{height:100%; background: rgb(253, 241, 241);} /**/
-    h1, h2, h3, h4, h5, h6, p, span, a{-webkit-transition:0.5s ease-out; transition:0.5s ease-out;}
-    a:focus, a:hover{text-decoration:none;}
-    ul{padding:0;}
-    p{font-size:14px;}
-body { line-height:1em; }
-
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { display:block; }
-
-ul { list-style:none; }
-
-blockquote, q { quotes:none;}
-
-blockquote:before, blockquote:after,q:before, q:after { content:''; content:none;}
-
-a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; text-decoration:none;	display:block;	-webkit-transition:0.5s ease-in; transition:0.5s ease-in; color:black;}
- 
-/* change colours to suit your needs */
-ins {background-color:#ff9; color:#000;  text-decoration:none;}
-
-/* change colours to suit your needs */
-mark { background-color:#ff9; color:#000;  font-style:italic; font-weight:bold;}
-del { text-decoration: line-through;}
-abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help;}
-table {border-collapse:collapse; border-spacing:0;}
-/* change border colour to suit your needs 
-hr { display:block; height:1px;  border:0;  border-top:1px solid #cccccc; margin:0; padding:0;}*/
-hr { display:block; border:0;  border-top:1px solid #F0F0F0; margin:0; padding:0;}
-input, select {vertical-align:middle;}
-img{	border:0;}
-.clear-both{clear: both;}
-    
-    
-</style>
 </head>
 <body>
-	<header>
+	<header style='position:fixed; top:0; z-index:2;'> 
         <nav> 
             <div class="logo">
             logo
@@ -172,8 +26,13 @@ img{	border:0;}
                 <div class="span" id="three"></div>
             </div>
             <div class="log-inOut">
-                <a href="">login</a>
-                <a href="">logOut</a>
+
+            	<% if (loginUser == null){ %>
+                <a href="<%= request.getContextPath() %>/views/member/ssj_loginForm.jsp">login</a>
+                <% } else { %>
+
+                <a href="<%= request.getContextPath() %>/logout.me">logOut</a>
+                <% } %>
             </div>
         </nav>
 
@@ -182,7 +41,7 @@ img{	border:0;}
                 <li class="m-name1 m-name">
                     <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
                     <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/views/company/ssj_companyInfo.jsp">About us</a></li>
                         <li class="menu-h"><a href="#">F A Q</a></li>
                         <li class="menu-h"><a href="#">Q &#38; A</a></li>
                     </ul>
@@ -209,13 +68,13 @@ img{	border:0;}
         </div>
         <div class="side-icon">
             <div class="image1 icon">
-                <img src="img/user.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/user.png" alt="" />
             </div>
             <div class="image2 icon">
-                <img src="img/bell.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/bell.png" alt="" />
             </div>
             <div class="image3 icon">
-                <img src="img/pin.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
             </div>
             <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
@@ -262,9 +121,7 @@ img{	border:0;}
     $(".image3").click(function(){
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
     });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
+    
     
     $(".image2").click(function(){
         $(".alram-wrap").toggleClass("alon");
@@ -272,6 +129,8 @@ img{	border:0;}
     $(".image2").click(function(){
         
     });
+    
+    
     
 	</script>
 </body>

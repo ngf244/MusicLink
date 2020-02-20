@@ -161,6 +161,7 @@
             </div>
         </div>
     </div>
+
     
 <script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -186,7 +187,7 @@
         console.log(this);
         var userId = $(this).children().first().text();
         console.log(userId);
-        location.href='<%=request.getContextPath()%>userId='+userId;
+        location.href='<%=request.getContextPath()%>/showUserDetail.au?userId='+userId;
     })
     
 	//new WOW().init();

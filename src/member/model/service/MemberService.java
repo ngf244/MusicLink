@@ -4,6 +4,7 @@ import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.HashMap;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
@@ -45,6 +46,44 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+	}
+
+	public Member selectMember(String loginUserId) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		Member member = mDAO.selectMember(conn, loginUserId);
+		
+		close(conn);
+		
+		return member;
+	}
+
+	public int deleteMember(String userId) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.deleteMember(conn, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int updateMember(HashMap<String, String> map) {
+		Connection conn = getConnection();
+		
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.updateMember(conn, map);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;		
 	}
 
 

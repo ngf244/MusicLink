@@ -110,6 +110,33 @@ public class AuthorDAO {
 		
 		return mem;
 	}
+
+	public String getPicture(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String path = null;
+		String query = prop.getProperty("getPicuture");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				path = rset.getString("PROFILE_PIC_PATH");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return path;
+	}
 	
 	
 	

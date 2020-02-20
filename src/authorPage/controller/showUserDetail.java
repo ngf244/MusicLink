@@ -37,14 +37,17 @@ public class showUserDetail extends HttpServlet {
 		
 		Member mem = new AuthorService().selectUser(userId);
 		
+		String img = null;
 		if(type == 2) {
-			String imgSrc = new Au
-		}else {
-			
+			String imgPath = new AuthorService().getPicture(userId);
+			img = imgPath.substring(imgPath.length()-19, imgPath.length());
 		}
+		String path = "views/authorPage/showUserDetail.jsp";
 		
-		
-		
+		request.setAttribute("type", type);
+		request.setAttribute("mem", mem);
+		request.setAttribute("img", img);
+		request.getRequestDispatcher(path).forward(request, response);
 		
 	}
 

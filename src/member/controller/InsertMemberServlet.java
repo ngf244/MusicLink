@@ -41,6 +41,8 @@ public class InsertMemberServlet extends HttpServlet {
 		String email = request.getParameter("user_email");
 		String phone = request.getParameter("user_phone");
 		
+		String artist = request.getParameter("art_check");
+		
 		String birth = user_year + "-" + user_month + "-" + user_day;
 		
 		Member member = new Member(userId, userPwd, userName, birth, email, gender, phone);
@@ -48,7 +50,11 @@ public class InsertMemberServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0) {
-			page = "index.html";
+			if(artist.equals("N")) {
+				page = "index.jsp";
+			} else {
+				page = "views/member/ssj_joinArtistForm.jsp";
+			}
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원가입에 실패하였습니다.");

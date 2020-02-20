@@ -33,6 +33,22 @@ public class Festival {
 		this.secOp = secOp;
 		this.cpCode = cpCode;
 	}
+	
+	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
+			String recTerm, String posPath, String banPath, String secOp, String cpCode) {
+		super();
+		this.fesName = fesName;
+		this.fesLoc = fesLoc;
+		this.fesTerm = fesTerm;
+		this.fesInfo = fesInfo;
+		this.payRange = payRange;
+		this.recCount = recCount;
+		this.recTerm = recTerm;
+		this.posPath = posPath;
+		this.banPath = banPath;
+		this.secOp = secOp;
+		this.cpCode = cpCode;
+	}
 
 	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
 			String recTerm, String posPath, String banPath, String secOp, int ticFee, String ticUrl, String cpCode) {

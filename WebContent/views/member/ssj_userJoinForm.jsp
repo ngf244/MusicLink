@@ -4,115 +4,60 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-	
-
+	<link href="https://fonts.googleapis.com/css?family=Roboto=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>userJoinForm</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height: 800px; font-family: "Roboto", sans-serif;} 
+    background: #fff; height: 1000px; font-family: "Roboto", sans-serif;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:300px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
 	#enrollForm{width: 70%; height: 100%; position: absolute; left:50%; transform: translateX(-50%); text-align: center;}
-	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px;} 
-	.label{width: 35%; font-size: 12pt;}
-	#enrollBtn{margin-top:30px;}
+	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate; font-size: 20px;}
+	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px;} 
+	.label{width: 250px;}
 	.text_input{height: 34.4px;}
 	#idResult{height: 20px;}
     #btn{text-align: center; padding: 10px;}
 	.btn{
-		padding: 7px 18px;
+		padding: 12.5px 18px;
 		color: #fff;
-    	background-color: #333333;
+    	background-color: #7780b7;
     	border-color: #333333;
     	text-align: center;
     	font-weight: 400;
-        font-size: 0.875rem;
+        font-size: 0.99rem;
     	line-height: 1.5;
     	border-radius: 0.25rem;
     	font-family: "Roboto", sans-serif;
     	vertical-align: middle;
     	white-space: nowrap;
     	border: 1px solid transparent;
+    	
 	}
 	.form-control{
-		width: 150px;
+		width: 200px;
     	border-radius: 4px;
     	box-shadow: none;
-    	padding: 0.375rem 0.75rem;
-    	font-size: 0.875rem;
+    	padding: 0.8rem 0.75rem;
+    	font-size: 0.99rem;
    		line-height: 1.5;
     	vertical-align: middle;
     	border: 1px solid #ced4da;
     	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 	}
+	#enrollBtn{margin-top:30px;}
 	#user_year{width: 58px;}
     #user_month, #user_day{width: 40px;}
     
+    #infor_agree{overflow: scroll; width: 500px; height: 100px; border: 1px solid lightgray; font-size: 15px;}
 </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-            logo
-            </div>
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
-        </nav>
-
-        <div id="resize">
-            <ul class="menu">
-                <li class="m-name1 m-name">
-                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
-                    <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
-                        <li class="menu-h"><a href="#">F A Q</a></li>
-                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
-                    </ul>
-                </li>
-                <li class="m-name2 m-name">
-                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
-                    <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name3 m-name">
-                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
-                    <ul class="hidden-manu3 drop">
-                        <li class="menu-h"><a href="#">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
-            </ul>
-        </div>
-        <div class="side-icon">
-            <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="<%= request.getContextPath() %>/img/user.png" alt="" /></a>
-            </div>
-            <div class="image2 icon">
-                <a href="#" ><img src="<%= request.getContextPath() %>/img/bell.png" alt="" /></a>
-            </div>
-            <div class="image3 icon">
-                <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
-            </div>
-            <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
-            </div>
-        </div>    
-    </header>
+    <%@ include file="../common/menubar.jsp" %> 
 
 	<section style="z-index: 1;">
 		<div id="contentArea">
@@ -129,18 +74,18 @@
 					<tr>
 						<td class="label"><label>비밀번호</label></td>
 						<td class="input"><input type="password" name="user_pwd" id="user_pwd" class="form-control input-default enroll" placeholder="비밀번호를 입력하세요">
-						<label id="pwdResult"></label></td>
+						<br><label id="pwdResult"></label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>비밀번호 재확인</label></td>
 						<td class="input"><input type="password" id="user_pwd2" class="form-control input-default enroll" placeholder="비밀번호를 확인하세요">
-						<label id="pwd2Result"></label></td>
+						<br><label id="pwd2Result"></label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>이름</label></td>
 						<td class="input">
 						<input type="text" name="user_name" id="user_name" class="form-control input-default enroll" placeholder="이름를 입력하세요">
-						<label id="nameResult"></label></td>
+						<br><label id="nameResult"></label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>생년월일</label></td>
@@ -168,15 +113,32 @@
 					<tr>
 						<td class="label"><label>아티스트</label></td>
 						<td class="input">
-							<input type="radio" class="text_input" id="artist_check_Y" value="Y">Y
-       						<input type="radio" class="text_input" id="artist_check_N" value="N">N
+							<input type="radio" class="text_input" name="art_check" id="artist_check_Y" value="Y">Y
+       						<input type="radio" class="text_input" name="art_check" id="artist_check_N" value="N">N
 						</td>
 					</tr>
 					<tr>
 						<td class="input" colspan=2>
-							개인정보 동의서<br>
-       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 14px;">동의합니다.</label>
-       						<br>자세한 내용은 구현할 때
+							<br>개인정보 동의서<br><br>
+							<div id="infor_agree">
+							정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+							<br><br>
+							1. 수집하는 개인정보<br><br>
+							이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+							<br>
+							회원가입 시점에 네이버가 이용자로부터 수집하는 개인정보는 아래와 같습니다.<br>
+							- 회원 가입 시에 ‘아이디, 비밀번호, 이름, 생년월일, 성별, 휴대전화번호’를 필수항목으로 수집합니다. 만약 이용자가 입력하는 생년월일이 만14세 미만 아동일 경우에는 법정대리인 정보(법정대리인의 이름, 생년월일, 성별, 중복가입확인정보(DI), 휴대전화번호)를 추가로 수집합니다. 그리고 선택항목으로 이메일 주소, 프로필 정보를 수집합니다.
+							- 단체아이디로 회원가입 시 단체아이디, 비밀번호, 단체이름, 이메일주소, 휴대전화번호를 필수항목으로 수집합니다. 그리고 단체 대표자명을 선택항목으로 수집합니다.<br>
+							서비스 이용 과정에서 이용자로부터 수집하는 개인정보는 아래와 같습니다.<br>
+							NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정에서 해당 서비스의 이용자에 한해 추가 개인정보 수집이 발생할 수 있습니다. 추가로 개인정보를 수집할 경우에는 해당 개인정보 수집 시점에서 이용자에게 ‘수집하는 개인정보 항목, 개인정보의 수집 및 이용목적, 개인정보의 보관기간’에 대해 안내 드리고 동의를 받습니다.
+							<br>
+							서비스 이용 과정에서 IP 주소, 쿠키, 서비스 이용 기록, 기기정보, 위치정보가 생성되어 수집될 수 있습니다. 또한 이미지 및 음성을 이용한 검색 서비스 등에서 이미지나 음성이 수집될 수 있습니다.<br>
+							구체적으로 1) 서비스 이용 과정에서 이용자에 관한 정보를 자동화된 방법으로 생성하여 이를 저장(수집)하거나,<br>
+							2) 이용자 기기의 고유한 정보를 원래의 값을 확인하지 못 하도록 안전하게 변환하여 수집합니다. 서비스 이용 과정에서 위치정보가 수집될 수 있으며,
+							네이버에서 제공하는 위치기반 서비스에 대해서는 '네이버 위치정보 이용약관'에서 자세하게 규정하고 있습니다.<br>
+							이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.<br>
+							</div>
+       						<input type="checkbox" class="text_input" id="agree" value="agree_Y"><label style="font-size: 18px;">동의합니다.</label>
 						</td>
 					</tr>
 					<tr>
@@ -192,44 +154,8 @@
 	</section>
 	<h1 class="htext">J O I N</h1>
     
+    <%@ include file="../common/footer.jsp" %>
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
     <div class="map">
         <div class="map-bg">
             <h1 class="map-h1">&#215;</h1>
@@ -261,42 +187,19 @@
         </div>
     </div>
     
-<script src="<%= request.getContextPath() %>/js/respond.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/parallax.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 
 	<script>
 		var isUsable = false;
 		var inIdChecked = false;
 		
-		/* $('#user_id').on('change paste keyup', function(){
-			isIdChecked = false;
-		}); */
 		
 		var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
 		
 		function idCheck(){
 			var userId = $('#user_id');
+			
+			isUsable = false;
+			inIdChecked = false;
 			
 			if(userIdCheck.test(userId.val())){
 				$.ajax({
@@ -325,15 +228,19 @@
 			}
 		}
 		
-		/* $('#user_id').change(function(){
-			
-		}); */
+		
 		
 		function validate(){
-			if(isUsable && idIdChecked){
+			var infoAgree = $('#agree').is(":checked");
+			console.log(infoAgree);
+			if(isUsable && idIdChecked && infoAgree){
 				return true;
-			} else{
-				alert('아이디 중복확인을 해주세요');
+			} else {
+				if(isUsable == false && idIdChecked == false){
+					alert('아이디 중복확인을 해주세요');
+				} else if(infoAgree == false){
+					alert('개인정보 동의서에 동의를 체크해주세요.');
+				}
 				return false;
 			}
 		}

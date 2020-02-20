@@ -34,20 +34,22 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String user_id = request.getParameter("user_id");
-		String user_password = request.getParameter("user_password");
+		String userPwd = request.getParameter("user_password");
 		
-		System.out.println(user_id + "/" + user_password);
+		System.out.println(user_id + "/" + userPwd);
 		
-		Member member = new Member(user_id, user_password);
+		Member member = new Member(user_id, userPwd);
 		
 		Member loginUser = new MemberService().loginMember(member);
+		
+		response.setContentType("text/html; charset=UTF-8");
 		
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(1800);  // 로그인 30분 유지
 			session.setAttribute("loginUser", loginUser);
 			
-			response.sendRedirect("index.html");
+			response.sendRedirect("index.jsp");
 		} else {
 			request.setAttribute("msg", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/ssj_loginForm.jsp");

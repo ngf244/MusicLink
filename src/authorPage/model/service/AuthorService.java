@@ -40,4 +40,14 @@ public class AuthorService {
 		return mem;
 	}
 
+	public String getPicture(String userId) {
+		Connection conn = getConnection();
+		
+		String imgPath = new AuthorDAO().getPicture(conn, userId);
+		
+		close(conn);
+		
+		return imgPath;
+	}
+
 }
