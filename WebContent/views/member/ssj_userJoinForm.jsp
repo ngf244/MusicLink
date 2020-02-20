@@ -17,8 +17,8 @@
     
 	#enrollForm{width: 70%; height: 100%; position: absolute; left:50%; transform: translateX(-50%); text-align: center;}
 	#insertInfo{text-align: left; display:inline-block; border-spacing: 10px; border-collapse: separate; font-size: 20px;}
-	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px;} 
-	.label{width: 250px;}
+	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px; color: #6600cc;} 
+	.label{width: 250px; font-weight: 600; color: #76838f;}
 	.text_input{height: 34.4px;}
 	#idResult{height: 20px;}
     #btn{text-align: center; padding: 10px;}
@@ -98,8 +98,8 @@
 					<tr>
 						<td class="label"><label>성별</label></td>
 						<td class="input">
-							<input type="radio" class="text_input" name="gender" id="male" value="M">남자
-       						<input type="radio" class="text_input" name="gender" id="female" value="F">여자
+							<input type="radio" class="text_input" name="gender" id="male" value="남자">남자
+       						<input type="radio" class="text_input" name="gender" id="female" value="여자">여자
 						</td>
 					</tr>
 					<tr>
@@ -119,7 +119,7 @@
 					</tr>
 					<tr>
 						<td class="input" colspan=2>
-							<br>개인정보 동의서<br><br>
+							<br><span class="label">개인정보 동의서</span><br><br>
 							<div id="infor_agree">
 							정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 							<br><br>
