@@ -36,8 +36,10 @@ nav{width:100%; position:fixed; z-index:99999; }
 .user-nickName{width:30%; margin:15px auto;}
 .user-id{width:30%; margin:15px auto;}
 .user-mypage{width:30%; margin:15px auto;}
+.user-mypage:hover{cursor:pointer;}
 .user-coin{width:50%; margin:15px auto;}
 .user-charging{width:30%; margin:15px auto;}
+.user-charging:hover{cursor:pointer;}
 
 /*�븣�엺*/
 .alram-wrap{position: fixed; width:20%; height:150px; background:#fff; z-index:3; top:43%; left: 10%; border-radius: 20px; overflow: hidden; display: none;}
