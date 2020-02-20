@@ -66,6 +66,8 @@ public class ArtistFollowListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		ArrayList<FollowArtist> list = service.selectFollowList(currentPage, userCode);
 		
+		System.out.println(pi);
+		
 		String page = null;
 		if(list != null) {
 			page = "views/artist/MyArtistView.jsp";
