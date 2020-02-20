@@ -32,7 +32,7 @@ public class ArtistDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertArtist");
-		 
+		  
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, artist.getAtCode());

@@ -18,7 +18,7 @@ public class Artist {
 	private String atInsta;
 	private String atTwitter;
 	private String atFacebook;
-	  
+	   
 	public Artist() {}
 
 	public Artist(String atCode, String atName, String atGenre, String atClass) {

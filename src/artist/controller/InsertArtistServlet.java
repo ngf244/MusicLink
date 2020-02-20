@@ -66,7 +66,7 @@ public class InsertArtistServlet extends HttpServlet {
 			String name = multipartRequest.getParameter("artistName");
 			int number = Integer.parseInt(multipartRequest.getParameter("number"));
 			String debut = multipartRequest.getParameter("debutDate");
-			 
+			  
 			Date sqlDate = null;
 			String[] dateArr = debut.split("-");
 			int year = Integer.parseInt(dateArr[0]);

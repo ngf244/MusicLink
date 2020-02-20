@@ -138,7 +138,7 @@
                     <input type="button" value="취소하기" class="artistReg_btn" onclick="location.href='<%= request.getContextPath() %>/views/member/MypageMainView.jsp'">
                 </form>      
             </div>
-        </div>
+        </div> 
         
         
     </section>
