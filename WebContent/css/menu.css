@@ -26,8 +26,8 @@ nav{width:100%; position:fixed; z-index:99999; }
 .icon:hover{background: #F7FE2E; border-radius: 50px; box-sizing: border-box; cursor: pointer;}
 
 
-.side-text{margin-top:130px;}
-.side-text p{font-size:12px; background:#fff; width:65%; border-radius:5px;}
+.side-text{margin-top:800px; margin-left:100px; width:65%;}
+.side-text p{font-size:12px; background:#fff; width:100%; border-radius:5px; display: inline-block;}
 .side-text p sapn{border-bottom:1px solid black; display: inline-block; height:12px;}
 
 /*�엳�뱺 �젙蹂�*/
