@@ -5,8 +5,11 @@
 <html>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/menu.css" />
+<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fugaz+One&display=swap" rel="stylesheet">
 
-
+ 
 
 <head>
 <meta charset="UTF-8">
@@ -16,10 +19,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <style>
+	.cm {color:#ffe618 }	/* 메인 */
+	.cs {color:#c0dae9 }	/* 서브 */
+	.ck {color:#111427 }	/* 검은색 */
+	.cw {color:#fff }	/* 흰색 */
+	.ci {color:#fff079 }	/* 옅은 노랑*/
+	.cb {color:#80828d }	/* 옅은 회색1 */
+	.cg {color:#a8a9b5 }	/* 옅은 회색2 */
+	.ca {color:#c9cbd7 }	/* 옅은 회색3 */
+
 	
     body{margin:0;}
     /*베너*/
-    #banner{width:100%; height:967px; position: fixed; top:0; background:#fff; z-index:-11;}
+    #banner{width:100%; height:967px; position: fixed; top:0; background:rgb(253, 241, 241); z-index:-11;} 
     .bar-left{width:50%; height: inherit; position: absolute; top:0; left:0;/*background:#fff;*/}
     .bar-right{width:50%; height: inherit; position: absolute; top:0; left:50%; /*background:#fff;*/}
     .slide-bg{width:100%; height: inherit; float: right; }
@@ -29,9 +41,10 @@
     .bg-h-top > h2:nth-child(1), .bg-h-top > h2:nth-child(2){margin: 10px 0; color:#fff;}
     .bg-h-top > h2:nth-child(3){margin:15px 0 0 0; font-weight: bold;}
     .bg-h-mid{position: absolute; top: 32%; left: 58%;}
+    .bg-h-mid > h1{font-family: 'Baloo Bhai', cursive; font-weight: itaric;}
     .bg-h-mid > h1:nth-child(2){margin-left:35px; margin-top: -60px;}
-    .bg-h-mid > h1:nth-child(1) > p{display: inline-block; font-size:50px;}
-    .bg-h-mid > h1:nth-child(2) > p{display: inline-block; font-size:90px; margin-top:0;}
+    .bg-h-mid > h1:nth-child(1) > p{display: inline-block; font-size:50px; }
+    .bg-h-mid > h1:nth-child(2) > p{display: inline-block; font-size:100px; margin-top:0;}
     .bg-h-bot{position: absolute; bottom: 35%; left:56%;}
     .bg-h-bot > h2{margin-bottom: 50px;}
     .peo-num{margin-left:10px; font-size:100px; font-weight: bold; color:#fff;}
@@ -57,7 +70,7 @@
     
     
     /* 섹션 */
-    #sWrap{width:100%; height:1404px; margin-top:969px; position: relative; background: #fff; padding-top:150px; z-index:1;}
+    #sWrap{width:100%; height:1404px; margin-top:969px; position: relative; background: rgb(253, 241, 241); padding-top:150px; z-index:1;}
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     #section {width:70%; margin:0 auto; box-shadow: 5px 5px 35px black;/*  margin-top:969px;position: absolute;*/  
@@ -104,6 +117,7 @@
 </head>
 <body>
 	<%@ include file="views/common/menubar.jsp" %>
+	
 	<div id="banner">
         <div class="bar-left">
             <div class="slide-bg">

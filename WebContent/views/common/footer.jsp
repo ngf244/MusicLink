@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/footer.css" />
 <title>Insert title here</title>
-<style>
+<style> 
 	footer{height:540px; background:#fff; }
 	.ft-text{text-align: center; }
     .ft-text1{border-bottom: 5px solid #F7FE2E; display: inline-block; margin-bottom: 10px; }

@@ -23,7 +23,7 @@
             <div id="toggle">
                 <div class="span" id="one"></div>
                 <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
+                <div class="span" id="three"></div> 
             </div>
             <div class="log-inOut">
 
