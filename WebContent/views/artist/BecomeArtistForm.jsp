@@ -46,7 +46,9 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-    
+<%
+	String userCode = loginUser.getUserCode();  	
+%>
     <section style="z-index: 1;">
         <div class="sec-line"></div>
         <h1 class="sec-mtxt">MyPage<p>-become artist</p></h1>
@@ -92,6 +94,7 @@
             <br>
             <div class="become-artist">
                 <form action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
+                    <input type="hidden" name="userCode" value="<%= userCode %>">
                     <label for="artistName">활동 명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br><br>
                     <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br><br>
                     <label for="">데뷔일 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="debutDate"><br><br>
