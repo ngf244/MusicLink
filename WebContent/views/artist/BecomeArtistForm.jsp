@@ -12,24 +12,9 @@
      
 <title>아티스트 등록</title>
 <style>
-    
-    
-    /* 섹션 */ 
-    .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
-                    position: absolute; bottom:-25%; left:28%;}
+    /* 섹션 */
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1600px; padding-top: 30px;} 
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
-    
-    
-    /* 사이드 메뉴 */ 
-    .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
-    .sec-mtxt{margin-left:5%; margin-top: -15px;}
-    .sec-mtxt > p{ display: inline-block; font-size:20px;}
-    .sec-nav{width:22%; height:85%; border-right: 1px solid rgba(0,0,0,0.4); box-sizing: border-box; float:left;}
-    .smenu{color:#ccc; font-size: 30px; margin:0; margin-top:20px;}
-    .s-smenu{font-size:14px;margin-top:20px; color:#000;}
-    .s-smenu > li{padding:5px 10px;}    
+    background: rgba(255,255,255,1); height:1500px; padding-top: 30px; padding-bottom:10%;}
     
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
