@@ -62,11 +62,11 @@ public class InsertArtistServlet extends HttpServlet {
 					saveFiles.add(multipartRequest.getFilesystemName(name));
 				}
 			}			
-			String userCode = "UC5";
+			String userCode = "UC3";
 			String name = multipartRequest.getParameter("artistName");
 			int number = Integer.parseInt(multipartRequest.getParameter("number"));
 			String debut = multipartRequest.getParameter("debutDate");
-			
+			  
 			Date sqlDate = null;
 			String[] dateArr = debut.split("-");
 			int year = Integer.parseInt(dateArr[0]);
@@ -94,6 +94,9 @@ public class InsertArtistServlet extends HttpServlet {
 			
 			String gender = multipartRequest.getParameter("artistGender");
 			String category = multipartRequest.getParameter("artistCategory");
+			
+			String atclass = category + "(" + gender + ")";
+			
 			String local = multipartRequest.getParameter("activeLocal");
 			String intro = multipartRequest.getParameter("introduce");
 			String info = multipartRequest.getParameter("artistInfo");
@@ -105,7 +108,7 @@ public class InsertArtistServlet extends HttpServlet {
 			
 			String selfiePath = savePath + saveFiles.get(0); 
 			
-			Artist artist = new Artist(userCode, name, number, genre, category, selfiePath, videoLink, intro, info, local, activity, sqlDate, gender, insta, twitter, facebook);
+			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, videoLink, intro, info, activity, sqlDate, insta, twitter, facebook);
 		
 			int result = new ArtistService().insertArtist(artist);
 			
