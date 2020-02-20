@@ -431,6 +431,7 @@
 	
 	            // 슬라이드 다운 기능을 이용해 레이어 창을 오픈한다.
 	            jQuery("#wrap").slideDown();
+	            jQuery("section").slideDown();
 	        }
 	        
 	        // warp 레이어가 open된 상태라면 다음 우편번호 레이어를 off 상태로 변경한다.
