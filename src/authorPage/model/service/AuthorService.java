@@ -1,11 +1,12 @@
 package authorPage.model.service;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
 
-import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import authorPage.model.dao.AuthorDAO;
-import authorPage.model.vo.Member;
+import member.model.vo.Member;
 
 public class AuthorService {
 

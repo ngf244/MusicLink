@@ -1,6 +1,6 @@
 package authorPage.model.dao;
+import static common.JDBCTemplate.close;
 
-import static common.JDBCTemplate.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,7 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import authorPage.model.vo.Member;
+import member.model.vo.Member;
+
+
 
 public class AuthorDAO {
 	
@@ -28,6 +30,7 @@ public class AuthorDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public ArrayList<Member> selectMember(Connection conn) {
@@ -42,7 +45,11 @@ public class AuthorDAO {
 			rset = stmt.executeQuery(query);
 			
 			while(rset.next()) {
-				Member mem = new Member(rset.getString("user_code"), rset.getString("user_id"), rset.getString("user_name"), rset.getString("user_class"));
+				Member mem = new Member();
+				mem.setUserCode(rset.getString("user_code"));
+				mem.setUserId(rset.getString("user_id"));
+				mem.setUserName(rset.getString("user_name"));
+				mem.setUserClass(rset.getString("user_class"));
 				memArr.add(mem);
 			}
 			
@@ -137,8 +144,6 @@ public class AuthorDAO {
 		
 		return path;
 	}
-	
-	
 	
 
 }

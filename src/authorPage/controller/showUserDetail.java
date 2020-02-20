@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import authorPage.model.service.AuthorService;
-import authorPage.model.vo.Member;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class showUserDetail
