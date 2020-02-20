@@ -26,7 +26,7 @@
             </li>
             <li class="sec-menu-3 smenu">BECOME
                 <ul class="s-smenu">
-                    <li><a href="#">아티스트 등록</a></li>
+                    <li onclick="becomeAT();"><a href="#">아티스트 등록</a></li>
                     <li><a href="#">행사기획자 등록</a></li>
                 </ul>
             </li>
@@ -47,7 +47,11 @@
             </li>
         </ul>   
         	
-    
+<script>
+	function becomeAT(){
+		location.href="views/artist/BecomeArtistForm.jsp";
+	}
+</script>    
     
 </body>
 </html>

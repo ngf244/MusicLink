@@ -29,6 +29,17 @@ public class Artist {
 		this.atClass = atClass;
 	}
 
+
+	
+	public Artist(String atName, String atGenre, String atClass, String atPicPath, String atOneLine) {
+		super();
+		this.atName = atName;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atOneLine = atOneLine;
+	}
+
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath) {
 		super();
 		this.atCode = atCode;

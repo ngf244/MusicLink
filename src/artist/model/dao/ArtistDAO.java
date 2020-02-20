@@ -9,10 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import artist.model.vo.Artist;
+import artist.model.vo.FollowArtist;
 
 public class ArtistDAO {
 
@@ -100,16 +101,16 @@ public class ArtistDAO {
 		
 		return artist;
 	}
-	public int getFollowListCount(Connection conn) {
-		Statement stmt = null;
+	public int getFollowListCount(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("getFollowListCount");
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				result = rset.getInt(1);
@@ -118,10 +119,46 @@ public class ArtistDAO {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return result;
+	}
+	public ArrayList<FollowArtist> selectFollowList(Connection conn, int currentPage, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FollowArtist> list = null;
+		int artists = 4; // 한 페이지에 보여질 게시글 개수
+		
+		int startRow = (currentPage - 1) * artists + 1;
+		int endRow = startRow + artists - 1;		
+		
+		String query = prop.getProperty("selectFollowList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				FollowArtist fa = new FollowArtist(rset.getString("USER_CODE"),
+									  			  rset.getString("AT_NAME"),
+									  			  rset.getString("AT_GENRE"),
+									  			  rset.getString("AT_CLASS"),
+									  			  rset.getString("PROFILE_PIC_PATH"),
+									  			  rset.getString("AT_ONELINE"),
+									  			  rset.getDate("FOLLOWING_TIME"));
+				list.add(fa);				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
