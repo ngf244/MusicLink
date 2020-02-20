@@ -38,7 +38,7 @@ public class MyPageServlet extends HttpServlet {
 		
 		String loginUserId = ((Member)session.getAttribute("loginUser")).getUserId();
 		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
-		String fileName = (String)request.getAttribute("saveFileName");
+		String fileName = (String)session.getAttribute("atFileName");
 		
 		Member member = new MemberService().selectMember(loginUserId);
 		Artist artist = new ArtistService().selectArtist(userCode);

@@ -19,7 +19,7 @@
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
+    background: rgba(255,255,255,1); height:1200px; padding-top: 30px;} 
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
@@ -34,7 +34,7 @@
     
     /* 나의 아티스트 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
 
     .artistInfo{border-bottom: 1px solid rgb(209, 209, 209); margin-top: 2%; padding-left: 5%;}
 
@@ -53,7 +53,7 @@
         object-fit: cover;
     }
 
-    .artistDesc{display: inline-block; line-height: 30px;}
+    .artistDesc{display: inline-block; line-height: 30px; margin-left: 30px;}
     .artist h3 {background: #af9ce6;}
     
     /*페이징 css*/
@@ -185,7 +185,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>    
+	<%@ include file="../common/menubar.jsp" %>    
     
     <section style="z-index: 1;">
         <div class="sec-line"></div>
@@ -238,50 +238,11 @@
                         <ul>
                             <li>아티스트 명 : </li>
                             <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
+                            <li>유형 : </li>
+                            <li>한 줄 소개 : </li>
                         </ul>
                     </div>                   
                 </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>              
             </div>
 			<div id="pagingarea">
                	<ul class="pagination">
@@ -315,6 +276,6 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
