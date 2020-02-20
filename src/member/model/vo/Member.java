@@ -37,7 +37,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.userEmail = userEmail;
-		this.userPhone = userPhone;
+		this.userPhone = userPhone; 
 	}
 
 	public Member(String userId, String userPwd, String userName, String userBirth, String userEmail, String userGender,
