@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
@@ -45,6 +46,20 @@ public class ArtistService {
 		close(conn);
 		
 		return artist;
+	}
+
+	public int getFollowListCount() {
+		Connection conn = getConnection();
+		
+		int result = new ArtistDAO().getFollowListCount(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Artist> selectFollowList(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

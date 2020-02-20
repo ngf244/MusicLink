@@ -174,7 +174,8 @@
 	<%@ include file="common/menubar.jsp" %>    
     
     <section style="z-index: 1;">
-        <div class="sec-line"></div>
+    <%@ include file="common/MyPage_Menubar.jsp" %>	
+        <!-- <div class="sec-line"></div>
         <h1 class="sec-mtxt">MyPage<p>-post&comment</p></h1>
         <ul class="sec-nav">
             <li class="sec-menu-1 smenu">INFORMATION
@@ -211,7 +212,7 @@
                     <li>아티스트 후기</li>
                 </ul>
             </li>
-        </ul>
+        </ul> -->
         
         <div class="sec-menu-views views1">
             <h3>내가 작성한 글</h3>
