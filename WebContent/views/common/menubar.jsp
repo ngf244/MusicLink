@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <%
-	 Member loginUser = (Member)session.getAttribute("loginUser"); 
-%>    
+	Member loginUser = (Member)session.getAttribute("loginUser"); 
+	
+%> 
 
 <!DOCTYPE html>
 <html>
@@ -23,14 +24,13 @@
             <div id="toggle">
                 <div class="span" id="one"></div>
                 <div class="span" id="two"></div>
-                <div class="span" id="three"></div> 
+                <div class="span" id="three"></div>
             </div>
             <div class="log-inOut">
 
             	<% if (loginUser == null){ %>
                 <a href="<%= request.getContextPath() %>/views/member/ssj_loginForm.jsp">login</a>
                 <% } else { %>
-
                 <a href="<%= request.getContextPath() %>/logout.me">logOut</a>
                 <% } %>
             </div>
@@ -41,7 +41,7 @@
                 <li class="m-name1 m-name">
                     <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
                     <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="<%= request.getContextPath() %>/views/company/ssj_companyInfo.jsp">About us</a></li>
+                        <li class="menu-h"><a href="#">About us</a></li>
                         <li class="menu-h"><a href="#">F A Q</a></li>
                         <li class="menu-h"><a href="#">Q &#38; A</a></li>
                     </ul>
@@ -67,8 +67,9 @@
             </ul>
         </div>
         <div class="side-icon">
+        <% if (loginUser != null){ %>
             <div class="image1 icon">
-                <img src="<%= request.getContextPath() %>/img/user.png" alt="" />
+                <img src="<%= request.getContextPath() %>/img/user.png" alt=""/>
             </div>
             <div class="image2 icon">
                 <img src="<%= request.getContextPath() %>/img/bell.png" alt="" />
@@ -76,14 +77,24 @@
             <div class="image3 icon">
                 <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
             </div>
+        <% } else{ %>
+            <div class="image3 icon">
+                <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
+            </div>
+        <% } %>
             <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
             </div>
         </div>
+        <% if(loginUser != null){
+        	String uName = loginUser.getUserName();
+    		String uId = loginUser.getUserId();	
+       	%>
+
         <div class="user-wrap">
-            <div class="user-nickName">닉네임</div>
-            <div class="user-id">아이디</div>
-            <div class="user-mypage">내 정보</div>
+            <div class="user-nickName"><%= uName %></div>
+            <div class="user-id"><%= uId %></div>
+            <div class="user-mypage" onclick="myPage();">마이페이지</div>
             <div class="user-coin">
                 <lable>coin</lable><lable style="margin-left:15px;">20</lable>
             </div>
@@ -109,6 +120,7 @@
                 <div class="alram-close"></div>
             </div>
         </div>
+        <% } %>
     </header>
     
     <script>
@@ -118,19 +130,22 @@
 		$("#resize").toggleClass("active");	
 	});
     
+	$(".image1").click(function(){
+		$(".user-wrap").toggleClass("userOn");
+    });
+        
+    $(".image2").click(function(){
+        $(".alram-wrap").toggleClass("alon");
+    });
+    
     $(".image3").click(function(){
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
     });
     
     
-    $(".image2").click(function(){
-        $(".alram-wrap").toggleClass("alon");
-    });
-    $(".image2").click(function(){
-        
-    });
-    
-    
+    function myPage(){
+    	location.href="<%= request.getContextPath() %>/myPage.me";
+	}
     
 	</script>
 </body>
