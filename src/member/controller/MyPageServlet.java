@@ -50,7 +50,7 @@ public class MyPageServlet extends HttpServlet {
 			page = "views/member/MypageMainView.jsp";
 			request.setAttribute("member", member);
 			request.setAttribute("artist", artist);
-			request.setAttribute("fileName", fileName);
+			session.setAttribute("atFileName", fileName);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패하였습니다.");

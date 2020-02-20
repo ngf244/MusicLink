@@ -44,13 +44,11 @@ public class ArtistDAO {
 			pstmt.setString(7, artist.getAtVideoPath());
 			pstmt.setString(8, artist.getAtOneLine());
 			pstmt.setString(9, artist.getAtIntro());
-			pstmt.setString(10, artist.getAtLocal());
-			pstmt.setString(11, artist.getAtRecode());
-			pstmt.setDate(12, artist.getAtDebutDate());
-			pstmt.setString(13, artist.getAtGender());
-			pstmt.setString(14, artist.getAtInsta());
-			pstmt.setString(15, artist.getAtTwitter());
-			pstmt.setString(16, artist.getAtFacebook());
+			pstmt.setString(10, artist.getAtRecode());
+			pstmt.setDate(11, artist.getAtDebutDate());
+			pstmt.setString(12, artist.getAtInsta());
+			pstmt.setString(13, artist.getAtTwitter());
+			pstmt.setString(14, artist.getAtFacebook());
 			
 			result = pstmt.executeUpdate();
 			
@@ -85,10 +83,8 @@ public class ArtistDAO {
 								    rset.getString("AT_VIDEO"),
 								    rset.getString("AT_ONELINE"),
 								    rset.getString("AT_INTRO"),
-								    rset.getString("AT_LOCAL"),
 								    rset.getString("AT_RECORD"),
 								    rset.getDate("AT_DEBUT"),
-								    rset.getString("AT_GENDER"),
 								    rset.getInt("AT_GRADE"),
 								    rset.getString("AT_INSTA"),
 								    rset.getString("AT_TWITTER"),

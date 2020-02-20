@@ -3,9 +3,9 @@
 <%
 	Member member = (Member)request.getAttribute("member");
 	Artist artist = (Artist)request.getAttribute("artist");
-	String fileName = (String)request.getAttribute("fileName");
+	String atFileName = (String)session.getAttribute("atFileName");
 
-	System.out.println(fileName);
+	System.out.println(atFileName);
 	
 	String userCode = member.getUserCode();
 	String userId = member.getUserId();
@@ -34,7 +34,7 @@
 	if(userClass.equals("2")) {
 		//imgPath = artist.getAtPicPath().substring(39);
 		//System.out.println(imgPath);
-		imgPath = "artistProfile_uploadFiles/" + fileName;
+		imgPath = "artistProfile_uploadFiles/" + atFileName;
 	}
 	
 %>
@@ -71,14 +71,14 @@
     
     /* 마이페이지 메인 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
 
 
     .userInfo{margin-left: 10%; width: 80%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
     .profileBox {
         margin-left: 5%;
-        width: 150px;
-        height: 150px; 
+        width: 200px;
+        height: 200px; 
         border-radius: 70%;
         overflow: hidden;
         display: inline-block;
@@ -215,28 +215,28 @@
 		                <li class="follow-nav">선택</li>
 		                <li class="follow-nav">아티스트명</li>
 		                <li class="follow-nav">장르</li>
-		                <li class="follow-nav">활동지역</li>
+		                <li class="follow-nav">유형</li>
 		                <li class="follow-nav">상태</li>
 		            </ul>
 		            <div class="padding-1">
 		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
 		                <div class="artistName follow-sum">아티스트명1</div>
 		                <div class="Genre follow-sum">DANCE</div>
-		                <div class="local follow-sum">경상도</div>
+		                <div class="local follow-sum">남성(솔로)</div>
 		                <div class="followYN follow-sum">팔로우</div>
 		            </div>
 		            <div class="padding-1">
 		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
 		                <div class="followYN follow-sum">아티스트명2</div>
 		                <div class="Genre follow-sum">HIPHOP</div>
-		                <div class="local follow-sum">서울</div>
+		                <div class="local follow-sum">여성(솔로)</div>
 		                <div class="followYN follow-sum">팔로우</div>
 		            </div>
 		            <div class="padding-1">
 		                <div class="follow-time follow-sum"><input type="checkbox" name="select"></div>
 		                <div class="followYN follow-sum">아티스트명3</div>
 		                <div class="Genre follow-sum">TROT</div>
-		                <div class="local follow-sum">경기도</div>
+		                <div class="local follow-sum">여성(그룹)</div>
 		                <div class="followYN follow-sum">팔로우</div>
                     </div>
                     <br>

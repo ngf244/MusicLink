@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	
-%>    
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -37,8 +34,8 @@
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
     .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}  
-    .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px;}
-    .views1 h3{background: #af9ce6;}
+    .views1 h3{background: #af9ce6; font-size: 20pt;}
+    .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px; font-size: 15pt;}
 	.artistReg_btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
@@ -112,14 +109,14 @@
                     <input type="radio" name="artistCategory" value="솔로" id="solo"><label for="solo">솔로</label>
                     <input type="radio" name="artistCategory" value="그룹" id="group"><label for="group">그룹</label><br><br>                
                     
-                    <label for="">활동지역</label><br>
+                    <!-- <label for="">활동지역</label><br>
                     <input type="radio" name="activeLocal" value="서울" id="seoul"><label for="seoul">서울</label>
                     <input type="radio" name="activeLocal" value="경기도" id="Gyeonggi"><label for="Gyeonggi">경기도</label>
                     <input type="radio" name="activeLocal" value="경상도" id="Gyeongsang"><label for="Gyeongsang">경상도</label>
                     <input type="radio" name="activeLocal" value="강원도" id="Gangwon"><label for="Gangwon">강원도</label>
                     <input type="radio" name="activeLocal" value="전라도" id="Jeolla"><label for="Jeolla">전라도</label>
                     <input type="radio" name="activeLocal" value="충청도" id="Chungcheong"><label for="Chungcheong">충청도</label>
-                    <input type="radio" name="activeLocal" value="제주도" id="Jeju"><label for="Jeju">제주도</label><br><br>
+                    <input type="radio" name="activeLocal" value="제주도" id="Jeju"><label for="Jeju">제주도</label><br><br> -->
                     
                     
                     <label for="">한 줄 소개</label><br>

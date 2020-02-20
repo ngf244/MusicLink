@@ -12,10 +12,8 @@ public class Artist {
 	private String atVideoPath;
 	private String atOneLine;
 	private String atIntro;
-	private String atLocal;
 	private String atRecode;
 	private Date atDebutDate;
-	private String atGender;
 	private int atGrade;
 	private String atInsta;
 	private String atTwitter;
@@ -23,49 +21,50 @@ public class Artist {
 	 
 	public Artist() {}
 
-	public Artist(String atCode, String atName, String atGenre, String atLocal) {
+	public Artist(String atCode, String atName, String atGenre, String atClass) {
 		super();
 		this.atCode = atCode;
 		this.atName = atName;
 		this.atGenre = atGenre;
-		this.atLocal = atLocal;
+		this.atClass = atClass;
 	}
 
-	public Artist(String atCode, String atName, String atGenre, String atPicPath, String atVideoPath, int atGrade,
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+	}
+
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
+			String atVideoPath, String atOneLine, String atIntro, String atRecode, Date atDebutDate, String atInsta,
+			String atTwitter, String atFacebook) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atVideoPath = atVideoPath;
+		this.atOneLine = atOneLine;
+		this.atIntro = atIntro;
+		this.atRecode = atRecode;
+		this.atDebutDate = atDebutDate;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
+	}
+
+	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
+			String atVideoPath, String atOneLine, String atIntro, String atRecode, Date atDebutDate, int atGrade,
 			String atInsta, String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
 		this.atName = atName;
-		this.atGenre = atGenre;
-		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
-		this.atGrade = atGrade;
-		this.atInsta = atInsta;
-		this.atTwitter = atTwitter;
-		this.atFacebook = atFacebook;
-	}
-
-	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atVideoPath, String atOneLine, String atLocal, String atGender) {
-		super();
-		this.atCode = atCode;
-		this.atName = atName;
-		this.atMember = atMember;
-		this.atGenre = atGenre;
-		this.atClass = atClass;
-		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
-		this.atOneLine = atOneLine;
-		this.atLocal = atLocal;
-		this.atGender = atGender;
-	}
-
-	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atVideoPath, String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate,
-			String atGender, String atInsta, String atTwitter, String atFacebook) {
-		super();
-		this.atCode = atCode;
-		this.atName = atName;
 		this.atMember = atMember;
 		this.atGenre = atGenre;
 		this.atClass = atClass;
@@ -73,32 +72,8 @@ public class Artist {
 		this.atVideoPath = atVideoPath;
 		this.atOneLine = atOneLine;
 		this.atIntro = atIntro;
-		this.atLocal = atLocal;
 		this.atRecode = atRecode;
 		this.atDebutDate = atDebutDate;
-		this.atGender = atGender;
-		this.atInsta = atInsta;
-		this.atTwitter = atTwitter;
-		this.atFacebook = atFacebook;
-	}
-
-	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atVideoPath, String atOneLine, String atIntro, String atLocal, String atRecode, Date atDebutDate,
-			String atGender, int atGrade, String atInsta, String atTwitter, String atFacebook) {
-		super();
-		this.atCode = atCode;
-		this.atName = atName;
-		this.atMember = atMember;
-		this.atGenre = atGenre;
-		this.atClass = atClass;
-		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
-		this.atOneLine = atOneLine;
-		this.atIntro = atIntro;
-		this.atLocal = atLocal;
-		this.atRecode = atRecode;
-		this.atDebutDate = atDebutDate;
-		this.atGender = atGender;
 		this.atGrade = atGrade;
 		this.atInsta = atInsta;
 		this.atTwitter = atTwitter;
@@ -177,14 +152,6 @@ public class Artist {
 		this.atIntro = atIntro;
 	}
 
-	public String getAtLocal() {
-		return atLocal;
-	}
-
-	public void setAtLocal(String atLocal) {
-		this.atLocal = atLocal;
-	}
-
 	public String getAtRecode() {
 		return atRecode;
 	}
@@ -199,14 +166,6 @@ public class Artist {
 
 	public void setAtDebutDate(Date atDebutDate) {
 		this.atDebutDate = atDebutDate;
-	}
-
-	public String getAtGender() {
-		return atGender;
-	}
-
-	public void setAtGender(String atGender) {
-		this.atGender = atGender;
 	}
 
 	public int getAtGrade() {
@@ -245,10 +204,12 @@ public class Artist {
 	public String toString() {
 		return "Artist [atCode=" + atCode + ", atName=" + atName + ", atMember=" + atMember + ", atGenre=" + atGenre
 				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atVideoPath=" + atVideoPath + ", atOneLine="
-				+ atOneLine + ", atIntro=" + atIntro + ", atLocal=" + atLocal + ", atRecode=" + atRecode
-				+ ", atDebutDate=" + atDebutDate + ", atGender=" + atGender + ", atGrade=" + atGrade + ", atInsta="
-				+ atInsta + ", atTwitter=" + atTwitter + ", atFacebook=" + atFacebook + "]";
+				+ atOneLine + ", atIntro=" + atIntro + ", atRecode=" + atRecode + ", atDebutDate=" + atDebutDate
+				+ ", atGrade=" + atGrade + ", atInsta=" + atInsta + ", atTwitter=" + atTwitter + ", atFacebook="
+				+ atFacebook + "]";
 	}
+
+	
 
 
 	
