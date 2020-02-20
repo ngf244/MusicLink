@@ -44,7 +44,7 @@ public class MyPageServlet extends HttpServlet {
 		Artist artist = new ArtistService().selectArtist(userCode);
 		
 		System.out.println(member);
-		
+		 
 		String page = null;
 		if(member != null) {
 			page = "views/member/MypageMainView.jsp";

@@ -26,7 +26,7 @@ public class ArtistService {
 		} else {
 			rollback(conn);
 		}
-		close(conn);
+		close(conn); 
 		
 		return result1;
 	}

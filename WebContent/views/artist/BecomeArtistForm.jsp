@@ -22,7 +22,7 @@
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
-    /* 사이드 메뉴 */
+    /* 사이드 메뉴 */ 
     .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
     .sec-mtxt{margin-left:5%; margin-top: -15px;}
     .sec-mtxt > p{ display: inline-block; font-size:20px;}

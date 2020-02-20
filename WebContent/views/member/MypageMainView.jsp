@@ -34,7 +34,7 @@
 	if(userClass.equals("2")) {
 		//imgPath = artist.getAtPicPath().substring(39);
 		//System.out.println(imgPath);
-		imgPath = "artistProfile_uploadFiles/" + atFileName;
+		imgPath = "artistProfile_uploadFiles/" + atFileName; 
 	}
 	
 %>
