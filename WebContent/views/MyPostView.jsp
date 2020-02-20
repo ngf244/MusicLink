@@ -174,44 +174,7 @@
 	<%@ include file="common/menubar.jsp" %>    
     
     <section style="z-index: 1;">
-        <div class="sec-line"></div>
-        <h1 class="sec-mtxt">MyPage<p>-post&comment</p></h1>
-        <ul class="sec-nav">
-            <li class="sec-menu-1 smenu">INFORMATION
-                <ul class="s-smenu">
-                    <li><a href='PwdCheckForm.jsp'>회원정보 열람/수정/탈퇴</a></li>
-                    <li><a href='MyPostView.jsp'>내가 작성한 글/댓글</a></li>
-                    <li><a href='MypageNoticeView.jsp'>알람창</a></li>
-                </ul>
-            </li>
-            <li class="sec-menu-2 smenu">FOLLOW
-                <uL class="s-smenu">
-                    <li><a href='MyArtistView.jsp'>나의 아티스트</a></li>
-                    <li><a href='MyArtistSchedule.jsp'>팔로잉 아티스트의 행사</a></li>
-                </uL>
-            </li>
-            <li class="sec-menu-3 smenu">BECOME
-                <ul class="s-smenu">
-                    <li><a href='BecomeArtistForm.jsp'>아티스트 등록</a></li>
-                    <li><a href='BecomePlannerForm.jsp'>행사기획자 등록</a></li>
-                </ul>
-            </li>
-            <li class="sec-menu-4 smenu">EVENT-1
-                <ul class="s-smenu">
-                    <li>공연스케줄</li>
-                    <li>지원한 행사</li>
-                    <li>러브콜(receive)</li>
-                    <li>행사 후기</li>
-                </ul>
-            </li>
-            <li class="sec-menu-5 smenu">EVENT-2
-                <ul class="s-smenu">
-                    <li>등록한 행사</li>
-                    <li>러브콜(send)</li>
-                    <li>아티스트 후기</li>
-                </ul>
-            </li>
-        </ul>
+    <%@ include file="common/MyPage_Menubar.jsp" %>	
         
         <div class="sec-menu-views views1">
             <h3>내가 작성한 글</h3>

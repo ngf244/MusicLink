@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import festival.FesFileRenamePolicy;
 import festival.model.service.FestivalService;
 import festival.model.vo.Festival;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class FestivalInsertServlet
@@ -97,8 +98,7 @@ public class FestivalInsertServlet extends HttpServlet {
 			
 			System.out.println(fesName + ", " + fesLoc + ", " + fesTerm + ", " + fesInfo + ", " + payRange + ", " + recCount + ", " + recTerm + ", " + posPath + ", " + banPath + ", " + secOp);
 			
-			//String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-			String userCode = "UC3";
+			String userCode = ((Member)request.getSession().getAttribute("loginUser")).getUserCode();
 			Festival festival = new Festival(fesName, fesLoc, fesTerm, fesInfo, payRange, recCount, recTerm, posPath , banPath, secOp, userCode);
 			
 			int result = new FestivalService().insertFestival(festival);

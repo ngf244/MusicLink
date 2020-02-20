@@ -6,6 +6,7 @@ import festival.model.vo.Festival;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class FestivalService {
 
@@ -23,6 +24,24 @@ public class FestivalService {
 		
 		close(conn);
 		return result;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().getListCount(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Festival> selectList(int currentPage) {
+		Connection conn = getConnection();
+		
+		ArrayList<Festival> list = new FestivalDAO().selectList(conn, currentPage);
+		
+		close(conn);
+		return list;
 	}
 	
 }

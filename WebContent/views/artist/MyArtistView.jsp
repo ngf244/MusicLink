@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, artist.model.vo.*, festival.model.vo.*" %>
+<%
+	ArrayList<FollowArtist> list = (ArrayList<FollowArtist>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,7 +30,7 @@
     .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
                     position: absolute; bottom:-25%; left:28%;}
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
+    background: rgba(255,255,255,1); height:1200px; padding-top: 30px;} 
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
     
     
@@ -34,7 +45,7 @@
     
     /* 나의 아티스트 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
 
     .artistInfo{border-bottom: 1px solid rgb(209, 209, 209); margin-top: 2%; padding-left: 5%;}
 
@@ -53,7 +64,7 @@
         object-fit: cover;
     }
 
-    .artistDesc{display: inline-block; line-height: 30px;}
+    .artistDesc{display: inline-block; line-height: 30px; margin-left: 30px;}
     .artist h3 {background: #af9ce6;}
     
     /*페이징 css*/
@@ -185,49 +196,17 @@
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>    
+	<%@ include file="../common/menubar.jsp" %>    
     
     <section style="z-index: 1;">
-        <div class="sec-line"></div>
-        <h1 class="sec-mtxt">MyPage<p>-MyArtist</p></h1>
-        <ul class="sec-nav">
-            <li class="sec-menu-1 smenu">INFORMATION
-                <ul class="s-smenu">
-                    <li><a href='PwdCheckForm.jsp'>회원정보 열람/수정/탈퇴</a></li>
-                    <li><a href='MyPostView.jsp'>내가 작성한 글/댓글</a></li>
-                    <li><a href='MypageNoticeView.jsp'>알람창</a></li>
-                </ul>
-            </li>
-            <li class="sec-menu-2 smenu">FOLLOW
-                <uL class="s-smenu">
-                    <li><a href='MyArtistView.jsp'>나의 아티스트</a></li>
-                    <li><a href='MyArtistSchedule.jsp'>팔로잉 아티스트의 행사</a></li>
-                </uL>
-            </li>
-            <li class="sec-menu-3 smenu">BECOME
-                <ul class="s-smenu">
-                    <li><a href='BecomeArtistForm.jsp'>아티스트 등록</a></li>
-                    <li><a href='BecomePlannerForm.jsp'>행사기획자 등록</a></li>
-                </ul>
-            </li>
-            <li class="sec-menu-4 smenu">EVENT-1
-                <ul class="s-smenu">
-                    <li>공연스케줄</li>
-                    <li>지원한 행사</li>
-                    <li>러브콜(receive)</li>
-                    <li>행사 후기</li>
-                </ul>
-            </li>
-            <li class="sec-menu-5 smenu">EVENT-2
-                <ul class="s-smenu">
-                    <li>등록한 행사</li>
-                    <li>러브콜(send)</li>
-                    <li>아티스트 후기</li>
-                </ul>
-            </li>
-        </ul>
+    <%@ include file="../common/MyPage_Menubar.jsp" %>
         
         <div class="sec-menu-views views1">
+            <% if(list.isEmpty()){ %>
+            	<div>팔로잉한 아티스트가 없습니다.</div>            
+            <% } else{
+            		for(FollowArtist fa : list){
+            %>
             <div class="artist">
                 <h3>나의 아티스트</h3>
                 <div class="artistInfo">
@@ -236,53 +215,18 @@
                     </div>
                     <div class="artistDesc">
                         <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
+                            <li>아티스트 명 : <%= fa.getAtName() %></li>
+                            <li>장르 : <%= fa.getAtGenre() %></li>
+                            <li>유형 : <%= fa.getAtClass() %></li>
+                            <li>한 줄 소개 : <%=fa.getAtOneLine() %></li>
                         </ul>
                     </div>                   
                 </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="artistInfo">
-                    <div class="profileBox">
-                        <img class="profile" src="">
-                    </div>
-                    <div class="artistDesc">
-                        <ul>
-                            <li>아티스트 명 : </li>
-                            <li>장르 : </li>
-                            <li>활동지역 : </li>
-                            <li><a href="">more</a></li>
-                        </ul>
-                    </div>  
-                </div>              
             </div>
+            <% 		}
+            	}
+            %>
+            
 			<div id="pagingarea">
                	<ul class="pagination">
                		<li class="page-item">
@@ -315,6 +259,6 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
     
-	<%@ include file="common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

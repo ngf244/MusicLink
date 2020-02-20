@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -26,13 +27,13 @@ import common.ATFileRenamePolicy;
  * Servlet implementation class InsertArtistServlet
  */
 @WebServlet("/insert.at")
-public class InsertArtistServlet extends HttpServlet {
+public class ArtistInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertArtistServlet() {
+    public ArtistInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -62,7 +63,7 @@ public class InsertArtistServlet extends HttpServlet {
 					saveFiles.add(multipartRequest.getFilesystemName(name));
 				}
 			}			
-			String userCode = "UC3";
+			String userCode = multipartRequest.getParameter("userCode");
 			String name = multipartRequest.getParameter("artistName");
 			int number = Integer.parseInt(multipartRequest.getParameter("number"));
 			String debut = multipartRequest.getParameter("debutDate");
@@ -112,9 +113,12 @@ public class InsertArtistServlet extends HttpServlet {
 		
 			int result = new ArtistService().insertArtist(artist);
 			
+			HttpSession session = request.getSession();
+			
 			if(result > 0) {
 				System.out.println("아티스트 등록 성공");
 				request.setAttribute("saveFileName", saveFiles.get(0));
+				session.setAttribute("atFileName", saveFiles.get(0)); 
 				
 				RequestDispatcher view = request.getRequestDispatcher("myPage.me");
 				view.forward(request, response);

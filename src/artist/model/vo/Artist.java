@@ -29,6 +29,17 @@ public class Artist {
 		this.atClass = atClass;
 	}
 
+
+	
+	public Artist(String atName, String atGenre, String atClass, String atPicPath, String atOneLine) {
+		super();
+		this.atName = atName;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atOneLine = atOneLine;
+	}
+
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath) {
 		super();
 		this.atCode = atCode;
@@ -37,6 +48,21 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
+	}
+	
+
+	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath, String atVideoPath,
+			String atInsta, String atTwitter, String atFacebook) {
+		super();
+		this.atCode = atCode;
+		this.atName = atName;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atVideoPath = atVideoPath;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
 	}
 
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
