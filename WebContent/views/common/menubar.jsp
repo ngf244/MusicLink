@@ -84,10 +84,10 @@
                 <img src="<%= request.getContextPath() %>/img/pin.png" alt="" />
             </div>
         <% } %>
-            <div class="side-text">
+        </div>
+        <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
             </div>
-        </div>
         <% if(loginUser != null){
         	String uName = loginUser.getUserName();
     		String uId = loginUser.getUserId();	
