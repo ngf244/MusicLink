@@ -9,11 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import artist.model.service.ArtistService;
-import artist.model.vo.Artist;
-import festival.model.vo.Festival;
+import artist.model.vo.FollowArtist;
 import festival.model.vo.PageInfo;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class ArtistListServlet
@@ -34,9 +35,12 @@ public class ArtistFollowListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+		
 		ArtistService service = new ArtistService();
 		
-		int listCount = service.getFollowListCount();
+		int listCount = service.getFollowListCount(userCode);
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -50,7 +54,7 @@ public class ArtistFollowListServlet extends HttpServlet {
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 
-		limit = 10;
+		limit = 3;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
@@ -60,7 +64,7 @@ public class ArtistFollowListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList<Artist> list = service.selectFollowList(currentPage);
+		ArrayList<FollowArtist> list = service.selectFollowList(currentPage, userCode);
 		
 		String page = null;
 		if(list != null) {

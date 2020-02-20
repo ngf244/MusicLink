@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
+import artist.model.vo.FollowArtist;
 import member.model.dao.MemberDAO;
 
 public class ArtistService {
@@ -48,18 +49,20 @@ public class ArtistService {
 		return artist;
 	}
 
-	public int getFollowListCount() {
+	public int getFollowListCount(String userCode) {
 		Connection conn = getConnection();
 		
-		int result = new ArtistDAO().getFollowListCount(conn);
+		int result = new ArtistDAO().getFollowListCount(conn, userCode);
 		close(conn);
 		
 		return result;
 	}
 
-	public ArrayList<Artist> selectFollowList(int currentPage) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<FollowArtist> selectFollowList(int currentPage, String userCode) {
+		Connection conn = getConnection();
+		ArrayList<FollowArtist> list = new ArtistDAO().selectFollowList(conn, currentPage, userCode);
+		close(conn);
+		return list;
 	}
 
 }
