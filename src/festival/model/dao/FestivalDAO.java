@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
-import artist.model.vo.Artist;
 import festival.model.vo.Festival;
 
 import static common.JDBCTemplate.*;
@@ -85,16 +85,16 @@ public class FestivalDAO {
 		return result;
 	}
 
-	public ArrayList<Festival> selectList(Connection conn, int currentPage) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
-		ArrayList<Festival> list = null;
-		String artistArr[] = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		int posts = 10; //한 페이지에 보여질 게시글 개수
+
+		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
@@ -109,7 +109,7 @@ public class FestivalDAO {
 			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Festival>();
+			map = new LinkedHashMap<Festival, ArrayList<String>>();
 			
 			while(rset.next()) {
 				Festival f = new Festival(rset.getString("fes_code"),
@@ -130,21 +130,20 @@ public class FestivalDAO {
 				rset2 = pstmt2.executeQuery();
 				
 				while(rset2.next()) {
-					String artCode = rset.getString("USER_CODE");
-
+					String artCode = rset2.getString(1);
+					
 					pstmt3 = conn.prepareStatement(query3);
 					pstmt3.setString(1, artCode);
 					
 					rset3 = pstmt3.executeQuery();
 					
-					int i = 0;
+					ArrayList<String> artistArr = new ArrayList<String>();
 					while(rset3.next()) {
-						artistArr[i] = rset3.getString("at_name");
-						i++;
+						artistArr.add(rset3.getString(1));
 					}
+					
+					map.put(f, artistArr);
 				}
-				
-				list.add(f);
 			}
 			
 			
@@ -155,7 +154,7 @@ public class FestivalDAO {
 			close(pstmt);
 		}
 		
-		return list;
+		return map;
 	}
 
 }

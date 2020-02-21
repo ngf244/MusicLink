@@ -10,6 +10,8 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	System.out.println(startPage);
 %>    
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,6 +24,8 @@
 
 	<script src="../js/jquery-3.4.1.min.js"></script>	
 
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
+
 <title>나의 아티스트</title>
 <style>
     
@@ -31,7 +35,7 @@
     
     /* 나의 아티스트 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt; color: black;}
 
     .artistInfo{border-bottom: 1px solid rgb(209, 209, 209); margin-top: 2%; padding-left: 5%;}
 
@@ -51,9 +55,9 @@
     }
 
     .artistDesc{display: inline-block; line-height: 30px; margin-left: 30px;}
-    .artist h3 {background: #af9ce6;}
+    .views1 h3 {background: #af9ce6;}
     
-    /*페이징 css*/
+     /*페이징 css*/
     #pagingarea{text-align:center; display:inline-block; margin-top:5%; margin-left: 40%}	
 	
 	.pagination {
@@ -178,7 +182,6 @@
 	  white-space: normal; 
 	}  
 
-
 </style>
 </head>
 <body>
@@ -188,16 +191,17 @@
     <%@ include file="../common/MyPage_Menubar.jsp" %>
         
         <div class="sec-menu-views views1">
+        <h3>나의 아티스트</h3>
             <% if(list.isEmpty()){ %>
             	<div>팔로잉한 아티스트가 없습니다.</div>            
             <% } else{
             		for(FollowArtist fa : list){
             %>
             <div class="artist">
-                <h3>나의 아티스트</h3>
+                
                 <div class="artistInfo">
                     <div class="profileBox">
-                        <img class="profile" src="">
+                        <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath().substring(64) %>">
                     </div>
                     <div class="artistDesc">
                         <ul>
@@ -215,23 +219,26 @@
             
 			<div id="pagingarea">
                	<ul class="pagination">
-               		<li class="page-item">
-               			<a class="page-link" href="#" aria-label="Previous">
+               		<li class="page-item prev">
+               			<a class="page-link" href='<%= request.getContextPath() %>/list.fat?currentPage=<%= currentPage-1 %>' aria-label="Previous">
                				<span aria-hidden="true">&laquo;</span>
 							<span class="sr-only">Previous</span>
 						</a>
-                       </li>
+                   </li>
+                   
+			<% for(int p = startPage; p <= endPage; p++){ %>
+				<% if(p == currentPage){ %>
                        <li class="page-item">
-                       	<a class="page-link" href="#">1</a>
+                       	<a class="page-link" href='#'><%= p %></a>
                        </li>
+				<% } else{ %>			
                        <li class="page-item">
-                       	<a class="page-link" href="#">2</a>
+                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fat?currentPage=<%= p %>'><%= p %></a>
                        </li>
-                       <li class="page-item">
-                       	<a class="page-link" href="#">3</a>
-                       </li>
-                       <li class="page-item">
-                       	<a class="page-link" href="#" aria-label="Next">
+                <% } %>
+            <% } %>            					
+                       <li class="page-item next">
+                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fat?currentPage=<%= currentPage + 1 %>' aria-label="Next">
                        		<span aria-hidden="true">&raquo;</span>
                        		<span class="sr-only">Next</span>
                        	</a>
@@ -240,6 +247,17 @@
 			</div>              
             
         </div>
+			<script>
+				if(<%= currentPage %> <= 1){
+					var before = $('.prev');
+					before.attr('class', 'page-item prev disabled');
+				}
+				
+				if(<%= currentPage %> >= <%= maxPage %>){
+					var after = $(".next");
+					after.attr('class', 'page-item next disabled');
+				}				
+			</script>        
         
     </section>
     <h1 class="htext">M Y P A G E</h1>

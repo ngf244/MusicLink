@@ -130,37 +130,6 @@
     
     <%@ include file="../common/footer.jsp" %>
     
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div class="map-cont-left"></div>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     
 <script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

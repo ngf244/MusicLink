@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import authorPage.model.dao.AuthorDAO;
+import authorPage.model.vo.Follow;
 import member.model.vo.Member;
 
 public class AuthorService {
@@ -49,6 +50,16 @@ public class AuthorService {
 		close(conn);
 		
 		return imgPath;
+	}
+
+	public ArrayList<Follow> selectFollow(String userCode) {
+		Connection conn = getConnection();
+		
+		ArrayList<Follow> fArr = new AuthorDAO().selectFollow(conn, userCode);
+		
+		close(conn);
+		
+		return fArr;
 	}
 
 }

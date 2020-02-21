@@ -29,7 +29,7 @@ public class ArtistDAO {
 			e.printStackTrace();
 		}
 	}
-	public int insertArtist(Connection conn, Artist artist) {
+	public int upgradeArtist(Connection conn, Artist artist) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -108,6 +108,7 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -135,18 +136,21 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userCode);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userCode);
 			
 			rset = pstmt.executeQuery();
+			list = new ArrayList<FollowArtist>();
 			
 			while(rset.next()) {
 				FollowArtist fa = new FollowArtist(rset.getString("USER_CODE"),
-									  			  rset.getString("AT_NAME"),
-									  			  rset.getString("AT_GENRE"),
-									  			  rset.getString("AT_CLASS"),
-									  			  rset.getString("PROFILE_PIC_PATH"),
-									  			  rset.getString("AT_ONELINE"),
-									  			  rset.getDate("FOLLOWING_TIME"));
+									  			   rset.getString("AT_NAME"),
+									  			   rset.getString("AT_GENRE"),
+									  			   rset.getString("AT_CLASS"),
+									  			   rset.getString("PROFILE_PIC_PATH"),
+									  			   rset.getString("AT_ONELINE"),
+									  			   rset.getDate("FOLLOWING_TIME"));
 				list.add(fa);				
 			}
 		} catch (SQLException e) {

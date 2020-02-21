@@ -20,7 +20,7 @@
             </li>
             <li class="sec-menu-2 smenu">FLOOW
                 <uL class="s-smenu">
-                    <li><a href="#">나의 아티스트</a></li>
+                    <li onclick="MyArtist();"><a href="#">나의 아티스트</a></li>
                     <li><a href="#">팔로잉 아티스트의 행사</a></li>
                 </uL>
             </li>
@@ -50,6 +50,10 @@
 <script>
 	function becomeAT(){
 		location.href="views/artist/BecomeArtistForm.jsp";
+	}
+	
+	function MyArtist(){
+		location.href="<%= request.getContextPath() %>/list.fat";
 	}
 </script>    
     
