@@ -158,5 +158,51 @@ public class ArtistDAO {
 		
 		return list;
 	}
+	
+	public int insertArtist(Connection conn, Artist artist, String userId) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		String result1 = null;
+		int result2 = 0;
+		
+		String query1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("insertArtist");
+		
+		try {
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt2 = conn.prepareStatement(query2);
+			
+			pstmt1.setString(1, userId);
+			rs = pstmt1.executeQuery();
+			if(rs.next()) {
+				result1 = rs.getString(1);
+			}
+			
+			pstmt2.setString(1, result1);
+			pstmt2.setString(2, artist.getAtName());
+			pstmt2.setInt(3, artist.getAtMember());
+			pstmt2.setString(4, artist.getAtGenre());
+			pstmt2.setString(5, artist.getAtClass());
+			pstmt2.setString(6, artist.getAtPicPath());
+			pstmt2.setString(7, artist.getAtOneLine());
+			pstmt2.setString(8, artist.getAtIntro());
+			pstmt2.setString(9, artist.getAtRecode());
+			pstmt2.setDate(10, artist.getAtDebutDate());
+			pstmt2.setString(11, artist.getAtInsta());
+			pstmt2.setString(12, artist.getAtTwitter());
+			pstmt2.setString(13, artist.getAtFacebook());
+			
+			result2 = pstmt2.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return result2;
+	}
 
 }
