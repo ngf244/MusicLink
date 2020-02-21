@@ -40,7 +40,7 @@
                 <li class="m-name1 m-name">
                     <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
                     <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/views/company/ssj_companyInfo.jsp">About us</a></li>
                         <li class="menu-h"><a href="#">F A Q</a></li>
                         <li class="menu-h"><a href="#">Q &#38; A</a></li>
                     </ul>
