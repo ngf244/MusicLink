@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,6 +57,7 @@
 	
 	#potoFile #videoFile {display:inline-block;width:190px;height:30px;padding-left:10px;margin-right:5px;line-height:30px;
 						  border:1px solid #aaa;background-color:#fff;vertical-align:middle;}
+	#videoFile{width: 300px;}
 	.fileBox .btn_file {display:inline-block;width:100px;height:30px;font-size:0.8em;line-height:30px;text-align:center;vertical-align:middle;}
 	.fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 	.btn_file{padding: 5px 10px; color: black; background-color: lightgray; text-align: center;
@@ -85,11 +87,13 @@
 		</div>
 		
 		<div id="contentArea">
-			<form id="enrollForm">
+			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
 				<table id="insertInfo">
 					<tr>
 						<td colspan="2" rowspan="5" class="table1_td">
-						<img id="titleImg" src="#">
+							<div id="titleImgArea">
+								<img id="titleImg">
+							</div>_
 						</td>
 						<td class="label" id="labelA">활동명</td>
 						<td><input type="text" name="art_name" id="art_name" class="form-control input-default enroll" placeholder="활동명 or 팀명을 입력하세요"></td>
@@ -121,12 +125,12 @@
 					<tr>
 						<td class="label" id="labelA">유형</td>
 						<td>
-							<label class="radio_label"><input type="radio" class="type_gender" name="gender" value="남성">남성</label>
-							<label class="radio_label"><input type="radio" class="type_gender" name="gender" value="여성">여성</label>
-							<label class="radio_label"><input type="radio" class="type_gender" name="gender" value="혼성">혼성</label>
+							<label class="radio_label"><input type="radio" class="type_gender" name="artistGender" value="남성">남성</label>
+							<label class="radio_label"><input type="radio" class="type_gender" name="artistGender" value="여성">여성</label>
+							<label class="radio_label"><input type="radio" class="type_gender" name="artistGender" value="혼성">혼성</label>
 							<br>
-							<label class="radio_label"><input type="radio" class="type_num" name="memNum" value="솔로">솔로</label>
-							<label class="radio_label"><input type="radio" class="type_num" name="memNum" value="그룹">그룹</label>
+							<label class="radio_label"><input type="radio" class="type_num" name="artistCategory" value="솔로">솔로</label>
+							<label class="radio_label"><input type="radio" class="type_num" name="artistCategory" value="그룹">그룹</label>
 						</td>
 					</tr>
 					<tr>
@@ -181,34 +185,32 @@
 						<td colspan="3" class="fileBox">
 							<input type="text" name="potoFile" id="potoFile" class="text-file" readonly>
 							<label for="uploadBtn1" class="btn_file">첨부파일</label>
-							<input type="file" id="uploadBtn1" class="uploadBtn1">
+							<input type="file" id="uploadBtn1" class="uploadBtn1" accept="image/jpeg, image/png, image/jpg">
 						</td>
 					</tr>
 					<tr>
 						<td class="label">동영상 첨부</td>
 						<td colspan="3" class="fileBox">
-							<input type="text" name="videoFile" id="videoFile" class="text-file" readonly>
-							<label for="uploadBtn2" class="btn_file">첨부파일</label>
-							<input type="file" id="uploadBtn2" class="uploadBtn2">
+							<input type="url" name="videoFile" id="videoFile" class="text-file" placeholder="동영상링크 주소를 넣어주세요.">
 						</td>
 					</tr>
 					<tr>
 						<td rowspan="3" class="label" id="label_sns">SNS</td>
 						<td colspan="3">
 							<span class="sns_class">Instargram</span>
-							<input type="text" name="instar" id="instar" class="sns-form">
+							<input type="url" name="instaURL" id="instaURL" class="sns-form">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">Twitter</span>
-							<input type="text" name="twitter" id="twitter" class="sns-form">
+							<input type="url" name="twitterURL" id="twitterURL" class="sns-form">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">FaceBook</span>
-							<input type="text" name="facebook" id="facebook" class="sns-form">
+							<input type="url" name="facebookURL" id="facebookURL" class="sns-form">
 						</td>
 					</tr>
 					<tr>
@@ -220,6 +222,10 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+		
+		<div id="fileArea">
+			<input type="file" id="profile" multiple="multiple" name="profile" onchange="LoadImg(this)">
 		</div>
 	</section>
 	<h1 class="htext">A R T I S T</h1>
@@ -258,6 +264,29 @@
     </div>
     
     <script>
+    	$(function(){
+    		$('#fileArea').hide();
+    		
+    		$('#titleImgArea').click(function(){
+    			$('#profile').click();
+    		});
+    	});
+    	
+    	function LoadImg(value){
+    		if(value.files && value.files[0]){
+    			var reader = new FileReader();
+    				
+    			reader.onload = function(e){
+    				$('#titleImg').attr("src", e.target.result);
+    			}
+    				
+    			reader.readAsDataURL(value.files[0]);
+    		}
+    	}
+    	
+    	
+	    
+    	
 	    var uploadFile1 = $('.fileBox .uploadBtn1');
 	    uploadFile1.on('change', function(){
 	    	if(window.FileReader){
@@ -266,16 +295,6 @@
 	    		var filename = $(this).val().split('/').pop().split('\\').pop();
 	    	}
 	    	$(this).siblings('#potoFile').val(filename);
-	    });
-    	
-	    var uploadFile2 = $('.fileBox .uploadBtn2');
-	    uploadFile2.on('change', function(){
-	    	if(window.FileReader){
-	    		var filename = $(this)[0].files[0].name;
-	    	} else {
-	    		var filename = $(this).val().split('/').pop().split('\\').pop();
-	    	}
-	    	$(this).siblings('#videoFile').val(filename);
 	    });
 	    
 	    $('#rowplus').click(function(){
