@@ -14,7 +14,7 @@
 <style>
     /* 섹션 */
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1500px; padding-top: 30px; padding-bottom:10%;}
+    background: rgba(255,255,255,1); height:1400px; padding-top: 30px; padding-bottom:10%;}
     
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
@@ -41,7 +41,7 @@
             <h3>아티스트 등록</h3>
             <br>
             <div class="become-artist">
-                <form action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
+                <form action="<%= request.getContextPath() %>/upgrade.at" method="post" encType="multipart/form-data">
                     <input type="hidden" name="userCode" value="<%= userCode %>">
                     <label for="artistName">활동 명 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="artistName" placeholder="활동명 or 팀명을 입력해주세요." size="30"><br><br>
                     <label for="">인원 수 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="number"><br><br>

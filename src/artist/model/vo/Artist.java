@@ -9,7 +9,6 @@ public class Artist {
 	private String atGenre;
 	private String atClass;
 	private String atPicPath;
-	private String atVideoPath;
 	private String atOneLine;
 	private String atIntro;
 	private String atRecode;
@@ -51,7 +50,7 @@ public class Artist {
 	}
 	
 
-	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath, String atVideoPath,
+	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath,
 			String atInsta, String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
@@ -59,14 +58,13 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
 		this.atInsta = atInsta;
 		this.atTwitter = atTwitter;
 		this.atFacebook = atFacebook;
 	}
 
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atVideoPath, String atOneLine, String atIntro, String atRecode, Date atDebutDate, String atInsta,
+			String atOneLine, String atIntro, String atRecode, Date atDebutDate, String atInsta,
 			String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
@@ -75,7 +73,6 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
 		this.atOneLine = atOneLine;
 		this.atIntro = atIntro;
 		this.atRecode = atRecode;
@@ -86,7 +83,7 @@ public class Artist {
 	}
 
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
-			String atVideoPath, String atOneLine, String atIntro, String atRecode, Date atDebutDate, int atGrade,
+			String atOneLine, String atIntro, String atRecode, Date atDebutDate, int atGrade,
 			String atInsta, String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
@@ -95,7 +92,6 @@ public class Artist {
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
-		this.atVideoPath = atVideoPath;
 		this.atOneLine = atOneLine;
 		this.atIntro = atIntro;
 		this.atRecode = atRecode;
@@ -152,14 +148,6 @@ public class Artist {
 
 	public void setAtPicPath(String atPicPath) {
 		this.atPicPath = atPicPath;
-	}
-
-	public String getAtVideoPath() {
-		return atVideoPath;
-	}
-
-	public void setAtVideoPath(String atVideoPath) {
-		this.atVideoPath = atVideoPath;
 	}
 
 	public String getAtOneLine() {
@@ -229,7 +217,7 @@ public class Artist {
 	@Override
 	public String toString() {
 		return "Artist [atCode=" + atCode + ", atName=" + atName + ", atMember=" + atMember + ", atGenre=" + atGenre
-				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atVideoPath=" + atVideoPath + ", atOneLine="
+				+ ", atClass=" + atClass + ", atPicPath=" + atPicPath + ", atVideoPath=" + ", atOneLine="
 				+ atOneLine + ", atIntro=" + atIntro + ", atRecode=" + atRecode + ", atDebutDate=" + atDebutDate
 				+ ", atGrade=" + atGrade + ", atInsta=" + atInsta + ", atTwitter=" + atTwitter + ", atFacebook="
 				+ atFacebook + "]";

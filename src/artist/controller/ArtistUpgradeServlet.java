@@ -26,14 +26,14 @@ import common.ATFileRenamePolicy;
 /**
  * Servlet implementation class InsertArtistServlet
  */
-@WebServlet("/insert.at")
-public class ArtistInsertServlet extends HttpServlet {
+@WebServlet("/upgrade.at")
+public class ArtistUpgradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ArtistInsertServlet() {
+    public ArtistUpgradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -109,8 +109,9 @@ public class ArtistInsertServlet extends HttpServlet {
 			
 			String selfiePath = savePath + saveFiles.get(0); 
 			
-			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, videoLink, intro, info, activity, sqlDate, insta, twitter, facebook);
-		
+			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
+			
+			
 			int result = new ArtistService().insertArtist(artist);
 			
 			HttpSession session = request.getSession();
