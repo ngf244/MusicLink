@@ -67,6 +67,7 @@ public class ArtistFollowListServlet extends HttpServlet {
 		ArrayList<FollowArtist> list = service.selectFollowList(currentPage, userCode);
 		
 		System.out.println(pi);
+		System.out.println(list);
 		
 		String page = null;
 		if(list != null) {
