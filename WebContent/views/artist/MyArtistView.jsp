@@ -35,7 +35,7 @@
     
     /* 나의 아티스트 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt; color: black;}
 
     .artistInfo{border-bottom: 1px solid rgb(209, 209, 209); margin-top: 2%; padding-left: 5%;}
 
@@ -201,7 +201,7 @@
                 
                 <div class="artistInfo">
                     <div class="profileBox">
-                        <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath().substring(66) %>">
+                        <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath().substring(64) %>">
                     </div>
                     <div class="artistDesc">
                         <ul>
