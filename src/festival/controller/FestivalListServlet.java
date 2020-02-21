@@ -2,6 +2,7 @@ package festival.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,12 +60,12 @@ public class FestivalListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList<Festival> list = service.selectList(currentPage);
+		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage);
 		
 		String page = null;
-		if(list != null) {
+		if(map != null) {
 			page = "views/festival/FestivalList.jsp";
-			request.setAttribute("list", list);
+			request.setAttribute("map", map);
 			request.setAttribute("pi", pi);
 		} else {
 			page = "views/common/errorPage.jsp";
