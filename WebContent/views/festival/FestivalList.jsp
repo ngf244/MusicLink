@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--
 <%@ page import = "java.util.ArrayList, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
 <%
 	ArrayList<Festival> list = (ArrayList<Festival>)request.getAttribute("list");
@@ -11,6 +12,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 %>
+ --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -117,14 +119,13 @@
 		
 		<div id="contentArea">
 	
-			<!-- 
 			<div class="banner animation">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt="">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt="">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt="">
 			</div>
-			 -->
-			 
+			
+			 <!-- 
 			 <div class="banner slide">
 			 <ul>
 			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt=""></li>
@@ -132,22 +133,23 @@
 			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt=""></li>
 			 </ul>
 			 </div>
-			
-			<%-- 
+			  -->
+			  
+			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+			<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 			<script type="text/javascript" src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 			<script>
-				$('.animation').slick({
-					infinite: true,
-					autoplay:true,
-					autoplaySpeed:3000,
-					fade:true,
-					dots:true,
-					arrows:true,
-					cssEase:'ease',
-					easing:'ease',
-		    	});
+				$(document).ready(function(){
+					$('.banner').slick({
+						autoplay:true,
+						autoplaySpeed:3000,
+						fade:true,
+						arrows:true,
+						cssEase:'ease',
+						easing:'ease',
+			    	});
+			    });
 			</script>
-			 --%>
 			<!-- 
 			<div id="banner_paging_area">
 				<input type="button" value="<" id="banner_left" onclick="paging(this);">
@@ -237,6 +239,8 @@
 				</div>
 				
 				<div id="festivalList">
+					<%--
+					
 					<% if(list.isEmpty()) { %>
 						<label>등록된 행사가 없습니다.</label>
 					<% } else {
@@ -275,6 +279,7 @@
 					</div>
 						 <% }
 					   } %>
+					 --%>
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">

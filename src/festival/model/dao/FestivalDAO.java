@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import artist.model.vo.Artist;
 import festival.model.vo.Festival;
 
 import static common.JDBCTemplate.*;
@@ -86,14 +87,21 @@ public class FestivalDAO {
 
 	public ArrayList<Festival> selectList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
 		ArrayList<Festival> list = null;
+		String artistArr[] = null;
 		ResultSet rset = null;
+		ResultSet rset2 = null;
+		ResultSet rset3 = null;
 		int posts = 10; //한 페이지에 보여질 게시글 개수
 		
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
 		
 		String query = prop.getProperty("selectList");
+		String query2 = prop.getProperty("findArtist");
+		String query3 = prop.getProperty("findArtistName");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -110,12 +118,36 @@ public class FestivalDAO {
 										  rset.getString("fes_term"),
 										  rset.getInt("recruit_num"),
 										  rset.getString("recruit_term"),
-										  rset.getString("event_poster_path"),
+										  rset.getString("fes_poster_path"),
 										  rset.getString("fes_banner_path"),
 										  rset.getString("secret_option"),
-										  rset.getInt("ticket_fee"));
+										  rset.getInt("ticket_fee"),
+										  rset.getString("cp_code"));
+				
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, f.getFesCode());
+				
+				rset2 = pstmt2.executeQuery();
+				
+				while(rset2.next()) {
+					String artCode = rset.getString("USER_CODE");
+
+					pstmt3 = conn.prepareStatement(query3);
+					pstmt3.setString(1, artCode);
+					
+					rset3 = pstmt3.executeQuery();
+					
+					int i = 0;
+					while(rset3.next()) {
+						artistArr[i] = rset3.getString("at_name");
+						i++;
+					}
+				}
+				
 				list.add(f);
 			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

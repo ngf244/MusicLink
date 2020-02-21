@@ -239,7 +239,7 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file test">
-									<input type="file" multiple="multiple" name="posterPath" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
+									<input type="file" accept="image/*" multiple="multiple" name="posterPath" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
 									<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
 								</div>
 							</div>
@@ -250,7 +250,7 @@
 						<td>
 							<div class="input-group mb-3 postergroup">
 								<div class="custom-file">
-									<input type="file" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
+									<input type="file" accept="image/*" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
 									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
 								</div>
 							</div>
