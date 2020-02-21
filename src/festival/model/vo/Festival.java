@@ -38,7 +38,7 @@ public class Festival {
 	
 	
 	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, int recCount, String recTerm,
-			String posPath, String banPath, String secOp, int ticFee) {
+			String posPath, String banPath, String secOp, int ticFee, String cpCode) {
 		super();
 		this.fesCode = fesCode;
 		this.fesName = fesName;
@@ -50,6 +50,7 @@ public class Festival {
 		this.banPath = banPath;
 		this.secOp = secOp;
 		this.ticFee = ticFee;
+		this.cpCode = cpCode;
 	}
 
 	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
