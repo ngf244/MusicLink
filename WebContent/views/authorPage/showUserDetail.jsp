@@ -1,5 +1,19 @@
+<%@page import="authorPage.model.vo.Follow"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	int type = (int)request.getAttribute("type");
+	String userClass = null;
+	switch(type){
+	case 1 : userClass = "일반회원"; break;
+	case 2 : userClass = "아티스트회원"; break;
+	case 3 : userClass = "기업회원"; break;
+	}
+	Member mem = (Member)request.getAttribute("mem");
+	String img = (String)request.getAttribute("img");
+	ArrayList<Follow> fArr = (ArrayList<Follow>)request.getAttribute("fArr");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,20 +39,22 @@
     .searchBox-submitButton{width: 20%; height: 100%; right: 0%;}
     
     .userDetailBox{width: 80%; height: 30%; top: 25%; left: 10%;}
-    .userDetailBox-imgBox{background-color: seashell; width: 35%; height: 100%; top: 0%; left: 5%;}
+    .userDetailBox-imgBox{border: 1px inset black; width: 35%; height: 100%; top: 0%; left: 5%;}
     .userDetailBox-nameBox{width: 50%; height: 24%; top: 0%; right: 5%;}
     .userDetailBox-addressBox{width: 50%; height: 24%; top: 33%; right: 5%;}
     .userDetailBox-usertypeBox{width: 50%; height: 24%; top: 66%; right: 5%;}
     
-    fieldset{border: 1px solid black; height: 100%;}
+    fieldset{border: 1px solid black; height: 100%; text-align: center;}
     legend{font-size: larger;}
-    input[readonly]{width: 99%; height: 55%; margin-top: 10px;}
+    input[readonly]{width: 99%; height: 55%; margin-top: 10px; text-align: center}
 
     .recentActiveBox{width: 46%; height: 40%; bottom: 3%; left: 3%;}
     .followListBox{width: 46%; height: 40%; bottom: 3%; right: 3%;}
     .title{background-color: #FDF1F1; width: 100%; height: 12%; top: 0%; text-align: center; line-height: 42px; right:0%; left: 0%;}
-    .title+div{background-color: violet; width: 100%; height: 80%; top: 15%;}
-    .title+div table{width: 100%; border: 1px solid black;}
+    .title+div{width: 100%; height: 80%; top: 15%; overflow: auto;}
+    .title+div table{width: 100%; border: 1px solid black; text-align: center;}
+    
+    img{width: 100%; height: 100%}
     /* section2 끝 */
 
 
@@ -59,24 +75,30 @@
         
             <div class="userDetailBox">
                 <div class="userDetailBox-imgBox">
-                    img 사진 들어갈 곳
+                    <%if(type == 1){ %>
+                    <img src="<%=request.getContextPath()%>/views/authorPage/image/nomalUser.png">
+                    <%}else if(type == 3){ %>
+                    <img src="<%=request.getContextPath()%>/views/authorPage/image/companyUser.png">
+                    <%}else{ %>
+                    <img src="<%=request.getContextPath()%>/artistProfile_uploadFiles/<%=img%>">
+                    <%} %>
                 </div>
                 <div class="userDetailBox-nameBox">
                     <fieldset>
                         <legend>이름</legend>
-                        <input type="text" readonly>
+                        <input type="text" readonly value="<%=mem.getUserName()%>">
                     </fieldset>
                 </div>
                 <div class="userDetailBox-addressBox">
                     <fieldset>
-                        <legend>주소</legend>
-                        <input type="text" readonly>
+                        <legend>연락처</legend>
+                        <input type="text" readonly value="<%=mem.getUserPhone()%>">
                     </fieldset>
                 </div>
                 <div class="userDetailBox-usertypeBox">
                     <fieldset>
                         <legend>회원 유형</legend>
-                        <input type="text" readonly>
+                        <input type="text" readonly value="<%=userClass%>">
                     </fieldset>
                 </div>
             </div>
@@ -89,6 +111,7 @@
                             <th>활동</th>
                             <th>Date</th>
                         </tr>
+                       
                     </table>
                 </div>
             </div>
@@ -101,6 +124,13 @@
                             <th>이름</th>
                             <th>Date</th>
                         </tr>
+                        <% for(int i = 0; i < fArr.size(); i++){ %>
+                        	<tr>
+                        		<td><%=fArr.get(i).getAtCode() %></td>
+                        		<td><%=fArr.get(i).getAtName() %></td>
+                        		<td><%=fArr.get(i).getFollowingDate() %></td>
+                        	</tr>
+                        <% } %>
                     </table>
                 </div>
             </div>        
@@ -123,37 +153,6 @@
     <h1 class="htext">A U T H O R</h1>
     
     <%@ include file="../common/footer.jsp" %>
-    
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div class="map-cont-left"></div>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
 <script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -1,6 +1,10 @@
 package authorPage.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import authorPage.model.service.AuthorService;
+import authorPage.model.vo.Follow;
 import member.model.vo.Member;
 
 /**
@@ -30,10 +35,8 @@ public class showUserDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		System.out.println(userId);
 		
 		int type = new AuthorService().checkUserClass(userId);
-		System.out.println(type);
 		
 		Member mem = new AuthorService().selectUser(userId);
 		
@@ -44,9 +47,12 @@ public class showUserDetail extends HttpServlet {
 		}
 		String path = "views/authorPage/showUserDetail.jsp";
 		
+		ArrayList<Follow> fArr= new AuthorService().selectFollow(mem.getUserCode());
+		
 		request.setAttribute("type", type);
 		request.setAttribute("mem", mem);
 		request.setAttribute("img", img);
+		request.setAttribute("fArr", fArr);
 		request.getRequestDispatcher(path).forward(request, response);
 		
 	}
