@@ -54,6 +54,7 @@ public class InsertMemberServlet extends HttpServlet {
 				page = "index.jsp";
 			} else {
 				page = "views/member/ssj_joinArtistForm.jsp";
+				request.setAttribute("userId", userId);
 			}
 		} else {
 			page = "views/common/errorPage.jsp";

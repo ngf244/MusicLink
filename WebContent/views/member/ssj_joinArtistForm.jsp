@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	String userId = (String)request.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -87,13 +89,14 @@
 		</div>
 		
 		<div id="contentArea">
-			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
+			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" onsubmit="insertSubmit();" encType="multipart/form-data">
+			<input type="hidden" name="userId" value="<%= userId %>">
 				<table id="insertInfo">
 					<tr>
 						<td colspan="2" rowspan="5" class="table1_td">
 							<div id="titleImgArea">
 								<img id="titleImg">
-							</div>_
+							</div>
 						</td>
 						<td class="label" id="labelA">활동명</td>
 						<td><input type="text" name="art_name" id="art_name" class="form-control input-default enroll" placeholder="활동명 or 팀명을 입력하세요"></td>
@@ -138,7 +141,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea class="introduce" name="" id="line_intro" rows="5" cols="95" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요."></textarea>
+							<textarea class="introduce" name="introduce" id="line_intro" rows="5" cols="95" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요."></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -146,7 +149,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea class="introduce" name="" id="art_intro" rows="10" cols="95" placeholder="프로필에 들어갈 아티스트 소개를 적어주세요."></textarea>
+							<textarea class="introduce" name="artistInfo" id="art_intro" rows="10" cols="95" placeholder="프로필에 들어갈 아티스트 소개를 적어주세요."></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -167,14 +170,14 @@
 										<th class="art_history1">작사</th>
 										<th class="art_history1">작곡</th>
 									</tr>
-									<tr>
-										<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="2020.02.20"></td>
-										<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="kh세미프로젝트"></td>
-										<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="ROCK"></td>
-										<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="싸우는거 아니조"></td>
-										<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="싸우는거 맞조"></td>
-									</tr>
 									<tbody>
+										<tr>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="2020.02.20"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="kh세미프로젝트"></td>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="ROCK"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="싸우는거 아니조"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="싸우는거 맞조"></td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -221,12 +224,13 @@
 						</td>
 					</tr>
 				</table>
+				<div id="fileArea">
+					<input type="file" id="profile" multiple="multiple" name="profile" onchange="LoadImg(this)">
+				</div>
+				<input type="hidden" id="hiddenHistory" name="hiddenHistory">
 			</form>
 		</div>
 		
-		<div id="fileArea">
-			<input type="file" id="profile" multiple="multiple" name="profile" onchange="LoadImg(this)">
-		</div>
 	</section>
 	<h1 class="htext">A R T I S T</h1>
     
@@ -284,9 +288,6 @@
     		}
     	}
     	
-    	
-	    
-    	
 	    var uploadFile1 = $('.fileBox .uploadBtn1');
 	    uploadFile1.on('change', function(){
 	    	if(window.FileReader){
@@ -316,6 +317,27 @@
 	    $('#rowminus').click(function(){
 	    	$('.historyTable > tbody:last > tr:last').remove();
 	    });
+	    
+	    function insertSubmit(){
+	    	var tr = $('.historyTable > tbody tr');
+	    	var td = tr.children();
+	    	var total = "";
+	    	
+	    	for(var i = 1; i < num.length; i++) {
+	    		
+	    		if(i == 1){
+	    			total += td.eq(0).val() + "," + td.eq(1).val() + ","
+	    					+ td.eq(2).val() + "," + td.eq(3).val() + ","
+	    					+ td.eq(4).val();
+	    		} else {
+	    		}
+	    	}
+	    	$('#hiddenHistory').val(total);
+	    	
+	    	
+	    }
+	    
+	    
     </script>
     
 </body>

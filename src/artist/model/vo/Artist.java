@@ -62,6 +62,25 @@ public class Artist {
 		this.atTwitter = atTwitter;
 		this.atFacebook = atFacebook;
 	}
+	
+	
+
+	public Artist(String atName, int atMember, String atGenre, String atClass, String atPicPath, String atOneLine,
+			String atIntro, String atRecode, Date atDebutDate, String atInsta, String atTwitter, String atFacebook) {
+		super();
+		this.atName = atName;
+		this.atMember = atMember;
+		this.atGenre = atGenre;
+		this.atClass = atClass;
+		this.atPicPath = atPicPath;
+		this.atOneLine = atOneLine;
+		this.atIntro = atIntro;
+		this.atRecode = atRecode;
+		this.atDebutDate = atDebutDate;
+		this.atInsta = atInsta;
+		this.atTwitter = atTwitter;
+		this.atFacebook = atFacebook;
+	}
 
 	public Artist(String atCode, String atName, int atMember, String atGenre, String atClass, String atPicPath,
 			String atOneLine, String atIntro, String atRecode, Date atDebutDate, String atInsta,
