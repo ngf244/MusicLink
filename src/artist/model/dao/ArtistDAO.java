@@ -29,7 +29,7 @@ public class ArtistDAO {
 			e.printStackTrace();
 		}
 	}
-	public int insertArtist(Connection conn, Artist artist) {
+	public int upgradeArtist(Connection conn, Artist artist) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		

@@ -15,12 +15,12 @@ import member.model.dao.MemberDAO;
 
 public class ArtistService {
 
-	public int insertArtist(Artist artist) {
+	public int upgradeArtist(Artist artist) {
 		Connection conn = getConnection();
 		ArtistDAO atDAO = new ArtistDAO();
 		String userCode = artist.getAtCode();		
 		
-		int result1 = atDAO.insertArtist(conn, artist);
+		int result1 = atDAO.upgradeArtist(conn, artist);
 		int result2 = new MemberDAO().updateMemberClass(conn, userCode);
 		
 		if(result1 > 0 && result2 > 0) {
