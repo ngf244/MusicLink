@@ -112,7 +112,7 @@ public class ArtistUpgradeServlet extends HttpServlet {
 			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
 			
 			
-			int result = new ArtistService().insertArtist(artist);
+			int result = new ArtistService().upgradeArtist(artist);
 			
 			HttpSession session = request.getSession();
 			

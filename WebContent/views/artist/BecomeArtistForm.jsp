@@ -18,9 +18,9 @@
     
     /* 아티스트 등록 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}  
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}  
     .views1 h3{background: #af9ce6; font-size: 20pt;}
-    .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px; font-size: 15pt;}
+    .become-artist{margin-left: 8%; padding-left: 5%; line-height: 30px; font-size: 14pt;}
 	.artistReg_btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;

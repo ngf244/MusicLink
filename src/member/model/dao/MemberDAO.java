@@ -83,7 +83,7 @@ public class MemberDAO {
 			pstmt.setString(6, member.getUserGender());
 			pstmt.setString(7, member.getUserPhone());
 			
-			System.out.println("pass : "+member.getUserPwd());
+			System.out.println("pass(memberDAO) : "+member.getUserPwd());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

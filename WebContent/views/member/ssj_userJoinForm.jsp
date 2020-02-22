@@ -11,7 +11,7 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height: 1000px; font-family: "Roboto", sans-serif;} 
+    background: #fff; height: 1100px; font-family: "Roboto", sans-serif;} 
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
@@ -20,7 +20,7 @@
 	.mj{text-align: center; padding-top: 40px; padding-bottom: 20px; font-size: 40px; color: #6600cc;} 
 	.label{width: 250px; font-weight: 600; color: #76838f;}
 	.text_input{height: 34.4px;}
-	#idResult{height: 20px;}
+	label[id$=Result]{height: 30px; font-size: 14px;}
     #btn{text-align: center; padding: 10px;}
 	.btn{
 		padding: 12.5px 18px;
@@ -93,6 +93,7 @@
 							<input type="text" name="user_year" id="user_year" class="form-control input-default enroll" placeholder="년">
 							<input type="text" name="user_month" id="user_month" class="form-control input-default enroll" placeholder="월">
 							<input type="text" name="user_day" id="user_day" class="form-control input-default enroll" placeholder="일">
+							<br><label id="dateResult">ex) 1990 01 01 와 같이 입력해주세요</label>
        					</td>
 					</tr>
 					<tr>
@@ -191,94 +192,99 @@
 	<script>
 		var isUsable = false;
 		var inIdChecked = false;
-		
+		var pwdChecked = false;
+		var pwd2Chedcked = false;
+		var nameChecked = false;
 		
 		var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
+		var nameCheck = /^[가-힣]{2,}$/;
+		var pwdCheck = /^[a-zA-Z](?=.*[~!@\#$%<>^&*])(?=.*[0-9]).{7,11}$/;
 		
 		function idCheck(){
 			var userId = $('#user_id');
 			
-			isUsable = false;
-			inIdChecked = false;
-			
-			if(userIdCheck.test(userId.val())){
-				$.ajax({
-					url: "<%= request.getContextPath() %>/idCheck.me",
-					type: 'post',
-					data: {userId: userId.val()},
-					success: function(data){
-						if(data == 'success'){
-							$('#idResult').text('사용 가능합니다.').css('color', 'green');
-							isUsable = true;
-							isIdChecked = true;
-						} else {
-							$('#idResult').text('사용 불가능합니다.').css('color', 'red');
-							isUsable = false;
-							idIdChecked = false;
-							userId.focus();
+				if(userIdCheck.test(userId.val())){
+					$.ajax({
+						url: "<%= request.getContextPath() %>/idCheck.me",
+						type: 'post',
+						data: {userId: userId.val()},
+						success: function(data){
+							if(data == 'success'){
+								$('#idResult').text('사용 가능합니다.').css('color', 'green');
+								isUsable = true;
+								isIdChecked = true;
+							} else {
+								$('#idResult').text('사용 불가능합니다.').css('color', 'red');
+								isUsable = false;
+								idIdChecked = false;
+								userId.focus();
+							}
+						},
+						error: function(data){
+							console.log(data);
 						}
-					},
-					error: function(data){
-						console.log(data);
-					}
-				});
-			} else{
-				$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');;
-				userId.focus();
-			}
-		}
-		
-		
-		
-		function validate(){
-			var infoAgree = $('#agree').is(":checked");
-			console.log(infoAgree);
-			if(isUsable && idIdChecked && infoAgree){
-				return true;
-			} else {
-				if(isUsable == false && idIdChecked == false){
-					alert('아이디 중복확인을 해주세요');
-				} else if(infoAgree == false){
-					alert('개인정보 동의서에 동의를 체크해주세요.');
+					});
+				} else{
+					$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');;
+					userId.focus();
 				}
-				return false;
-			}
 		}
-		
-		
-		var nameCheck = /^[가-힣]{2,}$/;
-		var pwdCheck = /^[a-zA-Z](?=.*[!*&])(?=.*[0-9]).{7,11}$/;
-		
-		$('#user_name').blur(function(){
+
+		$('#user_name').change(function(){
 			if(nameCheck.test($(this).val())){
-				$('#nameResult').text('정상입력').css('color', 'green');
+				nameChecked = true;
 			} else{
-				$(this).focus();
 				$('#nameResult').text('알맞는 이름을 입력하세요').css('color', 'red');
 			}
 		});
 		
-		$('#user_pwd').blur(function(){
+		$('#user_pwd').change(function(){
 			if(pwdCheck.test($(this).val())){
 				$('#pwdResult').text('정상입력').css('color', 'green');
+				pwdChecked = true;
 			} else{
-				$(this).focus();
-				$('#pwdResult').text('조건에 만족하지 않습니다.').css('color', 'red');
+				$('#pwdResult').text('영문,숫자,특수기호를 조합하세요.').css('color', 'red');
 			}
 		});
 		
-		$('#user_pwd2').blur(function(){
+		$('#user_pwd2').change(function(){
 			if(pwdCheck.test($(this).val())){
 				$('#pwd2Result').text('정상입력').css('color', 'green');
+				pwd2Chedcked = true;
 			} else{
-				$(this).focus();
-				$('#pwd2Result').text('비밀번호가 일치하지 않습니다..').css('color', 'red');
+				$('#pwd2Result').text('비밀번호가 일치하지 않습니다.').css('color', 'red');
 			}
 		});
 		
-		/* $('#user_year').blur(function(){
-			if($(this))
-		}); */
+		function validate(){
+			if(!isUsable && !idIdChecked){
+				alert("아이디 중복체크를 해주세요.");
+				return false;
+			} else if(pwdChecked == false){
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			} else if(pwd2Chedcked == false){
+				alert("비밀번호 확인을 해주세요.");
+				return false;
+			} else if(nameChecked == false){
+				alert("이름을 제대로 입력헤주세요.");
+				return false;
+			} else if($('#user_year').val() == "" || $('#user_month').val() == "" || $('#user_day').val() == ""){
+				alert("생년월일을 입력해주세요.")
+				return false;
+			} else if($('#user_email').val() == ""){
+				alert("이메일을 입력해주세요.")
+				return false;
+			} else if($('#user_phone').val() == ""){
+				alert("전화번호를 입력해주세요.")
+				return false;
+			} else if(!($('#agree').is(":checked"))) {
+				alert("개인정보 동의서를 동의해주세요.")
+				return false;
+			} else {
+				return true;
+			}
+		}
 	</script>
 </body>
 </html>

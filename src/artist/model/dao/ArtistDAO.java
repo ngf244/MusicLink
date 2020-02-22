@@ -29,7 +29,7 @@ public class ArtistDAO {
 			e.printStackTrace();
 		}
 	}
-	public int insertArtist(Connection conn, Artist artist) {
+	public int upgradeArtist(Connection conn, Artist artist) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -108,6 +108,7 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -135,18 +136,21 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userCode);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userCode);
 			
 			rset = pstmt.executeQuery();
+			list = new ArrayList<FollowArtist>();
 			
 			while(rset.next()) {
 				FollowArtist fa = new FollowArtist(rset.getString("USER_CODE"),
-									  			  rset.getString("AT_NAME"),
-									  			  rset.getString("AT_GENRE"),
-									  			  rset.getString("AT_CLASS"),
-									  			  rset.getString("PROFILE_PIC_PATH"),
-									  			  rset.getString("AT_ONELINE"),
-									  			  rset.getDate("FOLLOWING_TIME"));
+									  			   rset.getString("AT_NAME"),
+									  			   rset.getString("AT_GENRE"),
+									  			   rset.getString("AT_CLASS"),
+									  			   rset.getString("PROFILE_PIC_PATH"),
+									  			   rset.getString("AT_ONELINE"),
+									  			   rset.getDate("FOLLOWING_TIME"));
 				list.add(fa);				
 			}
 		} catch (SQLException e) {
@@ -162,16 +166,20 @@ public class ArtistDAO {
 	public int insertArtist(Connection conn, Artist artist, String userId) {
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
 		ResultSet rs = null;
 		String result1 = null;
 		int result2 = 0;
+		int result3 = 0;
 		
 		String query1 = prop.getProperty("selectCode");
 		String query2 = prop.getProperty("insertArtist");
+		String query3 = prop.getProperty("updateUserClass");
 		
 		try {
 			pstmt1 = conn.prepareStatement(query1);
 			pstmt2 = conn.prepareStatement(query2);
+			pstmt3 = conn.prepareStatement(query3);
 			
 			pstmt1.setString(1, userId);
 			rs = pstmt1.executeQuery();
@@ -194,6 +202,9 @@ public class ArtistDAO {
 			pstmt2.setString(13, artist.getAtFacebook());
 			
 			result2 = pstmt2.executeUpdate();
+			
+			pstmt3.setString(1, result1);
+			result3 = pstmt3.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -202,7 +213,7 @@ public class ArtistDAO {
 			close(pstmt1);
 		}
 		
-		return result2;
+		return (result2*result3);
 	}
 
 }

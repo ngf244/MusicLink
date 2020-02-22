@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--
-<%@ page import = "java.util.ArrayList, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
+<%@ page import = "java.util.ArrayList, java.util.LinkedHashMap, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
 <%
-	ArrayList<Festival> list = (ArrayList<Festival>)request.getAttribute("list");
+	LinkedHashMap<Festival, ArrayList<String>> map = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("map");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -12,7 +11,6 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 %>
- --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,13 +71,13 @@
     #festivalList{display:block;}
     .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
     .alignspanlist, .alignspan{font-weight: bold;}
-    .festival{display:inline-block; width:65%; margin-top: 5%; text-align:left;}
+    .festival{display:inline-block; width:70%; margin-top: 5%; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     #festivalName{font-size:17px;}
     .festivalDetail{margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
-    .listlabel{width: 45%;}
+    .listlabel{width: 60%;}
     
     #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
     
@@ -119,11 +117,11 @@
 		
 		<div id="contentArea">
 	
-			<div class="banner animation">
+			<!-- <div class="banner animation">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt="">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt="">
 				<img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt="">
-			</div>
+			</div> -->
 			
 			 <!-- 
 			 <div class="banner slide">
@@ -239,12 +237,10 @@
 				</div>
 				
 				<div id="festivalList">
-					<%--
-					
-					<% if(list.isEmpty()) { %>
+					<% if(map == null) { %>
 						<label>등록된 행사가 없습니다.</label>
 					<% } else {
-							for(Festival f : list) {%>
+							for(Festival f : map.keySet()) {%>
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
@@ -266,20 +262,31 @@
 									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td><%= f.getRecCount() %>팀</td>
 								</tr>
+								<%
+									String attendArtist = "";
+									ArrayList<String> list = map.get(f);
+									
+									for(int i = 0; i < list.size(); i++) {
+										if(i != list.size() - 1)
+											attendArtist += list.get(i) + ", ";
+										else
+											attendArtist += list.get(i);
+									}
+								%>
 								<tr>
 									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
+									<td><%= attendArtist %></td>
 								</tr>
 								<tr>
 									<td class="listlabel">주최사명</td>
-									<td>KH</td>
+									<td><%= f.getCpCode() %></td>
 								</tr>
 							</table>
 						</div>
 					</div>
 						 <% }
 					   } %>
-					 --%>
+					 
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
@@ -325,10 +332,10 @@
 						</div>
 					</div>
 				</div>
-					
+				
 				<div id="pagingarea">
                 	<ul class="pagination">
-                		<li class="page-item">
+                		<li class="page-item disalbed">
                 			<a class="page-link" href="#" aria-label="Previous">
                 				<span aria-hidden="true">&laquo;</span>
 								<span class="sr-only">Previous</span>
