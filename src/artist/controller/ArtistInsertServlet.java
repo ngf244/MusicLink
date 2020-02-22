@@ -100,20 +100,47 @@ public class ArtistInsertServlet extends HttpServlet {
 			
 			String intro = multipartRequest.getParameter("introduce");
 			String info = multipartRequest.getParameter("artistInfo");
-			String activity = multipartRequest.getParameter("hiddenHistory");
 			String insta = multipartRequest.getParameter("instaURL");
 			String twitter = multipartRequest.getParameter("twitterURL");
 			String facebook = multipartRequest.getParameter("facebookURL");
 			
+			String[] albumDates = multipartRequest.getParameterValues("albumDate");
+	        String[] albumTitles = multipartRequest.getParameterValues("albumTitle");
+	        String[] albumGenres = multipartRequest.getParameterValues("albumGenre");
+	        String[] albumWriters = multipartRequest.getParameterValues("albumWriter");
+	        String[] albumSongs = multipartRequest.getParameterValues("albumSong");
+	         
+	        String activity = "";
+	         
+	        for(int i = 0; i < albumDates.length; i++) {
+	           activity += albumDates[i] + " ";
+	           activity += albumTitles[i] + " ";
+	           activity += albumGenres[i] + " ";
+	           activity += albumWriters[i] + " ";
+	           activity += albumSongs[i] + " ";
+	            
+	           if(i != albumDates.length - 1) {
+	              activity += "/";
+	           }
+	        }
+	         
 			String selfiePath = savePath + saveFiles.get(0); 
+			
+//			사진첨부가 들어가지 않음!!!
+			/*String artistPotoFile = savePath + saveFiles.get(1);*/
+			String videoUrl = multipartRequest.getParameter("videoFile");
 			
 			Artist artist = new Artist(name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
 			
 			int result = new ArtistService().insertArtist(artist, userId);
+			/*int result2 = new ArtistService().insertProfile(userId, intro, artistPotoFile);*/
+			int result3 = new ArtistService().insertProfile(userId, intro, videoUrl);
+			
+			System.out.println("result : " + result + "result3 : " + result3);
 			
 			HttpSession session = request.getSession();
 			
-			if(result > 0) {
+			if(result > 0&& result3 > 0) {
 				System.out.println("아티스트 등록 성공");
 				request.setAttribute("saveFileName", saveFiles.get(0));
 				session.setAttribute("atFileName", saveFiles.get(0)); 

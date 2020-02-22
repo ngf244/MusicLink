@@ -89,7 +89,7 @@
 		</div>
 		
 		<div id="contentArea">
-			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" onsubmit="insertSubmit();" encType="multipart/form-data">
+			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
 			<input type="hidden" name="userId" value="<%= userId %>">
 				<table id="insertInfo">
 					<tr>
@@ -318,24 +318,6 @@
 	    	$('.historyTable > tbody:last > tr:last').remove();
 	    });
 	    
-	    function insertSubmit(){
-	    	var tr = $('.historyTable > tbody tr');
-	    	var td = tr.children();
-	    	var total = "";
-	    	
-	    	for(var i = 1; i < num.length; i++) {
-	    		
-	    		if(i == 1){
-	    			total += td.eq(0).val() + "," + td.eq(1).val() + ","
-	    					+ td.eq(2).val() + "," + td.eq(3).val() + ","
-	    					+ td.eq(4).val();
-	    		} else {
-	    		}
-	    	}
-	    	$('#hiddenHistory').val(total);
-	    	
-	    	
-	    }
 	    
 	    
     </script>
