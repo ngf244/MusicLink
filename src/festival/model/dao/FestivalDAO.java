@@ -111,8 +111,10 @@ public class FestivalDAO {
 			rset = pstmt.executeQuery();
 			map = new LinkedHashMap<Festival, ArrayList<String>>();
 			
+			ArrayList<String> artistArr = null;
+			Festival f = null;
 			while(rset.next()) {
-				Festival f = new Festival(rset.getString("fes_code"),
+				f = new Festival(rset.getString("fes_code"),
 										  rset.getString("fes_name"),
 										  rset.getString("fes_location"),
 										  rset.getString("fes_term"),
@@ -129,6 +131,7 @@ public class FestivalDAO {
 				
 				rset2 = pstmt2.executeQuery();
 				
+				artistArr = new ArrayList<String>();
 				while(rset2.next()) {
 					String artCode = rset2.getString(1);
 					
@@ -137,20 +140,22 @@ public class FestivalDAO {
 					
 					rset3 = pstmt3.executeQuery();
 					
-					ArrayList<String> artistArr = new ArrayList<String>();
 					while(rset3.next()) {
 						artistArr.add(rset3.getString(1));
 					}
-					
-					map.put(f, artistArr);
 				}
+				
+				map.put(f, artistArr);
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset3);
+			close(rset2);
 			close(rset);
+			close(pstmt3);
+			close(pstmt2);
 			close(pstmt);
 		}
 		

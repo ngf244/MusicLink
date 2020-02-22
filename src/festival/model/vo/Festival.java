@@ -17,6 +17,8 @@ public class Festival {
 	private int ticFee;
 	private String ticUrl;
 	private String cpCode;
+
+	private String ticFreeOp;
 	
 	public Festival() {}
 
@@ -201,6 +203,14 @@ public class Festival {
 
 	public void setCpCode(String cpCode) {
 		this.cpCode = cpCode;
+	}
+
+	public String getTicFreeOp() {
+		return ticFreeOp;
+	}
+
+	public void setTicFreeOp(String ticFreeOp) {
+		this.ticFreeOp = ticFreeOp;
 	}
 	
 	
