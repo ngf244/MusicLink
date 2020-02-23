@@ -94,14 +94,17 @@
 						<td><input type="text" name="id"></td>
 						<td rowspan="2"><input type="submit" class="findBtn findPwdBtn" value="비밀번호 찾기"></td>
 					</tr>
-					
 					<tr>
 						<td>e-mail</td>
 						<td><input type="email" name="email"></td>
 					</tr>
+					<tr>
+						<td colspan="3"><p class="infoMent"></p></td>
+					</tr>
+					
 				</table>				
 			</form>
-		</div>		
+		</div>
     </div>
     <br>
     <a href="javascript:self.close();"><div class="closeBtn">닫기</div></a>

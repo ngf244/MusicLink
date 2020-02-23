@@ -101,5 +101,20 @@ public class MemberService {
 		return id;
 	}
 
+	public int updatePwd(String id, String tempPwd) {
+		Connection conn = getConnection();
+		
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.updatePwd(conn, id, tempPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;	
+	}
+
 
 }
