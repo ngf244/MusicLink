@@ -13,26 +13,9 @@
 	
 <title>나의 아티스트 스케줄</title>
 <style>
-    
-    
-    /* 섹션 */
-    .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
-                    position: absolute; bottom:-25%; left:28%;}
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1200px; padding-top: 30px;} 
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
-    
-    
-    /* 사이드 메뉴 */
-    .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
-    .sec-mtxt{margin-left:5%; margin-top: -15px;}
-    .sec-mtxt > p{ display: inline-block; font-size:20px;}
-    .sec-nav{width:22%; height:85%; border-right: 1px solid rgba(0,0,0,0.4); box-sizing: border-box; float:left;}
-    .smenu{color:#ccc; font-size: 30px; margin:0; margin-top:20px;}
-    .s-smenu{font-size:14px;margin-top:20px; color:#000;}
-    .s-smenu > li{padding:5px 10px;}    
-    
-    .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;  font-family: 'Noto Sans KR', sans-serif;}
+ 	/* 섹션 */
+	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: rgba(255,255,255,1); height:2000px; padding-top: 30px; padding-bottom:10%;}
     
     /* 시작 */
     #menuList div div {display: none;}
@@ -57,6 +40,7 @@
     /* 끝 */
     
     /* 행사리스트 부분 */
+    .eventList{font-size: 14pt;}
     .eventArea{margin: 4%; padding: 2%;}
     .eventImage{width: 180px; height: 250px; background: lightgray; float: left;}
     .eventInfo{width: 250px; height: 250px; float: left; line-height: 30px; margin-left: 30px;}
@@ -199,9 +183,9 @@
     <section style="z-index: 1;">
 	<%@ include file="common/MyPage_Menubar.jsp" %>
 	
-        <div class="sec-menu-views">
+        <div class="sec-menu-views views1">
             <div class="faeText">
-                <h3>팔로잉 아티스트의 행사</h3>
+                <h3 style="font-size:14pt;">팔로잉 아티스트의 행사</h3>
             </div>
             
             <div id="pictureBrowser">
@@ -224,7 +208,7 @@
                     var lastDay = (new Date(date.getFullYear(), date.getMonth()+1, 0)).getDate();
                     var days = "";
                     for(var i = 1; i <= lastDay; i++){
-                        days += "<span class='dayNum' onclick='pickDate("+i+");'>"+i+"</span>";
+                        days += "<span class='dayNum' onclick='pickDate("+i+");'><strong></strong>"+ i +"</span>";
                     }
                     document.getElementById("monthDays").innerHTML = days;
     

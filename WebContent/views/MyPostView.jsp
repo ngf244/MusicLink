@@ -12,28 +12,13 @@
 	<script src="../js/jquery-3.4.1.min.js"></script>
 <title>나의 게시물</title>
 <style>
-    
-    
-    /* 섹션 */
-    .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
-                    position: absolute; bottom:-25%; left:28%;}
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
-    
-    
-    /* 사이드 메뉴 */
-    .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
-    .sec-mtxt{margin-left:5%; margin-top: -15px;}
-    .sec-mtxt > p{ display: inline-block; font-size:20px;}
-    .sec-nav{width:22%; height:85%; border-right: 1px solid rgba(0,0,0,0.4); box-sizing: border-box; float:left;}
-    .smenu{color:#ccc; font-size: 30px; margin:0; margin-top:20px;}
-    .s-smenu{font-size:14px;margin-top:20px; color:#000;}
-    .s-smenu > li{padding:5px 10px;}    
+ 	/* 섹션 */
+	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: rgba(255,255,255,1); height:1200px; padding-top: 30px; padding-bottom:10%;}
     
     /* 내가 작성한 글/댓글 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
     .myPost{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
     .post-nav{width:24.5%; display: inline-block; text-align: center; padding:10px 0; }
     .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
@@ -179,18 +164,18 @@
         <div class="sec-menu-views views1">
             <h3>내가 작성한 글</h3>
             <ul class="myPost">
-                <li class="post-nav">글 번호</li>
-                <li class="post-nav">게시판 유형</li>
-                <li class="post-nav">제목</li>
-                <li class="post-nav">작성일</li>
+                <li class="post-nav" style="width: 10%;">글 번호</li>
+                <li class="post-nav" style="width: 20%;">게시판 유형</li>
+                <li class="post-nav" style="width: 40%;">제목</li>
+                <li class="post-nav" style="width: 20%;">작성일</li>
             </ul>
             <div class="padding-1">
-                <div class="post-num post-sum">3</div>
-                <div class="post-class post-sum">Q&A게시판</div>
-                <div class="post-title post-sum">아티스트 등록은 어떻게 하나요?</div>
-                <div class="post-time post-sum">2020-02-03-22-11-21</div>
+                <div class="post-num post-sum" style="width: 10%;">3</div>
+                <div class="post-class post-sum" style="width: 20%;">Q&A게시판</div>
+                <div class="post-title post-sum" style="width: 40%;">아티스트 등록은 어떻게 하나요?</div>
+                <div class="post-time post-sum" style="width: 20%;">2020-02-03-22-11-21</div>
             </div>
-            <div class="padding-1">
+<!--             <div class="padding-1">
                 <div class="post-num post-sum">2</div>
                 <div class="post-class post-sum">소통게시판</div>
                 <div class="post-title post-sum">처음으로 글 올립니다!</div>
@@ -201,7 +186,7 @@
                 <div class="post-class post-sum">갤러리게시판</div>
                 <div class="post-title post-sum">1월 공연 사진</div>
                 <div class="post-time post-sum">2020-02-03-20-38-12</div>
-            </div>
+            </div> -->
 			<div id="pagingarea">
                	<ul class="pagination">
                		<li class="page-item">

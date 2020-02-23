@@ -13,36 +13,18 @@
 
 <title>알림창 HISTROY</title>
 <style>
-    
-    
-    /* 섹션 */
-    .section-txt{font-size:60px; width:45%; margin:0 auto; font-weight: bold; color:#fff; text-shadow: 1px 1px 15px #ccc;
-                    position: absolute; bottom:-25%; left:28%;}
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px;} 
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 31%; left:34%; color: rgb(224, 224, 224);} 
-    
-    
-    /* 사이드 메뉴 */
-    .sec-line{width:4%; height:5px; background: yellow; margin:0; padding:0; margin-left:5%; margin-top:2%;}
-    .sec-mtxt{margin-left:5%; margin-top: -15px;}
-    .sec-mtxt > p{ display: inline-block; font-size:20px;}
-    .sec-nav{width:22%; height:85%; border-right: 1px solid rgba(0,0,0,0.4); box-sizing: border-box; float:left;}
-    .smenu{color:#ccc; font-size: 30px; margin:0; margin-top:20px;}
-    .s-smenu{font-size:14px;margin-top:20px; color:#000;}
-    .s-smenu > li{padding:5px 10px;}    
-    
+ 	/* 섹션 */
+	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: rgba(255,255,255,1); height:1200px; padding-top: 30px; padding-bottom:10%;}
+        
     /* 알림창 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
-    .views1{display: block; font-family: 'Noto Sans KR', sans-serif;}
+    .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
     .notice{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
     .notice-nav{width:24.5%; display: inline-block; text-align: center; padding:10px 0;}
     .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
     .notice-sum{width:24.5%; display: inline-block; margin:0; padding: 0; text-align: center; vertical-align: middle; line-height: 25px;}
     .views1 h3{background: #af9ce6;}
-    
-
-	
 	
 	/*페이징 css*/
     #pagingarea{text-align:center; display:inline-block; margin-top:5%; margin-left: 40%}	
