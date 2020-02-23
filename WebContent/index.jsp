@@ -13,10 +13,17 @@
 
 <head>
 <meta charset="UTF-8">
-<title>뮤링 메인</title> 
+<title>뮤링 메인</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:'start.do'
+		});
+	});
+</script>
 
 <style>
 	.cm {color:#ffe618 }	/* 메인 */
@@ -301,6 +308,13 @@
     <%@ include file="views/common/footer.jsp" %>
     
     <script>
+    
+    $(function(){
+    	$.ajax({
+    		url:'start.do'
+    	});
+    });
+    
     $(window).scroll(function() { 
         if ($(this).scrollTop() == 0) { 
         	$('#sWrap').css('margin-top','969px');
