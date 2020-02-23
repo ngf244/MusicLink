@@ -162,5 +162,118 @@ public class ArtistDAO {
 		
 		return list;
 	}
+	
+	public int insertArtist(Connection conn, Artist artist, String userId) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		ResultSet rs = null;
+		String result1 = null;
+		int result2 = 0;
+		int result3 = 0;
+		
+		String query1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("insertArtist");
+		String query3 = prop.getProperty("updateUserClass");
+		
+		try {
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt3 = conn.prepareStatement(query3);
+			
+			pstmt1.setString(1, userId);
+			rs = pstmt1.executeQuery();
+			if(rs.next()) {
+				result1 = rs.getString(1);
+			}
+			
+			pstmt2.setString(1, result1);
+			pstmt2.setString(2, artist.getAtName());
+			pstmt2.setInt(3, artist.getAtMember());
+			pstmt2.setString(4, artist.getAtGenre());
+			pstmt2.setString(5, artist.getAtClass());
+			pstmt2.setString(6, artist.getAtPicPath());
+			pstmt2.setString(7, artist.getAtOneLine());
+			pstmt2.setString(8, artist.getAtIntro());
+			pstmt2.setString(9, artist.getAtRecode());
+			pstmt2.setDate(10, artist.getAtDebutDate());
+			pstmt2.setString(11, artist.getAtInsta());
+			pstmt2.setString(12, artist.getAtTwitter());
+			pstmt2.setString(13, artist.getAtFacebook());
+			
+			result2 = pstmt2.executeUpdate();
+			
+			pstmt3.setString(1, result1);
+			result3 = pstmt3.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return (result2*result3);
+	}
+	public int insertProfile(Connection conn, String userId, String intro, String artistMedia) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		
+		String result1 = null;
+		int result2 = 0;
+		String result3 = null;
+		int result4 = 0;
+		
+		String query1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("insertBoard");
+		String query3 = prop.getProperty("selectBoardCode");
+		String query4 = prop.getProperty("insertMedia");
+		
+		try {
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt1.setString(1, userId);
+			rs1 = pstmt1.executeQuery();
+			if(rs1.next()) {
+				result1 = rs1.getString(1);
+			}
+			
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt2.setString(1, intro);
+			pstmt2.setString(2, "아티스트");
+			pstmt2.setString(3, result1);
+			
+			result2 = pstmt2.executeUpdate();
+			
+			pstmt3 = conn.prepareStatement(query3);
+			pstmt3.setString(1, result1);
+			rs2 = pstmt3.executeQuery();
+			if(rs2.next()) {
+				result3 = rs2.getString(1);
+			}
+			
+			pstmt4 = conn.prepareStatement(query4);
+			pstmt4.setString(1, result3);
+			pstmt4.setString(2, artistMedia);
+			
+			result4 = pstmt4.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs2);
+			close(rs1);
+			close(pstmt4);
+			close(pstmt3);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return (result2 * result4);
+	}
 
 }

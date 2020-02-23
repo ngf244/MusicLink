@@ -7,17 +7,14 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-
-	<link href="../../css/style.css" rel="stylesheet">
+	<!-- 부트스트랩 -->
+	<link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
-    <link href="../../css/slick.css" rel="stylesheet" />
-    <link href="../../css/slick-theme.css" rel="stylesheet" />
-    <link href="../../css/common.css" rel="stylesheet" />
-    <link href="../../css/mfooter.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+    <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>FAQ 리스트</title>
 <style>
 section {
@@ -178,63 +175,7 @@ zzzrod
 </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-            logo
-            </div>
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
-        </nav>
-
-        <div id="resize">
-            <ul class="menu">
-                <li class="m-name1 m-name">
-                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
-                    <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
-                        <li class="menu-h"><a href="#">F A Q</a></li>
-                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
-                    </ul>
-                </li>
-                <li class="m-name2 m-name">
-                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
-                    <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name3 m-name">
-                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
-                    <ul class="hidden-manu3 drop">
-                        <li class="menu-h"><a href="#">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
-            </ul>
-        </div>
-        <div class="side-icon">
-            <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="../../img/user.png" alt="" /></a>
-            </div>
-            <div class="image2 icon">
-                <a href="#" ><img src="../../img/bell.png" alt="" /></a>
-            </div>
-            <div class="image3 icon">
-                <img src="../../img/pin.png" alt="" />
-            </div>
-            <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
-            </div>
-        </div>    
-    </header>
+    <%@ include file="../common/menubar.jsp" %>
 
 	<section style="z-index: 1;">
 		<div id="categoryArea">
@@ -287,49 +228,15 @@ zzzrod
 	</section>
 	<h1 class="htext">F A Q</h1>
     
-    <script src="../../plugins/common/common.min.js"></script>
-    <script src="../../js/custom.min.js"></script>
-    <script src="../../js/settings.js"></script>
-    <script src="../../js/gleek.js"></script>
-    <script src="../../js/styleSwitcher.js"></script>
+    <!-- 부트스트랩 -->
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
+    <%@ include file="../common/footer.jsp" %>
+    
     <div class="map">
         <div class="map-bg">
             <h1 class="map-h1">&#215;</h1>
@@ -361,31 +268,5 @@ zzzrod
         </div>
     </div>
     
-<script src="../../js/respond.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/wow.min.js"></script>
-<script src="../../js/parallax.min.js"></script>
-<script src="../../js/slick.min.js"></script>
-<script>
-
-	$("#toggle").click(function(){
-		$(this).toggleClass("on");
-		$("#resize").toggleClass("active");	
-	});
-    
-    $(".image3").click(function(){
-        $(".map").css({"display":"block","width":"100%","height":"80%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
-    });
-    $(".map-h1").click(function(){
-        $(".map").css("display","none");
-    });
-    
-    
-    
-	//new WOW().init();
-	
-	
-</script>
 </body>
 </html>

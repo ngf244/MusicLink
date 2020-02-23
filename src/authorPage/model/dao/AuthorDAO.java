@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import authorPage.model.vo.Follow;
 import member.model.vo.Member;
 
 
@@ -104,6 +105,7 @@ public class AuthorDAO {
 			
 			if(rset.next()) {
 				mem = new Member();
+				mem.setUserCode(rset.getString("USER_CODE"));
 				mem.setUserName(rset.getString("USER_NAME"));
 				mem.setUserPhone(rset.getString("USER_PHONE"));
 			}
@@ -143,6 +145,38 @@ public class AuthorDAO {
 		}
 		
 		return path;
+	}
+
+	public ArrayList<Follow> selectFollow(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Follow f = null;
+		ArrayList<Follow> fArr = new ArrayList<Follow>();
+		
+		String query = prop.getProperty("selectFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				f = new Follow();
+				f.setAtCode(rset.getString("AT_CODE"));
+				f.setFollowingDate(rset.getDate("FOLLOWING_TIME"));
+				f.setAtName(rset.getString("USER_NAME"));
+				fArr.add(f);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fArr;
 	}
 	
 

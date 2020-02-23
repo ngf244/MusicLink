@@ -14,7 +14,7 @@ import member.model.service.MemberService;
 /**
  * Servlet implementation class UpdateMemberServlet
  */
-@WebServlet("/update.me")
+@WebServlet(name="UpdateMemberServlet", urlPatterns="/update.me")
 public class UpdateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

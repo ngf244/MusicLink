@@ -87,7 +87,20 @@ public class ArtistService {
 	public int insertProfile(String userId, String intro, String artistMedia) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
+	public int insertProfile(String userId, String intro, String artistMedia) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
+	
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -95,7 +108,6 @@ public class ArtistService {
 		}
 
 		return result;
-
 	}	
 
 	public int insertVideoLink(String userCode, String videoLink) {

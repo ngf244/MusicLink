@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
-import artist.model.vo.Artist;
 import festival.model.vo.Festival;
 
 import static common.JDBCTemplate.*;
@@ -85,16 +85,16 @@ public class FestivalDAO {
 		return result;
 	}
 
-	public ArrayList<Festival> selectList(Connection conn, int currentPage) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
-		ArrayList<Festival> list = null;
-		String artistArr[] = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		int posts = 10; //한 페이지에 보여질 게시글 개수
+
+		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
@@ -109,10 +109,12 @@ public class FestivalDAO {
 			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Festival>();
+			map = new LinkedHashMap<Festival, ArrayList<String>>();
 			
+			ArrayList<String> artistArr = null;
+			Festival f = null;
 			while(rset.next()) {
-				Festival f = new Festival(rset.getString("fes_code"),
+				f = new Festival(rset.getString("fes_code"),
 										  rset.getString("fes_name"),
 										  rset.getString("fes_location"),
 										  rset.getString("fes_term"),
@@ -129,33 +131,35 @@ public class FestivalDAO {
 				
 				rset2 = pstmt2.executeQuery();
 				
+				artistArr = new ArrayList<String>();
 				while(rset2.next()) {
-					String artCode = rset.getString("USER_CODE");
-
+					String artCode = rset2.getString(1);
+					
 					pstmt3 = conn.prepareStatement(query3);
 					pstmt3.setString(1, artCode);
 					
 					rset3 = pstmt3.executeQuery();
 					
-					int i = 0;
 					while(rset3.next()) {
-						artistArr[i] = rset3.getString("at_name");
-						i++;
+						artistArr.add(rset3.getString(1));
 					}
 				}
 				
-				list.add(f);
+				map.put(f, artistArr);
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset3);
+			close(rset2);
 			close(rset);
+			close(pstmt3);
+			close(pstmt2);
 			close(pstmt);
 		}
 		
-		return list;
+		return map;
 	}
 
 }

@@ -7,6 +7,7 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class FestivalService {
 
@@ -35,13 +36,13 @@ public class FestivalService {
 		return result;
 	}
 
-	public ArrayList<Festival> selectList(int currentPage) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectList(int currentPage) {
 		Connection conn = getConnection();
 		
-		ArrayList<Festival> list = new FestivalDAO().selectList(conn, currentPage);
+		LinkedHashMap<Festival, ArrayList<String>> map = new FestivalDAO().selectList(conn, currentPage);
 		
 		close(conn);
-		return list;
+		return map;
 	}
 	
 }

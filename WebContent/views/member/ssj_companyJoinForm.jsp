@@ -24,7 +24,7 @@
 	#enrollBtn{margin-top:30px;}
 	#enrollBtnSubmit{margin-left: 230px;}
 	.text_input{height: 34.4px;}
-	#idResult{height: 20px;}
+	label[id$=Result]{height: 30px; font-size: 14px;}
     #btn{padding: 10px;}
     
     .btn{
@@ -108,15 +108,16 @@
 					</tr>
 					<tr>
 						<td class="label"><label>회사 전화번호</label></td>
-						<td class="input"><input type="tel" name="company_tel" id="company_tel" class="form-control input-default enroll" placeholder="회사 전화번호를 입력하세요"></td>
+						<td class="input"><input type="tel" name="company_tel" id="company_tel" class="form-control input-default enroll" placeholder="(-)제외하고 입력하세요"></td>
 					</tr>
 					<tr>
 						<td class="label"><label>담당자 이름</label></td>
-						<td class="input"><input type="text" name="user_name" id="user_name" class="form-control input-default enroll" placeholder="담당자 이름을 입력하세요"></td>
+						<td class="input"><input type="text" name="user_name" id="user_name" class="form-control input-default enroll" placeholder="담당자 이름을 입력하세요">
+						<br><label id="nameResult"></label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>전화번호</label></td>
-						<td class="input"><input type="tel" name="user_phone" id="user_phone" class="form-control input-default enroll" placeholder="(-) 제외하고 입력하세요"></td>
+						<td class="input"><input type="tel" name="user_phone" id="user_phone" class="form-control input-default enroll" placeholder="(-)제외하고 입력하세요"></td>
 					</tr>
 					<tr>
 						<td class="label"><label>이메일</label></td>
@@ -256,7 +257,13 @@
 	<script>
 	var isUsable = false;
 	var inIdChecked = false;
+	var pwdChecked = false;
+	var pwd2Chedcked = false;
+	var nameChecked = false;
+	
 	var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
+	var nameCheck = /^[가-힣]{2,}$/;
+	var pwdCheck = /^[a-zA-Z](?=.*[~!@\#$%<>^&*])(?=.*[0-9]).{7,11}$/;
 	
 	function idCheck(){
 		var userId = $('#company_id');
@@ -288,45 +295,68 @@
 		}
 	}
 	
-	function validate(){
-		if(isUsable && idIdChecked){
-			return true;
-		} else{
-			alert('아이디 중복확인을 해주세요');
-			return false;
-		}
-	}
-	
-	
-	var nameCheck = /^[가-힣]{2,}$/;
-	var pwdCheck = /^[a-zA-Z](?=.*[!*&])(?=.*[0-9]).{7,11}$/;
-	
-	$('#user_name').blur(function(){
+	$('#user_name').change(function(){
 		if(nameCheck.test($(this).val())){
-			$('#nameResult').text('정상입력').css('color', 'green');
+			nameChecked = true;
 		} else{
-			$(this).focus();
 			$('#nameResult').text('알맞는 이름을 입력하세요').css('color', 'red');
 		}
 	});
 	
-	$('#company_pwd').blur(function(){
+	$('#company_pwd').change(function(){
 		if(pwdCheck.test($(this).val())){
 			$('#pwdResult').text('정상입력').css('color', 'green');
+			pwdChecked = true;
 		} else{
-			$(this).focus();
 			$('#pwdResult').text('조건에 만족하지 않습니다.').css('color', 'red');
 		}
 	});
 	
-	$('#company_pwd2').blur(function(){
+	$('#company_pwd2').change(function(){
 		if(pwdCheck.test($(this).val())){
 			$('#pwd2Result').text('정상입력').css('color', 'green');
+			pwd2Chedcked = true;
 		} else{
-			$(this).focus();
 			$('#pwd2Result').text('비밀번호가 일치하지 않습니다..').css('color', 'red');
 		}
 	});
+	
+	function validate(){
+		if(!isUsable && !idIdChecked){
+			alert("아이디 중복체크를 해주세요.");
+			return false;
+		} else if(pwdChecked == false){
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		} else if(pwd2Chedcked == false){
+			alert("비밀번호 확인을 해주세요.");
+			return false;
+		} else if($('#company_name').val() == "") {
+			alert("회사명을 입력헤주세요.");
+			return false;
+		} else if($('#zonecodeInput').val() == "" || $('#addressInput').val() == ""){
+			alert("회사 주소를 입력해주세요.")
+			return false;
+		} else if($('#company_tel').val() == ""){
+			alert("회사 전화번호를 입력해주세요.")
+			return false;
+		} else if(nameChecked == false){
+			alert("이름을 제대로 입력헤주세요.");
+			return false;
+		} else if($('#user_phone').val() == ""){
+			alert("전화번호를 입력해주세요.")
+			return false;
+		} else if($('#user_email').val() == ""){
+			alert("이메일을 입력해주세요.")
+			return false;
+		}  else if(!($('#agree').is(":checked"))) {
+			alert("개인정보 동의서를 동의해주세요.")
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	</script>
 </body>
 </html>
