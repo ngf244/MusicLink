@@ -20,7 +20,8 @@ import common.wrapper.EncryptWrapper;
 		servletNames = { 
 				"InsertCompanyServlet", 
 				"InsertMemberServlet", 
-				"LoginServlet"
+				"LoginServlet", 
+				"UpdateMemberServlet"
 		})
 public class EncryptFilter implements Filter {
 
@@ -47,7 +48,6 @@ public class EncryptFilter implements Filter {
 		// place your code here
 		
 		HttpServletRequest hsr = (HttpServletRequest)request;
-		
 		EncryptWrapper ew = new EncryptWrapper(hsr);
 		
 		// pass the request along the filter chain

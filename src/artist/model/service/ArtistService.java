@@ -69,15 +69,28 @@ public class ArtistService {
 		Connection conn = getConnection();
 		ArtistDAO aDAO = new ArtistDAO();
 		
-		int result1 = aDAO.insertArtist(conn, artist, userId);
+		int result = aDAO.insertArtist(conn, artist, userId);
 		
-		if(result1 > 0) {
+		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		
-		return result1;
+		return result;
+	}
+
+	public int insertProfile(String userId, String intro, String artistMedia) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 
 }
