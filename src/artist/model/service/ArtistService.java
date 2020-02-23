@@ -22,7 +22,7 @@ public class ArtistService {
 		String userCode = artist.getAtCode();		
 		
 		int result1 = atDAO.upgradeArtist(conn, artist);
-		int result2 = new MemberDAO().updateMemberClass(conn, userCode);
+		int result2 = new MemberDAO().updateArtistClass(conn, userCode);
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);
