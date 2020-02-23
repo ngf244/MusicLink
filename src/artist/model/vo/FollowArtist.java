@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class FollowArtist {
 	private String userCode;
+	private String atCode;
 	private String atName;
 	private String atGenre;
 	private String atClass;
@@ -13,10 +14,11 @@ public class FollowArtist {
 	
 	public FollowArtist() {}
 
-	public FollowArtist(String userCode, String atName, String atGenre, String atClass, String picPath,
+	public FollowArtist(String userCode, String atCode,  String atName, String atGenre, String atClass, String picPath,
 			String atOneLine, Date followingTime) {
 		super();
 		this.userCode = userCode;
+		this.atCode = atCode;
 		this.atName = atName;
 		this.atGenre = atGenre;
 		this.atClass = atClass;
@@ -33,6 +35,14 @@ public class FollowArtist {
 		this.userCode = userCode;
 	}
 
+	public String getAtCode() {
+		return atCode;
+	}
+
+	public void setAtCode(String atCode) {
+		this.atCode = atCode;
+	}
+	
 	public String getAtName() {
 		return atName;
 	}
@@ -83,9 +93,11 @@ public class FollowArtist {
 
 	@Override
 	public String toString() {
-		return "FollowArtist [userCode=" + userCode + ", atName=" + atName + ", atGenre=" + atGenre + ", atClass="
-				+ atClass + ", picPath=" + picPath + ", atOneLine=" + atOneLine + ", followingTime=" + followingTime
-				+ "]";
+		return "FollowArtist [userCode=" + userCode + ", atCode=" + atCode + ", atName=" + atName + ", atGenre="
+				+ atGenre + ", atClass=" + atClass + ", picPath=" + picPath + ", atOneLine=" + atOneLine
+				+ ", followingTime=" + followingTime + "]";
 	}
+
+
 	
 }
