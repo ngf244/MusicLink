@@ -136,5 +136,18 @@ public class ArtistService {
 		return result;
 	}
 
+	public int unfollowArtist(String userCode, String atCode) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().unfollowArtist(conn, userCode, atCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 
 }

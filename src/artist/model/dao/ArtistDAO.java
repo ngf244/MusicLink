@@ -145,6 +145,7 @@ public class ArtistDAO {
 			
 			while(rset.next()) {
 				FollowArtist fa = new FollowArtist(rset.getString("USER_CODE"),
+												   rset.getString("AT_CODE"),
 									  			   rset.getString("AT_NAME"),
 									  			   rset.getString("AT_GENRE"),
 									  			   rset.getString("AT_CLASS"),
@@ -335,6 +336,27 @@ public class ArtistDAO {
 			close(pstmt);
 		}
 				
+		return result;
+	}
+	public int unfollowArtist(Connection conn, String userCode, String atCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("unfollowArtist");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, atCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
 		return result;
 	}
 
