@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.FAQ"%>
 <% 
 	ArrayList<FAQ> list = (ArrayList<FAQ>)request.getAttribute("list");
-%>    
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -176,7 +176,8 @@ zzzrod
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
-
+	
+	
 	<section style="z-index: 1;">
 		<div id="categoryArea">
 			<div id="block"></div><br>

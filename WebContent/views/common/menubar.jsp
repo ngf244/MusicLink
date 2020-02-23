@@ -41,8 +41,8 @@
                     <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
                     <ul class="hidden-manu1 drop">
                         <li class="menu-h"><a href="<%= request.getContextPath() %>/views/company/ssj_companyInfo.jsp">About us</a></li>
-                        <li class="menu-h"><a href="<%= request.getContextPath() %>/views/faq/FAQListView.jsp">F A Q</a></li>
-                        <li class="menu-h"><a href="<%= request.getContextPath() %>/views/QNA/QNAList.jsp">Q &#38; A</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/list.faq">F A Q</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/list.qna">Q &#38; A</a></li>
                     </ul>
                 </li>
                 <li class="m-name2 m-name">

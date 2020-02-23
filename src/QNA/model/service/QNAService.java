@@ -24,4 +24,63 @@ public class QNAService {
 		return list;
 	}
 
+	public int insertQnA(QnA qna, String userId) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		
+		int result = dao.insertQnA(conn, qna, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		System.out.println("service"+result);
+		return result;
+	}
+
+	public QnA selectQnA(String qnaCode) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		
+		QnA qna = null;
+		qna = dao.selectQnA(conn, qnaCode);
+		
+		if(qna != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return qna;
+	}
+
+	public int deleteQnA(String qnaCode) {
+		Connection conn = getConnection();
+		int result = new QNADAO().deleteQnA(conn, qnaCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int updateQnA(QnA qna) {
+		Connection conn = getConnection();
+		int result = new QNADAO().updateQnA(conn, qna);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	
+
 }
