@@ -226,6 +226,33 @@ public class MemberDAO {
 		return result;
 	}
 
+	public String findId(Connection conn, String name, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String id = "";
+		
+		String query = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				id = rset.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		
+		return id;
+	}
+
 
 	
 
