@@ -27,7 +27,7 @@
             <li class="sec-menu-3 smenu">BECOME
                 <ul class="s-smenu">
                     <li onclick="becomeAT();"><a href="#">아티스트 등록</a></li>
-                    <li><a href="#">행사기획자 등록</a></li>
+                    <li onclick="becomePL();"><a href="#">행사기획자 등록</a></li>
                 </ul>
             </li>
             <li class="sec-menu-4 smenu">EVENT-1
@@ -49,7 +49,11 @@
         	
 <script>
 	function becomeAT(){
-		location.href="views/artist/BecomeArtistForm.jsp";
+		location.href="<%= request.getContextPath() %>/views/artist/BecomeArtistForm.jsp";
+	}
+	
+	function becomePL(){
+		location.href="<%= request.getContextPath() %>/views/planner/BecomePlannerForm.jsp";
 	}
 	
 	function MyArtist(){

@@ -206,11 +206,11 @@ public class MemberDAO {
 		return result;		
 	}
 
-	public int updateMemberClass(Connection conn, String userCode) {
+	public int updateArtistClass(Connection conn, String userCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("updateMemberClass");
+		String query = prop.getProperty("updateArtistClass");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -269,6 +269,26 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 				
+		return result;
+	}
+
+	public int updatePlannerClass(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePlannerClass");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 
