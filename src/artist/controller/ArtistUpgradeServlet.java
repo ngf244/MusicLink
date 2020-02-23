@@ -129,16 +129,20 @@ public class ArtistUpgradeServlet extends HttpServlet {
 			String facebook = multipartRequest.getParameter("facebookURL");
 			String videoLink = multipartRequest.getParameter("videoLink");
 			
-			String selfiePath = savePath + saveFiles.get(0); 
+			String selfiePath = savePath + saveFiles.get(0);
+			String activityImgPath = savePath + saveFiles.get(1);
 			
 			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
 						
 			int result1 = new ArtistService().upgradeArtist(artist);
-			int result2 = new ArtistService().insertVideoLink(userCode, videoLink);
+			int result2 = new ArtistService().insertGalleryBoard(artist);
+			int result3 = new ArtistService().insertVideoLink(userCode, videoLink);
+			int result4 = new ArtistService().insertGalleryBoard(artist);
+			int result5 = new ArtistService().insertActivityImg(userCode, activityImgPath);
 			
 			HttpSession session = request.getSession();
 			
-			if(result1 > 0) {
+			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
 				System.out.println("아티스트 등록 성공");
 				request.setAttribute("saveFileName", saveFiles.get(0));
 				session.setAttribute("atFileName", saveFiles.get(0)); 

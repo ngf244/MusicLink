@@ -23,11 +23,4 @@ public class GalleryDAO {
 		}
 	}
 
-	public int insertVideoLink(String userCode, String videoLink) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("insertVideoLink");
-		return 0;
-	}
 }

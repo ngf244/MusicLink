@@ -97,23 +97,44 @@ public class ArtistService {
 		return result;
 	}
 
-	public int insertProfile(String userId, String intro, String artistMedia) {
+	public int insertGalleryBoard(Artist artist) {
 		Connection conn = getConnection();
-		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
-	
+		int result = new ArtistDAO().insertGalleryBoard(conn, artist);
+		
 		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-
+		
 		return result;
-	}	
+	}
 
 	public int insertVideoLink(String userCode, String videoLink) {
 		Connection conn = getConnection();
-		int result = new GalleryDAO().insertVideoLink(userCode, videoLink);
-		return 0;
+		int result = new ArtistDAO().insertVideoLink(conn, userCode, videoLink);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
+
+	public int insertActivityImg(String userCode, String activityImgPath) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertActivityImg(conn, userCode, activityImgPath);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 
 }
