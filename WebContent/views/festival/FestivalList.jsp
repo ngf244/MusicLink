@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, java.util.LinkedHashMap, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
+<%@ page import = "java.util.ArrayList, java.util.Date, java.util.GregorianCalendar, java.util.LinkedHashMap, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
 <%
 	LinkedHashMap<Festival, ArrayList<String>> map = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("map");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -30,7 +30,7 @@
     
 <title>행사 리스트</title>
 <style>
-    section {width:70%; height:280%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
+    section {width:70%; height:410%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
@@ -75,11 +75,13 @@
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
-    #festivalName{font-size:17px;}
-    .festivalDetail{margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
-    .listlabel{width: 60%;}
+    .festivalName{font-size:17px;}
     
-    #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
+    .festivalDetail{width: 100%; margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
+    .tdspace{width: 5%;}
+    .listlabel{width: 35%;}
+    
+    #pagingarea{text-align:center; display:inline-block; margin-top:10%;}
     
     footer .ft-content{width:70%; !important;}
     
@@ -244,16 +246,60 @@
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
+							<%
+								String attendArtist = "";
+								ArrayList<String> list = map.get(f);
+								
+								for(int i = 0; i < list.size(); i++) {
+									if(i != list.size() - 1)
+										attendArtist += list.get(i) + ", ";
+									else
+										attendArtist += list.get(i);
+								}
+								
+								String fesTerm = f.getFesTerm();
+								String endFes[] = fesTerm.split(" - ");
+								String dateSplit[] = (endFes[endFes.length-1]).split("/");
+								
+								int month = 0;
+								int day = 0;
+								int year = 0;
+								if(endFes.length > 1) {
+									month = Integer.parseInt(dateSplit[0]);
+									day = Integer.parseInt(dateSplit[1]);
+									year = Integer.parseInt(dateSplit[2]);
+								}
+
+								Date endFesDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
+								Date today = new Date(new GregorianCalendar().getTimeInMillis());
+								
+								long minus = today.getTime() - endFesDate.getTime();
+								
+								String addcls = "";
+								String addtext = "";
+								if (today.getTime() > endFesDate.getTime()) {
+									addcls = "badge badge-pill badge-light";
+									addtext = "지난 행사";
+								} else if (list.size() < f.getRecCount()) { 
+									addcls = "badge badge-pill badge-success";
+									addtext = "아티스트 모집 중";
+								} else if (list.size() == f.getRecCount()) { 
+									addcls = "badge badge-pill badge-danger";
+									addtext = "아티스트 확정";
+								}
+							%>
 							<div>
-								<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
-								<label id="festivalName"><%= f.getFesName() %></label>
+								<span class="<%= addcls %> alignspanlist"><%= addtext %></span> &nbsp;
+								<label class="festivalName"><%= f.getFesName() %></label>
 							</div>
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
-									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td class="tdspace" rowspan=5></td>
 									<td><%= f.getFesTerm() %></td>
 								</tr>
+								<% if(addtext.equals("아티스트 모집 중") && loginUser != null) {
+									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
 								<tr>
 									<td class="listlabel">아티스트 모집 기간</td>
 									<td><%= f.getRecTerm() %></td>
@@ -262,36 +308,36 @@
 									<td class="listlabel">모집 아티스트 팀 수</td>
 									<td><%= f.getRecCount() %>팀</td>
 								</tr>
-								<%
-									String attendArtist = "";
-									ArrayList<String> list = map.get(f);
-									
-									for(int i = 0; i < list.size(); i++) {
-										if(i != list.size() - 1)
-											attendArtist += list.get(i) + ", ";
-										else
-											attendArtist += list.get(i);
-									}
-								%>
+								<%  }
+								   } %>
 								<tr>
 									<td class="listlabel">확정 아티스트</td>
 									<td><%= attendArtist %></td>
 								</tr>
+								<% if(!addtext.equals("아티스트 모집 중") && (f.getTicFee() != 0)) {%>
+								<tr>
+									<td class="listlabel">공연비</td>
+									<td><%= f.getTicFee() %></td>
+								</tr>
+								<% } %>
+								<%-- 
 								<tr>
 									<td class="listlabel">주최사명</td>
 									<td><%= f.getCpCode() %></td>
 								</tr>
+								 --%>
 							</table>
 						</div>
 					</div>
 						 <% }
 					   } %>
+					 <!-- 
 					 
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
 							<span class="badge badge-pill badge-danger alignspanlist">아티스트 확정</span> &nbsp;
-							<label id="festivalName">행사명</label><br>
+							<label class="festivalName">행사명</label><br>
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
@@ -312,8 +358,8 @@
 					<div class="festival">
 						<div class="promotionDetailImg"></div>
 						<div class="festivalInfo">
-						<span class="badge badge-pill badge-light">지난 행사</span> &nbsp;
-							<label id="festivalName">행사명</label><br>
+							<span class="badge badge-pill badge-light">지난 행사</span> &nbsp;
+							<label class="festivalName">행사명</label><br>
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
@@ -331,33 +377,47 @@
 							</table>
 						</div>
 					</div>
+					  -->
 				</div>
-				
 				<div id="pagingarea">
-                	<ul class="pagination">
-                		<li class="page-item disalbed">
-                			<a class="page-link" href="#" aria-label="Previous">
-                				<span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-							</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#" aria-label="Next">
-                        		<span aria-hidden="true">&raquo;</span>
-                        		<span class="sr-only">Next</span>
-                        	</a>
-                        </li>
-                	</ul>
+               	<ul class="pagination">
+               		<li class="page-item prev">
+               			<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= currentPage-1 %>' aria-label="Previous">
+               				<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+                    </li>
+                   
+					<% for(int p = startPage; p <= endPage; p++){ %>
+						<% if(p == currentPage){ %>
+		                       <li class="page-item">
+		                       	<a class="page-link" href='#'><%= p %></a>
+		                       </li>
+						<% } else{ %>			
+		                       <li class="page-item">
+		                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= p %>'><%= p %></a>
+		                       </li>
+		                <% } %>
+		            <% } %>
+		            <li class="page-item next">
+                    	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= currentPage + 1 %>' aria-label="Next">
+                    		<span aria-hidden="true">&raquo;</span>
+                    		<span class="sr-only">Next</span>
+                       	</a>
+                    </li>
+               	</ul>
 				</div>
+				<script>
+					if(<%= currentPage %> <= 1){
+						var before = $('.prev');
+						before.attr('class', 'page-item prev disabled');
+					}
+					
+					if(<%= currentPage %> >= <%= maxPage %>){
+						var after = $(".next");
+						after.attr('class', 'page-item next disabled');
+					}
+				</script>
 			</div>
 		</div>
 		</div>
