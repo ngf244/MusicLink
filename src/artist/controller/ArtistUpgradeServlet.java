@@ -101,7 +101,29 @@ public class ArtistUpgradeServlet extends HttpServlet {
 			String local = multipartRequest.getParameter("activeLocal");
 			String intro = multipartRequest.getParameter("introduce");
 			String info = multipartRequest.getParameter("artistInfo");
-			String activity = multipartRequest.getParameter("activity");
+			//String activity = multipartRequest.getParameter("activity");
+			String[] albumDates = multipartRequest.getParameterValues("albumDate");
+			String[] albumTitles = multipartRequest.getParameterValues("albumTitle");
+			String[] albumGenres = multipartRequest.getParameterValues("albumGenre");
+			String[] albumWriters = multipartRequest.getParameterValues("albumWriter");
+			String[] albumSongs = multipartRequest.getParameterValues("albumSong");
+			
+			String activity = "";
+			
+			for(int i = 0; i < albumDates.length; i++) {
+				activity += albumDates[i] + " ";
+				activity += albumTitles[i] + " ";
+				activity += albumGenres[i] + " ";
+				activity += albumWriters[i] + " ";
+				activity += albumSongs[i] + " ";
+				
+				if(i != albumDates.length - 1) {
+					activity += "/";
+				}
+			}
+			
+			System.out.println(activity);
+			
 			String insta = multipartRequest.getParameter("instaURL");
 			String twitter = multipartRequest.getParameter("twitterURL");
 			String facebook = multipartRequest.getParameter("facebookURL");
@@ -110,13 +132,13 @@ public class ArtistUpgradeServlet extends HttpServlet {
 			String selfiePath = savePath + saveFiles.get(0); 
 			
 			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
-			
-			
-			int result = new ArtistService().upgradeArtist(artist);
+						
+			int result1 = new ArtistService().upgradeArtist(artist);
+			int result2 = new ArtistService().insertVideoLink(userCode, videoLink);
 			
 			HttpSession session = request.getSession();
 			
-			if(result > 0) {
+			if(result1 > 0) {
 				System.out.println("아티스트 등록 성공");
 				request.setAttribute("saveFileName", saveFiles.get(0));
 				session.setAttribute("atFileName", saveFiles.get(0)); 
