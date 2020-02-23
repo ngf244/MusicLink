@@ -86,5 +86,20 @@ public class MemberService {
 		return result;		
 	}
 
+	public String findId(String name, String email) {
+		Connection conn = getConnection();
+		
+		MemberDAO mDAO = new MemberDAO();
+		String id = mDAO.findId(conn, name, email);  
+		
+		if(id != "") {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return id;
+	}
+
 
 }
