@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "festival.model.vo.Festival, java.util.ArrayList, java.text.DecimalFormat" %>
+<%
+	Festival f = (Festival)request.getAttribute("festival");
+	ArrayList<String> artistArr = (ArrayList<String>)request.getAttribute("artistArr");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -55,7 +60,7 @@
     #festivalInfoArea{width:65%; display:inline-block; font-size:15px; margin-bottom:5%;}
     #infoTable{border-spacing: 20px; border-collapse: separate; text-align: left; line-height:1.8em}
     #infoTable td{vertical-align:middle;}
-    #label{width:30%;}
+    #label{width:45%;}
     #ticketLink{font-size: 12px; cursor:pointer;}
     #companyStar{color: #FFCD12;}
     
@@ -64,10 +69,10 @@
     footer .ft-content{width:70%; !important;}
 </style>
 </head>
-<body onload="fesMapSetting();">
+<body>
 	
 	<%@ include file="../common/menubar.jsp" %>
-    
+	
     <!-- 행사 상세 페이지 코딩 시작 -->
 	<section style="z-index: 1;">
 		<div id="scale">
@@ -90,47 +95,76 @@
 					<table id="infoTable">
 						<tr>
 							<td id="label">행사명</td>
-							<td>제 3회 KH 토크콘서트</td>
+							<td><%= f.getFesName() %></td>
 						</tr>
 						<tr>
 							<td>행사 기간</td>
-							<td>2020.01.16 ~ 2020.01.20</td>
+							<td><%= f.getFesTerm() %></td>
 						</tr>
+						<%
+							String fullLoc = "";
+							String spLoc[] = f.getFesLoc().split("/");
+							
+							String mapLoc[] = spLoc[0].split("&");
+							
+							if(spLoc.length > 1) {
+								fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1] + " " + spLoc[1];
+							} else {
+								fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1];
+							}
+						%>
 						<tr>
 							<td>행사 장소</td>
-							<td>서울 서초구 반포대로 150 흰물결아트센터</td>
+							<td><%= fullLoc %></td>
 						</tr>
 						<tr>
 							<td>모집 아티스트 수<br>(팀 수)</td>
-							<td>3팀</td>
+							<td><%= f.getRecCount() %>팀</td>
 						</tr>
+						<%
+							String artistStr = "";
+							
+							for(int i = 0; i < artistArr.size(); i++) {
+								if(i != artistArr.size() - 1)
+									artistStr += artistArr.get(i) + ", ";
+								else
+									artistStr += artistArr.get(i);
+							}
+						%>
 						<tr>
 							<td>확정 아티스트</td>
-							<td>하은</td>
+							<td><%= artistStr %></td>
 						</tr>
+						<%
+							int strPay = Integer.parseInt((f.getPayRange().split("~"))[0]);
+							int endPay = Integer.parseInt((f.getPayRange().split("~"))[1]);
+							
+							DecimalFormat formatter = new DecimalFormat("###,###");
+							
+							String printPay = formatter.format(strPay) + "&#8361; ~ " + formatter.format(endPay) + "&#8361;";
+						%>
 						<tr>
 							<td>공연비</td>
 							<td>
-								1,000,000 &#8361; ~ 2,000,000 &#8361; (추후합의) &nbsp;&nbsp;
+								<%= printPay %>
+								<!-- 1,000,000 &#8361; ~ 2,000,000 &#8361; (추후합의) &nbsp;&nbsp; -->
 							</td>
 						</tr>
 						<tr>
 							<td>아티스트 모집 기간</td>
-							<td>2019.12.30 ~ 2020.01.10</td>
+							<td><%= f.getRecTerm() %></td>
 						</tr>
 						<tr>
 							<td>주최사</td>
 							<td>
-								KH 정보교육원 &nbsp;&nbsp;
+								<%= f.getCpName() %> &nbsp;&nbsp;
 								<span id="companyStar">★ ★ ★ ★ ☆</span>	
 							</td>
 						</tr>
 						<tr>
 							<td>행사 설명</td>
 							<td>
-								수강생과 수료생을 이어줄 제 3회 KH 토크콘서트! 
-								'Future is Now, 미래를 it는 KH'를 주제로 
-								여러분을 미래로 안내할 강연자들과 함께 찾아갑니다.
+								<%= f.getFesInfo() %>
 							</td>
 						</tr>
 					</table>
@@ -138,6 +172,9 @@
 				
 				<br>
 				<div id="fesmap"></div>
+				<script>
+				fesMapSetting();
+				</script>
 				
 				<input type="button" class="btn mb-1 btn-warning" value="행사 지원">
 			</div>
@@ -148,7 +185,6 @@
     <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
 	<script>
-		
 		$(function() {
 			$('#ticketLink').on({'mouseenter':function() {
 				$(this).css('color', 'orange');
@@ -157,12 +193,10 @@
 			}, 'click':function() {
 				window.open("http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=19018834", "_blank");
 			}})
-		})
+		});
 		
-		
-		var address = "서울 서초구 반포대로 150";
+		//var address = "";
 		//var addressDetail = "흰물결아트센터";
-		
 		function fesMapSetting() {
 			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
@@ -177,7 +211,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(address, function(result, status) {
+			geocoder.addressSearch(<%= mapLoc[1] %>, function(result, status) {
 			
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
