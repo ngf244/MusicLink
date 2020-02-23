@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
+import gallery.model.dao.GalleryDAO;
 import member.model.dao.MemberDAO;
 
 public class ArtistService {
@@ -63,6 +64,44 @@ public class ArtistService {
 		ArrayList<FollowArtist> list = new ArtistDAO().selectFollowList(conn, currentPage, userCode);
 		close(conn);
 		return list;
+	}
+
+	public int insertArtist(Artist artist, String userId) {
+		Connection conn = getConnection();
+		ArtistDAO aDAO = new ArtistDAO();
+
+		int result = aDAO.insertArtist(conn, artist, userId);
+
+		if(result > 0) {
+			commit(conn);
+
+		} else {
+			rollback(conn);
+		}
+
+		return result;
+	}
+
+
+
+	public int insertProfile(String userId, String intro, String artistMedia) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		return result;
+
+	}	
+
+	public int insertVideoLink(String userCode, String videoLink) {
+		Connection conn = getConnection();
+		int result = new GalleryDAO().insertVideoLink(userCode, videoLink);
+		return 0;
 	}
 
 }

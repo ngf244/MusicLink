@@ -35,6 +35,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String newPwd = request.getParameter("newPwd");
+		System.out.println("changePwd = " + newPwd);
 		String userName = request.getParameter("userName");
 		String userBirth = request.getParameter("userBirth");
 		String gender = request.getParameter("gender");

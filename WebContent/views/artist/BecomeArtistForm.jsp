@@ -77,10 +77,45 @@
                     <label for="">아티스트 소개</label><br>
                     <textarea name="artistInfo" id="" cols="100" rows="10" placeholder="내용을 입력해주세요." style="resize: none;"></textarea><br><br>
                             
-                    <label for="">활동 이력</label><br>
-                    <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br><br>
-
-                    <label for="">아티스트 이미지 첨부 </label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
+<!--                     <label for="">활동 이력</label><br>
+                    <textarea name="activity" id="" cols="100" rows="5" placeholder="활동이력을 간단히 적어주세요." style="resize: none;"></textarea><br><br> -->
+					<table>
+						<tr>
+							<td class="label" id="labelTd">활동이력</td>
+							<td colspan="3" class="rowplus">
+							<img id="rowminus" width="20" height="20" src="<%= request.getContextPath() %>/img_s/minus.png" style="float: right">
+							<img id="rowplus" width="20" height="20" src="<%= request.getContextPath() %>/img_s/plus-sign-in-circle.png" style="float: right">
+							<div style="clear: both;"></div>
+							</td>
+						</tr>					
+						<tr>
+							<td colspan="4" class="historyTd">
+								<div class="historyDiv">
+									<table class="historyTable">
+										<tr>
+											<th class="art_history1">발행일</th>
+											<th class="art_history1">앨범명</th>
+											<th class="art_history1">장르</th>
+											<th class="art_history1">작사</th>
+											<th class="art_history1">작곡</th>
+										</tr>
+										<tr>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="2020.02.20"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="kh세미프로젝트"></td>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="ROCK"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="싸우는거 아니조"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="싸우는거 맞조"></td>
+										</tr>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>						
+					</table>
+					<br>
+                    <label for="">아티스트 프로필 이미지 첨부 </label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg"/><br><br>
+                    <label for="">아티스트 활동 사진 </label>&nbsp;&nbsp;<input type="file" name="activityImg" accept="image/jpeg, image/png, image/jpg"/><br><br>                         
                     <label for="">아티스트 동영상 링크 주소 </label>&nbsp;&nbsp;<input type="text" name="videoLink" placeholder="동영상 링크 주소를 입력해주세요." size="70"><br><br>
                     <label for="">인스타그램 주소 </label>&nbsp;&nbsp;&nbsp;<input type="url" name="instaURL" placeholder="인스타 주소를 입력해주세요." size="70"><br><br>
                     <label for="">트위터 주소 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" name="twitterURL" placeholder="트위터 주소를 입력해주세요." size="70"><br><br>
@@ -96,7 +131,27 @@
     </section>
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
+    <script>
+    $('#rowplus').click(function(){
+    	var trtdText = '<tr>' + '<td class="art_history">' 
+    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="test">' 
+    	+ '</td>' + '<td class="art_history">'
+    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="test">'
+    	+ '</td>' + '<td class="art_history">'
+    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="test">'
+    	+ '</td>' + '<td class="art_history">'
+    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="test">'
+    	+ '</td>' + '<td class="art_history">'
+    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="test">'
+    	+ '</td>' + '</tr>'
+    	
+    	$('.historyTable > tbody:last').append(trtdText);
+    });
     
+    $('#rowminus').click(function(){
+    	$('.historyTable > tbody:last > tr:last').remove();
+    });
+    </script>
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
