@@ -140,6 +140,10 @@
 				$('#errorbox').text(msg);
 			}
 		});
+		
+		function memberSearch(){
+			window.open('about:blank').location.href="<%= request.getContextPath() %>/views/member/FindIdPwd.jsp";
+		}
 	</script>
 
 </body>

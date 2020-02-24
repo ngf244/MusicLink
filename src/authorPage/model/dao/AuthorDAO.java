@@ -12,7 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.sun.org.apache.regexp.internal.REProgram;
+
 import authorPage.model.vo.Follow;
+import authorPage.model.vo.ReportPage;
 import member.model.vo.Member;
 
 
@@ -108,6 +111,7 @@ public class AuthorDAO {
 				mem.setUserCode(rset.getString("USER_CODE"));
 				mem.setUserName(rset.getString("USER_NAME"));
 				mem.setUserPhone(rset.getString("USER_PHONE"));
+				mem.setUserClass(rset.getString("USER_CLASS"));
 			}
 			
 		} catch (SQLException e) {
@@ -177,6 +181,37 @@ public class AuthorDAO {
 		}
 		
 		return fArr;
+	}
+
+	public ArrayList<ReportPage> getReportList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ReportPage r = null;
+		ArrayList<ReportPage> rArr = new ArrayList<ReportPage>();
+		
+		String query = prop.getProperty("getReportList");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				r = new ReportPage();
+				r.setReportNum(rset.getInt("REPORT_NUM"));
+				r.setReporterId(rset.getString("REPORTER_ID"));
+				r.setReportedId(rset.getString("USER_ID"));
+				r.setReportReason(rset.getString("REPORT_EX"));
+				r.setReportCategory(rset.getString("REPORT_CLASS"));
+				r.setReportedUserCode(rset.getString("USER_CODE"));
+				r.setReportDate(rset.getDate("REPORT_TIME"));
+				rArr.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rArr;
 	}
 	
 
