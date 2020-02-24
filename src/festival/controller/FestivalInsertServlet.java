@@ -66,7 +66,7 @@ public class FestivalInsertServlet extends HttpServlet {
 			String zonecodeInput = multipartRequest.getParameter("zonecodeInput");
 			String addressInput = multipartRequest.getParameter("addressInput");
 			String detailAddressInput = multipartRequest.getParameter("detailAddressInput");
-			String fesLoc = "(" + zonecodeInput + ")" + addressInput + "/" + detailAddressInput;
+			String fesLoc = zonecodeInput + "&" + addressInput + "/" + detailAddressInput;
 	
 			String fesTerm = multipartRequest.getParameter("feativalDate");
 			String fesInfo = multipartRequest.getParameter("festivalInfo");
@@ -87,10 +87,15 @@ public class FestivalInsertServlet extends HttpServlet {
 //				System.out.println("saveFiles.get(" + i + ") : " + saveFiles.get(i));
 //			}
 			
-			String posPath = savePath + saveFiles.get(0);
+//			String posPath = savePath + saveFiles.get(0);
+//			String banPath = "";
+//			if(saveFiles.size() > 1)
+//				banPath = savePath + saveFiles.get(1);
+			
+			String posPath = saveFiles.get(0);
 			String banPath = "";
 			if(saveFiles.size() > 1)
-				banPath = savePath + saveFiles.get(1);
+				banPath = saveFiles.get(1);
 			
 			String secOp = multipartRequest.getParameter("secretOp");
 			if(secOp == null) secOp = "N";
