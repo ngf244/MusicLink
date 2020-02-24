@@ -84,7 +84,7 @@
                             <td><input type="text" name="userId" value="<%= userId %>" readonly></td>
                         </tr>
                         <tr>
-                            <td>새 비밀번호<input type="hidden" name="userPwd" value="<%= userPwd%>"></td>
+                            <td>새 비밀번호<input type="hidden" name="userPwd" value="<%= userPwd %>"></td>
                             <td><input type="password" name="newPwd"></td>
                         </tr>
                         <tr>
