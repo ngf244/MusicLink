@@ -66,6 +66,7 @@
 
 <title>행사 상세 페이지</title>
 <style>
+	/*
 	section {
 		width: 70%;
 		height: 130%;
@@ -77,7 +78,6 @@
 		background: #fff;
 		display: block;
 	}
-	
 	.htext {
 		text-align: center;
 		font-size: 100px;
@@ -88,6 +88,12 @@
 		transform: translateX(-50%);
 		color: rgb(224, 224, 224);
 	}
+	*/
+	
+	section {width:70%; height:130%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: #fff; padding-top: 0px; padding-bottom:10%;}
+    
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
 	
 	#scale {
 		transform: scale(1.2);

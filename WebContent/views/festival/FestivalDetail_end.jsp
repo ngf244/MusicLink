@@ -47,11 +47,18 @@
     
 <title>행사 상세 페이지</title>
 <style>
+    /*
     section {width:70%; height:128%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+    */
     
+	section {width:70%; height:128%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: #fff; padding-top: 0px; padding-bottom:10%;}
+    
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+	
     #scale{transform:scale(1.2);}
     
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
@@ -198,10 +205,6 @@
 			}})
 		})
 		
-		
-		var address = "서울 서초구 반포대로 150";
-		//var addressDetail = "흰물결아트센터";
-		
 		function fesMapSetting() {
 			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
@@ -216,7 +219,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(address, function(result, status) {
+			geocoder.addressSearch(<%= mapLoc[1] %>, function(result, status) {
 			
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
@@ -232,7 +235,7 @@
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
 			            //content: '<div style="width:100%;text-align:center;line-height:2;">&nbsp;&nbsp;' + addressDetail + '&nbsp;&nbsp;</div>'
-			        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+			        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + <%= mapLoc[1] %> + '&nbsp;&nbsp;</div>'
 			        });
 			        infowindow.open(map, marker);
 			

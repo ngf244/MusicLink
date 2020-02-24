@@ -103,13 +103,15 @@
     section {width:70%; height:220%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     */
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:220%; padding-top: 30px; padding-bottom:10%;}
+    section {width:70%; height:220%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: #fff; padding-top: 0px; padding-bottom:10%;}
     
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+	
     #scale{transform:scale(1.2);}
     
-	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
-	#contentArea{width:100%; padding-top: 12%; text-align:center; position: absolute; left: 8%; display:inline-block;}
+	#categoryArea{position: absolute; left: 12%; display: inline-block;}
+	#contentArea{width:100%; padding-top: 10%; text-align:center; position: absolute; left: 8%; display:inline-block;}
 	
 	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
@@ -443,7 +445,10 @@
 			});
 		}
 		
+		var sechi = "";
 		function openDaumZipAddress() {
+			sechi = ($('section').css('height')).split("px");
+			$('section').css('height', parseInt(sechi[0]) + 600 + 'px');
 	        // 우편번호 찾기 화면을 넣을 element를 지정
 	        var element_wrap = document.getElementById("wrap");
 	
@@ -493,6 +498,7 @@
 	    function offDaumZipAddress() {
 	        // 슬라이드 업 기능을 이용해 레이어 창을 닫는다.
 	        jQuery("#wrap").slideUp();
+			$('section').css('height', sechi[0] + 'px');
 	    }
 	</script>
     
