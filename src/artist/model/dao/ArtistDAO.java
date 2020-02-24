@@ -354,7 +354,6 @@ public class ArtistDAO {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -462,8 +461,8 @@ public class ArtistDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
-			close(pstmt);
+			close(rs);
+			close(stmt);
 		}
 			
 		return list;
