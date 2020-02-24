@@ -151,6 +151,7 @@ public class ArtistService {
 		return result;
 	}
 
+
 	public int getFollowAtFesListCount(String userCode) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().getFollowAtFesListCount(conn, userCode);
@@ -163,6 +164,17 @@ public class ArtistService {
 		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
 		close(conn);
 		return map;
+  }
+  
+	public ArrayList<Artist> selectAList() {
+		Connection conn = getConnection();
+		ArrayList<Artist> list = null;
+		
+		ArtistDAO dao = new ArtistDAO();
+		
+		list = dao.selectAList(conn);
+				
+		return list;
 	}
 
 

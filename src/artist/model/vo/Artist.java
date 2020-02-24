@@ -51,13 +51,14 @@ public class Artist {
 	
 
 	public Artist(String atCode, String atName, String atGenre, String atClass, String atPicPath,
-			String atInsta, String atTwitter, String atFacebook) {
+			int atGreade, String atInsta, String atTwitter, String atFacebook) {
 		super();
 		this.atCode = atCode;
 		this.atName = atName;
 		this.atGenre = atGenre;
 		this.atClass = atClass;
 		this.atPicPath = atPicPath;
+		this.atGrade = atGreade;
 		this.atInsta = atInsta;
 		this.atTwitter = atTwitter;
 		this.atFacebook = atFacebook;
