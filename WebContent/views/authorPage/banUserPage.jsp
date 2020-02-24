@@ -1,5 +1,10 @@
+<%@page import="authorPage.model.vo.ReportPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<ReportPage> rArr = (ArrayList<ReportPage>)request.getAttribute("rArr");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,6 +50,8 @@
     .submitButton{width: 10%; height: 20%; bottom: 0%; right: 0%;}
 
     /* section 3 끝 */
+    
+    img{width: 100%; height: 100%}
 
 
 </style>
@@ -70,20 +77,15 @@
                         <th>사유</th>
                         <th>신고일자</th>
                     </tr>
+                    <%for(int i = 0; i < rArr.size(); i++){ %>
                     <tr onclick="showUserInfo(this);">
-                        <td>1</td>
-                        <td>hyunho-im</td>
-                        <td>daeho-kim</td>
-                        <td>잦은 부상</td>
-                        <td>2020-02-03</td>
+                        <td><%=rArr.get(i).getReportNum() %></td>
+                        <td><%=rArr.get(i).getReportedId() %></td>
+                        <td><%=rArr.get(i).getReporterId() %></td>
+                        <td><%=rArr.get(i).getReportReason() %></td>
+                        <td><%=rArr.get(i).getReportDate() %></td>
                     </tr>
-                    <tr onclick="showUserInfo(this);">
-                        <td>2</td>
-                        <td>hyunho-im</td>
-                        <td>daeho-kim</td>
-                        <td>못생김</td>
-                        <td>2020-02-03</td>
-                    </tr>
+                    <%} %>
                 </table>
 
 
@@ -91,7 +93,7 @@
         
             <div class="userDetailBox" id="userDetailBox">
                 <div class="userDetailBox-imgBox">
-                    img 사진 들어갈 곳
+               		 <img>
                 </div>
                 <div class="userDetailBox-nameBox">
                     <fieldset>
@@ -101,7 +103,7 @@
                 </div>
                 <div class="userDetailBox-addressBox">
                     <fieldset>
-                        <legend>주소</legend>
+                        <legend>연락처</legend>
                         <input type="text" readonly>
                     </fieldset>
                 </div>
@@ -197,12 +199,48 @@
     //     }
     // }
     
-    $('.searchBox button').click(function search() {
+    $('.searchBox button').click(function () {
         var searchId = $('.searchBox input').val()
         console.log(searchId);
+        $.ajax({
+            url : "showUserDetail.ban",
+            type : 'get',
+            data : {searchId:searchId},
+            success : function(data){
+                console.log(data);
 
-        
-        
+                var type = "";
+                switch(data.userClass){
+                    case '1' : type = "일반회원"; break;
+                    case '2' : type = "아티스트회원"; break;
+                    case '3' : type = "기획자회원"; break;
+                }
+
+                var userName = data.userName;
+                var userPhone = data.userPhone;
+                var userImg = "";
+
+                if (data.userEmail == null){
+                    if(data.userClass == 1){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/nomalUser.png";
+                    } else if(data.userClass == 3){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/companyUser.png";
+                    }
+                } else {
+                    userImg = "<%=request.getContextPath()%>/artistProfile_uploadFiles/" + data.userEmail;
+                }
+                console.log(userImg);
+
+                $('.userDetailBox-imgBox img').attr("src",userImg);
+                $('.userDetailBox-nameBox input').val(userName);
+                $('.userDetailBox-addressBox input').val(userPhone);
+                $('.userDetailBox-usertypeBox input').val(type);
+
+            },
+            error : function () {
+                console.log("헐 아작스 에러 대박;")
+            }
+        })
     })
     
     $('.searchBox input').keyup(function (event) {
@@ -211,6 +249,52 @@
         }
     })
 
+    $('table tr:gt(0)').click(function(){
+        var searchId = $(this).children().eq(1).text();
+        console.log(searchId);
+
+        $.ajax({
+            url : "showUserDetail.ban",
+            type : 'get',
+            data : {searchId:searchId},
+            success : function(data){
+                console.log(data);
+
+                var type = "";
+                switch(data.userClass){
+                    case '1' : type = "일반회원"; break;
+                    case '2' : type = "아티스트회원"; break;
+                    case '3' : type = "기획자회원"; break;
+                }
+
+                var userName = data.userName;
+                var userPhone = data.userPhone;
+                var userImg = "";
+
+                if (data.userEmail == null){
+                    if(data.userClass == 1){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/nomalUser.png";
+                    } else if(data.userClass == 3){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/companyUser.png";
+                    }
+                } else {
+                    userImg = "<%=request.getContextPath()%>/artistProfile_uploadFiles/" + data.userEmail;
+                }
+                console.log(userImg);
+
+                $('.userDetailBox-imgBox img').attr("src",userImg);
+                $('.userDetailBox-nameBox input').val(userName);
+                $('.userDetailBox-addressBox input').val(userPhone);
+                $('.userDetailBox-usertypeBox input').val(type);
+
+            },
+            error : function () {
+                console.log("헐 아작스 에러 대박;")
+            }
+        })
+
+    })
+    
 
 	//new WOW().init();
 	
