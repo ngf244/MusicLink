@@ -57,7 +57,6 @@
                     <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
                     <ul class="hidden-manu3 drop">
                         <li class="menu-h"><a href="<%= request.getContextPath() %>/list.fes">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
                     </ul>
                 </li>
                 <li class="m-name4 m-name">
