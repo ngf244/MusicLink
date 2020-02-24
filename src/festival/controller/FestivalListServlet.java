@@ -34,9 +34,14 @@ public class FestivalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int category = 0;
+		if(request.getParameter("category") != null) {
+			category = Integer.parseInt(request.getParameter("category"));
+		}
+		
 		FestivalService service = new FestivalService();
 		
-		int listCount = service.getListCount();
+		int listCount = service.getListCount(category);
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -49,7 +54,7 @@ public class FestivalListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
-
+		
 		limit = 10;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
@@ -60,13 +65,15 @@ public class FestivalListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage);
+		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage, category);
 		
 		String page = null;
 		if(map != null) {
 			page = "views/festival/FestivalList.jsp";
 			request.setAttribute("map", map);
 			request.setAttribute("pi", pi);
+
+			request.setAttribute("category", category);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "행사 리스트 조회에 실패하였습니다.");

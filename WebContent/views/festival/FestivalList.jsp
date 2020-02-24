@@ -10,6 +10,8 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	int category = (int)request.getAttribute("category");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,9 +30,18 @@
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
+    
 <title>행사 리스트</title>
 <style>
-    section {width:70%; height:410%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
+    section {width:70%; height:180%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
@@ -38,7 +49,7 @@
     #scale{transform:scale(1.2);}
     
 	#categoryArea{position: absolute; top: 35%; left: 12%; display: inline-block;}
-	#contentArea{width:83.38%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
+	#contentArea{width:83.5%; padding-top: 12%; text-align:center; position: absolute; left: 50%; transform: translateX(-50%); display:inline-block;}
 	
 	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px; vertical-align: middle;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
@@ -60,28 +71,30 @@
     
     #listArea{margin-top:9%; margin-left:10%; margin-right:10%; /*background:yellow;*/}
     #listCategory{font-size:20px;}
-    #secondCategory{width:100%; margin-top:8%; margin-bottom:80px;}
-    #listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}
+    #secondCategory{width:100%; margin-top:5%; margin-bottom:80px;}
+    /*#listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}*/
     
-    #listSearch{min-width: 30%; text-align:right; float: right; margin-right:5%; margin-top:-11px; display: inline-block; text-align: center;}
-    #icon{width: 20px; height: 20px;}
-    .dropdown{width: 40%; height: 40px; font-size: 13px; margin-right: 3px; padding-left: 1.4%; text-align:center;}
+    #listSearch{width: 35%; text-align:right; float: right; margin-right:1%; margin-top:-11px; display: inline-block; text-align: center;}
+    /*#icon{width: 20px; height: 20px;}*/
+    #searchBtn{width:60px; height: 40px; padding:0; text-align:center; margin-left: 5px;}
+    .dropdown{width: 35%; height: 40px; font-size: 12.5px; margin-right: 3px; padding-left: 1.4%; text-align:center;}
     .searchtext{height: 40px; font-size: 13px; margin-left: 3px;}
+    .pointer{cursor:pointer;}
     
-    #festivalList{display:block;}
+    #festivalList{display:block; margin-top:8%;}
     .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
     .alignspanlist, .alignspan{font-weight: bold;}
-    .festival{display:inline-block; width:70%; margin-top: 5%; text-align:left;}
+    .festival{display:inline-block; width:70%; margin-top: 50px; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     .festivalName{font-size:17px;}
     
     .festivalDetail{width: 100%; margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
-    .tdspace{width: 5%;}
-    .listlabel{width: 35%;}
+    .tdspace{width: 20px;}
+    .listlabel{width: 130px;}
     
-    #pagingarea{text-align:center; display:inline-block; margin-top:10%;}
+    #pagingarea{text-align:center; display:inline-block; margin-top:5%;}
     
     footer .ft-content{width:70%; !important;}
     
@@ -118,12 +131,12 @@
 		</div>
 		
 		<div id="contentArea">
-	
-			<!-- <div class="banner animation">
-				<img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt="">
-				<img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt="">
-				<img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt="">
-			</div> -->
+		
+			<div class="banner animation">
+				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_1.jpg" alt="" /></div>
+				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_2.jpg" alt="" /></div>
+				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_3.jpg" alt="" /></div>
+			</div>
 			
 			 <!-- 
 			 <div class="banner slide">
@@ -140,23 +153,18 @@
 			<script type="text/javascript" src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 			<script>
 				$(document).ready(function(){
-					$('.banner').slick({
+					$('.banner div').css({'width':'100%', 'height':'400px', 'overflow':'hidden', 'display':'flex', 'justify-content':'center', 'align-items':'center'});
+					
+					$('.animation').slick({
 						autoplay:true,
-						autoplaySpeed:3000,
+						autoplaySpeed:2000,
 						fade:true,
 						arrows:true,
 						cssEase:'ease',
-						easing:'ease',
+						easing:'ease'
 			    	});
 			    });
 			</script>
-			<!-- 
-			<div id="banner_paging_area">
-				<input type="button" value="<" id="banner_left" onclick="paging(this);">
-				<label id="banner_paging">● ○ ○ ○</label>
-				<input type="button" value=">" id="banner_right" onclick="paging(this);">
-			</div>
-			 -->
 			
 			<div class="promotionArea">
 				<label class="subTitle">아티스트 확정 행사</label><br>
@@ -207,46 +215,86 @@
 			
 			<hr id="hrstyle">
 			
+			<script>
+				$(function() {
+					var scrollPosition = $("#hrstyle").offset().top;
+					<%
+					switch(category) {
+					case 0: break;
+					case 1: %>
+						$('#allCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
+					case 2: %>
+						$('#ingCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
+					case 3: %>
+						$('#fullCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
+					case 4: %>
+						$('#endCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
+					}%>
+				})
+			</script>
+			
 			<div id="listArea">
 				<div id="listCategory">
-					<label class="category">전체 행사</label>
+					<label class="category pointer" id="allCategory">전체 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category">아티스트 모집 행사</label>
+					<label class="category pointer" id="ingCategory">아티스트 모집 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category">아티스트 확정 행사</label>
+					<label class="category pointer" id="fullCategory">아티스트 확정 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category">지난 행사</label>
+					<label class="category pointer" id="endCategory">지난 행사</label>
 				</div>
 				
 				<div id="secondCategory">
+					<!-- 
 					<div id="listSort">
-						<label class="category">최근등록순</label>
+						<label class="category pointer" id="timeSort">최근등록순</label>
 						<label class="category">&nbsp; | &nbsp;</label>
-						<label class="category">날짜순</label>
+						<label class="category pointer" id="fesDateSort">날짜순</label>
 					</div>
-					
+					 -->
 					<div id="listSearch">
-	                    <div class="input-group">
-							<select class="btn btn-outline-dark selectdrop dropdown">
-								<option>검색 종류</option>
-								<option>행사명</option>
-								<option>아티스트명</option>
+						<form action="<%= request.getContextPath() %>/search.fes" method="post" class="input-group" onsubmit="return typeCk();">
+							<select class="btn btn-outline-dark selectdrop dropdown" id="searchType" name="searchType">
+								<option value="nothing">검색 종류</option>
+								<option value="title">행사명</option>
+								<option value="artist">아티스트명</option>
 							</select>
-	                        <input type="search" class="form-control searchtext" placeholder="Search Festival" aria-label="Search Dashboard">
-	                        <img src="<%= request.getContextPath() %>/icons/search.png" id="icon" />
-	                    </div>
+	                        <input type="search" class="form-control searchtext" name="searchText" aria-label="Search Dashboard">
+	                        <input type="submit" class="btn mb-1 btn-dark" id="searchBtn" value="검색">
+						</form>
 					</div>
+					<script>
+						function typeCk() {
+							if($('#searchType').val() == 'nothing') {
+								alert('검색 종류를 선택해주세요');
+								return false;
+							}
+							return true;
+						}
+					</script>
 				</div>
 				
 				<div id="festivalList">
 					<% if(map == null) { %>
 						<label>등록된 행사가 없습니다.</label>
 					<% } else {
-							for(Festival f : map.keySet()) {%>
-					<div class="festival">
-						<div class="promotionDetailImg"></div>
-						<div class="festivalInfo">
-							<%
+							for(Festival f : map.keySet()) {
 								String attendArtist = "";
 								ArrayList<String> list = map.get(f);
 								
@@ -286,8 +334,12 @@
 								} else if (list.size() == f.getRecCount()) { 
 									addcls = "badge badge-pill badge-danger";
 									addtext = "아티스트 확정";
-								}
-							%>
+								} %>
+					<div class="festival">
+						<input type="hidden" value="<%= f.getFesCode() %>">
+						<input type="hidden" value="<%= addtext %>">
+						<img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>" class="promotionDetailImg" />
+						<div class="festivalInfo">
 							<div>
 								<span class="<%= addcls %> alignspanlist"><%= addtext %></span> &nbsp;
 								<label class="festivalName"><%= f.getFesName() %></label>
@@ -299,7 +351,7 @@
 									<td><%= f.getFesTerm() %></td>
 								</tr>
 								<% if(addtext.equals("아티스트 모집 중") && loginUser != null) {
-									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
+									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) { %>
 								<tr>
 									<td class="listlabel">아티스트 모집 기간</td>
 									<td><%= f.getRecTerm() %></td>
@@ -309,75 +361,32 @@
 									<td><%= f.getRecCount() %>팀</td>
 								</tr>
 								<%  }
-								   } %>
+								   }
+								if(!attendArtist.equals("")) { %>
 								<tr>
 									<td class="listlabel">확정 아티스트</td>
 									<td><%= attendArtist %></td>
 								</tr>
-								<% if(!addtext.equals("아티스트 모집 중") && (f.getTicFee() != 0)) {%>
+								<% }
+								if(!addtext.equals("아티스트 모집 중") && (f.getTicFee() != 0)) {%>
 								<tr>
 									<td class="listlabel">공연비</td>
 									<td><%= f.getTicFee() %></td>
 								</tr>
-								<% } %>
-								<%-- 
+								<% }
+								if(loginUser != null) {
+									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
 								<tr>
 									<td class="listlabel">주최사명</td>
-									<td><%= f.getCpCode() %></td>
+									<td><%= f.getCpName() %></td>
 								</tr>
-								 --%>
+								<%  }
+								   } %>
 							</table>
 						</div>
 					</div>
 						 <% }
 					   } %>
-					 <!-- 
-					 
-					<div class="festival">
-						<div class="promotionDetailImg"></div>
-						<div class="festivalInfo">
-							<span class="badge badge-pill badge-danger alignspanlist">아티스트 확정</span> &nbsp;
-							<label class="festivalName">행사명</label><br>
-							<table class="festivalDetail">
-								<tr>
-									<td class="listlabel">행사 기간</td>
-									<td rowspan=3>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
-								</tr>
-								<tr>
-									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
-								</tr>
-								<tr>
-									<td class="listlabel">주최사명</td>
-									<td>KH</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="festival">
-						<div class="promotionDetailImg"></div>
-						<div class="festivalInfo">
-							<span class="badge badge-pill badge-light">지난 행사</span> &nbsp;
-							<label class="festivalName">행사명</label><br>
-							<table class="festivalDetail">
-								<tr>
-									<td class="listlabel">행사 기간</td>
-									<td rowspan=3>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
-								</tr>
-								<tr>
-									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
-								</tr>
-								<tr>
-									<td class="listlabel">주최사명</td>
-									<td>KH</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					  -->
 				</div>
 				<div id="pagingarea">
                	<ul class="pagination">
@@ -388,17 +397,17 @@
 						</a>
                     </li>
                    
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){ %>
+					<% for(int p = startPage; p <= endPage; p++){
+						if(p == currentPage){ %>
 		                       <li class="page-item">
 		                       	<a class="page-link" href='#'><%= p %></a>
 		                       </li>
-						<% } else{ %>			
+						<% } else { %>			
 		                       <li class="page-item">
 		                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= p %>'><%= p %></a>
 		                       </li>
-		                <% } %>
-		            <% } %>
+		                <% }
+					   } %>
 		            <li class="page-item next">
                     	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= currentPage + 1 %>' aria-label="Next">
                     		<span aria-hidden="true">&raquo;</span>
@@ -425,6 +434,9 @@
     
     <script>
     	$(function() {
+    		<% int sectionHeiht = 231 + ((map.size()-1) * 25); %>
+    		$('section').css('height', '<%= sectionHeiht %>%');
+    		
     		for(var i = 2; i < 5; i++) {
     			$('#banner_img' + i).css('visibility', 'hidden');
     		}
@@ -436,6 +448,30 @@
 			}, 'click':function() {
 				$(this).css({'background':'#333333', 'color':'white', 'border':'null'});
 			}});
+			
+			var category = <%= category %>;
+			$('#allCategory').click(function() {
+				category = 1;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
+			$('#ingCategory').click(function() {
+				category = 2;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
+			$('#fullCategory').click(function() {
+				category = 3;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
+			$('#endCategory').click(function() {
+				category = 4;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
+			
+			$('.festival').click(function() {
+				var fcode = $(this).children().eq(0).val();
+				var status = $(this).children().eq(1).val();
+				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
+			});
     	})
     
     	function paging(where) {
@@ -489,15 +525,6 @@
     <!-- 행사 리스트 코딩 끝 -->
     
 	<%@ include file="../../views/common/footer.jsp" %>
-    
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
-    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
-    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
-    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
-    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
     
 </body>
 </html>

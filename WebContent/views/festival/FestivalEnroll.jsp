@@ -306,10 +306,14 @@
     				$(this).val(null);
     			}
     		}})
+	    	
+	    	$(".inputValCk, .inputTextCk").change(function() {
+	    		if($(this).val())
+	    			$(this).css('border', '1px solid #ced4da');
+	    	})
     	})
     	
 	    function submitForm() {
-	    	
 	    	var idStr = "";
 	    	var emptyCk = false;
 	    	
@@ -333,8 +337,34 @@
 
 	    	if(emptyCk == true) {
 	    		alert('필수항목을 기재해주세요');
+	    	} else {
+	    		var fesday = $('#feativalDate').val();
+	    		var artday = $('#artistDate').val();
+	    		
+	    		var fesSplit = fesday.split(" - ");
+	    		var artSplit = artday.split(" - ");
+				
+	    		var fesStrSplit = fesSplit[0].split("/");
+	    		var fesstrday = new Date(fesStrSplit[2], parseInt(fesStrSplit[0])-1, fesStrSplit[1]);
+	    		
+	    		var artStrSplit = artSplit[0].split("/");
+	    		var artstrday = new Date(artStrSplit[2], parseInt(artStrSplit[0])-1, artStrSplit[1]);
+	    		var today = new Date();
+				
+	    		var artEndSplit = artSplit[1].split("/");
+	    		var artendday = new Date(artEndSplit[2], parseInt(artEndSplit[0])-1, artEndSplit[1]);
+	    		
+	    		today.setHours(0,0,0,0);
+	    		
+	    		if (fesstrday.getTime() < today.getTime() || artstrday.getTime() < today.getTime()) {
+	    			alert("오늘 이전의 날짜는 등록할 수 없습니다");
+	        		return false;
+	    		} else if(artendday.getTime() > fesstrday.getTime()) {
+	    			alert("아티스트 모집 기간은 행사 기간 이전에 마감되어야 합니다");
+	        		return false;
+	    		}
 	    	}
-    		
+	    	
 	    	return !emptyCk;
 	    }
 	    
@@ -410,7 +440,6 @@
 	                    jQuery("#address_detail").focus();
 	                    address = data.address;
 	                    zonecode = data.zonecode;
-	                   	console.log(data.zonecode);
 	                    $('#addressInput').val(address);
 	                    $('#zonecodeInput').val(zonecode);
 	                    fesMapSetting();

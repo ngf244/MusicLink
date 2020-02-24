@@ -18,6 +18,7 @@ public class Festival {
 	private String ticUrl;
 	private String cpCode;
 
+	private String cpName;
 	private String ticFreeOp;
 	
 	public Festival() {}
@@ -211,6 +212,14 @@ public class Festival {
 
 	public void setTicFreeOp(String ticFreeOp) {
 		this.ticFreeOp = ticFreeOp;
+	}
+
+	public String getCpName() {
+		return cpName;
+	}
+
+	public void setCpName(String cpName) {
+		this.cpName = cpName;
 	}
 	
 	
