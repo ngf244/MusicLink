@@ -99,11 +99,12 @@
 		label.switch > input[type="checkbox"]:checked ~ span:after {
 		  transform: translate3d(100%, -50%, 0);
 		}
-		
+	/*	
     section {width:70%; height:220%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
-    
-    .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+    */
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    background: rgba(255,255,255,1); height:220%; padding-top: 30px; padding-bottom:10%;}
     
     #scale{transform:scale(1.2);}
     
@@ -310,6 +311,21 @@
 	    	$(".inputValCk, .inputTextCk").change(function() {
 	    		if($(this).val())
 	    			$(this).css('border', '1px solid #ced4da');
+	    	})
+	    	
+	    	var thistop = "";
+	    	$('.datestyle').focus(function() {
+	    		if($(this).attr('id') == 'feativalDate') {
+					thistop = ($('#feativalDate').css('top')).split("px");
+			    	$('.datepicker').css('top', (parseInt(thistop[0])+395) + 'px');
+	    		} else {
+					thistop = ($('#artistDate').css('top')).split("px");
+			    	$('.datepicker').css('top', (parseInt(thistop[0])+495) + 'px');
+	    		}
+	    	});
+	    	
+	    	$('.datepicker').focus(function() {
+		    	$('.datepicker').css('top', $('#feativalDate').css('top'));
 	    	})
     	})
     	

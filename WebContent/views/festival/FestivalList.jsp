@@ -347,8 +347,28 @@
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
-									<td class="tdspace" rowspan=5></td>
+									<td class="tdspace" rowspan=6></td>
 									<td><%= f.getFesTerm() %></td>
+								</tr>
+								<%
+								String fullLoc = "";
+								String spLoc[] = f.getFesLoc().split("/");
+								
+								String mapLoc[] = spLoc[0].split("&");
+								
+								if (mapLoc.length > 1) {
+									if(spLoc.length > 1) {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1] + " " + spLoc[1];
+									} else {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1];
+									}
+								} else {
+									fullLoc = f.getFesLoc();
+								}
+								%>
+								<tr>
+									<td class="listlabel">행사 장소</td>
+									<td><%= fullLoc %></td>
 								</tr>
 								<% if(addtext.equals("아티스트 모집 중") && loginUser != null) {
 									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) { %>
