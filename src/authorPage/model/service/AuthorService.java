@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import authorPage.model.dao.AuthorDAO;
 import authorPage.model.vo.Follow;
+import authorPage.model.vo.ReportPage;
 import member.model.vo.Member;
 
 public class AuthorService {
@@ -60,6 +61,16 @@ public class AuthorService {
 		close(conn);
 		
 		return fArr;
+	}
+
+	public ArrayList<ReportPage> getReportList() {
+		Connection conn = getConnection();
+		
+		ArrayList<ReportPage> rArr = new AuthorDAO().getReportList(conn);
+		
+		close(conn);
+		
+		return rArr;
 	}
 
 }
