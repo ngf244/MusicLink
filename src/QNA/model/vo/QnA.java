@@ -12,6 +12,7 @@ public class QnA {
 	private String qnaComContent;
 	private String qnaStatus;
 	private String mnCode;
+	private String userCode;
 	
 	public QnA() {}
 
@@ -25,7 +26,7 @@ public class QnA {
 	}
 
 	public QnA(String qnaCode, String qnaTitle, String qnaContent, String qnaWriter, Date qnaDate, String qnaComYN,
-			String qnaComContent, String qnaStatus, String mnCode) {
+			String qnaComContent, String qnaStatus, String mnCode, String userCode) {
 		super();
 		this.qnaCode = qnaCode;
 		this.qnaTitle = qnaTitle;
@@ -36,6 +37,7 @@ public class QnA {
 		this.qnaComContent = qnaComContent;
 		this.qnaStatus = qnaStatus;
 		this.mnCode = mnCode;
+		this.userCode = userCode;
 	}
 
 	public String getQnaCode() {
@@ -109,6 +111,15 @@ public class QnA {
 	public void setMnCode(String mnCode) {
 		this.mnCode = mnCode;
 	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
 	
 	
 }

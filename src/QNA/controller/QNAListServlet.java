@@ -35,7 +35,7 @@ public class QNAListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QNAService service = new QNAService();
 		
-		int listCount = service.getListCount();
+		int listCount = service.getListCount();	// 게시판 리스트 개수
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수
@@ -61,6 +61,8 @@ public class QNAListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<QnA> list = service.selectList(currentPage);
+		
+		System.out.println("qnaListServlet listCount값 : "+listCount);
 		
 		String page = null;
 		if(list != null) {

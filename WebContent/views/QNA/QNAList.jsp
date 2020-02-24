@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, QNA.model.vo.*" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,76 +37,31 @@
 		color: rgb(224, 224, 224);
 	}
 	
-	#categoryArea {
-		padding-top: 35px;
-		padding-left: 30px;
-		color: #76838f;
-	}
+	#categoryArea {padding-top: 35px;padding-left: 30px;color: #76838f;}
 	
-	#contentArea{
-		padding-top: 45px; 
-		padding-bottom: 45px;
-		text-align: center;
-	}
+	#contentArea{padding-top: 45px; padding-bottom: 45px;text-align: center;}
 	
-	#inBigCategory {
-		font-family: 'Bungee', cursive;
-		font-size: 50px;
-	}
+	#inBigCategory {font-family: 'Bungee', cursive;font-size: 50px;}
 	
-	#inSmallCategory {
-		font-family: 'Comfortaa', cursive;
-		font-size: 30px;
-	}
+	#inSmallCategory {font-family: 'Comfortaa', cursive;font-size: 30px;}
 	
-	#block {
-		background: #8AFF00;
-		width: 55px;
-		height: 8px;
-		top: 5%;
-	}
+	#block {background: #8AFF00;width: 55px;height: 8px;top: 5%;}
 	
-	.table-responsive {
-		text-align: center;
-		border-radius: 3px;
-		box-shadow: 0px;
-	}
+	.table-responsive {text-align: center;border-radius: 3px;box-shadow: 0px;}
 	
-	th {
-		text-align: inherit;
-	}
+	th {text-align: inherit;}
 	
-	.table {
-		width: 90%;
-		margin-left: 5%;
-		margin-bottom: 1rem;
-		text-align: center;
-	}
+	.table {width: 90%;margin-left: 5%;margin-bottom: 1rem;text-align: center;}
 	
-	.table th, .table td {
-		padding: 0.75rem;
-		vertical-align: top;
-		border-top: 1px solid #dee2e6;
-	}
+	.table th, .table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}
 	
-	.table thead th {
-		vertical-align: bottom;
-		border-bottom: 2px solid #dee2e6;
-	}
+	.table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}
 	
-	.table tbody+tbody {
-		border-top: 2px solid #dee2e6;
-	}
+	.table tbody+tbody {border-top: 2px solid #dee2e6;}
 	
-	.badge-primary {
-		background-color: #f29d56;
-		color: white;
-	}
+	.badge-primary {background-color: #f29d56;color: white;}
 	
-	.badge-success {
-		background-color: #7780b7;
-		color: white;
-	}
+	.badge-success {background-color: #7780b7;color: white;}
 	
 	.px-2 {
 		padding-left: 0.5rem !important;
@@ -147,14 +103,12 @@
     <%
     	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
     	PageInfo pi = (PageInfo)request.getAttribute("pi");
-    	
     	int listCount = pi.getListCount();
     	int currentPage = pi.getCurrentPage();
     	int maxPage = pi.getMaxPage();
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
     %>
-
 	<section style="z-index: 1;">
 		<div id="categoryArea">
 			<div id="block"></div><br>
@@ -183,16 +137,16 @@
 							for(QnA q : list) {	
 					%>
 						<tr>
-							<th><%= q.getQnaCode() %></th>
+							<th><%= q.getQnaCode() %><input type="hidden" value='<%= q.getQnaCode() %>'></th>
 							<td><%= q.getQnaWriter() %></td>
 							<td><%= q.getQnaTitle() %></td>
 							<td><%= q.getQnaDate() %></td>
 							<td>
-							<% if(q.getQnaComYN().equals("N")){ %>
-							<span class="badge badge-primary px-2">답변대기</span>
-							<% } else { %>
-							<span class="badge badge-success px-2">답변완료</span>
-							<% } %>
+								<% if(q.getQnaComYN().equals("N")){ %>
+								<span class="badge badge-primary px-2">답변대기</span>
+								<% } else { %>
+								<span class="badge badge-success px-2">답변완료</span>
+								<% } %>
 							</td>
 						</tr>
 					<%
@@ -238,10 +192,11 @@
 					
 					
 					<!-- 맨 끝으로 -->
-					<button class="btn_style" onclick="location.href='<%= request.getContextPath() %>/list.bo?currentPage=<%= maxPage %>'">&gt;&gt;</button>
+					<button class="btn_style" onclick="location.href='<%= request.getContextPath() %>/list.qna?currentPage=<%= maxPage %>'">&gt;&gt;</button>
+					<% } %>
 				</div>
 				<div id="write_box">
-					<button class="btn_style" id="write">글쓰기</button>
+					<button onclick='location.href="views/QNA/Q&AWrite.jsp"' class="btn_style" id="write">글쓰기</button>
 				</div>
 			</div>
 		</div>
@@ -283,18 +238,19 @@
     
 	<script>
 		$(function(){
-			$('#listArea td').mouseenter(function(){
+			$('.table td').mouseenter(function(){
 				$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
 			}).mouseout(function(){
 				$(this).parent().css('background', 'none');
-			})
+			}).click(function(){
+				var qnaCode = $(this).parent().children().children('input').val();
 				
 				// 로그인 한 사람만 상세보기 이용할 수 있게하기
-				<%-- <% if(loginUser != null){%>
-					location.href='<%= request.getContextPath() %>/detail.bo?bid=' + bid;
+				<% if(loginUser != null){%>
+					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
 					alert('회원만 이용할 수 있는 서비스입니다.');
-				<% } %> --%>
+				<% } %>
 			});
 		});
 	</script>
