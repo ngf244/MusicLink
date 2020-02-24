@@ -178,10 +178,10 @@
 </style>
 </head>
 <body>
-	<%@ include file="common/menubar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
     
     <section style="z-index: 1;">
-	<%@ include file="common/MyPage_Menubar.jsp" %>
+	<%@ include file="../common/MyPage_Menubar.jsp" %>
 	
         <div class="sec-menu-views views1">
             <div class="faeText">
@@ -314,7 +314,7 @@
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>
 
-	<%@ include file="common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>
