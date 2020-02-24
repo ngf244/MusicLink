@@ -31,9 +31,9 @@
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}
     .views1{display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 14pt;}
     .notice{width:100%; padding-left:0; margin:0; margin-top:16px; background:rgba(0,0,0,0.3); font-weight: bold; color:#fff;}
-    .notice-nav{width:24.5%; display: inline-block; text-align: center; padding:10px 0;}
+    .notice-nav{width:24.5%; height: 30px; line-height: 30px; display: inline-block; text-align: center; padding:10px 0;}
     .padding-1{padding:5px 0; color:#000; border-bottom: 0.5px dashed lightgray;}
-    .notice-sum{width:24.5%; display: inline-block; margin:0; padding: 0; text-align: center; vertical-align: middle; line-height: 25px;}
+    .notice-sum{width:24.5%; height: 30px; display: inline-block; margin:0; padding: 0; text-align: center; vertical-align: middle; line-height: 25px;}
     .views1 h3{background: #af9ce6;}
 	
 	/*페이징 css*/
@@ -173,10 +173,10 @@
         <div class="sec-menu-views views1">
             <h3>알림창 </h3>
             <ul class="notice">
-            	<li class="notice-nav" style="width: 100px;">알림번호</li>
-                <li class="notice-nav" style="width: 200px;">알림시간</li>
+            	<li class="notice-nav" style="width: 150px;">알림번호</li>
+                <li class="notice-nav" style="width: 150px;">알림시간</li>
                 <li class="notice-nav" style="width: 300px;">유형</li>
-                <li class="notice-nav" style="width: 500px;">메시지 내용</li>
+                <li class="notice-nav" style="width: 350px;">메시지 내용</li>
             </ul>
             <% if(list.isEmpty()){ %>
 	            	<div>알림 내역이 없습니다.</div>
@@ -185,8 +185,8 @@
             %>
             
             <div class="padding-1">
-                <div class="notice-num notice-sum" style="width: 100px;"><%= n.getNoticeCode() %></div>
-                <div class="notice-time notice-sum" style="width: 200px;"><%= n.getNoticeTime() %></div>
+                <div class="notice-num notice-sum" style="width: 150px;"><%= n.getNoticeCode() %></div>
+                <div class="notice-time notice-sum" style="width: 150px;"><%= n.getNoticeTime() %></div>
                 <div class="notice-class notice-sum" style="width: 300px;">
                 <% 
                 	String noticeClass = "";
@@ -200,7 +200,7 @@
                 %>
                 <%= noticeClass %>
                 </div>
-                <div class="msg notice-sum" style="width: 500px;"><%= n.getNoticeContents() %></div>
+                <div class="msg notice-sum" style="width: 350px;"><%= n.getNoticeContents() %></div>
             </div>
 	        <%	    }
            	   }
@@ -237,7 +237,18 @@
 			</div>   
 			              
         </div>
-        
+			<script>
+				if(<%= currentPage %> <= 1){
+					var before = $('.prev');
+					before.attr('class', 'page-item prev disabled');
+				}
+				
+				if(<%= currentPage %> >= <%= maxPage %>){
+					var after = $(".next");
+					after.attr('class', 'page-item next disabled');
+				}				
+			</script>        
+                
     </section>
     <h1 class="htext">M Y P A G E</h1>
     <div class="clear-both"></div>

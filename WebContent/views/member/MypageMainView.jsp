@@ -14,7 +14,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();	
 		
-	System.out.println(atFileName);
+	System.out.println("아티스트 파일 명 : " + atFileName);
 	
 	String userCode = member.getUserCode();
 	String userId = member.getUserId();

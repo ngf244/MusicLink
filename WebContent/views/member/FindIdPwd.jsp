@@ -92,7 +92,7 @@
 					<tr>
 						<td>ID</td>
 						<td><input type="text" name="id"></td>
-						<td rowspan="2"><input type="submit" class="findBtn findPwdBtn" value="비밀번호 찾기"></td>
+						<td rowspan="2"><input type="submit" class="findBtn findPwdBtn" onclick="infoMessage();" value="비밀번호 찾기"></td>
 					</tr>
 					<tr>
 						<td>e-mail</td>
@@ -108,6 +108,10 @@
     </div>
     <br>
     <a href="javascript:self.close();"><div class="closeBtn">닫기</div></a>
-     	
+    <script>
+    	function infoMessage(){
+    		alert("로그인폼으로 이동합니다. 메일을 확인해주세요.");
+    	}
+    </script> 	
 </body>
 </html>
