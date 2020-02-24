@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="member.model.vo.*"%>
 <%
-	Member loginUser = (Member)session.getAttribute("loginUser"); 
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	Manager loginManager = (Manager)session.getAttribute("loginManager");
 %> 
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
             </div>
             <div class="log-inOut">
 
-            	<% if (loginUser == null){ %>
+            	<% if (loginUser == null && loginManager == null){ %>
                 <a href="<%= request.getContextPath() %>/views/member/ssj_loginForm.jsp">login</a>
                 <% } else { %>
                 <a href="<%= request.getContextPath() %>/logout.me">logOut</a>

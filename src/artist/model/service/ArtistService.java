@@ -82,21 +82,6 @@ public class ArtistService {
 		return result;
 	}
 
-
-
-	public int insertProfile(String userId, String intro, String artistMedia) {
-		Connection conn = getConnection();
-		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		return result;
-	}
-
 	public int insertGalleryBoard(Artist artist) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().insertGalleryBoard(conn, artist);
@@ -139,6 +124,32 @@ public class ArtistService {
 	public int unfollowArtist(String userCode, String atCode) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().unfollowArtist(conn, userCode, atCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int insertProfile1(String userId, Artist artist, String artistPotoFile) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile1(conn, userId, artist, artistPotoFile);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int insertProfile2(String userId, Artist artist, String videoUrl) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile2(conn, userId, artist, videoUrl);
 		
 		if(result > 0) {
 			commit(conn);
