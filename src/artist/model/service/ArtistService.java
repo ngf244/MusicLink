@@ -149,5 +149,18 @@ public class ArtistService {
 		return result;
 	}
 
+	public ArrayList<Artist> selectAList() {
+		Connection conn = getConnection();
+		ArrayList<Artist> list = null;
+		
+		ArtistDAO dao = new ArtistDAO();
+		
+		list = dao.selectAList(conn);
+		
+		
+		return list;
+
+	}
+
 
 }
