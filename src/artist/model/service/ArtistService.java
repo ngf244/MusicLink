@@ -7,10 +7,12 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
+import festival.model.vo.Festival;
 import gallery.model.dao.GalleryDAO;
 import member.model.dao.MemberDAO;
 
@@ -147,6 +149,20 @@ public class ArtistService {
 		}
 		
 		return result;
+	}
+
+	public int getFollowAtFesListCount(String userCode) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().getFollowAtFesListCount(conn, userCode);
+		close(conn);
+		return result;
+	}
+
+	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
+		close(conn);
+		return map;
 	}
 
 
