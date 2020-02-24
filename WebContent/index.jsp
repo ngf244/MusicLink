@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.ArrayList, artist.model.vo.*" %>
+<%
+	ArrayList<Artist> list = (ArrayList<Artist>)request.getAttribute("aList");
+	boolean isReceive = true;
+	if(list == null) {
+		isReceive = false;
+	}
+	
+%>
 <!DOCTYPE html> 
 <html>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
@@ -19,9 +27,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$.ajax({
-			url:'start.do'
-		});
+		if(<%=isReceive%> == false){
+			location.href="<%=request.getContextPath()%>/start.do";
+		}
 	});
 </script>
 
@@ -191,13 +199,13 @@
         <div class="content-m1">
             <div class="ar-line">
                 <div class="line-box">
-                    <select class="select-box">
+                    <!-- <select class="select-box">
                         <option>카테고리를 선택하세요.</option>
                         <option>주간</option>
                         <option>팔로우</option>
                         <option>등등</option>
                         <option>기타</option>
-                    </select>
+                    </select> -->
                 </div>
             </div> 
             <div class="ranking-box">
@@ -209,81 +217,32 @@
                         <div class="lr-bot lrank">3</div>
                     </div>
                     <div class="rank-right-1">
-                        <div class="rr-top rrank">
-                            <div class="at-photo">
-                                <img src="img/jungseonghwan01.jpg">
-                            </div>
-                            <div class="at-nickName">
-                                <p>B. T. S</p>
-                                <p>Not Today</p>
-                            </div>
-                            <div class="genre">
-                                댄스 / 가요
-                            </div>
-                            <div class="at-icon">
-                                <div class="at-icon-wrap">
-                                    <a href="#">
-                                        <img src="img/facebook.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="img/instagram.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="img/twitter.png">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rr-mid rrank">
-                            <div class="at-photo">
-                                <img src="img/pappertones01.jpg">
-                            </div>
-                            <div class="at-nickName">
-                                <p>B. T. S</p>
-                                <p>Not Today</p>
-                            </div>
-                            <div class="genre">
-                                댄스 / 가요
-                            </div>
-                            <div class="at-icon">
-                                <div class="at-icon-wrap">
-                                    <a href="#">
-                                        <img src="img/facebook.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="img/instagram.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="img/twitter.png">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rr-bot rrank">
-                            <div class="at-photo">
-                                <img src="img/taeyeon01.jpg">
-                            </div>
-                            <div class="at-nickName">
-                                <p>B. T. S</p>
-                                <p>Not Today</p>
-                            </div>
-                            <div class="genre">
-                                댄스 / 가요
-                            </div>
-                            <div class="at-icon">
-                                <div class="at-icon-wrap">
-                                    <a href="#">
-                                        <img src="<%= request.getContextPath() %>/img/facebook.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="<%= request.getContextPath() %>/img/instagram.png">
-                                    </a>
-                                    <a href="#">
-                                        <img src="<%= request.getContextPath() %>/img/twitter.png">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    	<%	if(isReceive == true){ %>
+	                    	<% for(Artist a : list){ %>
+	                        <div class="rr-bot rrank">
+	                            <div class="at-photo">
+	                                <img src="artistProfile_uploadFiles/<%= a.getAtPicPath().substring(70) %>">
+	                            </div>
+	                            <div class="at-nickName">
+	                                <p><%= a.getAtName() %></p>
+	                            </div>
+	                            <div class="genre"><%= a.getAtGenre() %></div>
+	                            <div class="at-icon">
+	                                <div class="at-icon-wrap">
+	                                    <a href="<%= a.getAtFacebook() %>" target="_blank">
+	                                        <img src="<%= request.getContextPath() %>/img/facebook.png">
+	                                    </a>
+	                                    <a href="<%= a.getAtInsta() %>" target="_blank">
+	                                        <img src="<%= request.getContextPath() %>/img/instagram.png">
+	                                    </a>
+	                                    <a href="<%= a.getAtTwitter() %>" target="_blank">
+	                                        <img src="<%= request.getContextPath() %>/img/twitter.png">
+	                                    </a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <% } %>
+                    	<% } %>
                     </div>
                 </div>
             </div>
@@ -309,11 +268,7 @@
     
     <script>
     
-    $(function(){
-    	$.ajax({
-    		url:'start.do'
-    	});
-    });
+    
     
     $(window).scroll(function() { 
         if ($(this).scrollTop() == 0) { 

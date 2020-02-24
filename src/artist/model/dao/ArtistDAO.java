@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -358,6 +359,39 @@ public class ArtistDAO {
 		}	
 		
 		return result;
+	}
+	public ArrayList<Artist> selectAList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Artist> list = null;
+		
+		String query = prop.getProperty("selectAList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			list = new ArrayList<Artist>();
+			
+			while(rs.next()) {
+				list.add(new Artist(rs.getString("at_code"),
+									rs.getString("at_name"),
+									rs.getString("at_genre"),
+									rs.getString("at_class"),
+									rs.getString("PROFILE_PIC_PATH"),
+									rs.getInt("at_Grade"),
+									rs.getString("at_insta"),
+									rs.getString("at_Twitter"),
+									rs.getString("at_Facebook")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }
