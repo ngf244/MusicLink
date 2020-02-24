@@ -67,12 +67,15 @@ public class FestivalListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage, category);
 		
+		LinkedHashMap<Festival, ArrayList<String>> banmap = service.selectBannerList();
+		
 		String page = null;
-		if(map != null) {
+		if(map != null && banmap!= null) {
 			page = "views/festival/FestivalList.jsp";
 			request.setAttribute("map", map);
 			request.setAttribute("pi", pi);
-
+			
+			request.setAttribute("banmap", banmap);
 			request.setAttribute("category", category);
 		} else {
 			page = "views/common/errorPage.jsp";

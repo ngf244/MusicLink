@@ -33,8 +33,6 @@ public class FestivalDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fcode = request.getParameter("fcode");
 		String status = request.getParameter("status");
-		System.out.println(fcode);
-		System.out.println(status);
 		
 		FestivalService service = new FestivalService();
 		

@@ -136,7 +136,7 @@
 	}
 	
 	#bigArea {
-		width: 90%;
+		width: 88%;
 		height: 100%;
 		text-align: center;
 		display: inline-block;
