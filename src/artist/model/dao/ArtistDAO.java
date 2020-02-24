@@ -320,6 +320,7 @@ public class ArtistDAO {
 		
 		return result;
 	}
+	
 	public int insertActivityImg(Connection conn, String userCode, String activityImgPath) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -341,6 +342,7 @@ public class ArtistDAO {
 				
 		return result;
 	}
+	
 	public int unfollowArtist(Connection conn, String userCode, String atCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -387,6 +389,7 @@ public class ArtistDAO {
 		
 		return result;
 	}
+	
 	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(Connection conn, int currentPage, String userCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -423,7 +426,7 @@ public class ArtistDAO {
 				aList.add(a);
 				
 				map.put(fList, aList);	
-      }
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
