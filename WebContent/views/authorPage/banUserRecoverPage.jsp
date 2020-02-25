@@ -44,6 +44,8 @@
 
     .preDetailReason+div{width: 5%; height: 5%; bottom: 5%; right: 10%;}
     .preDetailReason+div button{background-color: red;}
+
+    img{width: 100%; height: 100%}
 </style>
 </head>
 <body>
@@ -60,7 +62,7 @@
         
             <div class="userDetailBox">
                 <div class="userDetailBox-imgBox">
-                    img 사진 들어갈 곳
+                    <img>
                 </div>
                 <div class="userDetailBox-nameBox">
                     <fieldset>
@@ -129,14 +131,78 @@
         var check = confirm("정말 해제 하시겠습니까?");
 
         if(check == true){
+            var userId = $('.searchBox input').val();
+            console.log("userId : " + userId);
+            location.href="<%=request.getContextPath() %>/userUnBan.rec?userId="+userId;
             return true;
         }
         else{
             return false;
         }
     }
+
+    $('.searchBox button').click(function () {
+        var searchId = $('.searchBox input').val();
+        console.log(searchId);
+        $('#hiddenId').val(searchId);
+        $.ajax({
+            url : "<%=request.getContextPath()%>/showUserDetail.rec",
+            type : 'get',
+            data : {searchId:searchId},
+            success : function(data){
+                console.log(data);
+                if(data.userBirth == null){
+                    notban();
+                }
+
+                var type = "";
+                switch(data.userClass){
+                    case '1' : type = "일반회원"; break;
+                    case '2' : type = "아티스트회원"; break;
+                    case '3' : type = "기획자회원"; break;
+                }
+
+                var userName = data.userName;
+                var userPhone = data.userPhone;
+                var userImg = "";
+
+                if (data.userEmail == null){
+                    if(data.userClass == 1){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/nomalUser.png";
+                    } else if(data.userClass == 3){
+                        userImg = "<%=request.getContextPath()%>/views/authorPage/image/companyUser.png";
+                    }
+                } else {
+                    userImg = "<%=request.getContextPath()%>/artistProfile_uploadFiles/" + data.userEmail;
+                }
+                console.log(userImg);
+
+                var banReason = data.userBirth;
+                var banReasonDetail = data.userGender;
+
+                $('.userDetailBox-imgBox img').attr("src",userImg);
+                $('.userDetailBox-nameBox input').val(userName);
+                $('.userDetailBox-addressBox input').val(userPhone);
+                $('.userDetailBox-usertypeBox input').val(type);
+                $('.preDistrictReason input').val(banReason);
+                $('.preDetailReason input').val(banReason);
+            },
+            error : function () {
+                console.log("헐 아작스 에러 대박;")
+            }
+        })
+    })
     
-	//new WOW().init();
+    $('.searchBox input').keyup(function (event) {
+        if(event.keyCode === 13){
+            $('.searchBox button').trigger('click');
+        }
+    })
+
+    function notban(){
+        alert("벤 안당한넘임 ㅎ");
+        location.href="<%=request.getContextPath() %>/views/authorPage/banUserRecoverPage.jsp";
+    }
 	
 	
 </script>
