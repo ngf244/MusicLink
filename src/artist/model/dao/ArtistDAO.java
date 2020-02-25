@@ -572,7 +572,6 @@ public class ArtistDAO {
 		ArrayList<Artist> list = null;
 		
 		String query = prop.getProperty("selectAList");
-		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
@@ -596,7 +595,7 @@ public class ArtistDAO {
 			close(rs);
 			close(stmt);
 		}
-			
+		System.out.println(list);
 		return list;
 
 	}

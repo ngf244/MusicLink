@@ -221,7 +221,7 @@
 	                    	<% for(Artist a : list){ %>
 	                        <div class="rr-bot rrank">
 	                            <div class="at-photo">
-	                                <img src="<%= request.getContextPath() %>/artistProfile_uploadFiles/<%= a.getAtPicPath() %>">
+	                                <img src=" <%= request.getContextPath() %>/artistProfile_uploadFiles/<%= a.getAtPicPath() %>">
 	                            </div>
 	                            <div class="at-nickName">
 	                                <p><%= a.getAtName() %></p>
