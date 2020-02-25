@@ -386,7 +386,6 @@ public class ArtistDAO {
 		ArrayList<Artist> list = null;
 		
 		String query = prop.getProperty("selectAList");
-		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
@@ -411,6 +410,7 @@ public class ArtistDAO {
 			close(stmt);
 		}
 		System.out.println("아티스트 랭킹 리스트 3위까지 : " + list);	
+
 		return list;
 
 	}

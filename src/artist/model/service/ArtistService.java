@@ -159,6 +159,7 @@ public class ArtistService {
 		list = dao.selectAList(conn);
 				
 		return list;
+		
 	}
 
 	public String selectArtistImg(String userCode) {
