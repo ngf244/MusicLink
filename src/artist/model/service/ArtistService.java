@@ -188,5 +188,12 @@ public class ArtistService {
 		return list;
 	}
 
+	public String selectArtistImg(String userCode) {
+		Connection conn = getConnection();
+		String fileName = new ArtistDAO().selectArtistImg(conn, userCode);
+		close(conn);
+		return fileName;
+	}
+
 
 }

@@ -41,11 +41,12 @@ public class MyPageServlet extends HttpServlet {
 		
 		String loginUserId = ((Member)session.getAttribute("loginUser")).getUserId();
 		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
-		String fileName = (String)session.getAttribute("atFileName");
 		
 		Member member = new MemberService().selectMember(loginUserId);
 		Artist artist = new ArtistService().selectArtist(userCode);
-		
+		//String fileName = (String)session.getAttribute("atFileName");
+		String fileName = new ArtistService().selectArtistImg(userCode);
+				
 		System.out.println(member);
 		// 메인뷰의 아티스트 리스트 
 		ArtistService service = new ArtistService();
