@@ -14,7 +14,7 @@
     
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
-<title>FAQ 작성</title>
+<title>FAQ 수정</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
@@ -94,6 +94,6 @@
     <script src="../../js/settings.js"></script>
     <script src="../../js/gleek.js"></script>
     <script src="../../js/styleSwitcher.js"></script>
-    
+
 </body>
 </html>

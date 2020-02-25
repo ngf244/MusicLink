@@ -17,84 +17,38 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	section {
-		width: 70%;
-		margin: 0 auto;
-		box-shadow: 5px 5px 10px 8px lightgray;
-		margin-top: 250px;
-		position: relative;
-		background: #fff;
-		height: 700px;
-		display: block;
+		width: 70%;margin: 0 auto;box-shadow: 5px 5px 10px 8px lightgray;margin-top: 250px;
+		position: relative;background: #fff;height: 700px;display: block;
 	}
-	
 	.htext {
-		text-align: center;
-		font-size: 100px;
-		height: 0;
-		position: absolute;
-		top: 140px;
-		left: 50%;
-		transform: translateX(-50%);
-		color: rgb(224, 224, 224);
+		text-align: center;font-size: 100px;height: 0;position: absolute;
+		top: 140px;left: 50%;transform: translateX(-50%);color: rgb(224, 224, 224);
 	}
 	
 	#categoryArea {padding-top: 35px;padding-left: 30px;color: #76838f;}
-	
 	#contentArea{padding-top: 45px; padding-bottom: 45px;text-align: center;}
-	
 	#inBigCategory {font-family: 'Bungee', cursive;font-size: 50px;}
-	
 	#inSmallCategory {font-family: 'Comfortaa', cursive;font-size: 30px;}
-	
 	#block {background: #8AFF00;width: 55px;height: 8px;top: 5%;}
 	
 	.table-responsive {text-align: center;border-radius: 3px;box-shadow: 0px;}
-	
 	th {text-align: inherit;}
-	
 	.table {width: 90%;margin-left: 5%;margin-bottom: 1rem;text-align: center;}
-	
 	.table th, .table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}
-	
 	.table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}
-	
 	.table tbody+tbody {border-top: 2px solid #dee2e6;}
-	
 	.badge-primary {background-color: #f29d56;color: white;}
-	
 	.badge-success {background-color: #7780b7;color: white;}
+	.px-2 {padding-left: 0.5rem !important;padding-right: 0.5rem !important;border-radius: 0.25rem;padding: 5px;font-size: 13px;}
 	
-	.px-2 {
-		padding-left: 0.5rem !important;
-		padding-right: 0.5rem !important;
-		border-radius: 0.25rem;
-		padding: 5px;
-		font-size: 13px;
-	}
-	
-	
-	.btnArea{
-		display: inline-block;
-		background: red;
-	}
-	
-	#write_box{
-		display: inline-block;
-		float: right;
-		margin-right: 11%;
-		background: yellow;
-		width: 70px;
-	}
+	.pagingArea{background: blue; text-align: left;}
+	.btnArea{display: inline-block;background: red;width: 1100px;}
+	#write_box{display: inline-block;float: right;background: yellow;width: 205px;}
+	#Before{margin-left: 45%;}
 	
 	.btn_style{
-		margin-left: 0;
-    	border-radius: 0.25rem;
-    	position: relative;
-    	padding: 0.5rem 0.75rem;
-    	line-height: 1.25;
-    	color: #7571f9;
-    	background-color: #fff;
-    	border: 1px solid #dee2e6;
+		margin-left: 0;border-radius: 0.25rem;position: relative;padding: 0.5rem 0.75rem;
+    	line-height: 1.25;color: #7571f9;background-color: #fff;border: 1px solid #dee2e6;
 	}
 	
 	#choosen{background: lightpink;}
@@ -161,11 +115,11 @@
 				</table>
 			</div>
 			<!-- 페이징 -->
-			<div class='paginaArea'>
+			<div class='pagingArea'>
 				<div class="btnArea">
 					<% if(!list.isEmpty()) { %>
 					<!-- 맨 처음으로 -->
-					<button class="btn_style" onclick="location.href='<%= request.getContextPath() %>/list.qna?currentPage=1'">&lt;&lt;</button>
+					<button class="btn_style" id="Before" onclick="location.href='<%= request.getContextPath() %>/list.qna?currentPage=1'">&lt;&lt;</button>
 					
 					<!-- 이전 페이지로 -->
 					<button class="btn_style" id="beforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.qna?currentPage=<%= currentPage-1 %>'">&lt;</button>
@@ -200,9 +154,9 @@
 					<% } %>
 				</div>
 				<div id="write_box">
-				<%-- <% if(loginUser != null) { %> --%>
+				<% if(loginUser != null) { %>
 					<button onclick='location.href="<%= request.getContextPath() %>/views/QNA/Q&AWrite.jsp"' class="btn_style" id="write">글쓰기</button>
-				<%-- <% } %> --%>
+				<% } %>
 				</div>
 			</div>
 		</div>

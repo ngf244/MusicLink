@@ -25,11 +25,15 @@
 	#inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
 	
-	#contentArea{padding-top: 45px; padding-bottom: 45px; font-family: "Roboto", sans-serif;}
+	#contentArea{padding-top: 30px; padding-bottom: 45px; font-family: "Roboto", sans-serif;}
 	#block {background: #8AFF00; width: 55px; height: 8px; top: 5%;}
     
     #insertInfo{font-size: 20px; width: 750px; margin-left: auto; margin-right: auto;}
+	
 	#titleImg{width: 300px; height: 300px;}
+	#titleImgArea{position: relative; z-index: 1;}
+	#titleImgArea .textImg{position: absolute; top: 130px; left: 120px; z-index: 2;}
+	#clickImg{width: 20px; height: 20px;}
 	
 	.introduce{resize: none; border: 1px solid #ced4da; border-radius: 4px;}
 	
@@ -66,7 +70,7 @@
     	font-weight: 500; font-size: 0.99rem; line-height: 1.5; border-radius: 0.25rem;
     	font-family: "Roboto", sans-serif; vertical-align: middle; white-space: nowrap; border: 1px solid transparent;}
     	
-   	.sns-form{width: 200px; border-radius: 4px; box-shadow: none; padding: 0.5rem 0.6rem; font-size: 0.99rem;
+   	.sns-form{width: 240px; border-radius: 4px; box-shadow: none; padding: 0.5rem 0.6rem; font-size: 0.99rem;
    	line-height: 1.5; vertical-align: middle; border: 1px solid #ced4da; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;}
     .sns_class{
     align-items: center;padding: 0.5rem 0.6rem;font-size: 0.875rem;font-weight: 400;line-height: 1.5;
@@ -75,7 +79,10 @@
     #label_sns{height: 150px;}
     
     .rowplus{text-align: right;}
-	
+    
+	.alert-danger {color: #853131;background-color: #ffdfdf;border-color: #ffd2d2;
+			position: relative;padding: 0.75rem 1.25rem;margin-bottom: 20px;border: 1px solid transparent;border-radius: 0.3rem;
+			font-size: 13px;text-align:center;}
 </style>
 </head>
 <body>
@@ -89,13 +96,19 @@
 		</div>
 		
 		<div id="contentArea">
-			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
+			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data" onsubmit="return validate();">
 				<table id="insertInfo">
+					<tr>
+						<td colspan="4" class="alert-danger">※ 모든 정보를 입력해주세요.(단, sns는 선택)</td>
+					</tr>
 					<tr>
 						<td colspan="2" rowspan="5" class="table1_td">
 						<input type="hidden" name="userId" value="<%= userId %>">
 							<div id="titleImgArea">
 								<img id="titleImg">
+								<div class="textImg">
+									<img id="clickImg" src="<%= request.getContextPath()%>/img_s/black.png"> click
+								</div>
 							</div>
 						</td>
 						<td class="label" id="labelA">활동명</td>
@@ -141,7 +154,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea class="introduce" name="introduce" id="line_intro" rows="5" cols="95" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요."></textarea>
+							<textarea class="introduce" name="introduce" id="line_intro" rows="5" cols="110" placeholder="아티스트 리스트에 들어갈 한 줄 소개를 적어주세요."></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -149,7 +162,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea class="introduce" name="artistInfo" id="art_intro" rows="10" cols="95" placeholder="프로필에 들어갈 아티스트 소개를 적어주세요."></textarea>
+							<textarea class="introduce" name="artistInfo" id="art_intro" rows="10" cols="110" placeholder="프로필에 들어갈 아티스트 소개를 적어주세요."></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -172,11 +185,11 @@
 									</tr>
 									<tbody>
 										<tr>
-											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="2020.02.20"></td>
-											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="kh세미프로젝트"></td>
-											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="ROCK"></td>
-											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="싸우는거 아니조"></td>
-											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="싸우는거 맞조"></td>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" placeholder="2020.01.01"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" placeholder="앨범명"></td>
+											<td class="art_history"><input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" placeholder="장르"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" placeholder="작사가"></td>
+											<td class="art_history"><input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" placeholder="작곡가"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -201,19 +214,19 @@
 						<td rowspan="3" class="label" id="label_sns">SNS</td>
 						<td colspan="3">
 							<span class="sns_class">Instargram</span>
-							<input type="url" name="instaURL" id="instaURL" class="sns-form">
+							<input type="url" name="instaURL" id="instaURL" class="sns-form" placeholder="인스타링크 주소를 넣어주세요.">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">Twitter</span>
-							<input type="url" name="twitterURL" id="twitterURL" class="sns-form">
+							<input type="url" name="twitterURL" id="twitterURL" class="sns-form" placeholder="트위터링크 주소를 넣어주세요.">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">FaceBook</span>
-							<input type="url" name="facebookURL" id="facebookURL" class="sns-form">
+							<input type="url" name="facebookURL" id="facebookURL" class="sns-form" placeholder="페이스북링크 주소를 넣어주세요.">
 						</td>
 					</tr>
 					<tr>
@@ -276,14 +289,16 @@
     		});
     	});
     	
+    	var titleImgChecked = false;
     	function LoadImg(value){
     		if(value.files && value.files[0]){
     			var reader = new FileReader();
     				
     			reader.onload = function(e){
     				$('#titleImg').attr("src", e.target.result);
+    				$('.textImg').css("display", "none");
     			}
-    				
+    			titleImgChecked = true;
     			reader.readAsDataURL(value.files[0]);
     		}
     	}
@@ -300,15 +315,15 @@
 	    
 	    $('#rowplus').click(function(){
 	    	var trtdText = '<tr>' + '<td class="art_history">' 
-	    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" value="test">' 
+	    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumDate" id="albumDate" placeholder="2020.01.01">' 
 	    	+ '</td>' + '<td class="art_history">'
-	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" value="test">'
+	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumTitle" id="albumTitle" placeholder="앨범명">'
 	    	+ '</td>' + '<td class="art_history">'
-	    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" value="test">'
+	    	+ '<input type="text" style="width: 100px;" class="historydata" name="albumGenre" id="albumGenre" placeholder="장르">'
 	    	+ '</td>' + '<td class="art_history">'
-	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" value="test">'
+	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumWriter" id="albumWriter" placeholder="작사가">'
 	    	+ '</td>' + '<td class="art_history">'
-	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" value="test">'
+	    	+ '<input type="text" style="width: 200px;" class="historydata" name="albumSong" id="albumSong" placeholder="작곡가">'
 	    	+ '</td>' + '</tr>'
 	    	
 	    	$('.historyTable > tbody:last').append(trtdText);
@@ -318,7 +333,44 @@
 	    	$('.historyTable > tbody:last > tr:last').remove();
 	    });
 	    
-	    
+	    function validate(){
+			if(titleImgChecked == false){
+				alert("프로필 사진을 첨부해주세요.");
+				return false;
+			} else if($('#art_name').val() == ""){
+				alert("활동명 or 팀명을 입력해주세요.");
+				return false;
+			} else if($('#art_num').val() == ""){
+				alert("인원수를 입력해주세요.");
+				return false;
+			} else if($('#debut_year').val() == "" || $('#debut_month').val() == "" || $('#debut_day').val() == ""){
+				alert("데뷔일을 입력해주세요.")
+				return false;
+			} else if($('input:checkbox[name="genre"]:checked').length == 0){
+				alert("장르를 체크해주세요.")
+				return false;
+			} else if($('input:radio[name="artistGender"]:checked').val() == ""){
+				alert("성별을 선택해주세요.")
+				return false;
+			} else if($('input:radio[name="artistCategory"]:checked').val() == ""){
+				alert("(솔로/그룹)을 선택해주세요.")
+				return false;
+			} else if($('#line_intro').val() == ""){
+				alert("한 줄 소개를 적어주세요.");
+				return false;
+			} else if($('#art_intro').val() == ""){
+				alert("아티스트 소개를 적어주세요.");
+				return false;
+			} else if($('#potoFile').val() == ""){
+				alert("사진첨부를 해주세요.");
+				return false;
+			} else if($('#videoFile').val() == ""){
+				alert("동영상을 첨부해주세요.");
+				return false;
+			} else {
+				return true;
+			}
+		}
 	    
     </script>
     
