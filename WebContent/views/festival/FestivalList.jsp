@@ -12,6 +12,8 @@
 	int endPage = pi.getEndPage();
 	
 	int category = (int)request.getAttribute("category");
+	
+	LinkedHashMap<Festival, ArrayList<String>> banmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("banmap");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -48,7 +50,7 @@
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
     */
 	section {width:70%; height:180%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; padding-top: 0px; padding-bottom:10%;}
+    /*background: #fff;*/ padding-top: 0px; padding-bottom:10%;}
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
 	
@@ -61,14 +63,17 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
     #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
-    #banner{width:100%; height:400px; overflow:hidden; display: flex; justify-content:center; align-items:center; position: fixed;}
+    #banner{width:100%; height:400px; overflow:hidden;}
     #banner_paging_area{text-align:center; position:absolute; top:490px; left: 50%; transform: translateX(-50%);}
     #banner_paging{color: white; font-size: 10px;}
     #banner_left, #banner_right{border:0; background: none; color: white;}
     
-    .promotionArea{margin-top:8%;}
+    .banClick{text-align:right; background-color:light-gray;}
+    .alignspanban{margin-bottom : 50px; margin-right: 50px;}
+    
+    .promotionArea{margin-top:8%; text-align:center;}
     .subTitle{font-size:20px; font-weight:bold;}
-    .promotionImgArea{margin-top:20px; width:100%;}
+    .promotionImgArea{margin-top:20px; width:80%;}
     .promotionImgArea input{}
     .promotionImg{width:150px; height:210px; background:lightgray; display:inline-block; vertical-align:middle; text-align:right;}
     .alignspan{font-size:11px; margin-top: 186px; margin-right:4px;}
@@ -88,8 +93,15 @@
     .pointer{cursor:pointer;}
     
     #festivalList{display:block; margin-top:8%;}
-    .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
-    .alignspanlist, .alignspan{font-weight: bold;}
+    .promotionDetailImg{
+    	width:138px;
+    	height:174px;
+    	background:lightgray;
+    	display:inline-block;
+    	vertical-align:top;
+    	text-align:right;
+    }
+    .alignspanlist, .alignspan, .alignspanban{font-weight: bold;}
     .festival{display:inline-block; width:70%; margin-top: 50px; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label{vertical-align:middle;}
@@ -104,24 +116,9 @@
     
     footer .ft-content{width:70%; !important;}
     
-    ul,li{list-style:none;}
-    .slide{height:400px;overflow:hidden;}
-    .slide ul{width:calc(100% * 3);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
-    .slide li{width:calc(100% / 3);height:400px;}
-    .slide li:nth-child(1){background:#ffa;}
-    .slide li:nth-child(2){background:#faa;}
-    .slide li:nth-child(3){background:#afa;}
-    @keyframes slide {
-      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
-      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
-      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
-      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
-      50% {margin-left:-200%;}
-      60% {margin-left:-200%;}
-      75% {margin-left:-300%;}
-      85% {margin-left:-300%;}
-      100% {margin-left:0;}
-    }
+    .banner div {width:100%; height:400px; overflow:hidden;}
+    .banner div img {width:100%; height:auto; position: absolute; top: 50%; transform: translateY(-50%);}
+    
 </style>
 </head>
 <body>
@@ -139,45 +136,65 @@
 		<div id="contentArea">
 		
 			<div class="banner animation">
-				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_1.jpg" alt="" /></div>
-				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_2.jpg" alt="" /></div>
-				<div><img style="width:100%;" src="<%= request.getContextPath() %>/images/poster/banner/poster_banner_3.jpg" alt="" /></div>
+				<% if(banmap != null) {
+						for(Festival banFes : banmap.keySet()) {
+							ArrayList<String> banArtlist = banmap.get(banFes);
+							
+							String fesTerm = banFes.getFesTerm();
+							String endFes[] = fesTerm.split(" - ");
+							String dateSplit[] = (endFes[endFes.length-1]).split("/");
+							
+							int month = 0;
+							int day = 0;
+							int year = 0;
+							if(endFes.length > 1) {
+								month = Integer.parseInt(dateSplit[0]);
+								day = Integer.parseInt(dateSplit[1]);
+								year = Integer.parseInt(dateSplit[2]);
+							}
+
+							Date endFesDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
+							Date today = new Date(new GregorianCalendar().getTimeInMillis());
+							
+							String banaddtext = "";
+							if (today.getTime() > endFesDate.getTime()) {
+								banaddtext = "지난 행사";
+							} else if (banArtlist.size() < banFes.getRecCount()) {
+								banaddtext = "아티스트 모집 중";
+							} else if (banArtlist.size() == banFes.getRecCount()) {
+								banaddtext = "아티스트 확정";
+							} %>
+						<div class="banClick">
+							<input type="hidden" value="<%= banFes.getFesCode() %>">
+							<input type="hidden" value="<%= banaddtext %>">
+							<img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= banFes.getBanPath() %>" alt="" />
+						</div>
+				<%		}
+					} %>
 			</div>
-			
-			 <!-- 
-			 <div class="banner slide">
-			 <ul>
-			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_1.jpg" alt=""></li>
-			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_2.jpg" alt=""></li>
-			 	<li><img style="width:100%;" src="../../images/poster/banner/poster_banner_3.jpg" alt=""></li>
-			 </ul>
-			 </div>
-			  -->
 			  
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 			<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 			<script type="text/javascript" src="<%= request.getContextPath() %>/js/slick.min.js"></script>
 			<script>
 				$(document).ready(function(){
-					$('.banner div').css({'height':'400px', 'overflow':'hidden', 'display':'flex', 'justify-content':'center', 'align-items':'center'});
-					$('.banner div img').css({'height':'400px', 'overflow':'hidden', 'display':'flex', 'justify-content':'center', 'align-items':'center'});
-					
 					$('.animation').slick({
 						autoplay:true,
-						autoplaySpeed:2000,
+						autoplaySpeed:1300,
 						fade:true,
 						arrows:true,
 						cssEase:'ease',
 						easing:'ease'
 			    	});
+					
+					$('#fulFes').slick();
 			    });
 			</script>
 			
 			<div class="promotionArea">
 				<label class="subTitle">아티스트 확정 행사</label><br>
 				
-				<div class="promotionImgArea">
-					<input type="button" value="<">
+				<div class="promotionImgArea" id="fulFes" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
 					<div class="promotionImg">
 						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
 					</div>
@@ -193,7 +210,6 @@
 					<div class="promotionImg">
 						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
 					</div>
-					<input type="button" value=">">
 				</div>
 			</div>
 			
@@ -345,7 +361,8 @@
 					<div class="festival">
 						<input type="hidden" value="<%= f.getFesCode() %>">
 						<input type="hidden" value="<%= addtext %>">
-						<img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>" class="promotionDetailImg" />
+						<%-- <img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>" class="promotionDetailImg" /> --%>
+						<div style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;" class="promotionDetailImg"></div>
 						<div class="festivalInfo">
 							<div>
 								<span class="<%= addcls %> alignspanlist"><%= addtext %></span> &nbsp;
@@ -461,7 +478,7 @@
     
     <script>
     	$(function() {
-    		<% int sectionHeiht = 235 + ((map.size()-1) * 26); %>
+    		<% int sectionHeiht = 238 + ((map.size()-1) * 28); %>
     		$('section').css('height', '<%= sectionHeiht %>%');
     		
     		for(var i = 2; i < 5; i++) {
@@ -494,6 +511,11 @@
 				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
 			});
 			
+			$('.banClick').click(function() {
+				var fcode = $(this).children().eq(0).val();
+				var status = $(this).children().eq(1).val();
+				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
+			});
 			$('.festival').click(function() {
 				var fcode = $(this).children().eq(0).val();
 				var status = $(this).children().eq(1).val();

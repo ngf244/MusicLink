@@ -7,10 +7,12 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
+import festival.model.vo.Festival;
 import gallery.model.dao.GalleryDAO;
 import member.model.dao.MemberDAO;
 
@@ -82,21 +84,6 @@ public class ArtistService {
 		return result;
 	}
 
-
-
-	public int insertProfile(String userId, String intro, String artistMedia) {
-		Connection conn = getConnection();
-		int result = new ArtistDAO().insertProfile(conn, userId, intro, artistMedia);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		return result;
-	}
-
 	public int insertGalleryBoard(Artist artist) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().insertGalleryBoard(conn, artist);
@@ -149,6 +136,47 @@ public class ArtistService {
 		return result;
 	}
 
+	public int insertProfile1(String userId, Artist artist, String artistPotoFile) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile1(conn, userId, artist, artistPotoFile);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int insertProfile2(String userId, Artist artist, String videoUrl) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile2(conn, userId, artist, videoUrl);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+
+	public int getFollowAtFesListCount(String userCode) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().getFollowAtFesListCount(conn, userCode);
+		close(conn);
+		return result;
+	}
+
+	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
+		close(conn);
+		return map;
+  }
+  
 	public ArrayList<Artist> selectAList() {
 		Connection conn = getConnection();
 		ArrayList<Artist> list = null;
@@ -156,10 +184,15 @@ public class ArtistService {
 		ArtistDAO dao = new ArtistDAO();
 		
 		list = dao.selectAList(conn);
-		
-		
+				
 		return list;
+	}
 
+	public String selectArtistImg(String userCode) {
+		Connection conn = getConnection();
+		String fileName = new ArtistDAO().selectArtistImg(conn, userCode);
+		close(conn);
+		return fileName;
 	}
 
 

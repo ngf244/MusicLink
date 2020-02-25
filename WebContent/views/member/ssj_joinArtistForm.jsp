@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<% 
 	String userId = (String)request.getAttribute("userId");
 %>
 <!DOCTYPE html>
@@ -90,10 +90,10 @@
 		
 		<div id="contentArea">
 			<form id="enrollForm" action="<%= request.getContextPath() %>/insert.at" method="post" encType="multipart/form-data">
-			<input type="hidden" name="userId" value="<%= userId %>">
 				<table id="insertInfo">
 					<tr>
 						<td colspan="2" rowspan="5" class="table1_td">
+						<input type="hidden" name="userId" value="<%= userId %>">
 							<div id="titleImgArea">
 								<img id="titleImg">
 							</div>
@@ -188,7 +188,7 @@
 						<td colspan="3" class="fileBox">
 							<input type="text" name="potoFile" id="potoFile" class="text-file" readonly>
 							<label for="uploadBtn1" class="btn_file">첨부파일</label>
-							<input type="file" id="uploadBtn1" class="uploadBtn1" accept="image/jpeg, image/png, image/jpg">
+							<input type="file" name="uploadBtn1" id="uploadBtn1" class="uploadBtn1" accept="image/jpeg, image/png, image/jpg">
 						</td>
 					</tr>
 					<tr>
@@ -225,7 +225,7 @@
 					</tr>
 				</table>
 				<div id="fileArea">
-					<input type="file" id="profile" multiple="multiple" name="profile" onchange="LoadImg(this)">
+					<input type="file" name="profile" id="profile" multiple="multiple" name="profile" onchange="LoadImg(this)">
 				</div>
 				<input type="hidden" id="hiddenHistory" name="hiddenHistory">
 			</form>

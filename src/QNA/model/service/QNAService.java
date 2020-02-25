@@ -81,6 +81,22 @@ public class QNAService {
 		return result;
 	}
 
+	public ArrayList<QnA> insertReply(QnA qna) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		int result = dao.insertReply(conn, qna);
+		ArrayList<QnA> list = null;
+		
+		if(result > 0) {
+			commit(conn);
+			list = dao.selectReplyList(conn, qna.getQnaCode());
+		} else {
+			rollback(conn);
+		}
+		
+		return list;
+	}
+
 	
 
 }

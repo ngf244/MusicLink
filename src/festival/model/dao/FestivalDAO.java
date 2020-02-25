@@ -65,6 +65,7 @@ public class FestivalDAO {
 		ResultSet rs = null;
 		int result = 0;
 		
+		if(category == 0) category = 1;
 		String query = prop.getProperty("c" + category + "_getListCount");
 		
 		try {
@@ -336,7 +337,9 @@ public class FestivalDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rs2);
 			close(rs);
+			close(pstmt2);
 			close(pstmt);
 		}
 		
@@ -382,6 +385,63 @@ public class FestivalDAO {
 		}
 		
 		return artistArr;
+	}
+
+	public LinkedHashMap<Festival, ArrayList<String>> selectBannerList(Connection conn) {
+		Statement stmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		ResultSet rset = null;
+		ResultSet rset2 = null;
+		ResultSet rset3 = null;
+		LinkedHashMap<Festival, ArrayList<String>> banmap = null;
+		
+		String query = prop.getProperty("selectRandomFestival");
+		String query2 = prop.getProperty("findArtist");
+		String query3 = prop.getProperty("findArtistName");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			banmap = new LinkedHashMap<Festival, ArrayList<String>>();
+			Festival f = null;
+			ArrayList<String> artistArr = null;
+			while(rset.next()) {
+				f = new Festival(rset.getString("fes_code"),
+								 rset.getString("fes_term"),
+								 rset.getInt("recruit_num"),
+								 rset.getString("recruit_term"),
+								 rset.getString("fes_banner_path"));
+				
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, f.getFesCode());
+				rset2 = pstmt2.executeQuery();
+
+				artistArr = new ArrayList<String>();
+				while(rset2.next()) {
+					String artCode = rset2.getString(1);
+					
+					pstmt3 = conn.prepareStatement(query3);
+					pstmt3.setString(1, artCode);
+					
+					rset3 = pstmt3.executeQuery();
+					
+					while(rset3.next()) {
+						artistArr.add(rset3.getString(1));
+					}
+				}
+				
+				banmap.put(f, artistArr);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return banmap;
 	}
 
 }
