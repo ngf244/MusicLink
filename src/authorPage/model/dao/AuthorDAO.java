@@ -89,7 +89,6 @@ public class AuthorDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
@@ -120,7 +119,6 @@ public class AuthorDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return mem;
 	}
 
@@ -147,7 +145,6 @@ public class AuthorDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return path;
 	}
 
@@ -179,7 +176,6 @@ public class AuthorDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return fArr;
 	}
 
@@ -210,9 +206,161 @@ public class AuthorDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return rArr;
 	}
-	
 
+	public int addBanUser(Connection conn, String userCode, String restrictReason, String restrictReasonDetail, String adminCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		
+		String query = prop.getProperty("addBanUser"); // admin은 현재 관리자 로그인 기능이 없기 때문에 추후 추가한다
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, restrictReason);
+			pstmt.setString(3, restrictReasonDetail);
+//			pstmt.setString(4, adminCode); // 관리자 로그인 기능 제작완성시 해제. query문도 123을 ?로 바꿔야함
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public String getUserCode(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String userCode = null;
+		
+		String query = prop.getProperty("getUserCode");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				userCode = rset.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(userCode);
+		return userCode;
+	}
+
+	public int changeUserStatus(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result2 = 0;
+		
+		String query = prop.getProperty("changeUserStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result2 = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result2;
+	}
+
+	public int deleteReport(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<String> getBanReason(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> arr = new ArrayList<String>();
+		
+		String query = prop.getProperty("getBanReason");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				arr.add(rset.getString("BAN_REASON"));
+				arr.add(rset.getString("BAN_REASON_DETAIL"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return arr;
+	}
+
+	public int recoverUser(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("recoverUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteBan(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteBan");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
