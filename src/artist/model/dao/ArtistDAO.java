@@ -524,6 +524,7 @@ public class ArtistDAO {
 		String query1 = prop.getProperty("selectCode");
 		String query3 = prop.getProperty("insertVideoLink");
 		
+		
 		try {
 			pstmt1 = conn.prepareStatement(query1);
 			pstmt1.setString(1, userId);

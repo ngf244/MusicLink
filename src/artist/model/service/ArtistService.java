@@ -168,6 +168,7 @@ public class ArtistService {
 		return fileName;
 	}
 
+	
 	public int insertBoard(Artist artist, String userId) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().insertBoard(conn, artist, userId);
