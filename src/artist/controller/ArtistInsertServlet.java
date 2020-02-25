@@ -132,13 +132,15 @@ public class ArtistInsertServlet extends HttpServlet {
 			Artist artist = new Artist(name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);
 			
 			int result = new ArtistService().insertArtist(artist, userId);
-			int result2 = new ArtistService().insertProfile1(userId, artist, artistPotoFile);
-			int result3 = new ArtistService().insertProfile2(userId, artist, videoUrl);
+			int result2 = new ArtistService().insertBoard(artist, userId); 
+			int result5 = new ArtistService().insertProfile2(userId, videoUrl);
+			int result4 = new ArtistService().insertBoard(artist, userId);
+			int result3 = new ArtistService().insertProfile1(userId, artistPotoFile);
 			
 			
 			HttpSession session = request.getSession();
 			
-			if(result > 0 && result3 > 0) {
+			if(result > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
 				System.out.println("아티스트 등록 성공");
 				request.setAttribute("saveFileName", saveFiles.get(0));
 				session.setAttribute("atFileName", saveFiles.get(0)); 
