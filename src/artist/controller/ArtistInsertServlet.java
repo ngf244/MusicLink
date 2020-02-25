@@ -124,9 +124,9 @@ public class ArtistInsertServlet extends HttpServlet {
 	           }
 	        }
 	         
-			String selfiePath = savePath + saveFiles.get(0); 
+			String selfiePath = saveFiles.get(0); 
 			
-			String artistPotoFile = savePath + saveFiles.get(1);
+			String artistPotoFile = saveFiles.get(1);
 			String videoUrl = multipartRequest.getParameter("videoFile");
 			
 			Artist artist = new Artist(name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);

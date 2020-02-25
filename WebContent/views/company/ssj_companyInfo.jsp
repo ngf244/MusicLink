@@ -15,12 +15,13 @@
     .inline{position: relative; z-index: 2; width: 100%; height: 500px;
     background-image:url('<%= request.getContextPath() %>/img_s/ODRADI0.jpg');background-repeat : no-repeat; background-size : cover; opacity: 0.5;}
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     
     .intro{ text-align: center; min-height: 100px;  font-family: 'Sunflower', sans-serif; 
     		z-index: 10; position: relative; margin-top: -410px;}
     .ml{color: navy; font-family: 'Titillium Web', sans-serif; font-size: 40px;}
-    .text{font-family: 'Sunflower', sans-serif; font-size: 15px; text-align: center;}
+    .text{font-family: 'Sunflower', sans-serif; font-size: 15px; text-align: center; font-weight: 600;}
+    .cmt{font-family: 'Sunflower', sans-serif; font-weight: 600;}
     
     
 </style>
