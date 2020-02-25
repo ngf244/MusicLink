@@ -215,7 +215,7 @@
                         <div class="lr-top lrank">1</div>
                         <div class="lr-mid lrank">2</div>
                         <div class="lr-bot lrank">3</div>
-                    </div>
+                    </div> 
                     <div class="rank-right-1">
                     	<%	if(isReceive == true){ %>
 	                    	<% for(Artist a : list){ %>
