@@ -80,7 +80,7 @@ public class FindPwdServlet extends HttpServlet {
 			contents += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			contents += "<h3 style='color: blue;'>로그인을 위한 임시 비밀번호입니다.</h3>";
 			contents += "<div style='font-size: 130%'>";
-			contents += "회원님의 임시 비밀번호는 <strong>" + tempPwd + "</strong> 입니다.</div><br/>";
+			contents += "<strong>" + id + "</strong>님의 임시 비밀번호는 <strong>" + tempPwd + "</strong> 입니다.</div><br/>";
 			String host = "smtp.naver.com"; // 사용하는 메일
 
 			System.out.println("---------recv Data Check--------");

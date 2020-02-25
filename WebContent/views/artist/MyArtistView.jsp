@@ -201,7 +201,7 @@
                 
                 <div class="artistInfo">
                     <div class="profileBox">
-                        <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath().substring(66) %>">
+                        <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath() %>">
                     </div>
                     <div class="artistDesc">
                         <ul>

@@ -33,6 +33,10 @@ public class QNAListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String qnaCode = request.getParameter("qnaCode");
+		
+		QnA qna = new QNAService().selectQnA(qnaCode);
+		
 		QNAService service = new QNAService();
 		
 		int listCount = service.getListCount();	// 게시판 리스트 개수
@@ -67,6 +71,7 @@ public class QNAListServlet extends HttpServlet {
 		String page = null;
 		if(list != null) {
 			page = "views/QNA/QNAList.jsp";
+			request.setAttribute("qna", qna);
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {

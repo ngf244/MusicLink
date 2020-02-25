@@ -1,4 +1,4 @@
-package festival.controller;
+package artist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import festival.model.service.FestivalService;
+import artist.model.service.ArtistService;
 import festival.model.vo.Festival;
 import festival.model.vo.PageInfo;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class FestivalListServlet
+ * Servlet implementation class ArtistScheduleListServlet
  */
-@WebServlet("/list.fes")
-public class FestivalListServlet extends HttpServlet {
+@WebServlet("/list.fatf")
+public class ArtistScheduleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalListServlet() {
+    public ArtistScheduleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +36,12 @@ public class FestivalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int category = 0;
-		if(request.getParameter("category") != null) {
-			category = Integer.parseInt(request.getParameter("category"));
-		}
+		HttpSession session = request.getSession();
 		
-		FestivalService service = new FestivalService();
+		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+		ArtistService service = new ArtistService();
 		
-		int listCount = service.getListCount(category);
+		int listCount = service.getFollowAtFesListCount(userCode);
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -54,8 +54,8 @@ public class FestivalListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
-		
-		limit = 10;
+
+		limit = 3;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
@@ -64,27 +64,23 @@ public class FestivalListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage, category);
-		
-		LinkedHashMap<Festival, ArrayList<String>> banmap = service.selectBannerList();
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);		
+		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = service.selectFollowAtFesList(currentPage, userCode);
+		System.out.println(pi);
+		System.out.println(map);
 		
 		String page = null;
-		if(map != null && banmap!= null) {
-			page = "views/festival/FestivalList.jsp";
+		if(map != null) {
+			page = "views/member/MyArtistSchedule.jsp";
 			request.setAttribute("map", map);
 			request.setAttribute("pi", pi);
-			
-			request.setAttribute("banmap", banmap);
-			request.setAttribute("category", category);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "행사 리스트 조회에 실패하였습니다.");
+			request.setAttribute("msg", "팔로우 아티스트 리스트 조회에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-		
 	}
 
 	/**

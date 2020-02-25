@@ -11,10 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
+import festival.model.vo.Festival;
 
 public class ArtistDAO {
 
@@ -187,7 +189,9 @@ public class ArtistDAO {
 			rs = pstmt1.executeQuery();
 			if(rs.next()) {
 				result1 = rs.getString(1);
+				System.out.println("if 안에 들어옴 : " + result1);
 			}
+			System.out.println("dao usercode: " + result1);
 			
 			pstmt2.setString(1, result1);
 			pstmt2.setString(2, artist.getAtName());
@@ -217,6 +221,217 @@ public class ArtistDAO {
 		
 		return (result2*result3);
 	}
+
+	public int insertGalleryBoard(Connection conn, Artist artist) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertGalleryBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, artist.getAtOneLine());
+			pstmt.setString(2, artist.getAtIntro());
+			pstmt.setString(3, artist.getAtCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int insertVideoLink(Connection conn, String userCode, String videoLink) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertVideoLink");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, videoLink);
+			result = pstmt.executeUpdate();
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertActivityImg(Connection conn, String userCode, String activityImgPath) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertActivityImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, activityImgPath);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
+	}
+	
+	public int unfollowArtist(Connection conn, String userCode, String atCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("unfollowArtist");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, atCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
+		return result;
+	}
+	public int insertProfile1(Connection conn, String userId, Artist artist, String artistPotoFile) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		/*PreparedStatement pstmt3 = null;*/
+		PreparedStatement pstmt4 = null;
+		
+		ResultSet rs1 = null;
+		/*ResultSet rs2 = null;*/
+		
+		String result1 = null;
+		int result2 = 0;
+		/*String result3 = null;*/
+		int result4 = 0;
+		
+		String query1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("insertBoard");
+		/*String query3 = prop.getProperty("selectBoardCode");*/
+		String query4 = prop.getProperty("insertActivityImg");
+		
+		try {
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt1.setString(1, userId);
+			rs1 = pstmt1.executeQuery();
+			if(rs1.next()) {
+				result1 = rs1.getString(1);	// user_code
+			}
+			
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt2.setString(1, artist.getAtOneLine());
+			pstmt2.setString(2, artist.getAtIntro());
+			pstmt2.setString(3, result1);
+			
+			result2 = pstmt2.executeUpdate();
+			
+			/*pstmt3 = conn.prepareStatement(query3);
+			pstmt3.setString(1, result1);
+			rs2 = pstmt3.executeQuery();
+			if(rs2.next()) {
+				result3 = rs2.getString(1);
+			}*/
+			
+			pstmt4 = conn.prepareStatement(query4);
+			pstmt4.setString(1, result1);
+			pstmt4.setString(2, artistPotoFile);
+			
+			result4 = pstmt4.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			/*close(rs2);*/
+			close(rs1);
+			close(pstmt4);
+			/*close(pstmt3);*/
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return (result2 * result4);
+	}
+	public int insertProfile2(Connection conn, String userId, Artist artist, String videoUrl) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		
+		String result1 = null;
+		int result2 = 0;
+		String result3 = null;
+		int result4 = 0;
+		
+		String query1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("insertBoard");
+		String query3 = prop.getProperty("selectBoardCode");
+		String query4 = prop.getProperty("insertVideoLink");
+		
+		try {
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt1.setString(1, userId);
+			rs1 = pstmt1.executeQuery();
+			if(rs1.next()) {
+				result1 = rs1.getString(1);	// user_code
+			}
+			
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt2.setString(1, artist.getAtOneLine());
+			pstmt2.setString(2, artist.getAtIntro());
+			pstmt2.setString(3, result1);
+			
+			result2 = pstmt2.executeUpdate();
+			
+			/*pstmt3 = conn.prepareStatement(query3);
+			pstmt3.setString(1, result1);
+			rs2 = pstmt3.executeQuery();
+			if(rs2.next()) {
+				result3 = rs2.getString(1);
+			}*/
+			
+			pstmt4 = conn.prepareStatement(query4);
+			pstmt4.setString(1, result1);
+			pstmt4.setString(2, videoUrl);
+			
+			System.out.println("result1, videoUrl : " + result1 + "," + videoUrl);
+			result4 = pstmt4.executeUpdate();
+			
+			System.out.println("result4 : " + result4);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs2);
+			close(rs1);
+			close(pstmt4);
+			close(pstmt3);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return (result2 * result4);
+	}
+
+
+	
 	public int insertProfile(Connection conn, String userId, String intro, String artistMedia) {
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
@@ -277,89 +492,80 @@ public class ArtistDAO {
 		
 		return (result2 * result4);
 	}
-	public int insertGalleryBoard(Connection conn, Artist artist) {
+
+	public int getFollowAtFesListCount(Connection conn, String userCode) {
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		int result = 0;
 		
-		String query = prop.getProperty("insertGalleryBoard");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, artist.getAtOneLine());
-			pstmt.setString(2, artist.getAtIntro());
-			pstmt.setString(3, artist.getAtCode());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	public int insertVideoLink(Connection conn, String userCode, String videoLink) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("insertVideoLink");
+		String query = prop.getProperty("getFollowAtFesListCount");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userCode);
-			pstmt.setString(2, videoLink);
-			result = pstmt.executeUpdate();
-						
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
 		return result;
 	}
-	public int insertActivityImg(Connection conn, String userCode, String activityImgPath) {
+	
+	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(Connection conn, int currentPage, String userCode) {
 		PreparedStatement pstmt = null;
-		int result = 0;
+		ResultSet rset = null;
+		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = null;
+		ArrayList<Festival> fList = null;
+		ArrayList<String> aList = null;
 		
-		String query = prop.getProperty("insertActivityImg");
+		int Festivals = 4; // 한 페이지에 보여질 게시글 개수
+		
+		int startRow = (currentPage - 1) * Festivals + 1;
+		int endRow = startRow + Festivals - 1;		
+		
+		String query = prop.getProperty("selectFollowAtFesList");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userCode);
-			pstmt.setString(2, activityImgPath);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userCode);
 			
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			map = new LinkedHashMap<ArrayList<Festival>, ArrayList<String>>();
+			fList = new ArrayList<Festival>();
+			aList = new ArrayList<String>();
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
+			while(rset.next()) {
+				Festival f = new Festival(rset.getString("FES_NAME"),
+										  rset.getString("FES_LOCATION"),
+										  rset.getString("FES_TERM"),
+										  rset.getString("FES_POSTER_PATH"));
+				fList.add(f); 
 				
-		return result;
-	}
-	public int unfollowArtist(Connection conn, String userCode, String atCode) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("unfollowArtist");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userCode);
-			pstmt.setString(2, atCode);
-			
-			result = pstmt.executeUpdate();
+				String a = rset.getString("AT_NAME");
+				aList.add(a);
+				
+				map.put(fList, aList);	
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
-		}	
+		}
 		
-		return result;
+		return map;
 	}
+  
 	public ArrayList<Artist> selectAList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -390,8 +596,33 @@ public class ArtistDAO {
 			close(rs);
 			close(stmt);
 		}
-		
+			
 		return list;
+
+	}
+	public String selectArtistImg(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String fileName = "";
+		
+		String query = prop.getProperty("selectArtistImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				fileName = rset.getString("PROFILE_PIC_PATH");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return fileName;
 	}
 
 }

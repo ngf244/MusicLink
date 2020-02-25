@@ -1,28 +1,29 @@
-package festival.controller;
+package QNA.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import festival.model.service.FestivalService;
-import festival.model.vo.Festival;
+import QNA.model.service.QNAService;
+import QNA.model.vo.QnA;
 
 /**
- * Servlet implementation class FestivalDetailServlet
+ * Servlet implementation class QNAReplyServlet
  */
-@WebServlet("/detail.fes")
-public class FestivalDetailServlet extends HttpServlet {
+@WebServlet("/insertReply.qna")
+public class QNAReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalDetailServlet() {
+    public QNAReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +32,30 @@ public class FestivalDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fcode = request.getParameter("fcode");
-		String status = request.getParameter("status");
+		String qnaCode = request.getParameter("qnaCode");
+		String replyContent = request.getParameter("replyContent");
 		
-		FestivalService service = new FestivalService();
+		System.out.println("qnaCode : " + qnaCode);
+		System.out.println("replyContent : " + replyContent);
 		
-		Festival festival = service.selectFestival(fcode);
-		ArrayList<String> artistArr = service.findArtist(fcode);
+		QnA qna = new QnA();
+		qna.setQnaCode(qnaCode);
+		qna.setQnaComContent(replyContent);
+		
+		ArrayList<QnA> list = new QNAService().insertReply(qna);
+		
+		System.out.println("qnaReplyServlet list.isEmpty() :" + list.isEmpty());
 		
 		String page = null;
-		if(festival != null) {
-			request.setAttribute("festival", festival);
-			request.setAttribute("artistArr", artistArr);
-			
-			if(status.equals("아티스트 모집 중")) {
-				page = "views/festival/FestivalDetail_approach.jsp";
-			} else {
-				page = "views/festival/FestivalDetail_end.jsp";
-			}
+		if(qna != null) {
+			page = "views/QNA/QNADetail.jsp";
+			request.setAttribute("list", list);
 		} else {
-			request.setAttribute("msg", "행사 상세보기에 실패하였습니다.");
 			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**

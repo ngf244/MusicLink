@@ -194,7 +194,7 @@ public class MemberDAO {
 			pstmt.setString(5, map.get("gender"));
 			pstmt.setString(6, map.get("phone"));
 			pstmt.setString(7, map.get("id"));
-			pstmt.setString(8, map.get("old"));
+			//pstmt.setString(8, map.get("old"));
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

@@ -129,7 +129,7 @@ public class ArtistUpgradeServlet extends HttpServlet {
 			String facebook = multipartRequest.getParameter("facebookURL");
 			String videoLink = multipartRequest.getParameter("videoLink");
 			
-			String selfiePath = savePath + saveFiles.get(0);
+			String selfiePath = saveFiles.get(0);
 			String activityImgPath = savePath + saveFiles.get(1);
 			
 			Artist artist = new Artist(userCode, name, number, genre, atclass, selfiePath, intro, info, activity, sqlDate, insta, twitter, facebook);

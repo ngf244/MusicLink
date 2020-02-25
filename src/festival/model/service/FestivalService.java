@@ -67,7 +67,8 @@ public class FestivalService {
 		Connection conn = getConnection();
 		
 		Festival festival = new FestivalDAO().selectFestival(conn, fcode);
-		
+
+		close(conn);
 		return festival;
 	}
 	
@@ -75,8 +76,18 @@ public class FestivalService {
 		Connection conn = getConnection();
 		
 		ArrayList<String> artistArr = new FestivalDAO().findArtist(conn, fcode);
-		
+
+		close(conn);
 		return artistArr;
+	}
+
+	public LinkedHashMap<Festival, ArrayList<String>> selectBannerList() {
+		Connection conn = getConnection();
+		
+		LinkedHashMap<Festival, ArrayList<String>> banMap = new FestivalDAO().selectBannerList(conn);
+		
+		close(conn);
+		return banMap;
 	}
 	
 }

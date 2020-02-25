@@ -78,24 +78,14 @@ public class FestivalInsertServlet extends HttpServlet {
 			int recCount = Integer.parseInt(multipartRequest.getParameter("needCount"));
 			String recTerm = multipartRequest.getParameter("artistDate");
 			
-//			String posPath = request.getParameter("posterPath");
-//			String banPath = request.getParameter("bannerPath");
-//			if(banPath.equals("파일을 선택해주세요")) banPath = "";
-			
-//			System.out.println("saveFiles.get()");
-//			for(int i = 0; i < saveFiles.size(); i++) {
-//				System.out.println("saveFiles.get(" + i + ") : " + saveFiles.get(i));
-//			}
-			
-//			String posPath = savePath + saveFiles.get(0);
-//			String banPath = "";
-//			if(saveFiles.size() > 1)
-//				banPath = savePath + saveFiles.get(1);
-			
-			String posPath = saveFiles.get(0);
 			String banPath = "";
-			if(saveFiles.size() > 1)
-				banPath = saveFiles.get(1);
+			String posPath = "";
+			if(saveFiles.size() == 1) {
+				posPath = saveFiles.get(0);
+			} else {
+				banPath = saveFiles.get(0);
+				posPath = saveFiles.get(1);
+			}
 			
 			String secOp = multipartRequest.getParameter("secretOp");
 			if(secOp == null) secOp = "N";
