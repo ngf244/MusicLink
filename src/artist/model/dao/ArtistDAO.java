@@ -471,5 +471,29 @@ public class ArtistDAO {
 		return list;
 
 	}
+	public String selectArtistImg(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String fileName = "";
+		
+		String query = prop.getProperty("selectArtistImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				fileName = rset.getString("PROFILE_PIC_PATH");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return fileName;
+	}
 
 }
