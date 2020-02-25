@@ -19,7 +19,7 @@
 	<header style='position:fixed; top:0; z-index:2;'> 
         <nav> 
             <div class="logo">
-            logo
+            <a href="index.jsp">logo</a> 
             </div>
             <div id="toggle">
                 <div class="span" id="one"></div>
