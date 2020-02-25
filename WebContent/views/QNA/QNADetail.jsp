@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="QNA.model.vo.*, java.util.ArrayList"%>
 <%
 	QnA qna = (QnA)request.getAttribute("qna");
+	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>Q&A Detail Form</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff;} 
@@ -40,9 +42,11 @@
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
 	}
+	#replyBtn{width: 80px;}
 	.detail{width: 100%;}
 	#qna_comment{margin-top: 10px; border: 1px solid lightgray; border-radius: 0.2rem; padding: 10px; vertical-align: middle;}
-	#label_comment{vertical-align: middle;}
+	#label_comment{vertical-align: middle; padding: 10px;}
+	.replyContent{font-size: 20px;}
 </style>
 </head>
 <body>
@@ -73,6 +77,7 @@
 						</td>
 					</tr>
 					<tr>
+					<% if(loginUser != null) { %>
 						<% if(qna.getQnaWriter().equals(loginUser.getUserName())) { %>
 						<td class="input_qna4" id="qna_btn1">
 							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
@@ -86,13 +91,34 @@
 							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
 						</td>
 						<% } %>
+					<% } else { %>
+						<td colspan="2" class="input_qna4" id="qna_btn1">
+							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
+						</td>
+					<% } %>
 					</tr>
 				</table>
-				<div id="qna_comment">
-					<label id="label_comment">답변 : </label>
-					<textarea rows="1" cols="150" id="replyContent" style="resize:none;"></textarea>
-				</div>
 			</form>
+				<table id="qna_comment">
+					<% if(loginManager != null) { %>
+					<tr>
+						<td><label id="label_comment">답변 : </label></td>
+						<td><textarea rows="1" cols="100" class="replyContent" name="replyContent" id="replyContent" style="resize:none;"></textarea></td>
+						<td><button type="button" onclick="location.href='<%= request.getContextPath() %>/insertReply.qna'" class="detail_btn" id="replyBtn">댓글등록</button></td>
+					</tr>
+					<% } %>
+					<% if(list.isEmpty()) { %>
+							<tr><td colspan="3">답변이 없습니다.</td></tr>
+					<% } else { %>
+						<% for(int i = 0; i < list.size(); i++){ %>
+							<tr>
+								<td><label id="label_comment">답변 : </label></td>
+								<td colspan="2"><%= list.get(i).getQnaComContent() %></td>
+							</tr>
+						<% } %>
+					<% } %>
+					
+				</table>
 		</div>
     </section>
     <h1 class="htext">Q & A</h1>
@@ -131,6 +157,8 @@
     </div>
     
     <script>
+    	
+    
     	function deleteQnA(){
     		var bool = confirm('정말로 삭제하시겠습니까?');
     		if(bool){
@@ -138,6 +166,7 @@
     			$('#table_show').submit();
     		}
     	}
+    	
     </script>
 
 </body>

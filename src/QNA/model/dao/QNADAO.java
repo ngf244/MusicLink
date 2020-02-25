@@ -216,6 +216,65 @@ public class QNADAO {
 		return result;
 	}
 
+	public int insertReply(Connection conn, QnA qna) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReply"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, qna.getQnaComContent());
+			pstmt.setString(2, qna.getQnaCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<QnA> selectReplyList(Connection conn, String qnaCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<QnA> list = null;
+		
+		String query = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, qnaCode);
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<QnA>();
+			
+			while(rs.next()) {
+				list.add(new QnA(rs.getString("qna_num"),
+								rs.getString("qna_title"),
+								rs.getString("qna_content"),
+								rs.getString("qna_writer"),
+								rs.getDate("qna_date"),
+								rs.getString("qna_comment_yn"),
+								rs.getString("qna_comment_content"),
+								rs.getString("qna_status"),
+								rs.getString("mn_code"),
+								rs.getString("user_code")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 
 
 }

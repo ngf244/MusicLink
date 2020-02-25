@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>FAQ 리스트</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 section {
 	width: 70%;
@@ -33,7 +34,7 @@ section {
 	font-size: 100px;
 	height: 0;
 	position: absolute;
-	top: 355px;
+	top: 140px;
 	left: 50%;
 	transform: translateX(-50%);
 	color: rgb(224, 224, 224);
@@ -172,6 +173,12 @@ zzzrod
 	font-size: 0.875rem;
 	padding: 7px 18px;
 }
+
+.detail_btn{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
+	}
+#mnBtn{text-align: right;}
 </style>
 </head>
 <body>
@@ -214,9 +221,14 @@ zzzrod
 								<i class="fa" aria-hidden="true"></i> <%= list.get(i).getFaqTitle() %>
 							</h5>
 						</div>
+						<input type="hidden" name="faqCode" value="<%= list.get(i).getFaqNum() %>">
 						<div id="collapse<%= i %>" class="collapse"
 							data-parent="#accordion-two">
 							<div class="card-body"><%= list.get(i).getFaqContent() %></div>
+							<div id="mnBtn">
+								<button type="button" onclick="location.href='<%= request.getContextPath() %>/update.faq'" class="detail_btn" id="updateBtn">수정</button>
+								<button type="button" onclick="deleteFAQ();" class="detail_btn" id="deleteBtn">삭제</button>
+							</div>
 						</div>
 					</div>
 					<%		}
@@ -224,7 +236,7 @@ zzzrod
 					%>
 				</div>
 			</div>
-			<input type="button" class="writerBtn" value="글쓰기">
+			<input type="button" onclick="location.href='<%= request.getContextPath() %>/views/faq/FAQWrite.jsp'" class="writerBtn" value="글쓰기">
 		</div>
 	</section>
 	<h1 class="htext">F A Q</h1>
@@ -269,5 +281,14 @@ zzzrod
         </div>
     </div>
     
+    <script>
+    	
+    	function deleteQnA(){
+    		var bool = confirm('정말로 삭제하시겠습니까?');
+    		if(bool){
+    			location.href="<%= request.getContextPath() %>/delete.faq";
+    		}
+    	}
+    </script>
 </body>
 </html>

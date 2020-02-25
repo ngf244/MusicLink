@@ -5,16 +5,17 @@
 <head>
 <meta charset="utf-8">
 
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
     
 	<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
-    <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
     
-    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
+    <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>FAQ 작성</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
