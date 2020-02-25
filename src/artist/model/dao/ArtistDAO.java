@@ -467,7 +467,7 @@ public class ArtistDAO {
 			close(rs);
 			close(stmt);
 		}
-			
+		System.out.println("아티스트 랭킹 리스트 3위까지 : " + list);	
 		return list;
 
 	}

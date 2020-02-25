@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.LinkedHashMap, java.util.ArrayList, festival.model.vo.Festival, festival.model.vo.PageInfo"%>
+<%
+	LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = (LinkedHashMap<ArrayList<Festival>, ArrayList<String>>)request.getAttribute("map");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>    
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
