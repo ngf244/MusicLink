@@ -9,7 +9,7 @@
 	String spLoc[] = f.getFesLoc().split("/");
 
 	String mapLoc[] = spLoc[0].split("&");
-
+	
 	if (spLoc.length > 1) {
 		fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1] + " " + spLoc[1];
 	} else {
@@ -68,7 +68,7 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
     #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
-    #bigArea{width:85%; height:100%; text-align:center; display:inline-block;}
+    #bigArea{width:88%; height:100%; text-align:center; display:inline-block;}
     
     #promotionImg{
 		width: 250px;
@@ -206,6 +206,7 @@
 		})
 		
 		function fesMapSetting() {
+			
 			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -219,7 +220,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(<%= mapLoc[1] %>, function(result, status) {
+			geocoder.addressSearch('<%= mapLoc[1] %>', function(result, status) {
 			
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
@@ -231,11 +232,11 @@
 			            map: map,
 			            position: coords
 			        });
-			
+			 
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
 			            //content: '<div style="width:100%;text-align:center;line-height:2;">&nbsp;&nbsp;' + addressDetail + '&nbsp;&nbsp;</div>'
-			        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + <%= mapLoc[1] %> + '&nbsp;&nbsp;</div>'
+			        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + '<%= mapLoc[1] %>' + '&nbsp;&nbsp;</div>'
 			        });
 			        infowindow.open(map, marker);
 			

@@ -22,7 +22,16 @@ public class Festival {
 	private String ticFreeOp;
 	
 	public Festival() {}
-
+	
+	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String banPath) {
+		super();
+		this.fesCode = fesCode;
+		this.fesTerm = fesTerm;
+		this.recCount = recCount;
+		this.recTerm = recTerm;
+		this.banPath = banPath;
+	}
+	
 	public Festival(String fesName, String fesLoc, String fesTerm, String posPath) {
 		super();
 		this.fesName = fesName;

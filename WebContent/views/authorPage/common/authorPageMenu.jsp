@@ -35,7 +35,7 @@
              <div class="menuSelect1">
                  <div class="menuSelect1-1"><a href="<%=request.getContextPath()%>/showUserList.au">회원 열람</a></div>
                  <div class="menuSelect1-2"><a href="<%=request.getContextPath()%>/userBan.do">회원 금지</a></div>
-                 <div class="menuSelect1-3">금지 해제</div>
+                 <div class="menuSelect1-3"><a href="<%=request.getContextPath() %>/views/authorPage/banUserRecoverPage.jsp">금지 해제</a></div>
              </div>
          </div>
          <div id="menuList2">

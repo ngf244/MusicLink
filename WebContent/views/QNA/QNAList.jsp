@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>Q&A List View</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	section {
 		width: 70%;
@@ -74,13 +75,15 @@
 	
 	.btnArea{
 		display: inline-block;
-		margin-left: 15%;
+		background: red;
 	}
 	
 	#write_box{
 		display: inline-block;
 		float: right;
 		margin-right: 11%;
+		background: yellow;
+		width: 70px;
 	}
 	
 	.btn_style{
@@ -101,6 +104,7 @@
 <body>
     <%@ include file="../common/menubar.jsp" %>
     <%
+    	QnA qna = (QnA)request.getAttribute("qna");
     	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
     	PageInfo pi = (PageInfo)request.getAttribute("pi");
     	int listCount = pi.getListCount();
@@ -196,7 +200,9 @@
 					<% } %>
 				</div>
 				<div id="write_box">
-					<button onclick='location.href="views/QNA/Q&AWrite.jsp"' class="btn_style" id="write">글쓰기</button>
+				<%-- <% if(loginUser != null) { %> --%>
+					<button onclick='location.href="<%= request.getContextPath() %>/views/QNA/Q&AWrite.jsp"' class="btn_style" id="write">글쓰기</button>
+				<%-- <% } %> --%>
 				</div>
 			</div>
 		</div>
@@ -246,7 +252,9 @@
 				var qnaCode = $(this).parent().children().children('input').val();
 				
 				// 로그인 한 사람만 상세보기 이용할 수 있게하기
-				<% if(loginUser != null){%>
+				<% if(loginUser != null) { %>
+					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
+				<% } else if(loginManager != null) { %>
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
 					alert('회원만 이용할 수 있는 서비스입니다.');

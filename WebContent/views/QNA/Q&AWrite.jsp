@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/reset.css" />
     <link href="<%= request.getContextPath() %>/css/mfooter.css" rel="stylesheet" />
 <title>Q&A 작성</title>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 

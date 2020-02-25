@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.service.ManagerService;
 import member.model.service.MemberService;
+import member.model.vo.Manager;
 import member.model.vo.Member;
 
 /**
@@ -39,15 +41,24 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(user_id + "/" + userPwd);
 		
 		Member member = new Member(user_id, userPwd);
-		
 		Member loginUser = new MemberService().loginMember(member);
+		
+		Manager manager = new Manager(user_id, userPwd);
+		Manager loginManager = new ManagerService().loginManager(manager);
+		
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(1800);  // 로그인 30분 유지
+			session.setMaxInactiveInterval(2400);  // 로그인 40분 유지
 			session.setAttribute("loginUser", loginUser);
+			
+			response.sendRedirect("index.jsp");
+		} else if(loginManager != null) {
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(2400);  // 로그인 40분 유지
+			session.setAttribute("loginManager", loginManager);
 			
 			response.sendRedirect("index.jsp");
 		} else {
