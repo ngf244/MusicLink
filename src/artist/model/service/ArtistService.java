@@ -136,33 +136,6 @@ public class ArtistService {
 		return result;
 	}
 
-	public int insertProfile1(String userId, Artist artist, String artistPotoFile) {
-		Connection conn = getConnection();
-		int result = new ArtistDAO().insertProfile1(conn, userId, artist, artistPotoFile);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		return result;
-	}
-
-	public int insertProfile2(String userId, Artist artist, String videoUrl) {
-		Connection conn = getConnection();
-		int result = new ArtistDAO().insertProfile2(conn, userId, artist, videoUrl);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		return result;
-	}
-
-
 	public int getFollowAtFesListCount(String userCode) {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().getFollowAtFesListCount(conn, userCode);
@@ -196,5 +169,43 @@ public class ArtistService {
 		return fileName;
 	}
 
+	
+	public int insertBoard(Artist artist, String userId) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertBoard(conn, artist, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
+	public int insertProfile1(String userId, String artistPotoFile) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile1(conn, userId, artistPotoFile);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int insertProfile2(String userId, String videoUrl) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertProfile2(conn, userId, videoUrl);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 }

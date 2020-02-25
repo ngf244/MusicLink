@@ -19,7 +19,7 @@
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:-97px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
 	
     #categoryArea {padding-top: 35px; padding-left: 30px; color: #76838f;}
 	#contentArea{padding-top: 45px; padding-bottom: 45px;}
@@ -34,7 +34,7 @@
 	#qna_btn2{text-align: right;}
 	
 	#inputTable{width:100%;}
-	.labeltd{width:12%; font-size: 15px;}
+	.labeltd{width:12%; font-size: 17px;}
 	.inputqna{height:40px;}
 	.inputtextarea{border-radius: 4px; resize:none;}
 	

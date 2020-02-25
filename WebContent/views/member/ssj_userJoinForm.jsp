@@ -69,12 +69,12 @@
 						<td class="input">
 						<input type="text" name="user_id" id="user_id" class="form-control input-default enroll" placeholder="아이디를 입력하세요">&nbsp;
 						<input type="button" class="btn mb-1 btn-dark" id="id_check" onclick="idCheck();" value="중복확인"><br>
-						<label id="idResult"></label></td>
+						<label id="idResult">6~15자 영문 소문자와 숫자를 조합하세요</label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>비밀번호</label></td>
 						<td class="input"><input type="password" name="user_pwd" id="user_pwd" class="form-control input-default enroll" placeholder="비밀번호를 입력하세요">
-						<br><label id="pwdResult"></label></td>
+						<br><label id="pwdResult">6자 이상의 영문,숫자,특수기호를 조합하세요</label></td>
 					</tr>
 					<tr>
 						<td class="label"><label>비밀번호 재확인</label></td>
@@ -198,7 +198,7 @@
 		
 		var userIdCheck = /^[a-z](?=.*[0-9]).{5,14}$/;	
 		var nameCheck = /^[가-힣]{2,}$/;
-		var pwdCheck = /^[a-zA-Z](?=.*[~!@\#$%<>^&*])(?=.*[0-9]).{7,11}$/;
+		var pwdCheck = /^[a-zA-Z](?=.*[~!@\#$%<>^&*])(?=.*[0-9]).{5,}$/;
 		
 		function idCheck(){
 			var userId = $('#user_id');

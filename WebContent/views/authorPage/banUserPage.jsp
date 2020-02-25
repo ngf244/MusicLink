@@ -115,21 +115,22 @@
                     <button type="button" onclick="showWritePage();">보기</button>
                 </div>
             </div>
-            <form>
+            <form action="<%=request.getContextPath()%>/addBanUser.ban">
                 <div class="districtReason" id="reason">
+                    <input type="hidden" id="hiddenId" name="userId" value="">
                     <h2>제재 사유</h2><br>
                     <select name="restrictReason">
-                        <option>비속어 사용</option>
-                        <option>회원간 불화 유발</option>
-                        <option>스토킹</option>
-                        <option>뭐라도 더 있겠지뭐</option>
-                        <option>기타</option>
+                        <option value="비속어 사용">비속어 사용</option>
+                        <option value="회원간 불화 유발">회원간 불화 유발</option>
+                        <option value="스토킹">스토킹</option>
+                        <option value="뭐라도">뭐라도 더 있겠지뭐</option>
+                        <option value="기타">기타</option>
                     </select>
                 </div>
                 <div class="detailReason" id="reasonDetail">
                     <div class="detailReason-textareaBox">
                         <h2>제재 사유 상세 입력</h2><br>
-                        <textarea name="rectrictReasonDetail" cols="71" rows="10"></textarea>
+                        <textarea name="restrictReasonDetail" cols="71" rows="10"></textarea>
                     </div>
                     <div class="submitButton">
                     <button type="submit" style="background-color: red;" onclick="return restrictSubmit();">등록</button>
@@ -202,6 +203,7 @@
     $('.searchBox button').click(function () {
         var searchId = $('.searchBox input').val()
         console.log(searchId);
+        $('#hiddenId').val(searchId);
         $.ajax({
             url : "showUserDetail.ban",
             type : 'get',
@@ -252,6 +254,7 @@
     $('table tr:gt(0)').click(function(){
         var searchId = $(this).children().eq(1).text();
         console.log(searchId);
+        $('#hiddenId').val(searchId);
 
         $.ajax({
             url : "showUserDetail.ban",

@@ -34,7 +34,7 @@ section {
 	font-size: 100px;
 	height: 0;
 	position: absolute;
-	top: 140px;
+	top: -97px;
 	left: 50%;
 	transform: translateX(-50%);
 	color: rgb(224, 224, 224);
