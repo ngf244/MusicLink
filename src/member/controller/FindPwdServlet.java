@@ -1,6 +1,10 @@
 package member.controller;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -51,7 +55,10 @@ public class FindPwdServlet extends HttpServlet {
 		String tempPwd = RandomStringUtils.randomAscii(10);
 		System.out.println("임시비밀번호 생성 : " + tempPwd);
 		
-		int result = new MemberService().updatePwd(id, tempPwd);
+		String value = getSha512(tempPwd);
+		System.out.println("임시비밀번호 암호화" + value);
+		
+		int result = new MemberService().updatePwd(id, value);
 		if(result > 0) {
 			System.out.println("임시비밀번호 DB추가완료");
 			Member member = new MemberService().selectMember(id);
@@ -73,7 +80,7 @@ public class FindPwdServlet extends HttpServlet {
 			contents += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			contents += "<h3 style='color: blue;'>로그인을 위한 임시 비밀번호입니다.</h3>";
 			contents += "<div style='font-size: 130%'>";
-			contents += "회원님의 임시 비밀번호는 <strong>" + member.getUserPwd() + "</strong> 입니다.</div><br/>";
+			contents += "<strong>" + id + "</strong>님의 임시 비밀번호는 <strong>" + tempPwd + "</strong> 입니다.</div><br/>";
 			String host = "smtp.naver.com"; // 사용하는 메일
 
 			System.out.println("---------recv Data Check--------");
@@ -132,6 +139,26 @@ public class FindPwdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	public static String getSha512(String userPwd) {
+		String encPwd = null;
+		
+		MessageDigest md = null;	// SHA-512방식의 암호화 객체
+		
+		try {
+			md = MessageDigest.getInstance("SHA-512");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		byte[] bytes = userPwd.getBytes(Charset.forName("UTF-8"));
+		md.update(bytes);
+		
+		encPwd = Base64.getEncoder().encodeToString(md.digest());
+		
+		
+		return encPwd;
 	}
 
 }

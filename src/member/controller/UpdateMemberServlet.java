@@ -34,6 +34,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		System.out.println("이전 비밀번호 : " + userPwd);
 		String newPwd = request.getParameter("newPwd");
 		System.out.println("changePwd = " + newPwd);
 		String userName = request.getParameter("userName");
@@ -44,7 +45,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", userId);
-		map.put("old", userPwd);
+		//map.put("old", userPwd);
 		map.put("new", newPwd);
 		map.put("name", userName);
 		map.put("birth", userBirth);

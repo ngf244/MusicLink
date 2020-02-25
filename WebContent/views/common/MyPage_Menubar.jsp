@@ -13,15 +13,15 @@
         <ul class="sec-nav">
             <li class="sec-menu-1 smenu">INFORMATION
                 <ul class="s-smenu">
-                    <li><a href="#">회원정보 열람/수정/탈퇴</a></li>
+                    <li onclick="pwdCheck();"><a href="#">회원정보 열람/수정/탈퇴</a></li>
                     <li><a href="#">내가 작성한 글/댓글</a></li>
-                    <li><a href="#">알람창</a></li>
+                    <li onclick="noticeHistory();"><a href="#">알람창</a></li>
                 </ul>
             </li>
             <li class="sec-menu-2 smenu">FLOOW
                 <uL class="s-smenu">
                     <li onclick="MyArtist();"><a href="#">나의 아티스트</a></li>
-                    <li><a href="#">팔로잉 아티스트의 행사</a></li>
+                    <li onclick="MyAtSchedule()"><a href="#">팔로잉 아티스트의 행사</a></li>
                 </uL>
             </li>
             <li class="sec-menu-3 smenu">BECOME
@@ -58,6 +58,18 @@
 	
 	function MyArtist(){
 		location.href="<%= request.getContextPath() %>/list.fat";
+	}
+	
+	function pwdCheck(){
+		location.href="<%= request.getContextPath() %>/views/member/PwdCheckForm.jsp";
+	}
+	
+	function noticeHistory(){
+		location.href="<%= request.getContextPath() %>/list.no";
+	}
+	
+	function MyAtSchedule(){
+		location.href="<%= request.getContextPath() %>/list.fatf";
 	}
 </script>    
     

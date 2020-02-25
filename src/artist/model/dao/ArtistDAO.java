@@ -9,11 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
+import festival.model.vo.Festival;
 
 public class ArtistDAO {
 
@@ -260,6 +263,7 @@ public class ArtistDAO {
 		
 		return result;
 	}
+	
 	public int insertActivityImg(Connection conn, String userCode, String activityImgPath) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -281,6 +285,7 @@ public class ArtistDAO {
 				
 		return result;
 	}
+	
 	public int unfollowArtist(Connection conn, String userCode, String atCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -294,7 +299,6 @@ public class ArtistDAO {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -426,6 +430,7 @@ public class ArtistDAO {
 		return (result2 * result4);
 	}
 
+
 	
 	public int insertProfile(Connection conn, String userId, String intro, String artistMedia) {
 		PreparedStatement pstmt1 = null;
@@ -487,4 +492,113 @@ public class ArtistDAO {
 		
 		return (result2 * result4);
 	}
+
+	public int getFollowAtFesListCount(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getFollowAtFesListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(Connection conn, int currentPage, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = null;
+		ArrayList<Festival> fList = null;
+		ArrayList<String> aList = null;
+		
+		int Festivals = 4; // 한 페이지에 보여질 게시글 개수
+		
+		int startRow = (currentPage - 1) * Festivals + 1;
+		int endRow = startRow + Festivals - 1;		
+		
+		String query = prop.getProperty("selectFollowAtFesList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userCode);
+			
+			rset = pstmt.executeQuery();
+			map = new LinkedHashMap<ArrayList<Festival>, ArrayList<String>>();
+			fList = new ArrayList<Festival>();
+			aList = new ArrayList<String>();
+			
+			while(rset.next()) {
+				Festival f = new Festival(rset.getString("FES_NAME"),
+										  rset.getString("FES_LOCATION"),
+										  rset.getString("FES_TERM"),
+										  rset.getString("FES_POSTER_PATH"));
+				fList.add(f); 
+				
+				String a = rset.getString("AT_NAME");
+				aList.add(a);
+				
+				map.put(fList, aList);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return map;
+	}
+  
+	public ArrayList<Artist> selectAList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Artist> list = null;
+		
+		String query = prop.getProperty("selectAList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			list = new ArrayList<Artist>();
+			
+			while(rs.next()) {
+				list.add(new Artist(rs.getString("at_code"),
+									rs.getString("at_name"),
+									rs.getString("at_genre"),
+									rs.getString("at_class"),
+									rs.getString("PROFILE_PIC_PATH"),
+									rs.getInt("at_Grade"),
+									rs.getString("at_insta"),
+									rs.getString("at_Twitter"),
+									rs.getString("at_Facebook")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+			
+		return list;
+
+	}
+
 }
