@@ -65,7 +65,7 @@ public class ArtistScheduleListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);		
-		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = service.selectFollowAtFesList(currentPage, userCode);
+		LinkedHashMap<Festival, ArrayList<String>> map = service.selectFollowAtFesList(currentPage, userCode);
 		System.out.println(pi);
 		System.out.println(map);
 		

@@ -143,9 +143,9 @@ public class ArtistService {
 		return result;
 	}
 
-	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
 		Connection conn = getConnection();
-		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
+		LinkedHashMap<Festival, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
 		close(conn);
 		return map;
   }
