@@ -77,13 +77,16 @@
 
                         <tr>
                             <td><label>비밀번호</label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="userPwd" id="userPwd" required></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="userPwd" name="userPwd" id="userPwd" required></td>
+                        </tr>
+                        <tr>
+                        	<td></td>
                         </tr>
                     </table>
                     <br>
                     <br>
                     <div class="submit">
-                        <input type="submit" class="btn" value="확인" onclick="pwdCheck();">
+                        <input type="submit" onclick="pwdCheck();" class="btn" value="확인">
                         <input type="reset" class="btn" value="취소">
                     </div>
                     <div class="idPwdFind"> 
@@ -94,9 +97,11 @@
             </div>
             <script>
             	function pwdCheck(){
-            		if($('#userPwd').val() == <%= userPwd %>){
-                		console.log("일치함");
-                	}	
+            		if($('#userPwd').val() != <%= userPwd %>){
+            			alert("비밀번호가 일치하지 않음");
+                		return false;
+                	}
+            		return true;
             	}
             
             	
