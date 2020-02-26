@@ -4,7 +4,7 @@
 	Member member = (Member)request.getAttribute("member");
 	Artist artist = (Artist)request.getAttribute("artist");
 	String atFileName = (String)session.getAttribute("atFileName");
-
+	System.out.println(member);
 	ArrayList<FollowArtist> list = (ArrayList<FollowArtist>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
