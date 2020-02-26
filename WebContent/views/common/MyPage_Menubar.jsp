@@ -20,7 +20,7 @@
             <li class="sec-menu-1 smenu">INFORMATION
                 <ul class="s-smenu">
                     <li onclick="pwdCheck();"><a href="#">회원정보 열람/수정/탈퇴</a></li>
-                    <li><a href="#">내가 작성한 글/댓글</a></li>
+                    <li><a href="MyPost();">내가 작성한 글/댓글</a></li>
                     <li onclick="noticeHistory();"><a href="#">알림내역</a></li>
                 </ul>
             </li>
@@ -80,6 +80,10 @@
 	
 	function MyAtSchedule(){
 		location.href="<%= request.getContextPath() %>/list.fatf";
+	}
+	
+	function MyPost(){
+		location.href="<%= request.getContextPath() %>/list.mPost";
 	}
 </script>    
     

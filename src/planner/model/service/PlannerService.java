@@ -17,9 +17,8 @@ public class PlannerService {
 		PlannerDAO pnDAO = new PlannerDAO();
 		
 		int result = pnDAO.insertPlanner(conn, pn);
-		int result2 = new MemberDAO().updatePlannerClass(conn, userCode);
 		
-		if(result > 0 && result2 > 0) {
+		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
