@@ -40,6 +40,7 @@ public class FAQDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, faq.getFaqTitle());
 			pstmt.setString(2, faq.getFaqContent());
+			pstmt.setString(3, faq.getMnCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -83,6 +84,26 @@ public class FAQDAO {
 		}
 		
 		return list;
+	}
+
+	public int deleteFAQ(Connection conn, String faqCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, faqCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

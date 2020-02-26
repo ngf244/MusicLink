@@ -107,7 +107,7 @@
 							<div id="titleImgArea">
 								<img id="titleImg">
 								<div class="textImg">
-									<img id="clickImg" src="<%= request.getContextPath()%>/img_s/black.png"> click
+									<img id="clickImg" src="<%= request.getContextPath()%>/img_s/one-finger-click.png"> click
 								</div>
 							</div>
 						</td>
