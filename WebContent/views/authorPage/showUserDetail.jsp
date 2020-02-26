@@ -12,6 +12,9 @@
 	}
 	Member mem = (Member)request.getAttribute("mem");
 	String img = (String)request.getAttribute("img");
+	if(img!=null){
+		System.out.println(img);
+	}
 	ArrayList<Follow> fArr = (ArrayList<Follow>)request.getAttribute("fArr");
 %>
 <!DOCTYPE html>

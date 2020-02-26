@@ -45,7 +45,7 @@
     .plannerUserBox-list{width: 100%; height: 80%; top: 20%; overflow: auto;}
     .plannerUserBox-list>table{width: 100%; text-align: center;}
     
-    table tr:hover{color: red; cursor: pointer; text-decoration: underline; border-bottom: 2px solid black;}
+    table tr:nth-of-type(1)~tr:hover{color: red; cursor: pointer; text-decoration: underline; border-bottom: 2px solid black;}
     /* section1 종료 */
 </style>
 </head>
@@ -151,7 +151,7 @@
         $(".map").css("display","none");
     });
     
-    $('table tr').click(function () {
+    $('table tr:gt(0)').click(function () {
         console.log(this);
         var userId = $(this).children().first().text();
         console.log(userId);
