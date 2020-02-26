@@ -1,4 +1,4 @@
-package artictGallery.model.vo;
+package artistGallery.model.vo;
 
 import java.sql.Date;
 
