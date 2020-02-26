@@ -21,19 +21,17 @@ public class ArtistService {
 	public int upgradeArtist(Artist artist) {
 		Connection conn = getConnection();
 		ArtistDAO atDAO = new ArtistDAO();
-		String userCode = artist.getAtCode();		
 		
-		int result1 = atDAO.upgradeArtist(conn, artist);
-		int result2 = new MemberDAO().updateArtistClass(conn, userCode);
+		int result = atDAO.upgradeArtist(conn, artist);
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn); 
 		
-		return result1;
+		return result;
 	}
 
 	public Artist selectArtist(String userCode) {
