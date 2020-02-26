@@ -35,21 +35,21 @@ public class showUserDetail_recovery extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("searchId");
+		String userCode = new AuthorService().getUserCode(userId);
 		
-		int type = new AuthorService().checkUserClass(userId);
+		int type = new AuthorService().checkUserClass(userCode);
 		
-		Member mem = new AuthorService().selectUser(userId);
+		Member mem = new AuthorService().selectUser(userCode);
 		
 		String img = null;
 		if(type == 2) {
-			String imgPath = new AuthorService().getPicture(userId);
-			img = imgPath.substring(imgPath.length()-19, imgPath.length());
+			String imgPath = new AuthorService().getPicture(userCode);
+			img = imgPath;
+//			img = imgPath.substring(imgPath.length()-19, imgPath.length());
 		}
 		
 		mem.setUserEmail(img); // img경로 임시로 email에 집어넣음
 		mem.setUserClass(Integer.toString(type)); // type를 userClass에 집어넣음
-		
-		String userCode = new AuthorService().getUserCode(userId);
 		
 		ArrayList<String> arr = new AuthorService().getBanReason(userCode);
 		System.out.println(arr.size());
