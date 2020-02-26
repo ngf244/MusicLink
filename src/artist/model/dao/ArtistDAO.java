@@ -170,20 +170,16 @@ public class ArtistDAO {
 	public int insertArtist(Connection conn, Artist artist, String userId) {
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
 		ResultSet rs = null;
 		String result1 = null;
 		int result2 = 0;
-		int result3 = 0;
 		
 		String query1 = prop.getProperty("selectCode");
 		String query2 = prop.getProperty("insertArtist");
-		String query3 = prop.getProperty("updateUserClass");
 		
 		try {
 			pstmt1 = conn.prepareStatement(query1);
 			pstmt2 = conn.prepareStatement(query2);
-			pstmt3 = conn.prepareStatement(query3);
 			
 			pstmt1.setString(1, userId);
 			rs = pstmt1.executeQuery();
@@ -209,8 +205,6 @@ public class ArtistDAO {
 			
 			result2 = pstmt2.executeUpdate();
 			
-			pstmt3.setString(1, result1);
-			result3 = pstmt3.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -219,7 +213,7 @@ public class ArtistDAO {
 			close(pstmt1);
 		}
 		
-		return (result2*result3);
+		return (result2);
 	}
 
 	public int insertGalleryBoard(Connection conn, Artist artist) {
