@@ -149,10 +149,12 @@
 									artistStr += artistArr.get(i);
 							}
 						%>
+						<% if(!artistStr.equals("")) { %>
 						<tr>
 							<td>확정 아티스트</td>
 							<td><%= artistStr %></td>
 						</tr>
+						<% } %>
 						<% if(f.getTicFee() != 0) {
 							DecimalFormat formatter = new DecimalFormat("###,###");
 							

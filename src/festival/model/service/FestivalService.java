@@ -89,5 +89,47 @@ public class FestivalService {
 		close(conn);
 		return banMap;
 	}
+
+	public int getApListCount() {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().getApListCount(conn);
+		
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Festival> selectApList(int currentPage, int category) {
+		Connection conn = getConnection();
+		
+		ArrayList<Festival> fArr = new FestivalDAO().selectApList(conn, currentPage, category);
+		
+		close(conn);
+		return fArr;
+	}
+
+	public int approachFestival(String usercode, String fescode) {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().approachFestival(conn, usercode, fescode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<String> selectUserApList(String usercode) {
+		Connection conn = getConnection();
+		
+		ArrayList<String> userApList = new FestivalDAO().selectUserApList(conn, usercode);
+		
+		close(conn);
+		return userApList;
+	}
 	
 }

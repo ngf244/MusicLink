@@ -444,4 +444,135 @@ public class FestivalDAO {
 		return banmap;
 	}
 
+	public int getApListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("c2_getListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Festival> selectApList(Connection conn, int currentPage, int category) {
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rset = null;
+		ResultSet rset2 = null;
+		int posts = 10; //한 페이지에 보여질 게시글 개수
+
+		ArrayList<Festival> fArr = null;
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		if (category == 0) category = 1;
+		String query = prop.getProperty("c" + category + "_selectApList");
+		String query2 = prop.getProperty("findCpName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			fArr = new ArrayList<Festival>();
+			
+			Festival f = null;
+			while(rset.next()) {
+				f = new Festival();
+				f.setFesCode(rset.getString("fes_code"));
+				f.setFesName(rset.getString("fes_name"));
+				f.setFesLoc(rset.getString("fes_location"));
+				f.setFesTerm(rset.getString("fes_term"));
+				f.setRecTerm(rset.getString("recruit_term"));
+				f.setPosPath(rset.getString("fes_poster_path"));
+				f.setCpCode(rset.getString("cp_code"));
+				f.setPayRange(rset.getString("pay_range"));
+				
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, f.getCpCode());
+				rset2 = pstmt2.executeQuery();
+				
+				if(rset2.next()) {
+					f.setCpName(rset2.getString(1));
+				}
+				
+				fArr.add(f);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset2);
+			close(rset);
+			close(pstmt2);
+			close(pstmt);
+		}
+		
+		return fArr;
+	}
+
+	public int approachFestival(Connection conn, String usercode, String fescode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("approachFes");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, fescode);
+			pstmt.setString(2, usercode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<String> selectUserApList(Connection conn, String usercode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> userApList = null;
+		
+		String query = prop.getProperty("userApList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, usercode);
+			
+			rset = pstmt.executeQuery();
+			userApList = new ArrayList<String>();
+			while(rset.next()) {
+				userApList.add(rset.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userApList;
+	}
+
 }
