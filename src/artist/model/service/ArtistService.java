@@ -21,10 +21,10 @@ public class ArtistService {
 	public int upgradeArtist(Artist artist) {
 		Connection conn = getConnection();
 		ArtistDAO atDAO = new ArtistDAO();
-		String userCode = artist.getAtCode();		
 		
 		int result1 = atDAO.upgradeArtist(conn, artist);
-		int result2 = new MemberDAO().updateArtistClass(conn, userCode);
+		String userCode = artist.getAtCode();
+		int result2 = atDAO.insertAtReq(conn, userCode);
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);
@@ -33,7 +33,7 @@ public class ArtistService {
 		}
 		close(conn); 
 		
-		return result1;
+		return result1 * result2;
 	}
 
 	public Artist selectArtist(String userCode) {
@@ -143,9 +143,9 @@ public class ArtistService {
 		return result;
 	}
 
-	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectFollowAtFesList(int currentPage, String userCode) {
 		Connection conn = getConnection();
-		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
+		LinkedHashMap<Festival, ArrayList<String>> map = new ArtistDAO().selectFollowAtFesList(conn, currentPage, userCode);
 		close(conn);
 		return map;
   }

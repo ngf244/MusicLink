@@ -43,7 +43,8 @@ public class showUserDetail extends HttpServlet {
 		String img = null;
 		if(type == 2) {
 			String imgPath = new AuthorService().getPicture(userId);
-			img = imgPath.substring(imgPath.length()-19, imgPath.length());
+			img = imgPath;
+//			img = imgPath.substring(imgPath.length()-19, imgPath.length());
 		}
 		String path = "views/authorPage/showUserDetail.jsp";
 		

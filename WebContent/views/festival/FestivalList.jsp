@@ -50,7 +50,7 @@
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
     */
 	section {width:70%; height:180%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    /*background: #fff;*/ padding-top: 0px; padding-bottom:10%;}
+    background: #fff; padding-top: 0px; padding-bottom:10%;}
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
 	
@@ -73,7 +73,7 @@
     
     .promotionArea{margin-top:8%; text-align:center;}
     .subTitle{font-size:20px; font-weight:bold;}
-    .promotionImgArea{margin-top:20px; width:80%;}
+    .promotionImgArea{margin-top:20px; width:100%;}
     .promotionImgArea input{}
     .promotionImg{width:150px; height:210px; background:lightgray; display:inline-block; vertical-align:middle; text-align:right;}
     .alignspan{font-size:11px; margin-top: 186px; margin-right:4px;}
@@ -82,7 +82,7 @@
     
     #listArea{margin-top:9%; margin-left:10%; margin-right:10%; /*background:yellow;*/}
     #listCategory{font-size:20px;}
-    #secondCategory{width:100%; margin-top:5%; margin-bottom:80px;}
+    #secondCategory{width:105%; margin-top:5%; margin-bottom:80px;}
     /*#listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}*/
     
     #listSearch{width: 35%; text-align:right; float: right; margin-right:1%; margin-top:-11px; display: inline-block; text-align: center;}
@@ -414,7 +414,7 @@
 								<% }
 								if(!addtext.equals("아티스트 모집 중") && (f.getTicFee() != 0)) {%>
 								<tr>
-									<td class="listlabel">공연비</td>
+									<td class="listlabel">관람비</td>
 									<td><%= f.getTicFee() %></td>
 								</tr>
 								<% }

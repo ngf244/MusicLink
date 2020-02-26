@@ -85,6 +85,23 @@
             </div>
         <% } %>
         </div>
+        
+        
+        <% if((request.getRequestURI()).indexOf("festival") > -1) { %>
+        <% if (loginUser != null) { %>
+	           <% if(loginUser.getUserClass().equals("3")) { %>
+	           <div class="side-icon-right">
+	              <div class="image4 icon">
+	         <img src="<%= request.getContextPath() %>/img/add.png" alt="" />
+	              </div>
+	           </div>
+			   <% } %>
+		   <% } %>
+		<% } %>
+        
+        
+        
+        
         <div class="side-text">
                 <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
             </div>

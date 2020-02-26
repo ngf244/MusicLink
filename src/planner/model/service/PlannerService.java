@@ -16,16 +16,16 @@ public class PlannerService {
 		Connection conn = getConnection();
 		PlannerDAO pnDAO = new PlannerDAO();
 		
-		int result = pnDAO.insertPlanner(conn, pn);
-		int result2 = new MemberDAO().updatePlannerClass(conn, userCode);
+		int result1 = pnDAO.insertPlanner(conn, pn);
+		int result2 = pnDAO.insertPlReq(conn, userCode);
 		
-		if(result > 0 && result2 > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		
-		return result;
+		return result1 * result2;
 	}
 
 }

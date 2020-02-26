@@ -100,7 +100,7 @@ public class FestivalInsertServlet extends HttpServlet {
 			
 			if(result > 0) {
 				System.out.println("행사 등록 성공");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("list.fes");
 			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
@@ -108,7 +108,7 @@ public class FestivalInsertServlet extends HttpServlet {
 				}
 				
 				System.out.println("행사 등록 실패");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("list.fes");
 			}
 		}
 	}
