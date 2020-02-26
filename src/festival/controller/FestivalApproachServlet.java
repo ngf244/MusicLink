@@ -28,7 +28,6 @@ public class FestivalApproachServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("들어옴");
 		String usercode = request.getParameter("usercode");
 		String fescode = request.getParameter("fescode");
 		

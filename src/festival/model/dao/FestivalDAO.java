@@ -176,12 +176,13 @@ public class FestivalDAO {
 		return map;
 	}
 
-	public int getSearchListCount(Connection conn, String searchType, String searchText) {
+	public int getSearchListCount(Connection conn, int category, String searchType, String searchText) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
 		
-		String query = prop.getProperty(searchType + "_getSearchListCount");
+		if(category == 0) category = 1;
+		String query = prop.getProperty(searchType + "_c" + category + "_getSearchListCount");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -203,7 +204,7 @@ public class FestivalDAO {
 		return result;
 	}
 
-	public LinkedHashMap<Festival, ArrayList<String>> selectSearchList(Connection conn, int currentPage,
+	public LinkedHashMap<Festival, ArrayList<String>> selectSearchList(Connection conn, int currentPage, int category,
 			String searchType, String searchText) {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -220,16 +221,17 @@ public class FestivalDAO {
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
 		
-		String query = prop.getProperty(searchType + "_selectSearchList");
+		if(category == 0) category = 1;
+		String query = prop.getProperty(searchType + "_c" + category + "_selectSearchList");
 		String query2 = prop.getProperty("findArtist");
 		String query3 = prop.getProperty("findArtistName");
 		String query4 = prop.getProperty("findCpName");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setString(3, searchText);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			map = new LinkedHashMap<Festival, ArrayList<String>>();
@@ -573,6 +575,94 @@ public class FestivalDAO {
 		}
 		
 		return userApList;
+	}
+
+	public int getApSearchListCount(Connection conn, String searchType, String searchText) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty(searchType + "_getApSearchListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchText);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Festival> selectApSearchList(Connection conn, int currentPage, int category, String searchType,
+			String searchText) {
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rset = null;
+		ResultSet rset2 = null;
+		int posts = 10; //한 페이지에 보여질 게시글 개수
+
+		ArrayList<Festival> fArr = null;
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		if (category == 0) category = 1;
+		String query = prop.getProperty(searchType + "_c" + category + "_selectApSearchList");
+		String query2 = prop.getProperty("findCpName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			fArr = new ArrayList<Festival>();
+			
+			Festival f = null;
+			while(rset.next()) {
+				f = new Festival();
+				f.setFesCode(rset.getString("fes_code"));
+				f.setFesName(rset.getString("fes_name"));
+				f.setFesLoc(rset.getString("fes_location"));
+				f.setFesTerm(rset.getString("fes_term"));
+				f.setRecTerm(rset.getString("recruit_term"));
+				f.setPosPath(rset.getString("fes_poster_path"));
+				f.setCpCode(rset.getString("cp_code"));
+				f.setPayRange(rset.getString("pay_range"));
+				
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, f.getCpCode());
+				rset2 = pstmt2.executeQuery();
+				
+				if(rset2.next()) {
+					f.setCpName(rset2.getString(1));
+				}
+				
+				fArr.add(f);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset2);
+			close(rset);
+			close(pstmt2);
+			close(pstmt);
+		}
+		
+		return fArr;
 	}
 
 }

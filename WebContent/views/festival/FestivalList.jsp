@@ -12,6 +12,12 @@
 	int endPage = pi.getEndPage();
 	
 	int category = (int)request.getAttribute("category");
+	String searchType = "";
+	String searchText = "";
+	if(request.getAttribute("searchType") != null) {
+		searchType = (String)request.getAttribute("searchType");
+		searchText = (String)request.getAttribute("searchText");
+	}
 	
 	LinkedHashMap<Festival, ArrayList<String>> banmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("banmap");
 %>
@@ -283,22 +289,29 @@
 					<label class="category pointer" id="endCategory">지난 행사</label>
 				</div>
 				
+				<script>
+					$(function() {
+						var searchType = '<%= searchType %>';
+						var searchText = '<%= searchText %>';
+						
+						if(searchType != "") {
+							if(searchType == "title") $('#searchType option:eq(1)').attr('selected', 'selected');
+							else $('#searchType option:eq(2)').attr('selected', 'selected');
+							
+							$('#searchText').val(searchText);
+						}
+					})
+				</script>
 				<div id="secondCategory">
-					<!-- 
-					<div id="listSort">
-						<label class="category pointer" id="timeSort">최근등록순</label>
-						<label class="category">&nbsp; | &nbsp;</label>
-						<label class="category pointer" id="fesDateSort">날짜순</label>
-					</div>
-					 -->
 					<div id="listSearch">
 						<form action="<%= request.getContextPath() %>/search.fes" method="post" class="input-group" onsubmit="return typeCk();">
+							<input type="hidden" value=<%= category %> name="category">
 							<select class="btn btn-outline-dark selectdrop dropdown" id="searchType" name="searchType">
 								<option value="nothing">검색 종류</option>
 								<option value="title">행사명</option>
 								<option value="artist">아티스트명</option>
 							</select>
-	                        <input type="search" class="form-control searchtext" name="searchText" aria-label="Search Dashboard">
+	                        <input type="search" class="form-control searchtext" name="searchText" id="searchText" aria-label="Search Dashboard">
 	                        <input type="submit" class="btn mb-1 btn-dark" id="searchBtn" value="검색">
 						</form>
 					</div>
@@ -522,52 +535,6 @@
 				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
 			});
     	})
-    
-    	function paging(where) {
-    		var paging = document.getElementById("banner_paging");
-    		var printArr = paging.innerHTML.split(" ");
-			var count = printArr.length-1;
-
-    		if(where.value == "<") {
-    			for(var i = 0; i < printArr.length; i++) {
-        			if(i == 0) {
-        				var temp = printArr[0];
-            			printArr[0] = printArr[1];
-        			} else if(i == count) {
-        				printArr[i] = temp;
-        			} else {
-            			printArr[i] = printArr[i+1];
-        			}
-    			}
-    		} else {
-    			for(var i = count; i > 0; i--) {
-    				if(i == count) {
-        				var temp = printArr[0];
-        				printArr[0] = printArr[i];
-    				} else if(i == 1) {
-    					printArr[i+1] = printArr[i];
-    					printArr[i] = temp;
-    				} else {
-    					printArr[i+1] = printArr[i];
-    				}
-    			}
-    		}
-
-    		for(var i = 0; i < printArr.length; i++) {
-    			if(i == 0) paging.innerHTML = printArr[0] + " ";
-    			else if(i == printArr.length - 1) paging.innerHTML += printArr[i];
-    			else paging.innerHTML += printArr[i] + " ";
-    		}
-    		
-    		var cunt;
-    		for(var i = 0; i < printArr.length; i++) {
-    			if(printArr[i] == "●") {
-    				$('#festival_banner_img'+i).css('visibility', 'hidden');
-    				$('#festival_banner_img'+(i+1)).css('visibility', 'visible');
-    				$('#festival_banner_img'+(i+2)).css('visibility', 'hidden');
-    			}
-    		}
-    	}
     </script>
     
     <h1 class="htext">F E S T I V A L</h1>
