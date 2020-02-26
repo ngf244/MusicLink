@@ -22,16 +22,18 @@ public class ArtistService {
 		Connection conn = getConnection();
 		ArtistDAO atDAO = new ArtistDAO();
 		
-		int result = atDAO.upgradeArtist(conn, artist);
+		int result1 = atDAO.upgradeArtist(conn, artist);
+		String userCode = artist.getAtCode();
+		int result2 = atDAO.insertAtReq(conn, userCode);
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn); 
 		
-		return result;
+		return result1 * result2;
 	}
 
 	public Artist selectArtist(String userCode) {
