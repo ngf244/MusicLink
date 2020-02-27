@@ -18,7 +18,7 @@
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
     
-    #categoryArea{position: absolute; top: 2%; left: 3%; display: inline;}
+    #categoryArea{position: absolute; top: 3%; left: 3%; display: inline;}
     #contentArea{padding-top: 12%; text-align:center;}
 
     #inBigCategory {font-family: 'Bungee', cursive; font-size: 50px;}
@@ -67,6 +67,9 @@
     .paging .btn_arr, .paging .on{margin:0 3px;padding-top:0;border:1px solid #ddd; border-radius:30px;}
     .paging .on{padding-top:1px;height:22px;color:#fff;font-weight:bold;background:#000;}
     .paging .on:hover{text-decoration:none;}
+    
+    .btn_style{margin-left: 0; border-radius: 0.25rem; position: relative; padding: 0.5rem 0.75rem;
+        line-height: 1.25; color: #7571f9; background-color: #fff; border: 1px solid #dee2e6;}   
 
 </style>
 </head>
@@ -123,13 +126,13 @@
                             <div class="at-icon">
                                 <div class="at-icon-wrap">
                                     <a href="#">
-                                        <img src="img/facebook.png">
+                                        <img src="../img/facebook.png">
                                     </a>
                                     <a href="#">
-                                        <img src="img/instagram.png">
+                                        <img src="../img/instagram.png">
                                     </a>
                                     <a href="#">
-                                        <img src="img/twitter.png">
+                                        <img src="../img/twitter.png">
                                     </a>
                                 </div>
                             </div>
@@ -237,91 +240,37 @@
                 </div>
             </div>
         </div>
-        <div class="paging">
-          <a href="#" class="on">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-          <a href="#">8</a>
-          <a href="#">9</a>
-          <a href="#">10</a>      
-        </div>
+            <div class='paginaArea' align='center'>
+            <!-- 맨 처음으로 -->
+                <button class="btn_style">&lt;&lt;</button>
+                
+                <!-- 이전 페이지로 -->
+                <button class="btn_style" id="beforeBtn">&lt;</button>
+                
+                <!-- 10개의 페이지 목록 -->
+                <button class="btn_style" id="numBtn">1</button>
+                <button class="btn_style" id="numBtn">2</button>
+                <button class="btn_style" id="numBtn">3</button>
+                <button class="btn_style" id="numBtn">4</button>
+                <button class="btn_style" id="numBtn">5</button>
+                <button class="btn_style" id="numBtn">6</button>
+                <button class="btn_style" id="numBtn">7</button>
+                <button class="btn_style" id="numBtn">8</button>
+                <button class="btn_style" id="numBtn">9</button>
+                <button class="btn_style" id="numBtn">10</button>
+                
+                
+                <!-- 다음 페이지로 -->
+                <button class="btn_style" id="afterBtn">&gt;</button>
+                
+                <!-- 맨 끝으로 -->
+                <button class="btn_style">&gt;&gt;</button>
+            </div>       
         </div>
     </section>
     <h1 class="htext">A - r a n k</h1>
     
-    
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div class="map-cont-left"></div>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<%@ include file="../common/footer.jsp" %>
     
 <script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

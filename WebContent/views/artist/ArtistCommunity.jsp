@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="community.CommunityDAO" %>
+<%@ page import="community.Community" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,10 +56,23 @@
     
     .btn_style{margin-left: 0; border-radius: 0.25rem; position: relative; padding: 0.5rem 0.75rem;
         line-height: 1.25; color: #7571f9; background-color: #fff; border: 1px solid #dee2e6;}   
-
+	a, a:hover {
+		color:#000000;
+		text-decoration: none;
+	}
 </style>
 </head>
 <body>
+	<%
+		String USER_CODE = null;
+		if (session.getAttribute("USER_CODE") != null){
+			USER_CODE = (String) session.getAttribute("USER_CODE");
+		}
+		int pageNumber = 1;
+		if (request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+	%>
     <%@ include file="../common/menubar.jsp" %>
    
     <section style="z-index: 1;">
@@ -85,166 +102,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>게시판 주인</td>
-                            <td>A</td>
-                            <td>2020-02-06</td>
+	                    <%
+	                    	CommunityDAO communityDAO = new CommunityDAO();
+	                    	ArrayList<Community> list = communityDAO.getList(pageNumber);
+	                    	for(int i = 0; i < list.size(); i++) {
+	                    %>
+	                    <tr>
+                            <td><%= list.get(i).getCM_CODE() %></td>
+                            <td><%= list.get(i).getUSER_CODE() %></td>
+                            <td><a href="view.jsp?CM_CODE=<%= list.get(i).getCM_CODE() %>"><%= list.get(i).getCM_TITLE() %></a></td>
+                            <td><%= list.get(i).getCM_DATE()%></td>
                         </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>게시판 주인</td>
-                            <td>R</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>게시판 주인</td>
-                            <td>T</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>4</th>
-                            <td>게시판 주인</td>
-                            <td>I</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>5</th>
-                            <td>게시판 주인</td>
-                            <td>S</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>6</th>
-                            <td>게시판 주인</td>
-                            <td>T</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>7</th>
-                            <td>게시판 주인</td>
-                            <td>!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>8</th>
-                            <td>게시판 주인</td>
-                            <td>!!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>9</th>
-                            <td>게시판 주인</td>
-                            <td>!!!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>10</th>
-                            <td>게시판 주인</td>
-                            <td>?????</td>
-                            <td>2020-02-06</td>
-                        </tr>
+	                    <% 
+	                    	}
+	                    %>
+                       
                     </tbody>
                 </table>
             </div>
             <div class='paginaArea' align='center'>
-            <!-- 맨 처음으로 -->
-                <button class="btn_style">&lt;&lt;</button>
-                
-                <!-- 이전 페이지로 -->
-                <button class="btn_style" id="beforeBtn">&lt;</button>
-                
-                <!-- 10개의 페이지 목록 -->
-                <button class="btn_style" id="numBtn">1</button>
-                <button class="btn_style" id="numBtn">2</button>
-                <button class="btn_style" id="numBtn">3</button>
-                <button class="btn_style" id="numBtn">4</button>
-                
-                
-                <!-- 다음 페이지로 -->
-                <button class="btn_style" id="afterBtn">&gt;</button>
-                
-                <!-- 맨 끝으로 -->
-                <button class="btn_style">&gt;&gt;</button>
-                
+           		<%
+           			if(pageNumber != 1) {
+           		%>
+                	<a href="views.artist.ArtistCommunity.jsp?pageNumber=<%=pageNumber - 1%>" class="btn_style">이전</a>
+                <%
+           			} if(communityDAO.nextPage(pageNumber + 1)) {
+                %>
+                	<a href="views.artist.ArtistCommunity.jsp?pageNumber=<%=pageNumber + 1%>" class="btn_style">다음</a>
+                <%
+           			}
+                %>
                 <div id="write_box">
-                    <button class="btn_style" id="write">글쓰기</button>
+                    <button class="btn_style" id="write" onClick="location.href='ArtistBoardWrite.jsp'">글쓰기</button>
                 </div>
             </div>
            </div>
-        </div>
     </section>
     <h1 class="htext">A - r a n k</h1>
     
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
-    <div class="map">
-        <div class="map-bg">
-            <h1 class="map-h1">&#215;</h1>
-            <h1 class="map-txt">오시는길</h1>
-            <div class="map-cont">
-                <div class="map-cont-left"></div>
-                <div class="map-cont-right">
-                    <div class="cont-right1">
-                        <div class="right-txt1">ADDRESS</div>
-                        <div class="right-txt2">서울시 강남구..</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">TEL</div>
-                        <div class="right-txt2">02-1111-1111</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">SUB</div>
-                        <div class="right-txt2">2호선 - 강남, 역삼역</div>
-                    </div>
-                    <div class="cont-right1">
-                        <div class="right-txt1">BUS</div>
-                        <div class="right-txt2">146번, 360번</div>
-                    </div>
-                    <div class="cont-right2">
-                        <a href="#" class="map-button">NAVER 지도로 바로 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<%@ include file="../common/footer.jsp" %>
     
 <script src="js/respond.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

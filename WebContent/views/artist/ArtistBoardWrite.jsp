@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="community.CommunityDAO" %>
+<%@ page import="community.Community" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -113,17 +117,18 @@
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
+			<form method="post" action="writeAction.jsp">
 				<table id="inputTable">
 					<tr>
 						<td class="board_title labeltd">제목</td>
 						<td class="board_title">
-							<input type="text" class="form-control input-default inputboard" placeholder="제목을 입력해주세요">
+							<input type="text" class="form-control input-default inputboard" placeholder="제목을 입력해주세요" name="title">
 						</td>
 					</tr>
 					<tr>
 						<td class="board_content labeltd">내용</td>
 						<td class="board_content">
-							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
+							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요" name="content"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -134,6 +139,7 @@
 						</td>
 					</tr>
 				</table>
+			</form>
 			</div>
 		</div>
     </section>
