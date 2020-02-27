@@ -19,7 +19,7 @@
 	<header style='position:fixed; top:0; z-index:2;'> 
         <nav> 
             <div class="logo">
-            <a href="index.jsp">logo</a> 
+            <a href="<%= request.getContextPath() %>/index.jsp">logo</a> 
             </div>
             <div id="toggle">
                 <div class="span" id="one"></div>
@@ -58,6 +58,11 @@
                     <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
                     <ul class="hidden-manu3 drop">
                         <li class="menu-h"><a href="<%= request.getContextPath() %>/list.fes">F - l i s t</a></li>
+                    <% if (loginUser != null) { %>
+                    <% if(loginUser.getUserClass().equals("2")) { %>
+                       <li class="menu-h"><a href="<%= request.getContextPath() %>/aplist.fes">F - A p p r o a c h</a></li>
+                    <% } %>
+                    <% } %>
                     </ul>
                 </li>
                 <li class="m-name4 m-name">

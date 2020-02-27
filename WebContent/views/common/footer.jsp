@@ -15,7 +15,7 @@
     .ft-txt1{margin-bottom:80px; text-align: center; font-size:3em; color: rgb(224, 224, 224);}
     .ft-txt2{font-size:80px; text-align:center; color: rgb(224, 224, 224); }
     
-    .ft-content{width:60%; background:#000; margin: 0 auto; margin-top:22px; z-index:2; position: absolute; left:15%; color:#fff; padding:5%;}
+    .ft-content{width:60%; background:#000; margin: 0 auto; margin-top:22px; z-index:1; position: absolute; left:15%; color:#fff; padding:5%;}
     .content-left{width:70%; float: left;}
     .content-left li{color:darkslategray;}
     .content-right{width:30%; float: right;}
