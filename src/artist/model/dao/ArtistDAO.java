@@ -574,5 +574,28 @@ public class ArtistDAO {
 		
 		return result;
 	}
+	public String selectCode(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String userCode = "";
+		
+		String query = prop.getProperty("selectCode");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				userCode = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return userCode;
+	}
 
 }

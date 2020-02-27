@@ -72,16 +72,18 @@ public class ArtistService {
 		Connection conn = getConnection();
 		ArtistDAO aDAO = new ArtistDAO();
 
-		int result = aDAO.insertArtist(conn, artist, userId);
+		int result1 = aDAO.insertArtist(conn, artist, userId);
+		String userCode = aDAO.selectCode(conn, userId);
+		int result2 = aDAO.insertAtReq(conn, userCode);
 
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
-
 		} else {
 			rollback(conn);
 		}
-
-		return result;
+		close(conn);
+		
+		return result1*result2;
 	}
 
 	public int insertGalleryBoard(Artist artist) {

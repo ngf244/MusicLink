@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,25 +59,26 @@
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
-				<form action="<%= request.getContextPath() %>/insert.faq" method="post">
+				<form action="<%= request.getContextPath() %>/update.faq" method="post">
+				<input type="hidden" name="code" id="faqCode" value="<%= request.getParameter("faqCode") %>">
 					<table id="inputTable">
 						<tr>
 							<td class="qna_title labeltd">제목</td>
 							<td class="qna_title">
-								<input type="text" name="title" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
+								<input type="text" name="title" class="form-control input-default inputqna" value="<%= request.getParameter("faqTitle") %>" placeholder="제목을 입력해주세요">
 							</td>
 						</tr>
 						<tr>
 							<td class="qna_content labeltd">내용</td>
 							<td class="qna_content">
-								<textarea name="content" class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
+								<textarea name="content" class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"><%= request.getParameter("faqContent") %></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td id="qna_btn2">
 								<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
-								<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
+								<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.faq'" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
 							</td>
 						</tr>
 					</table>					

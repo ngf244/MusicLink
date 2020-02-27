@@ -22,7 +22,6 @@ public class FAQ {
 		this.mnCode = mnCode;
 	}
 
-
 	public FAQ(String faqNum, String faqTitle, String faqContent, String faqStatus) {
 		super();
 		this.faqNum = faqNum;

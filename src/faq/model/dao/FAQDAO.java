@@ -106,4 +106,26 @@ public class FAQDAO {
 		return result;
 	}
 
+	public int updateFAQ(Connection conn, FAQ faq) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, faq.getFaqTitle());
+			pstmt.setString(2, faq.getFaqContent());
+			pstmt.setString(3, faq.getFaqNum());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
