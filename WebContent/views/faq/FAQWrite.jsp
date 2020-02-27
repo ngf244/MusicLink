@@ -61,20 +61,20 @@
 						<tr>
 							<td class="qna_title labeltd">제목</td>
 							<td class="qna_title">
-								<input type="text" name="title" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
+								<input type="text" name="title" id="title" class="form-control input-default inputqna" placeholder="제목을 입력해주세요">
 							</td>
 						</tr>
 						<tr>
 							<td class="qna_content labeltd">내용</td>
 							<td class="qna_content">
-								<textarea name="content" class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
+								<textarea name="content" id="content" class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td id="qna_btn2">
 								<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
-								<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
+								<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.faq'" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
 							</td>
 						</tr>
 					</table>					
@@ -89,11 +89,16 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../../plugins/common/common.min.js"></script>
-    <script src="../../js/custom.min.js"></script>
-    <script src="../../js/settings.js"></script>
-    <script src="../../js/gleek.js"></script>
-    <script src="../../js/styleSwitcher.js"></script>
+    <script src="<%= request.getContextPath() %>/plugins/common/common.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/custom.min.js"></script>
+    <script src="<%= request.getContextPath() %>/js/settings.js"></script>
+    <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
+    <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
     
+    <script>
+    	var str = $('#content').val();
+    	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    	$('#content').val(str);
+    </script>
 </body>
 </html>

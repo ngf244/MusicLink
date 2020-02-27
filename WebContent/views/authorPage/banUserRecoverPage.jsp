@@ -185,7 +185,7 @@
                 $('.userDetailBox-addressBox input').val(userPhone);
                 $('.userDetailBox-usertypeBox input').val(type);
                 $('.preDistrictReason input').val(banReason);
-                $('.preDetailReason input').val(banReason);
+                $('.preDetailReason input').val(banReasonDetail);
             },
             error : function () {
                 console.log("헐 아작스 에러 대박;")

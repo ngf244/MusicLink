@@ -34,20 +34,20 @@ public class AuthorService {
 		return result;
 	}
 
-	public Member selectUser(String userId) {
+	public Member selectUser(String userCode) {
 		Connection conn = getConnection();
 		
-		Member mem = new AuthorDAO().selectUser(conn, userId);
+		Member mem = new AuthorDAO().selectUser(conn, userCode);
 		
 		close(conn);
 		
 		return mem;
 	}
 
-	public String getPicture(String userId) {
+	public String getPicture(String userCode) {
 		Connection conn = getConnection();
 		
-		String imgPath = new AuthorDAO().getPicture(conn, userId);
+		String imgPath = new AuthorDAO().getPicture(conn, userCode);
 		
 		close(conn);
 		

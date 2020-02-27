@@ -187,7 +187,7 @@
 	}
 	
 	#label {
-		width: 35%;
+		width: 40%;
 	}
 	
 	#companyStar {
@@ -207,6 +207,8 @@
 		border: 1px solid #ced4da;
 		border-radius: 4px;
 	}
+	
+	#apBtn{width: 25%; margin-top: 3%;}
 	
 	footer .ft-content {
 		width: 70%;
@@ -317,7 +319,11 @@
 				
 				<% if(loginUser != null) {
 					  if(loginUser.getUserClass().equals("2")) {%>
-				<input type="button" class="btn mb-1 btn-warning" value="행사 지원">
+				<input type="button" class="btn mb-1 btn-warning" id="apBtn" value="행사 지원">
+				<script>
+					size = '134%';
+					$('section').css('height', size);
+				</script>
 				<%    } else { %>
 				<script>
 					size = '135%';

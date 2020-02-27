@@ -32,15 +32,18 @@ public class showUserDetail_banPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("searchId");
+		String userCode = new AuthorService().getUserCode(userId);
 		
-		int type = new AuthorService().checkUserClass(userId);
-		
-		Member mem = new AuthorService().selectUser(userId);
+		int type = new AuthorService().checkUserClass(userCode);
+		System.out.println("type : " + type);
+		Member mem = new AuthorService().selectUser(userCode);
 		
 		String img = null;
 		if(type == 2) {
-			String imgPath = new AuthorService().getPicture(userId);
-			img = imgPath.substring(imgPath.length()-19, imgPath.length());
+			String imgPath = new AuthorService().getPicture(userCode);
+			img = imgPath;
+			System.out.println(img);
+//			img = imgPath.substring(imgPath.length()-19, imgPath.length());
 		}
 		
 		mem.setUserEmail(img); // img경로 임시로 email에 집어넣음

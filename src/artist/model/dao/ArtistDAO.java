@@ -170,20 +170,16 @@ public class ArtistDAO {
 	public int insertArtist(Connection conn, Artist artist, String userId) {
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
 		ResultSet rs = null;
 		String result1 = null;
 		int result2 = 0;
-		int result3 = 0;
 		
 		String query1 = prop.getProperty("selectCode");
 		String query2 = prop.getProperty("insertArtist");
-		String query3 = prop.getProperty("updateUserClass");
 		
 		try {
 			pstmt1 = conn.prepareStatement(query1);
 			pstmt2 = conn.prepareStatement(query2);
-			pstmt3 = conn.prepareStatement(query3);
 			
 			pstmt1.setString(1, userId);
 			rs = pstmt1.executeQuery();
@@ -209,8 +205,6 @@ public class ArtistDAO {
 			
 			result2 = pstmt2.executeUpdate();
 			
-			pstmt3.setString(1, result1);
-			result3 = pstmt3.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -219,7 +213,7 @@ public class ArtistDAO {
 			close(pstmt1);
 		}
 		
-		return (result2*result3);
+		return (result2);
 	}
 
 	public int insertGalleryBoard(Connection conn, Artist artist) {
@@ -322,7 +316,7 @@ public class ArtistDAO {
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
-			
+			System.out.println("팔로우 아티스트의 행사 개수 : " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -333,48 +327,59 @@ public class ArtistDAO {
 		return result;
 	}
 	
-	public LinkedHashMap<ArrayList<Festival>, ArrayList<String>> selectFollowAtFesList(Connection conn, int currentPage, String userCode) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = null;
-		ArrayList<Festival> fList = null;
+	public LinkedHashMap<Festival, ArrayList<String>> selectFollowAtFesList(Connection conn, int currentPage, String userCode) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rset1 = null;
+		ResultSet rset2 = null;
+		LinkedHashMap<Festival, ArrayList<String>> map = null;
+		Festival f = null;
 		ArrayList<String> aList = null;
 		
-		int Festivals = 4; // 한 페이지에 보여질 게시글 개수
+		int Festivals = 5; // 한 페이지에 보여질 게시글 개수
 		
 		int startRow = (currentPage - 1) * Festivals + 1;
 		int endRow = startRow + Festivals - 1;		
 		
-		String query = prop.getProperty("selectFollowAtFesList");
-		
+		String query1 = prop.getProperty("selectFollowAtFesList");
+ 		String query2 = prop.getProperty("selectFixedAt");
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setString(3, userCode);
-			
-			rset = pstmt.executeQuery();
-			map = new LinkedHashMap<ArrayList<Festival>, ArrayList<String>>();
-			fList = new ArrayList<Festival>();
-			aList = new ArrayList<String>();
-			
-			while(rset.next()) {
-				Festival f = new Festival(rset.getString("FES_NAME"),
-										  rset.getString("FES_LOCATION"),
-										  rset.getString("FES_TERM"),
-										  rset.getString("FES_POSTER_PATH"));
-				fList.add(f); 
+			pstmt1 = conn.prepareStatement(query1);
+			pstmt1.setInt(1, startRow);
+			pstmt1.setInt(2, endRow);
+			pstmt1.setString(3, userCode);
+						
+			rset1 = pstmt1.executeQuery();
+			map = new LinkedHashMap<Festival, ArrayList<String>>();
+			f = new Festival();
+						
+			while(rset1.next()) {
+				f = new Festival(rset1.getString("FES_NAME"),
+							     rset1.getString("FES_LOCATION"),
+								 rset1.getString("FES_TERM"),
+								 rset1.getString("FES_POSTER_PATH"));
 				
-				String a = rset.getString("AT_NAME");
-				aList.add(a);
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, rset1.getString("FES_CODE"));
 				
-				map.put(fList, aList);	
+				rset2 = pstmt2.executeQuery();
+				aList = new ArrayList<String>();
+				while(rset2.next()) {
+					String artistName = rset2.getString("AT_NAME");
+					aList.add(artistName);
+				}
+				map.put(f, aList);
 			}
+			System.out.println("공연 정보 : " + f);
+			System.out.println("확정된 아티스트 이름 : " + aList);
+			System.out.println("맵 출력 : " + map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
-			close(pstmt);
+			close(rset1);
+			close(rset2);
+			close(pstmt1);
+			close(pstmt2);
 		}
 		
 		return map;
@@ -549,6 +554,48 @@ public class ArtistDAO {
 		}
 		
 		return result3;
+	}
+	public int insertAtReq(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertAtReq");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public String selectCode(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String userCode = "";
+		
+		String query = prop.getProperty("selectCode");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				userCode = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return userCode;
 	}
 
 }

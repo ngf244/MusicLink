@@ -25,7 +25,6 @@ section {
 	margin-top: 20%;
 	position: relative;
 	background: #fff;
-	height: 700px;
 	display: block;
 }
 
@@ -214,6 +213,7 @@ zzzrod
 							for(int i = 0; i < list.size(); i++){
 					%>
 					<div class="card">
+					<form class="faqList" action="<%= request.getContextPath()%>/views/faq/FAQUpdate.jsp" method="post">
 						<div class="card-header">
 							<h5 class="mb-0 collapsed" data-toggle="collapse"
 								data-target="#collapse<%= i %>" aria-expanded="false"
@@ -221,22 +221,29 @@ zzzrod
 								<i class="fa" aria-hidden="true"></i> <%= list.get(i).getFaqTitle() %>
 							</h5>
 						</div>
-						<input type="hidden" name="faqCode" value="<%= list.get(i).getFaqNum() %>">
 						<div id="collapse<%= i %>" class="collapse"
 							data-parent="#accordion-two">
-							<div class="card-body"><%= list.get(i).getFaqContent() %></div>
+							<div class="card-body" id="contentDiv"><%= list.get(i).getFaqContent() %></div>
+						<% if(loginManager != null) {%>
 							<div id="mnBtn">
-								<button type="button" onclick="location.href='<%= request.getContextPath() %>/update.faq'" class="detail_btn" id="updateBtn">수정</button>
-								<button type="button" onclick="deleteFAQ();" class="detail_btn" id="deleteBtn">삭제</button>
+								<input type="hidden" name="faqCode" id="faqCode<%= i %>" value="<%= list.get(i).getFaqNum() %>">
+								<input type="hidden" name="faqTitle" value="<%= list.get(i).getFaqTitle() %>">
+								<input type="hidden" name="faqContent" value="<%= list.get(i).getFaqContent() %>">
+								<button type="submit" class="detail_btn" id="updateBtn">수정</button>
+								<button type="button" onclick="deleteFAQ(this);" class="detail_btn" id="deleteBtn">삭제</button>
 							</div>
+						<% } %>
 						</div>
+					</form>
 					</div>
 					<%		}
 					   }	
 					%>
 				</div>
 			</div>
+			<% if(loginManager != null) { %>
 			<input type="button" onclick="location.href='<%= request.getContextPath() %>/views/faq/FAQWrite.jsp'" class="writerBtn" value="글쓰기">
+			<% } %>
 		</div>
 	</section>
 	<h1 class="htext">F A Q</h1>
@@ -280,15 +287,20 @@ zzzrod
             </div>
         </div>
     </div>
-    
-    <script>
-    	
-    	function deleteQnA(){
-    		var bool = confirm('정말로 삭제하시겠습니까?');
-    		if(bool){
-    			location.href="<%= request.getContextPath() %>/delete.faq";
-    		}
-    	}
-    </script>
+
+	<script>
+	    function deleteFAQ(th){
+	    	/* var code = $(this).$('#faqCode').val(); */
+	    	/* var code = $(this).parent('#mnBtn').children('#faqCode').val(); */
+	    	/* var code = $(this).parent().children().eq(0).val(); */
+	    	var code = $(th).parent().children().eq(0).val();
+	    	console.log(code);
+	    	var bool = confirm('정말로 삭제하시겠습니까?');
+	    	
+	    	if(bool){
+	    		location.href='<%=request.getContextPath()%>/delete.faq?faqCode=' + code;
+	    	}
+	    }
+	</script>
 </body>
 </html>

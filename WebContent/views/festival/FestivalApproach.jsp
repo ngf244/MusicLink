@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, festival.model.vo.PageInfo, festival.model.vo.Festival, java.text.DecimalFormat" %>
+<%
+	ArrayList<Festival> fArr = (ArrayList<Festival>)request.getAttribute("fArr");
+	ArrayList<String> userApList = (ArrayList<String>)request.getAttribute("userApList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	
+	int category = (int)request.getAttribute("category");
+	String searchType = "";
+	String searchText = "";
+	if(request.getAttribute("searchType") != null) {
+		searchType = (String)request.getAttribute("searchType");
+		searchText = (String)request.getAttribute("searchText");
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -39,24 +59,34 @@
     #searchArea{width: 80%; height:40px; display: inline-block; text-align: center;}
     #searchArea select, input, #alignImg{vertical-align: middle; display: inline-block; text-align: center;}
     #alignImg{width:40px; height:40px; margin-left: 1.5%;}
-    #icon{width: 30px; height: 30px; vertical-align: middle;}
+    #searchBtn{width: 30px; height: 30px; vertical-align: middle;}
     .dropdown{width: 20%; height: 40px; padding-left: 1.5%; margin-right: 4px; font-size:14px;}
     .selectdrop option{border-radius: 0.25rem;}
     .searchtext{width: 60%; height: 30px; margin-left: 1.5%; border-radius: 4px;}
+    #searchText{text-align:left;}
     
     #listSort{font-size:14px; width:100%; text-align:right; float: right; margin-top:6%; margin-right:10%;}
+    .pointer{cursor:pointer;}
     
     #listArea{margin-top:5%; margin-right:10%; /*background:yellow;*/ display: block; margin-left:10%;}
-    #festivalList{display:block;}
-    .promotionDetailImg{width:114px; height:150px; background:lightgray; display:inline-block; vertical-align:top; text-align:right;}
+    #festivalList{display:block; margin-top:8%;}
+    .promotionDetailImg{
+    	width:138px;
+    	height:174px;
+    	background:lightgray;
+    	display:inline-block;
+    	vertical-align:top;
+    	text-align:right;
+    }
     .alignspanlist{font-weight: bold;}
-    .festival{display:inline-block; width:80%; margin-top: 5%; text-align:left;}
+    .festival{display:inline-block; width:80%; margin-top: 50px; text-align:left;}
     .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
     .festivalInfo span, label, button{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     #festivalName{font-size:17px;}
-    .festivalDetail{margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
-    .listlabel{width: 45%;}
+    .festivalDetail{width: 100%; margin-top: 5px; font-size:13px; line-height:1.8; /*border-spacing: 5px; border-collapse: separate;*/}
+    .listlabel{width: 130px;}
+    .tdspace{width: 20px;}
     
     .approachBtn{float: right; font-size: 13px; width: 90px; height: 25px; margin-top:-4px; line-height: 0.9; color:white;}
     
@@ -81,159 +111,237 @@
 		
 		<div id="contentArea">
 			<div id="listArea">
-			
+				
+				<script>
+					$(function() {
+						var searchType = '<%= searchType %>';
+						var searchText = '<%= searchText %>';
+						
+						if(searchType != "") {
+							if(searchType == "title") $('#searchType option:eq(1)').attr('selected', 'selected');
+							else $('#searchType option:eq(2)').attr('selected', 'selected');
+							
+							$('#searchText').val(searchText);
+						}
+					})
+				</script>
 				<div id="searchArea">
-					<div class="input-group">
-						<select class="btn btn-outline-dark selectdrop dropdown">
-							<option>검색 종류</option>
-							<option>행사명</option>
-							<option>주최사명</option>
+					<form action="<%= request.getContextPath() %>/apsearch.fes" method="post" id="searchForm" class="input-group" onsubmit="return typeCk();">
+						<input type="hidden" value=<%= category %> name="category">
+						<select class="btn btn-outline-dark selectdrop dropdown" id="searchType" name="searchType">
+							<option value="nothing">검색 종류</option>
+							<option value="title">행사명</option>
+							<option value="cpname">주최사명</option>
 						</select>
-                        <input type="text" class="form-control input-default searchtext">
-                        <div id="alignImg"><img src="<%= request.getContextPath() %>/icons/search.png" id="icon" /></div>
-					</div>
+                        <input type="text" class="form-control input-default searchtext" name="searchText" id="searchText">
+                        <div id="alignImg">
+                        	<img src="<%= request.getContextPath() %>/icons/search.png" id="searchBtn" />
+                        </div>
+					</form>
 				</div>
+				<script>
+					function typeCk() {
+						if($('#searchType').val() == 'nothing') {
+							alert('검색 종류를 선택해주세요');
+							return false;
+						}
+						return true;
+					};
+					
+					$('#searchBtn').click(function() {
+						$('#searchForm').submit();
+					});
+				</script>
+				
+				<script>
+					$(function() {
+						<%
+						switch(category) {
+						case 0: break;
+						case 1: %>
+							$('#timeSort').css({'color':'black', 'font-weight':'bold'});
+						<%  break;
+						case 2: %>
+							$('#recTimeSort').css({'color':'black', 'font-weight':'bold'});
+						<%  break;
+						case 3: %>
+							$('#highPaySort').css({'color':'black', 'font-weight':'bold'});
+						<%  break;
+						case 4: %>
+							$('#lowPaySort').css({'color':'black', 'font-weight':'bold'});
+						<%  break;
+						}%>
+
+						var category = <%= category %>;
+						$('#timeSort').click(function() {
+							category = 1;
+							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+						});
+						$('#recTimeSort').click(function() {
+							category = 2;
+							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+						});
+						$('#highPaySort').click(function() {
+							category = 3;
+							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+						});
+						$('#lowPaySort').click(function() {
+							category = 4;
+							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+						});
+					});
+					
+
+					function approach(where) {
+						$.ajax({
+							url: 'approachFes.do',
+							type: 'post',
+							data: {usercode: '<%= loginUser.getUserCode() %>', fescode: where.parentElement.parentElement.children[0].value},
+							success: function(data) {
+								where.className = 'btn mb-1 btn-secondary approachBtn';
+								where.innerHTML = '지원 완료';
+								where.disabled = true;
+							},
+							error: function(data) {
+								console.log('실패');
+							}
+						});
+					}
+				</script>
 				
 				<div id="listSort">
-					<label class="category">최근등록순</label>
+					<label class="category pointer" id="timeSort">최근등록순</label>
 					<label class="category">&nbsp; | &nbsp;</label>
-					<label class="category">날짜순</label>
+					<label class="category pointer" id="recTimeSort">모집마감순</label>
 					<label class="category">&nbsp; | &nbsp;</label>
-					<label class="category">공연비높은순</label>
+					<label class="category pointer" id="highPaySort">공연비높은순</label>
 					<label class="category">&nbsp; | &nbsp;</label>
-					<label class="category">공연비낮은순</label>
+					<label class="category pointer" id="lowPaySort">공연비낮은순</label>
 				</div>
 				
 				<div id="festivalList">
+					<% if(fArr == null) { %>
+						<label>등록된 행사가 없습니다.</label>
+					<% } else {
+							for(Festival f : fArr) { %>
 					<div class="festival">
-						<div class="promotionDetailImg"></div>
+						<input type="hidden" id="hidfescode" value="<%= f.getFesCode() %>">
+						<input type="hidden" value="아티스트 모집 중">
+						<!-- <div class="promotionDetailImg"></div> -->
+						<div style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;" class="promotionDetailImg"></div>
+						
 						<div class="festivalInfo">
 							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
-							<label id="festivalName">행사명</label>
-							<button type="button" class="btn mb-1 btn-warning approachBtn">행사 지원</button>
+							<label id="festivalName"><%= f.getFesName() %></label>
+							
+							<% for(int i = 0; i < userApList.size(); i++) {
+								  if((userApList.get(i)).equals(f.getFesCode())) { %>
+									<button type="button" class="btn mb-1 btn-secondary approachBtn" disabled>지원 완료</button>
+							<%      break;
+								  }
+								  if(i == userApList.size() - 1) { %>
+									<button type="button" class="btn mb-1 btn-warning approachBtn" onclick="approach(this);">행사 지원</button>
+							<%    }
+							   } %>
 							
 							<table class="festivalDetail">
 								<tr>
 									<td class="listlabel">행사 기간</td>
-									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
+									<td class="tdspace" rowspan=6></td>
+									<td><%= f.getFesTerm() %></td>
 								</tr>
 								<tr>
 									<td class="listlabel">아티스트 모집 기간</td>
-									<td>2020.07.01 ~ 2020.07.21</td>
+									<td><%= f.getRecTerm() %></td>
 								</tr>
+								<%  
+									DecimalFormat formatter = new DecimalFormat("###,###");
+									String printPay = formatter.format(Integer.parseInt((f.getPayRange().split("~"))[0])) + "&#8361; ~ " + formatter.format(Integer.parseInt((f.getPayRange().split("~"))[1])) + "&#8361;";
+								%>
 								<tr>
-									<td class="listlabel">모집 아티스트 팀 수</td>
-									<td>6팀</td>
+									<td class="listlabel">공연비</td>
+									<td><%= printPay %></td>
 								</tr>
+								<%
+								String fullLoc = "";
+								String spLoc[] = f.getFesLoc().split("/");
+								
+								String mapLoc[] = spLoc[0].split("&");
+								
+								if (mapLoc.length > 1) {
+									if(spLoc.length > 1) {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1] + " " + spLoc[1];
+									} else {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1];
+									}
+								} else {
+									fullLoc = f.getFesLoc();
+								}
+								%>
 								<tr>
-									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
+									<td class="listlabel">행사 장소</td>
+									<td><%= fullLoc %></td>
 								</tr>
 								<tr>
 									<td class="listlabel">주최사명</td>
-									<td>KH</td>
+									<td><%= f.getCpName() %></td>
 								</tr>
 							</table>
 						</div>
 					</div>
-					<div class="festival">
-						<div class="promotionDetailImg"></div>
-						<div class="festivalInfo">
-							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
-							<label id="festivalName">행사명</label>
-							<button type="button" class="btn mb-1 btn-warning approachBtn">행사 지원</button>
-							
-							<table class="festivalDetail">
-								<tr>
-									<td class="listlabel">행사 기간</td>
-									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
-								</tr>
-								<tr>
-									<td class="listlabel">아티스트 모집 기간</td>
-									<td>2020.07.01 ~ 2020.07.21</td>
-								</tr>
-								<tr>
-									<td class="listlabel">모집 아티스트 팀 수</td>
-									<td>6팀</td>
-								</tr>
-								<tr>
-									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
-								</tr>
-								<tr>
-									<td class="listlabel">주최사명</td>
-									<td>KH</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="festival">
-						<div class="promotionDetailImg"></div>
-						<div class="festivalInfo">
-							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
-							<label id="festivalName">행사명</label>
-                            <button type="button" class="btn mb-1 btn-secondary approachBtn">지원 완료</button>
-							
-							<table class="festivalDetail">
-								<tr>
-									<td class="listlabel">행사 기간</td>
-									<td rowspan=5>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>2020.08.30 ~ 2020.09.05</td>
-								</tr>
-								<tr>
-									<td class="listlabel">아티스트 모집 기간</td>
-									<td>2020.07.01 ~ 2020.07.21</td>
-								</tr>
-								<tr>
-									<td class="listlabel">모집 아티스트 팀 수</td>
-									<td>6팀</td>
-								</tr>
-								<tr>
-									<td class="listlabel">확정 아티스트</td>
-									<td>윤하</td>
-								</tr>
-								<tr>
-									<td class="listlabel">주최사명</td>
-									<td>KH</td>
-								</tr>
-							</table>
-						</div>
-					</div>
+					<% }
+					} %>
 				</div>
 				
 				<div id="pagingarea">
-                	<ul class="pagination">
-                		<li class="page-item">
-                			<a class="page-link" href="#" aria-label="Previous">
-                				<span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-							</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                        	<a class="page-link" href="#" aria-label="Next">
-                        		<span aria-hidden="true">&raquo;</span>
-                        		<span class="sr-only">Next</span>
-                        	</a>
-                        </li>
-                	</ul>
+               	<ul class="pagination">
+               		<li class="page-item prev">
+               			<a class="page-link" href='<%= request.getContextPath() %>/aplist.fes?currentPage=<%= currentPage-1 %>' aria-label="Previous">
+               				<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+                    </li>
+                   
+					<% for(int p = startPage; p <= endPage; p++){
+						if(p == currentPage){ %>
+		                       <li class="page-item">
+		                       	<a class="page-link" href='#'><%= p %></a>
+		                       </li>
+						<% } else { %>			
+		                       <li class="page-item">
+		                       	<a class="page-link" href='<%= request.getContextPath() %>/aplist.fes?currentPage=<%= p %>'><%= p %></a>
+		                       </li>
+		                <% }
+					   } %>
+		            <li class="page-item next">
+                    	<a class="page-link" href='<%= request.getContextPath() %>/aplist.fes?currentPage=<%= currentPage + 1 %>' aria-label="Next">
+                    		<span aria-hidden="true">&raquo;</span>
+                    		<span class="sr-only">Next</span>
+                       	</a>
+                    </li>
+               	</ul>
 				</div>
+				<script>
+					if(<%= currentPage %> <= 1){
+						var before = $('.prev');
+						before.attr('class', 'page-item prev disabled');
+					}
+					
+					if(<%= currentPage %> >= <%= maxPage %>){
+						var after = $(".next");
+						after.attr('class', 'page-item next disabled');
+					}
+				</script>
 			</div>
 		</div>
 		</div>
     </section>
     <script>
 		$(function() {
+			<% int sectionHeiht = 87 + ((fArr.size()-1) * 28); %>
+    		$('section').css('height', '<%= sectionHeiht %>%');
+			var scrollPosition = $("#hrstyle").offset().top;
+
 			$('.dropdown').on({'mouseout':function() {
 				$(this).css({'background':'white', 'color':'#333333', 'border':'1px solid #333333'});
 			}, 'mouseenter':function() {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.LinkedHashMap, java.util.ArrayList, festival.model.vo.Festival, festival.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.LinkedHashMap, java.util.ArrayList, festival.model.vo.Festival, festival.model.vo.PageInfo, java.util.Date, java.util.GregorianCalendar"%>
 <%
-	LinkedHashMap<ArrayList<Festival>, ArrayList<String>> map = (LinkedHashMap<ArrayList<Festival>, ArrayList<String>>)request.getAttribute("map");
+	LinkedHashMap<Festival, ArrayList<String>> map = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("map");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -26,7 +26,7 @@
 <style>
  	/* 섹션 */
 	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:2000px; padding-top: 30px; padding-bottom:10%;}
+    background: rgba(255,255,255,1); height:2100px; padding-top: 30px; padding-bottom:10%;}
     
     /* 시작 */
     #menuList div div {display: none;}
@@ -47,18 +47,18 @@
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;}
     #nowDay{display: inline-block;}
 
-    .nowDayArea{margin-left: 38%; font-size: 30px;}
+    .nowDayArea{margin-left: 34%; font-size: 30px;}
     /* 끝 */
     
     /* 행사리스트 부분 */
     .eventList{font-size: 14pt;}
     .eventArea{margin: 4%; padding: 2%;}
     .eventImage{width: 180px; height: 250px; background: lightgray; float: left;}
-    .eventInfo{width: 250px; height: 250px; float: left; line-height: 30px; margin-left: 30px;}
+    .eventInfo{width: 600px; height: 250px; float: left; line-height: 30px; margin-left: 40px; font-family: 'Noto Sans KR', sans-serif;}
     .faeText h3{background: #af9ce6;}
     .d-dayArea{
     	display: inline-block; float: right; border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: red; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: auto;
+		line-height: 1.5; padding: 4px 10px; width: auto; margin-left: 100px;
 	}
 
     /*페이징 css*/
@@ -262,62 +262,119 @@
             </div>
 
             <div class="eventList">
-                <div class="eventArea">
-                    <div class="eventImage">
-                        <img src="" alt="">
-                    </div>
-                    
-                    <div class="eventInfo">
-                        <ul>행사 명 <div class="d-dayArea">D - 10</div>
-                            <li>장소</li>
-                            <li>기간</li>
-                            <li>출연 아티스트</li>
-                        </ul>
-                    </div><div style="clear:both;"></div>                    
-                </div>
-                <hr style="border: 0.5px solid lightgray;">
+                <% if(map == null) { %>
+						<label>팔로우 아티스트의 확정된 행사가 없습니다.</label>
+                <% } else { 
+                		for(Festival f : map.keySet()) {
+                			String attendArtist = "";
+							ArrayList<String> list = map.get(f);
+							
+							for(int i = 0; i < list.size(); i++) {
+								if(i != list.size() - 1)
+									attendArtist += list.get(i) + ", ";
+								else
+									attendArtist += list.get(i);
+							}
 
-                <div class="eventArea">
-                    <div class="eventImage">
-                        <img src="" alt="">
-                    </div>
-                    
-                    <div class="eventInfo">
-                        <ul>행사 명 <div class="d-dayArea">D - 25</div>
-                            <li>장소</li>
-                            <li>기간</li>
-                            <li>출연 아티스트</li>
-                        </ul>
-                    </div><div style="clear:both;"></div>                    
-                </div>
+							String fesTerm = f.getFesTerm();
+							String endFes[] = fesTerm.split(" - ");
+							String dateSplit[] = (endFes[endFes.length-1]).split("/");
+							
+							int month = 0;
+							int day = 0;
+							int year = 0;
+							if(endFes.length > 1) {
+								month = Integer.parseInt(dateSplit[0]);
+								day = Integer.parseInt(dateSplit[1]);
+								year = Integer.parseInt(dateSplit[2]);
+							}
+
+							Date endFesDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
+							Date today = new Date(new GregorianCalendar().getTimeInMillis());
+							
+							long minus = today.getTime() - endFesDate.getTime();
+							long calc = 1000*60*60*24;
+							int resultDday = Math.abs((int)(Math.ceil(minus/calc)));
+			             %>   
+							<div class="eventArea">
+		                    <div class="eventImage">
+		                        <img width="190px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>">
+		                    </div>
+		                    
+		                    <div class="eventInfo">
+		                        <ul><div class="d-dayArea">D - <%= resultDday + 1 %></div>
+		                        	<li>행사 명 : <%= f.getFesName() %></li>
+		                 		<%
+								String fullLoc = "";
+								String spLoc[] = f.getFesLoc().split("/");
+								
+								String mapLoc[] = spLoc[0].split("&");
+								
+								if (mapLoc.length > 1) {
+									if(spLoc.length > 1) {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1] + " " + spLoc[1];
+									} else {
+										fullLoc = "(" + mapLoc[0] + ") " + mapLoc[1];
+									}
+								} else {
+									fullLoc = f.getFesLoc();
+								}
+								%> 
+		                            <li>장소 : <%= fullLoc %></li>
+		                            <li>기간 : <%= f.getFesTerm() %></li>
+		                            <li>출연 아티스트 : <%= attendArtist %></li>
+		                        </ul>
+		                    </div><div style="clear:both;"></div>                    
+		                </div>
+		                <hr style="border: 0.5px solid lightgray;">
+		                <% } 
+                   }		                
+		                %>
+		                
+
             </div>
-			<div id="pagingarea">
+			<!-- 페이징 부분 -->
+			<div id="pagingarea" style="margin-top: auto;">
                	<ul class="pagination">
-               		<li class="page-item">
-               			<a class="page-link" href="#" aria-label="Previous">
+               		<li class="page-item prev">
+               			<a class="page-link" href='<%= request.getContextPath() %>/list.fatf?currentPage=<%= currentPage-1 %>' aria-label="Previous">
                				<span aria-hidden="true">&laquo;</span>
 							<span class="sr-only">Previous</span>
 						</a>
-                       </li>
+                   </li>
+                   
+			<% for(int p = startPage; p <= endPage; p++){ %>
+				<% if(p == currentPage){ %>
                        <li class="page-item">
-                       	<a class="page-link" href="#">1</a>
+                       	<a class="page-link" href='#'><%= p %></a>
                        </li>
+				<% } else{ %>			
                        <li class="page-item">
-                       	<a class="page-link" href="#">2</a>
+                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fatf?currentPage=<%= p %>'><%= p %></a>
                        </li>
-                       <li class="page-item">
-                       	<a class="page-link" href="#">3</a>
-                       </li>
-                       <li class="page-item">
-                       	<a class="page-link" href="#" aria-label="Next">
+                <% } %>
+            <% } %>            					
+                       <li class="page-item next">
+                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fatf?currentPage=<%= currentPage + 1 %>' aria-label="Next">
                        		<span aria-hidden="true">&raquo;</span>
                        		<span class="sr-only">Next</span>
                        	</a>
                        </li>
                	</ul>
-			</div> 
-
+			</div>   
+			              
         </div>
+			<script>
+				if(<%= currentPage %> <= 1){
+					var before = $('.prev');
+					before.attr('class', 'page-item prev disabled');
+				}
+				
+				if(<%= currentPage %> >= <%= maxPage %>){
+					var after = $(".next");
+					after.attr('class', 'page-item next disabled');
+				}				
+			</script> 
 
         
         

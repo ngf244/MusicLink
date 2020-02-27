@@ -37,10 +37,13 @@ public class FestivalSearchServlet extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
 		int category = 0;
+		if(request.getParameter("category") != null) {
+			category = Integer.parseInt(request.getParameter("category"));
+		}
 		
 		FestivalService service = new FestivalService();
-
-		int listCount = service.getSearchListCount(searchType, searchText);
+		
+		int listCount = service.getSearchListCount(category, searchType, searchText);
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -64,13 +67,16 @@ public class FestivalSearchServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		LinkedHashMap<Festival, ArrayList<String>> map = service.selectSearchList(currentPage, searchType, searchText);
+		LinkedHashMap<Festival, ArrayList<String>> map = service.selectSearchList(currentPage, category, searchType, searchText);
 		
 		String page = null;
 		if(map != null) {
 			page = "views/festival/FestivalList.jsp";
 			request.setAttribute("map", map);
 			request.setAttribute("pi", pi);
+			
+			request.setAttribute("searchType", searchType);
+			request.setAttribute("searchText", searchText);
 			
 			request.setAttribute("category", category);
 		} else {

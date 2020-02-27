@@ -15,11 +15,11 @@ public class FAQ {
 		this.faqContent = faqContent;
 	}
 
-	public FAQ(String faqNum, String faqTitle, String faqContent) {
+	public FAQ(String faqTitle, String faqContent, String mnCode) {
 		super();
-		this.faqNum = faqNum;
 		this.faqTitle = faqTitle;
 		this.faqContent = faqContent;
+		this.mnCode = mnCode;
 	}
 
 	public FAQ(String faqNum, String faqTitle, String faqContent, String faqStatus) {
