@@ -14,18 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import festival.model.service.FestivalService;
 import festival.model.vo.Festival;
 import festival.model.vo.PageInfo;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class FestivalSearchServlet
+ * Servlet implementation class FestivalApproachSearchServlet
  */
-@WebServlet("/search.fes")
-public class FestivalSearchServlet extends HttpServlet {
+@WebServlet("/apsearch.fes")
+public class FestivalApproachSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalSearchServlet() {
+    public FestivalApproachSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,8 +43,8 @@ public class FestivalSearchServlet extends HttpServlet {
 		}
 		
 		FestivalService service = new FestivalService();
-		
-		int listCount = service.getSearchListCount(category, searchType, searchText);
+
+		int listCount = service.getApSearchListCount(searchType, searchText);
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -67,14 +68,18 @@ public class FestivalSearchServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		LinkedHashMap<Festival, ArrayList<String>> map = service.selectSearchList(currentPage, category, searchType, searchText);
+		ArrayList<Festival> fArr = service.selectApSearchList(currentPage, category, searchType, searchText);
+		
+		String usercode = ((Member)request.getSession().getAttribute("loginUser")).getUserCode();
+		ArrayList<String> userApList = service.selectUserApList(usercode);
 		
 		String page = null;
-		if(map != null) {
-			page = "views/festival/FestivalList.jsp";
-			request.setAttribute("map", map);
+		if(fArr != null) {
+			page = "views/festival/FestivalApproach.jsp";
+			request.setAttribute("fArr", fArr);
+			request.setAttribute("userApList", userApList);
 			request.setAttribute("pi", pi);
-			
+
 			request.setAttribute("searchType", searchType);
 			request.setAttribute("searchText", searchText);
 			

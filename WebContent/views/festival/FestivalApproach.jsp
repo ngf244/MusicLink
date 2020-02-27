@@ -13,6 +13,12 @@
 	int endPage = pi.getEndPage();
 	
 	int category = (int)request.getAttribute("category");
+	String searchType = "";
+	String searchText = "";
+	if(request.getAttribute("searchType") != null) {
+		searchType = (String)request.getAttribute("searchType");
+		searchText = (String)request.getAttribute("searchText");
+	}
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -53,10 +59,11 @@
     #searchArea{width: 80%; height:40px; display: inline-block; text-align: center;}
     #searchArea select, input, #alignImg{vertical-align: middle; display: inline-block; text-align: center;}
     #alignImg{width:40px; height:40px; margin-left: 1.5%;}
-    #icon{width: 30px; height: 30px; vertical-align: middle;}
+    #searchBtn{width: 30px; height: 30px; vertical-align: middle;}
     .dropdown{width: 20%; height: 40px; padding-left: 1.5%; margin-right: 4px; font-size:14px;}
     .selectdrop option{border-radius: 0.25rem;}
     .searchtext{width: 60%; height: 30px; margin-left: 1.5%; border-radius: 4px;}
+    #searchText{text-align:left;}
     
     #listSort{font-size:14px; width:100%; text-align:right; float: right; margin-top:6%; margin-right:10%;}
     .pointer{cursor:pointer;}
@@ -104,18 +111,47 @@
 		
 		<div id="contentArea">
 			<div id="listArea">
-			
+				
+				<script>
+					$(function() {
+						var searchType = '<%= searchType %>';
+						var searchText = '<%= searchText %>';
+						
+						if(searchType != "") {
+							if(searchType == "title") $('#searchType option:eq(1)').attr('selected', 'selected');
+							else $('#searchType option:eq(2)').attr('selected', 'selected');
+							
+							$('#searchText').val(searchText);
+						}
+					})
+				</script>
 				<div id="searchArea">
-					<div class="input-group">
-						<select class="btn btn-outline-dark selectdrop dropdown">
-							<option>검색 종류</option>
-							<option>행사명</option>
-							<option>주최사명</option>
+					<form action="<%= request.getContextPath() %>/apsearch.fes" method="post" id="searchForm" class="input-group" onsubmit="return typeCk();">
+						<input type="hidden" value=<%= category %> name="category">
+						<select class="btn btn-outline-dark selectdrop dropdown" id="searchType" name="searchType">
+							<option value="nothing">검색 종류</option>
+							<option value="title">행사명</option>
+							<option value="cpname">주최사명</option>
 						</select>
-                        <input type="text" class="form-control input-default searchtext">
-                        <div id="alignImg"><img src="<%= request.getContextPath() %>/icons/search.png" id="icon" /></div>
-					</div>
+                        <input type="text" class="form-control input-default searchtext" name="searchText" id="searchText">
+                        <div id="alignImg">
+                        	<img src="<%= request.getContextPath() %>/icons/search.png" id="searchBtn" />
+                        </div>
+					</form>
 				</div>
+				<script>
+					function typeCk() {
+						if($('#searchType').val() == 'nothing') {
+							alert('검색 종류를 선택해주세요');
+							return false;
+						}
+						return true;
+					};
+					
+					$('#searchBtn').click(function() {
+						$('#searchForm').submit();
+					});
+				</script>
 				
 				<script>
 					$(function() {
@@ -302,10 +338,10 @@
     </section>
     <script>
 		$(function() {
-			<% int sectionHeiht = 90 + ((fArr.size()-1) * 28); %>
+			<% int sectionHeiht = 87 + ((fArr.size()-1) * 28); %>
     		$('section').css('height', '<%= sectionHeiht %>%');
 			var scrollPosition = $("#hrstyle").offset().top;
-			
+
 			$('.dropdown').on({'mouseout':function() {
 				$(this).css({'background':'white', 'color':'#333333', 'border':'1px solid #333333'});
 			}, 'mouseenter':function() {

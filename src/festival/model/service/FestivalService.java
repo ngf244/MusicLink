@@ -45,19 +45,19 @@ public class FestivalService {
 		return map;
 	}
 
-	public int getSearchListCount(String searchType, String searchText) {
+	public int getSearchListCount(int category, String searchType, String searchText) {
 		Connection conn = getConnection();
 		
-		int result = new FestivalDAO().getSearchListCount(conn, searchType, searchText);
+		int result = new FestivalDAO().getSearchListCount(conn, category, searchType, searchText);
 		
 		close(conn);
 		return result;
 	}
 
-	public LinkedHashMap<Festival, ArrayList<String>> selectSearchList(int currentPage, String searchType, String searchText) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectSearchList(int currentPage, int category, String searchType, String searchText) {
 		Connection conn = getConnection();
 		
-		LinkedHashMap<Festival, ArrayList<String>> map = new FestivalDAO().selectSearchList(conn, currentPage, searchType, searchText);
+		LinkedHashMap<Festival, ArrayList<String>> map = new FestivalDAO().selectSearchList(conn, currentPage, category, searchType, searchText);
 		
 		close(conn);
 		return map;
@@ -130,6 +130,24 @@ public class FestivalService {
 		
 		close(conn);
 		return userApList;
+	}
+
+	public int getApSearchListCount(String searchType, String searchText) {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().getApSearchListCount(conn, searchType, searchText);
+		
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Festival> selectApSearchList(int currentPage, int category, String searchType, String searchText) {
+		Connection conn = getConnection();
+		
+		ArrayList<Festival> fArr = new FestivalDAO().selectApSearchList(conn, currentPage, category, searchType, searchText);
+		
+		close(conn);
+		return fArr;
 	}
 	
 }
