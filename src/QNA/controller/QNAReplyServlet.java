@@ -1,7 +1,6 @@
 package QNA.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,20 +41,18 @@ public class QNAReplyServlet extends HttpServlet {
 		qna.setQnaCode(qnaCode);
 		qna.setQnaComContent(replyContent);
 		
-		ArrayList<QnA> list = new QNAService().insertReply(qna);
-		
-		System.out.println("qnaReplyServlet list.isEmpty() :" + list.isEmpty());
+		int result = new QNAService().insertReply(qna);
 		
 		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("list", list);
+		if(result > 0) {
+			page = "/detail.qna?qnaCode=" + qnaCode;
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
 	}
 
 	/**
