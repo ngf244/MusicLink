@@ -62,7 +62,6 @@
 			<form id="table_show" action="<%= request.getContextPath() %>/views/QNA/Q&AUpdate.jsp" method="post">
 				<table class="detail">
 					<tr>
-						
 						<td colspan="2" class="input_qna" id="qna_title"><%= qna.getQnaTitle() %>
 						<input type="hidden" value="<%= qna.getQnaCode() %>" name="qnaCode">
 						</td>
@@ -99,6 +98,7 @@
 					</tr>
 				</table>
 			</form>
+			<!-- 댓글 작성 -->
 				<table id="qna_comment">
 					<% if(loginManager != null) { %>
 					<tr>
@@ -107,6 +107,7 @@
 						<td><button type="button" onclick="location.href='<%= request.getContextPath() %>/insertReply.qna'" class="detail_btn" id="replyBtn">댓글등록</button></td>
 					</tr>
 					<% } %>
+				<!-- 댓글 게시 -->
 					<% if(list.isEmpty()) { %>
 							<tr><td colspan="3">답변이 없습니다.</td></tr>
 					<% } else { %>
