@@ -18,7 +18,7 @@
 <style>
 	section {
 		width: 70%;margin: 0 auto;box-shadow: 5px 5px 10px 8px lightgray;margin-top: 250px;
-		position: relative;background: #fff;height: 700px;display: block;
+		position: relative;background: #fff;display: block;
 	}
 	.htext {
 		text-align: center;font-size: 100px;height: 0;position: absolute;
@@ -41,9 +41,15 @@
 	.badge-success {background-color: #7780b7;color: white;}
 	.px-2 {padding-left: 0.5rem !important;padding-right: 0.5rem !important;border-radius: 0.25rem;padding: 5px;font-size: 13px;}
 	
-	.pagingArea{background: blue; text-align: left;}
-	.btnArea{display: inline-block;background: red;width: 1100px;}
-	#write_box{display: inline-block;float: right;background: yellow;width: 205px;}
+	#tableNo{width: 86px;}
+	#tableWriter{width: 140px;}
+	#tableTitle{width: 255px;}
+	#tableDate{width: 216px;}
+	#tableStatus{width: 184px;}
+	
+	.pagingArea{text-align: left;}
+	.btnArea{display: inline-block; width: 1100px;}
+	#write_box{display: inline-block;float: right; width: 205px;}
 	#Before{margin-left: 45%;}
 	
 	.btn_style{
@@ -51,7 +57,7 @@
     	line-height: 1.25;color: #7571f9;background-color: #fff;border: 1px solid #dee2e6;
 	}
 	
-	#choosen{background: lightpink;}
+	#choosen{background: #E6E6FA;}
 	
 </style>
 </head>
@@ -67,6 +73,7 @@
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
     %>
+    <% System.out.println("jsp(listCount) : "+ listCount); %>
 	<section style="z-index: 1;">
 		<div id="categoryArea">
 			<div id="block"></div><br>
@@ -79,11 +86,11 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>작성자</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>답변상태</th>
+							<th id="tableNo">No</th>
+							<th id="tableWriter">작성자</th>
+							<th id="tableTitle">제목</th>
+							<th id="tableDate">작성일</th>
+							<th id="tableStatus">답변상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -96,7 +103,7 @@
 					%>
 						<tr>
 							<th><%= q.getQnaCode() %><input type="hidden" value='<%= q.getQnaCode() %>'></th>
-							<td><%= q.getQnaWriter() %></td>
+							<td id="qnaWriter"><%= q.getQnaWriter() %></td>
 							<td><%= q.getQnaTitle() %></td>
 							<td><%= q.getQnaDate() %></td>
 							<td>
@@ -126,7 +133,7 @@
 					<script>
 						if(<%= currentPage %> <= 1){
 							var before = $('#beforeBtn');
-							before.attr('diabled', 'true');
+							before.attr('disabled', 'true');
 						}
 					</script>
 					
@@ -199,7 +206,7 @@
 	<script>
 		$(function(){
 			$('.table td').mouseenter(function(){
-				$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+				$(this).parent().css({'background':'#E6E6FA', 'cursor':'pointer'});
 			}).mouseout(function(){
 				$(this).parent().css('background', 'none');
 			}).click(function(){
@@ -211,7 +218,7 @@
 				<% } else if(loginManager != null) { %>
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
-					alert('회원만 이용할 수 있는 서비스입니다.');
+					alert('작성자만 게시글을 볼 수 있습니다.');
 				<% } %>
 			});
 		});
