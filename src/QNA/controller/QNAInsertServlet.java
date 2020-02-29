@@ -42,8 +42,6 @@ public class QNAInsertServlet extends HttpServlet {
 		
 		int result = new QNAService().insertQnA(qna, userId);
 		
-		System.out.println("servlet"+result);
-		
 		response.setContentType("text/html; charset=UTF-8");
 		if(result > 0) {
 			response.sendRedirect("list.qna");

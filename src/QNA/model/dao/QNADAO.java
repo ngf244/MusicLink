@@ -59,6 +59,7 @@ public class QNADAO {
 		int posts = 10; // 한페이지에 보여질 게시글 개수
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
+		System.out.println("DAO(startRow, endRow) : " + startRow + "," + endRow);
 		
 		String query = prop.getProperty("selectList");
 		
@@ -238,6 +239,7 @@ public class QNADAO {
 		return result;
 	}
 
+
 	public ArrayList<QnA> selectReplyList(Connection conn, String qnaCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -343,6 +345,7 @@ public class QNADAO {
 		
 		return qList;
 	}
+
 
 
 

@@ -34,6 +34,7 @@ public class QNADeleteServlet extends HttpServlet {
 		int result = new QNAService().deleteQnA(qnaCode);
 		
 		response.setContentType("text/html; charset=UTF-8");
+		
 		if(result > 0) {
 			response.sendRedirect("list.qna");
 		} else {

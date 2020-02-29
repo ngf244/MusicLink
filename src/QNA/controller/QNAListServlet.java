@@ -65,7 +65,6 @@ public class QNAListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<QnA> list = service.selectList(currentPage);
-		
 		System.out.println("qnaListServlet listCount값 : "+listCount);
 		
 		String page = null;
