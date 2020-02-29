@@ -34,17 +34,23 @@
 	}
 	
 	String imgPath = "";
-	
-	switch(userGender) {
-	case "남자": imgPath = "img/default_profile_male.png"; break;
-	case "여자": imgPath = "img/default_profile_female.png"; break;
+	if(userGender != null) {
+		switch(userGender) {
+		case "남자": imgPath = "img/default_profile_male.png"; break;
+		case "여자": imgPath = "img/default_profile_female.png"; break;
+		}
+	} else {
+		imgPath = "img/default_profile_male.png";
 	}
+
 	
 	if(userClass.equals("2")) {
 		//imgPath = artist.getAtPicPath().substring(39);
 		//System.out.println(imgPath);
 		imgPath = "artistProfile_uploadFiles/" + atFileName;  
 	}
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -251,7 +257,10 @@
                         <li>회원구분 - <%= division %> </li>
                         <li>전화번호 -  <%= userPhone %> </li>
                         <li>이메일 -  <%= userEmail %> </li>
+                        
+                        <% if(userBirth != null) { %>
                         <li>생년월일 -  <%= userBirth %> </li>
+                        <% } %>
                     </ul>
                     <% if(division.equals("일반회원")){ %>
                     <p>회원님은 일반회원입니다. 행사 등록 및 행사 지원을 하기 위해서는 <br>
@@ -301,7 +310,7 @@
 		                <li class="follow-nav">상태</li>
 		            </ul>
 	            <% if(list.isEmpty()){ %>
-	            	<div>팔로잉한 아티스트가 없습니다.</div>
+	            	<div style="text-align: center;">팔로잉한 아티스트가 없습니다.</div>
 				<% } else{
             			for(FollowArtist fa : list){
             	%>
