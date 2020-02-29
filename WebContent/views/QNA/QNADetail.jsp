@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="QNA.model.vo.*, java.util.ArrayList"%>
 <%
 	QnA qna = (QnA)request.getAttribute("qna");
-	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -30,23 +29,25 @@
 	#block {background: #8AFF00; width: 55px; height: 8px; top: 5%;}
 	
 	#contentArea{padding-top: 60px; padding-bottom: 80px; font-family: 'Noto Sans KR', sans-serif;}
-	#table_show{width: 90%; margin-left: auto; margin-right: auto;}
-	#qna_title{padding: 10px; border-bottom: 2px solid lightgray; font-size: 20px; height: 20px; vertical-align: middle;}
-	.input_qna2{padding: 10px; border-bottom: 2px solid lightgray;}
+	.table_show{width: 90%; margin-left: auto; margin-right: auto;}
+	#qna_title{padding: 10px; border-bottom: 2px solid lightgray; font-size: 30px; height: 40px; vertical-align: middle;}
+	.input_qna2{padding: 10px; border-bottom: 2px solid lightgray; font-size: 18px;}
 	#qna_date{text-align: right;}
-	#qna_content{padding: 10px;}
+	#qna_content{padding: 10px; font-size: 20px; line-height: 25px;}
 	.input_qna4{border-bottom: 3px double lightgray;}
 	#qna_btn2{text-align: right;}
 	
 	.detail_btn{
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
-		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
+		line-height: 1.5; padding: 4px 10px; margin: 7px; margin-top: 40px; width: 60px; font-size: 15px;
 	}
-	#replyBtn{width: 80px;}
+	#replyBtn{width: 80px; margin-top: 7px;}
 	.detail{width: 100%;}
-	#qna_comment{margin-top: 10px; border: 1px solid lightgray; border-radius: 0.2rem; padding: 10px; vertical-align: middle;}
+	#qna_comment{margin-top: 10px; border-radius: 0.2rem; padding: 10px; vertical-align: middle;}
 	#label_comment{vertical-align: middle; padding: 10px;}
-	.replyContent{font-size: 20px;}
+	.replyContent{font-size: 17px;}
+	#replyS1{font-size: 19px; padding-left: 10px; width: 50px; vertical-align: top; line-height: 25px;}
+	#replyS2{font-size: 19px; padding-left: 10px; width: 1100px; line-height: 25px;}
 </style>
 </head>
 <body>
@@ -59,11 +60,13 @@
 			<label id="inSmallCategory"> - Q&A</label>
 		</div>
 		<div id="contentArea">
-			<form id="table_show" action="<%= request.getContextPath() %>/views/QNA/Q&AUpdate.jsp" method="post">
+			<form class="table_show" id="form1" action="<%= request.getContextPath() %>/views/QNA/Q&AUpdate.jsp" method="post">
 				<table class="detail">
 					<tr>
-						<td colspan="2" class="input_qna" id="qna_title"><%= qna.getQnaTitle() %>
+						<td colspan="2" class="input_qna"id="qna_title"><%= qna.getQnaTitle() %>
 						<input type="hidden" value="<%= qna.getQnaCode() %>" name="qnaCode">
+						<input type="hidden" value="<%= qna.getQnaTitle() %>" name="title">
+						<input type="hidden" value="<%= qna.getQnaContent() %>" name="content">
 						</td>
 					</tr>
 					<tr>
@@ -76,8 +79,7 @@
 						</td>
 					</tr>
 					<tr>
-					<% if(loginUser != null) { %>
-						<% if(qna.getQnaWriter().equals(loginUser.getUserName())) { %>
+					<% if(loginUser != null && qna.getUserCode().equals(loginUser.getUserCode())) { %>
 						<td class="input_qna4" id="qna_btn1">
 							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
 						</td>
@@ -85,11 +87,6 @@
 							<button type="submit" class="detail_btn" id="updateBtn">수정</button>
 							<button type="button" onclick="deleteQnA();" class="detail_btn" id="deleteBtn">삭제</button>
 						</td>
-						<% } else { %>
-						<td colspan="2" class="input_qna4" id="qna_btn1">
-							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
-						</td>
-						<% } %>
 					<% } else { %>
 						<td colspan="2" class="input_qna4" id="qna_btn1">
 							<button type="button" onclick="location.href='<%= request.getContextPath() %>/list.qna'" class="detail_btn" id="backBtn">목록</button>
@@ -99,27 +96,25 @@
 				</table>
 			</form>
 			<!-- 댓글 작성 -->
-				<table id="qna_comment">
-					<% if(loginManager != null) { %>
+			<form class="table_show" action="<%= request.getContextPath() %>/insertReply.qna" method="post">
+			<table id="qna_comment">
+				<% if(loginManager != null && qna.getQnaComYN().equals("N")) { %>
+				<tr>
+					<td><label id="label_comment">답변 : </label></td>
+					<td><textarea rows="1" cols="110" class="replyContent" name="replyContent" id="replyContent" style="resize:none;"></textarea></td>
+					<td><button type="submit" class="detail_btn" id="replyBtn">댓글등록</button></td>
+				</tr>
+				<% } %>
+			<!-- 댓글 게시 -->
+				<% if(qna.getQnaComYN().equals("Y")) { %>
 					<tr>
-						<td><label id="label_comment">답변 : </label></td>
-						<td><textarea rows="1" cols="100" class="replyContent" name="replyContent" id="replyContent" style="resize:none;"></textarea></td>
-						<td><button type="button" onclick="location.href='<%= request.getContextPath() %>/insertReply.qna'" class="detail_btn" id="replyBtn">댓글등록</button></td>
+						<td id="replyS1">답변 : </td>
+						<td colspan="2" id="replyS2"><%= qna.getQnaComContent() %></td>
 					</tr>
-					<% } %>
-				<!-- 댓글 게시 -->
-					<% if(list.isEmpty()) { %>
-							<tr><td colspan="3">답변이 없습니다.</td></tr>
-					<% } else { %>
-						<% for(int i = 0; i < list.size(); i++){ %>
-							<tr>
-								<td><label id="label_comment">답변 : </label></td>
-								<td colspan="2"><%= list.get(i).getQnaComContent() %></td>
-							</tr>
-						<% } %>
-					<% } %>
-					
-				</table>
+				<% } %>
+			</table>
+			<input type="hidden" value="<%= qna.getQnaCode() %>" name="qnaCode">
+			</form>
 		</div>
     </section>
     <h1 class="htext">Q & A</h1>
@@ -156,19 +151,17 @@
             </div>
         </div>
     </div>
-    
-    <script>
-    	
-    
-    	function deleteQnA(){
-    		var bool = confirm('정말로 삭제하시겠습니까?');
-    		if(bool){
-    			$('#table_show').attr('action','<%= request.getContextPath()%>/delete.qna');
-    			$('#table_show').submit();
-    		}
-    	}
-    	
-    </script>
+
+
+	<script>
+	    function deleteQnA(){
+	    	var bool = confirm('정말로 삭제하시겠습니까?');
+	    	if(bool){
+	    		$('#form1').attr('action','<%=request.getContextPath()%>/delete.qna');
+				$('#form1').submit();
+			}
+		}
+	</script>
 
 </body>
 </html>

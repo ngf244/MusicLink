@@ -72,6 +72,8 @@
     	int maxPage = pi.getMaxPage();
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
+    	
+    	String msg = (String)request.getAttribute("msg");
     %>
     <% System.out.println("jsp(listCount) : "+ listCount); %>
 	<section style="z-index: 1;">
@@ -213,13 +215,25 @@
 				var qnaCode = $(this).parent().children().children('input').val();
 				
 				// 로그인 한 사람만 상세보기 이용할 수 있게하기
-				<% if(loginUser != null) { %>
+				<% if(msg != null) {%>
+					alert(<%= msg%>);
+				<% } else {%>
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
-				<% } else if(loginManager != null) { %>
+				<% } %>
+				
+				
+				<%-- <% if(loginUser != null) { %>
+					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
+					<% if(userCode != null){ %>
+						<% if(!(loginUser.getUserCode().equals(userCode))){ %>
+							alert('작성자만 게시글을 볼 수 있습니다.');
+						<% } %>
+					<% } %>
+				<% } else if(loginManager != null) { %>	// 관리자
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
-					alert('작성자만 게시글을 볼 수 있습니다.');
-				<% } %>
+					alert('회원만 게시글을 볼 수 있습니다.');
+				<% } %> --%>
 			});
 		});
 	</script>

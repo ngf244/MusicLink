@@ -65,7 +65,7 @@
 					<tr>
 						<td class="qna_content labeltd">내용</td>
 						<td class="qna_content">
-							<textarea class="form-control h-150px inputtextarea" name="content" rows="10" placeholder="내용을 입력해주세요"></textarea>
+							<textarea class="form-control h-150px inputtextarea" id="content" name="content" rows="10" placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -122,7 +122,6 @@
     <script src="<%= request.getContextPath() %>/js/settings.js"></script>
     <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
-    
 
 </body>
 </html>
