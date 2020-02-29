@@ -1,6 +1,9 @@
 package QNA.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -94,6 +97,23 @@ public class QNAService {
 			rollback(conn);
 		}
 		
+		return list;
+	}
+
+	public int getMyQNAListCount(String userCode) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		int result = dao.getMyQNAListCount(conn, userCode);
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<QnA> selectMyQNAList(int currentPage, String userCode) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		ArrayList<QnA> list = dao.selectMyQNAList(conn, currentPage, userCode);
+		close(conn);
 		return list;
 	}
 
