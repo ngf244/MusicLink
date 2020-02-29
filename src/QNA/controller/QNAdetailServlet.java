@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import QNA.model.service.QNAService;
 import QNA.model.vo.QnA;
+import member.model.vo.Manager;
 import member.model.vo.Member;
 
 /**
@@ -33,6 +34,10 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String code = loginUser.getUserCode();
+				
 		String qnaCode = request.getParameter("qnaCode");
 		
 		QNAService service = new QNAService();
@@ -44,14 +49,22 @@ public class QNAdetailServlet extends HttpServlet {
 		
 		String page = null;
 		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
-			request.setAttribute("writer", userCode);
+			if(loginUser != null) {
+				if(!userCode.equals(code)) {
+				page = "views/QNA/QNAList.jsp";
+				request.setAttribute("qna", qna);
+				} else {
+					page = "views/QNA/QNADetail.jsp";
+					request.setAttribute("msg", "작성자만 확인가능");
+				}
+			} else {
+				page = "views/QNA/QNADetail.jsp";
+				request.setAttribute("qna", qna);
+			}
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
 		}
-
 
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

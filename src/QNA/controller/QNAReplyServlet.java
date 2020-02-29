@@ -33,7 +33,6 @@ public class QNAReplyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String qnaCode = request.getParameter("qnaCode");
 		String replyContent = request.getParameter("replyContent");
-		
 		System.out.println("qnaCode : " + qnaCode);
 		System.out.println("replyContent : " + replyContent);
 		

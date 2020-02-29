@@ -152,6 +152,7 @@
         </div>
     </div>
 
+
 	<script>
 	    function deleteQnA(){
 	    	var bool = confirm('정말로 삭제하시겠습니까?');

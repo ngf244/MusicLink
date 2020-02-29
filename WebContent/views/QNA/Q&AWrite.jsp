@@ -122,7 +122,6 @@
     <script src="<%= request.getContextPath() %>/js/settings.js"></script>
     <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
-    
 
 </body>
 </html>
