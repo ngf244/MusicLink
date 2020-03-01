@@ -346,6 +346,44 @@ public class QNADAO {
 		return qList;
 	}
 
+	public ArrayList<QnA> selectRecentMyQnAList(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<QnA> qList = null;
+		
+		String query = prop.getProperty("selectRecentMyQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			qList = new ArrayList<QnA>();
+			
+			while(rset.next()) {
+				QnA q = new QnA(rset.getString("QNA_NUM"),
+								rset.getString("QNA_TITLE"),
+								rset.getString("QNA_CONTENT"),
+								rset.getString("QNA_WRITER"),
+								rset.getDate("QNA_DATE"),
+								rset.getString("QNA_COMMENT_YN"),
+								rset.getString("QNA_COMMENT_CONTENT"),
+								rset.getString("QNA_STATUS"),
+								rset.getString("MN_CODE"),
+								rset.getString("USER_CODE"));
+				qList.add(q);
+			}
+			System.out.println("DAO에서 나의 최근 QNA리스트 찍어보기 : " + qList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return qList;
+	}
+
 
 
 

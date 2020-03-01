@@ -11,11 +11,12 @@
 <title>Insert title here</title>
 <style>
 	.sec-nav>li>ul{font-size: 12pt; font-family: 'Noto Sans KR', sans-serif;}
+	.sec-mtxt:hover{cursor: pointer;}
 </style>
 </head>
 <body>
         <div class="sec-line"></div>
-        <h1 class="sec-mtxt">MyPage<p>-Main</p></h1>
+        <h1 class="sec-mtxt" onclick="myPage();">MyPage<p>-Main</p></h1>
         <ul class="sec-nav">
             <li class="sec-menu-1 smenu">INFORMATION
                 <ul class="s-smenu">
@@ -58,6 +59,10 @@
         </ul>   
         	
 <script>
+	function myPage(){
+		location.href="<%= request.getContextPath() %>/myPage.me";
+	}
+
 	function becomeAT(){
 		location.href="<%= request.getContextPath() %>/views/artist/BecomeArtistForm.jsp";
 	}
