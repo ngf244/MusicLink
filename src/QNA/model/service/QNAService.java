@@ -116,6 +116,13 @@ public class QNAService {
 		return list;
 	}
 
+	public ArrayList<QnA> selectRecentMyQnAList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<QnA> qList = new QNADAO().selectRecentMyQnAList(conn, userCode);
+		close(conn);
+		return qList;
+	}
+
 	
 
 
