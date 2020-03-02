@@ -49,6 +49,7 @@ public class QNAUpdateServlet extends HttpServlet {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 수정에 실패하였습니다.");
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}

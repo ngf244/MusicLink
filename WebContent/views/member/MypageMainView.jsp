@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.*, artist.model.vo.*, festival.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.*, artist.model.vo.*, festival.model.vo.*, QNA.model.vo.QnA, gallery.model.vo.*"%>
 <%
 	Member member = (Member)request.getAttribute("member");
 	Artist artist = (Artist)request.getAttribute("artist");
 	String atFileName = (String)session.getAttribute("atFileName");
 	System.out.println(member);
+	
 	ArrayList<FollowArtist> list = (ArrayList<FollowArtist>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -34,17 +35,24 @@
 	}
 	
 	String imgPath = "";
-	
-	switch(userGender) {
-	case "남자": imgPath = "img/default_profile_male.png"; break;
-	case "여자": imgPath = "img/default_profile_female.png"; break;
+	if(userGender != null) {
+		switch(userGender) {
+		case "남자": imgPath = "img/default_profile_male.png"; break;
+		case "여자": imgPath = "img/default_profile_female.png"; break;
+		}
+	} else {
+		imgPath = "img/default_profile_male.png";
 	}
+
 	
 	if(userClass.equals("2")) {
 		//imgPath = artist.getAtPicPath().substring(39);
 		//System.out.println(imgPath);
 		imgPath = "artistProfile_uploadFiles/" + atFileName;  
 	}
+	
+	ArrayList<Gallery> gList = (ArrayList<Gallery>)request.getAttribute("gList");
+	ArrayList<QnA> qList = (ArrayList<QnA>)request.getAttribute("qList");
 	
 %>
 <!DOCTYPE html>
@@ -228,7 +236,8 @@
 	  overflow: visible;
 	  clip: auto;
 	  white-space: normal; 
-	}  
+	}
+	
 </style>
 </head>
 <body>
@@ -251,7 +260,10 @@
                         <li>회원구분 - <%= division %> </li>
                         <li>전화번호 -  <%= userPhone %> </li>
                         <li>이메일 -  <%= userEmail %> </li>
+                        
+                        <% if(userBirth != null) { %>
                         <li>생년월일 -  <%= userBirth %> </li>
+                        <% } %>
                     </ul>
                     <% if(division.equals("일반회원")){ %>
                     <p>회원님은 일반회원입니다. 행사 등록 및 행사 지원을 하기 위해서는 <br>
@@ -272,21 +284,30 @@
             
             <div class="postInfo">
                 <div class="write">
-                    <ul><b>내가 작성한 글</b></ul>
-                        <li><a href="">01.17 공연 행사 사진들</a></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>                            
+                    <ul><b>갤러리 게시판</b></ul>
+                        <% if(gList.isEmpty()){ %>
+                        <li>작성하신 글이 없습니다.</li>
+                        <% } else{
+            					for(Gallery g : gList){
+            			%>
+                        <li><a href=""><%= g.getGlTitle() %></a></li>
+				        <%		}
+		            	   }
+		            	%>                                                    
                 </div>
-                <div class="comment">
-                    <ul><b>내가 작성한 댓글</b></ul>
-                        <li><a href="">멋져요!!!</a></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                <div class="comment" style="float: left;">
+                    <ul><b>Q&A</b></ul>
+                       <% if(qList.isEmpty()){ %>
+                        <li>작성하신 글이 없습니다.</li>
+                        <% } else{
+            					for(QnA q : qList){
+            			%>
+                        <li><a href=""><%= q.getQnaTitle() %></a></li>
+				        <%		}
+		            	   }
+		            	%>
                 </div>
+                <div style="clear:both:"></div>
             </div>
 
             <div class="followView">
@@ -301,7 +322,7 @@
 		                <li class="follow-nav">상태</li>
 		            </ul>
 	            <% if(list.isEmpty()){ %>
-	            	<div>팔로잉한 아티스트가 없습니다.</div>
+	            	<div style="text-align: center;">팔로잉한 아티스트가 없습니다.</div>
 				<% } else{
             			for(FollowArtist fa : list){
             	%>

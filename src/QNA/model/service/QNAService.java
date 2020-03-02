@@ -1,6 +1,9 @@
 package QNA.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -81,22 +84,46 @@ public class QNAService {
 		return result;
 	}
 
-	public ArrayList<QnA> insertReply(QnA qna) {
+	public int insertReply(QnA qna) {
 		Connection conn = getConnection();
 		QNADAO dao = new QNADAO();
 		int result = dao.insertReply(conn, qna);
-		ArrayList<QnA> list = null;
 		
 		if(result > 0) {
 			commit(conn);
-			list = dao.selectReplyList(conn, qna.getQnaCode());
 		} else {
 			rollback(conn);
 		}
 		
+		return result;
+	}
+
+
+	public int getMyQNAListCount(String userCode) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		int result = dao.getMyQNAListCount(conn, userCode);
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<QnA> selectMyQNAList(int currentPage, String userCode) {
+		Connection conn = getConnection();
+		QNADAO dao = new QNADAO();
+		ArrayList<QnA> list = dao.selectMyQNAList(conn, currentPage, userCode);
+		close(conn);
 		return list;
 	}
 
+	public ArrayList<QnA> selectRecentMyQnAList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<QnA> qList = new QNADAO().selectRecentMyQnAList(conn, userCode);
+		close(conn);
+		return qList;
+	}
+
 	
+
 
 }

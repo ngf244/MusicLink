@@ -59,6 +59,7 @@ public class QNADAO {
 		int posts = 10; // 한페이지에 보여질 게시글 개수
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
+		System.out.println("DAO(startRow, endRow) : " + startRow + "," + endRow);
 		
 		String query = prop.getProperty("selectList");
 		
@@ -238,6 +239,7 @@ public class QNADAO {
 		return result;
 	}
 
+
 	public ArrayList<QnA> selectReplyList(Connection conn, String qnaCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -274,6 +276,114 @@ public class QNADAO {
 		
 		return list;
 	}
+
+	public int getMyQNAListCount(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getMyQNAListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<QnA> selectMyQNAList(Connection conn, int currentPage, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<QnA> qList = null;
+		int posts = 10; // 한페이지에 보여질 게시글 개수
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = prop.getProperty("selectMyQNAList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			qList = new ArrayList<QnA>();
+			
+			while(rset.next()) {
+				QnA q = new QnA(rset.getString("QNA_NUM"),
+								rset.getString("QNA_TITLE"),
+								rset.getString("QNA_CONTENT"),
+								rset.getString("QNA_WRITER"),
+								rset.getDate("QNA_DATE"),
+								rset.getString("QNA_COMMENT_YN"),
+								rset.getString("QNA_COMMENT_CONTENT"),
+								rset.getString("QNA_STATUS"),
+								rset.getString("MN_CODE"),
+								rset.getString("USER_CODE"));
+				qList.add(q);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return qList;
+	}
+
+	public ArrayList<QnA> selectRecentMyQnAList(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<QnA> qList = null;
+		
+		String query = prop.getProperty("selectRecentMyQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			qList = new ArrayList<QnA>();
+			
+			while(rset.next()) {
+				QnA q = new QnA(rset.getString("QNA_NUM"),
+								rset.getString("QNA_TITLE"),
+								rset.getString("QNA_CONTENT"),
+								rset.getString("QNA_WRITER"),
+								rset.getDate("QNA_DATE"),
+								rset.getString("QNA_COMMENT_YN"),
+								rset.getString("QNA_COMMENT_CONTENT"),
+								rset.getString("QNA_STATUS"),
+								rset.getString("MN_CODE"),
+								rset.getString("USER_CODE"));
+				qList.add(q);
+			}
+			System.out.println("DAO에서 나의 최근 QNA리스트 찍어보기 : " + qList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return qList;
+	}
+
 
 
 

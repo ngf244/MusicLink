@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import QNA.model.service.QNAService;
 import QNA.model.vo.QnA;
+import member.model.vo.Manager;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class QNAdetailServlet
@@ -33,18 +36,19 @@ public class QNAdetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String qnaCode = request.getParameter("qnaCode");
 		
-		QnA qna = new QNAService().selectQnA(qnaCode);
+		QNAService service = new QNAService();
+		
+		QnA qna = service.selectQnA(qnaCode);
 		
 		String page = null;
 		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
+			page = "views/QNA/QNAList.jsp";
 			request.setAttribute("qna", qna);
-			
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
 		}
-		
+
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}

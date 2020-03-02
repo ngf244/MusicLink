@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import QNA.model.service.QNAService;
+import QNA.model.vo.QnA;
 import artist.model.service.ArtistService;
 import artist.model.vo.Artist;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.PageInfo;
+import gallery.model.service.GalleryService;
+import gallery.model.vo.Gallery;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -77,7 +81,9 @@ public class MyPageServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		ArrayList<FollowArtist> list = service.selectFollowList(currentPage, userCode);
 		
-		
+		ArrayList<Gallery> gList = new GalleryService().selectRecentMyGalList(userCode);		
+		ArrayList<QnA> qList = new QNAService().selectRecentMyQnAList(userCode);
+		System.out.println("나의 최근 qna리스트 : " + qList);
 		String page = null;
 		if(member != null) {
 			page = "views/member/MypageMainView.jsp";
@@ -86,6 +92,8 @@ public class MyPageServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 			session.setAttribute("atFileName", fileName);
+			request.setAttribute("gList", gList);
+			request.setAttribute("qList", qList);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패하였습니다.");
