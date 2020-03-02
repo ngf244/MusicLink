@@ -123,6 +123,31 @@ public class QNAService {
 		return qList;
 	}
 
+	public int deleteReply(String qnaCode) {
+		Connection conn = getConnection();
+		int result = new QNADAO().deleteReply(conn, qnaCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateReply(String qnaCode) {
+		Connection conn = getConnection();
+		int result = new QNADAO().updateReply(conn, qnaCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 	
 
 

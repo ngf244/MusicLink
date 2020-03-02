@@ -59,7 +59,7 @@ public class QNADAO {
 		int posts = 10; // 한페이지에 보여질 게시글 개수
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
-		System.out.println("DAO(startRow, endRow) : " + startRow + "," + endRow);
+		System.out.println("DAO(currentPage, startRow, endRow) : " + currentPage + "," + startRow + "," + endRow);
 		
 		String query = prop.getProperty("selectList");
 		
@@ -382,6 +382,45 @@ public class QNADAO {
 		}
 		
 		return qList;
+	}
+
+	public int deleteReply(Connection conn, String qnaCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteReply");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, qnaCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateReply(Connection conn, String qnaCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateReply");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, qnaCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

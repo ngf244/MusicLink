@@ -212,10 +212,11 @@
 			}).click(function(){
 				var qnaCode = $(this).parent().children().children('input').val();
 				
+				
 				// 로그인 한 사람만 상세보기 이용할 수 있게하기
-				
-				
-				<% if(loginUser != null || loginManager != null) { %>
+				<% if(loginUser != null) { %>
+					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
+				<% } else if(loginManager != null) {%>
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
 					alert('회원만 게시글을 볼 수 있습니다.');
