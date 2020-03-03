@@ -23,6 +23,13 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 	
+	public Member(String userName, String userEmail, String userPhone) {
+		super();
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+	}
+
 	public Member(String userCode, String userId, String userName, String userClass) {
 		super();
 		this.userCode = userCode;
