@@ -1,4 +1,4 @@
-package artist.controller;
+package planner.controller;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import artist.model.service.ArtistService;
+import planner.model.service.PlannerService;
 
 /**
- * Servlet implementation class ArtistUnFollowServlet
+ * Servlet implementation class InsertPlannerGradeServlet
  */
-@WebServlet("/unfollow.at")
-public class ArtistUnFollowServlet extends HttpServlet {
+@WebServlet("/update.pgrd")
+public class UpdatePlannerGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ArtistUnFollowServlet() {
+    public UpdatePlannerGradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +30,34 @@ public class ArtistUnFollowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userCode = request.getParameter("userCode");
-		System.out.println("언팔기능을 수행할 아이디" + userCode);
-		String[] atCodes = request.getParameterValues("atCode[]");
-        
+		String cpCode = request.getParameter("cpCode");
+		int grade = Integer.parseInt(request.getParameter("grade"));
+		
+		PlannerService service = new PlannerService();
+		
+		int nowGrade = service.selectPlannerGrade(cpCode);
+		int totalGrade = 0;
 		int result = 0;
 		
-		for(String atCode : atCodes){
-            System.out.println("언팔할 아티스트 코드" + atCode);
-            result = new ArtistService().unfollowArtist(userCode, atCode);
-        }
+		if(nowGrade == 0) {
+			result = service.updatePlannerGrade(cpCode, grade);
+		} else {
+			totalGrade = (nowGrade + grade)/2; 
+			result = service.updatePlannerGrade(cpCode, totalGrade);
+		}
 		
 		String page = null;
 		if(result > 0) {
-			page = "/myPage.me";
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "입력 완료!");
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "아티스트 언팔에 실패하였습니다.");
+			request.setAttribute("msg", "평점 입력에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-        
+		
 	}
 
 	/**

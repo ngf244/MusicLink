@@ -41,7 +41,7 @@
             <% } else if(loginUserConfirm.getUserClass().equals("2")){ %>
             <li class="sec-menu-4 smenu">FESTIVAL
                 <ul class="s-smenu">
-                    <li><a href="#">공연스케줄</a></li>
+                    <li onclick="MySchedule();"><a href="#">공연스케줄</a></li>
                     <li><a href="#">지원한 행사</a></li>
                     <li><a href="#">러브콜(receive)</a></li>
                     <li><a href="#">행사 후기</a></li>
@@ -89,6 +89,10 @@
 	
 	function MyPost(){
 		location.href="<%= request.getContextPath() %>/list.mPost";
+	}
+	
+	function MySchedule(){
+		location.href="<%= request.getContextPath() %>/list.mSche";
 	}
 </script>    
     
