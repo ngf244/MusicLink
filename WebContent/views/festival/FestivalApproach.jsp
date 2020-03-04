@@ -191,7 +191,7 @@
 						});
 					});
 					
-
+					
 					function approach(where) {
 						$.ajax({
 							url: 'approachFes.do',
@@ -305,7 +305,7 @@
 					<% for(int p = startPage; p <= endPage; p++){
 						if(p == currentPage){ %>
 		                       <li class="page-item">
-		                       	<a class="page-link" href='#'><%= p %></a>
+		                       	<a class="page-link" href='#'><b><%= p %></b></a>
 		                       </li>
 						<% } else { %>			
 		                       <li class="page-item">

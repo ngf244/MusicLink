@@ -1,8 +1,6 @@
 package festival.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import festival.model.service.FestivalService;
 import festival.model.vo.Festival;
 
 /**
- * Servlet implementation class FestivalDetailServlet
+ * Servlet implementation class FestivalUpdateServlet
  */
-@WebServlet("/detail.fes")
-public class FestivalDetailServlet extends HttpServlet {
+@WebServlet("/update.fes")
+public class FestivalUpdateDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalDetailServlet() {
+    public FestivalUpdateDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +30,21 @@ public class FestivalDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fcode = request.getParameter("fcode");
-		int status = Integer.parseInt(request.getParameter("status"));
 		
 		FestivalService service = new FestivalService();
-		
 		Festival festival = service.selectFestival(fcode);
-		ArrayList<String> artistArr = service.findArtist(fcode);
-		int grade = service.getGeade(festival.getCpCode());
-		
+		int artcount = service.selectArtistCount(fcode);
+
 		String page = null;
 		if(festival != null) {
 			request.setAttribute("festival", festival);
-			request.setAttribute("artistArr", artistArr);
-			request.setAttribute("status", status);
-			request.setAttribute("grade", grade);
+			request.setAttribute("artcount", artcount);
 			
-			page = "views/festival/FestivalDetail.jsp";
+			page = "views/festival/FestivalUpdate.jsp";
 		} else {
-			request.setAttribute("msg", "행사 상세보기에 실패하였습니다.");
+			request.setAttribute("msg", "행사 수정의 데이터 조회에 실패하였습니다.");
 			page = "views/common/errorPage.jsp";
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 

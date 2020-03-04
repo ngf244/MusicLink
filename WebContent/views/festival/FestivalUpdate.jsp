@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "festival.model.vo.Festival, java.util.Date, java.util.GregorianCalendar" %>
+<%
+	Festival f = (Festival)request.getAttribute("festival");
+	int artcount = (int)request.getAttribute("artcount");
+	
+	System.out.println("artcount : " + artcount);
+	System.out.println("f.getRecCount() : " + f.getRecCount());
+	
+	String fulLoc = f.getFesLoc();
+	String splitzone[] = fulLoc.split("&");
+	String splitaddress[] = splitzone[1].split("/");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -108,11 +120,16 @@
     
     .htext{text-align: center; font-size: 100px; height:0; position:absolute; top:47%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
     */
-    
-	section {width:70%; height:130%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    /*
+	section {width:70%; height:255%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff; padding-top: 0px; padding-bottom:10%;}
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+	*/
+    section {width:70%; height:255%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: -128px; position: relative;
+    background: #fff; padding-top: 0px; padding-bottom:10%;}
+    
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 16.8%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
 	
     #scale{transform:scale(1.2);}
     
@@ -123,9 +140,9 @@
 	#inSmallCategory {font-family: 'Comfortaa', cursive; font-size: 30px;}
     #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
-    .alert{font-size: 13px; width:82.5%; }
+    .alert{font-size: 16px; line-height: 2; width:82.5%; }
     
-    #enrollForm{width: 90%; position:absolute; left: 50%; transform: translateX(-50%);}
+    #updateForm{width: 90%; position:absolute; left: 50%; transform: translateX(-50%);}
     #insertInfo{width: 100%; text-align: left; display:inline-block; border-spacing: 40px; border-collapse: separate; text-align: left;}
     #insertInfo textarea{border-radius: 4px; border: 1px solid #ced4da;}
     td{vertical-align:middle;}
@@ -136,9 +153,13 @@
     
     #fesName{width:70%;}
     
-    #datePickerStyle{background: #000; color: white; line-height: 35px;}
-    .dategroup{width: 250px;}
+    #payPickerStyle{background: #000; color: white; line-height: 35px;}
+    #datePickerStyle{background: #000; color: white; width:25px; line-height: 3; text-align:center;}
+    .dategroup{width: 300px;}
+    .artdategroup{width: 300px;}
     .datestyle{border-radius: 4px;}
+    
+    .deleteImg{width:auto; height:25px; margin-top:8px; margin-left:10px;}
     
     #wrap{display:none; border:1px solid #DDDDDD; width:500px; margin-top:5px;}
     #fesmap{border: 1px solid #ced4da; border-radius: 4px; width:80%; height:300px;}
@@ -153,7 +174,9 @@
     .postergroup{width:60%; top:25%; transform: translateY(25%);}
     #posterPath, #bannerPath{font-size:13px; overflow:hidden;}
     
+    .colauto{width:100%;}
     .feesize{width:50%;}
+    .feeop{width:20%; line-height:23px; margin-top:-5px; margin-left:5%;}
     .urlsize{width: 90%;}
     
     .tdcenter{text-align:center; color: #DB0000;}
@@ -162,10 +185,15 @@
     footer .ft-content{width:70%; !important;}
     
 </style>
+
 </head>
-<body onload="fesMapSetting();">
-	
+<body onload="fesMapSetting('<%= splitaddress[0] %>');">
 	<%@ include file="../../views/common/menubar.jsp" %>
+    
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	
     
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
@@ -176,41 +204,147 @@
 			<label id="inSmallCategory"> - Update</label>
 		</div>
 		
+		<script>
+			$(function() {
+				var posflag = false;
+				var banflag = false;
+					
+				<% if(artcount == f.getRecCount()) { %> //아티스트 확정 (지난행사조건추가하기??)
+					$('#alert').css('visibility', 'visible');
+					
+					$('#inputfee').attr('disabled', false);
+					$('#inputurl').attr('disabled', false);
+					$('#feativalDate').attr('disabled', true);
+					/*
+					$('.altertog').removeAttr('data-toggle');
+					$('.altertog').removeAttr('data-placement');
+					$('.altertog').removeAttr('title');
+					*/
+					$('#fesName').attr('readonly', true);
+					$('#moneyMin').attr('readonly', true);
+					$('#moneyMax').attr('readonly', true);
+					
+					$('#status').val('true');
+				<% } else if(artcount > 0 && artcount < f.getRecCount()) { System.out.println("artcount > 0"); %> //아티스트 모집 중 & 확정 아티스트 1명 이상
+					$('#alert').css('visibility', 'visible');
+					
+					$('#fesName').attr('readonly', true);
+					$('#moneyMin').attr('readonly', true);
+					
+					$('#feativalDate').attr('disabled', true);
+					$('#freeChk').attr('disabled', true);
+					
+					$('#status').val('false');
+				<% } else { System.out.println("else"); %> //아티스트 모집 중 & 확정 아티스트 0명
+					$('#alert').css('visibility', 'hidden');
+					/*
+					var addalter = {
+						'data-toggle':'tooltip',
+						'data-placement':'right',
+						'title':'모든 아티스트 확정 시 설정 가능합니다.'
+					};
+					$('.altertog').attr(addalter);
+					*/
+					$('#freeChk').attr('disabled', true);
+					$('#contentArea').css('padding-top', '5%');
+					$('section').css('height', '245%');
+					
+					$('#status').val('false');
+				<% } %>
+				
+				<% if(f.getBanPath() == null) { %>
+					$('#bannerPath').text('파일을 선택해주세요');
+					$('#oriban').val(null);
+				<% } else { %>
+					$('#oriban').val('<%= f.getBanPath() %>');
+				<%	} %>
+				
+				<% if(f.getSecOp() != null) { %>
+					<% if(f.getSecOp().equals("Y")) { %>
+						$('#secretOp').attr('selected', 'true');
+					<% } else { %>
+						$('#secretOp').attr('selected', 'false');
+						$('#inputfee').val(<%= f.getTicFee() %>);
+					<% } %>
+				<% } %>
+				
+				<% if(splitaddress.length > 1) { %>
+					$('#detailAddressInput').val('<%= splitaddress[1] %>');
+				<% } %>
+
+				<% if(f.getTicFreeOp() != null) { %>
+					<% if((f.getTicFreeOp()).equals("Y")) { %>
+		           		$('#inputfee').attr('disabled', true);
+		           		$('#freeChk').prop('checked', true);
+					<% } else { %>
+		           		$('#inputfee').attr('disabled', false);
+		           		$('#freeChk').prop('checked', false);
+					<% } %>
+				<% } %>
+				
+				$("#freeChk").change(function(){
+			        if($("#freeChk").is(":checked")){
+			            $('#inputfee').attr('disabled', true);
+			        }else{
+			            $('#inputfee').attr('disabled', false);
+			        }
+			    });
+				
+				var payrange = '<%= f.getPayRange() %>';
+				var paysplit = payrange.split("~");
+				$('#moneyMin').val(paysplit[0]);
+				$('#moneyMax').val(paysplit[1]);
+			});
+    		
+    		<%
+    			String recstr[] = f.getRecTerm().split(" - ");
+				String recstrSplit[] = recstr[0].split("/");
+	    		Date recStrDate = new Date(new GregorianCalendar(Integer.parseInt(recstrSplit[2]), Integer.parseInt(recstrSplit[0])-1, Integer.parseInt(recstrSplit[1])).getTimeInMillis());
+    			
+    		%>
+		</script>
+		
 		<div id="contentArea">
-			<form id="enrollForm">
-				<div class="alert alert-danger">※ 공연이 확정된 아티스트가 존재하여 특정 정보를 수정할 수 없습니다. Q&A에 문의해주세요.</div>
+			<form action="<%= request.getContextPath() %>/update.fes.do" method="post" id="updateForm" name="updateForm" encType="multipart/form-data" onsubmit="return submitForm();">
+				<div class="alert alert-danger" id="alert">※ 공연이 확정된 아티스트가 존재하여 특정 정보를 수정할 수 없습니다. Q&A에 문의해주세요.</div>
+				<input type="hidden" name="fesCode" value="<%= f.getFesCode() %>">
 				<table id="insertInfo">
 					<tr>
-						<td class="label"><label>행사 명</label></td>
+						<td class="label">행사명 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<input type="text" id="fesName" class="form-control input-default enroll" readonly>
+							<input type="text" name="fesName" id="fesName" class="form-control input-default enroll" value="<%= f.getFesName() %>">
 						</td>
 					</tr>
 					<tr>
-						<td class="label">행사 기간</td>
+						<td class="label">행사 기간 &nbsp;<span class="text-danger">*</span></td>
 						<td>
+							<input type="hidden" name="hide_feativalDate" value="<%= f.getFesTerm() %>">
 							<div class="input-group dategroup">
-								<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015" disabled>
+								<input class="form-control input-daterange-datepicker datestyle" type="text" id="feativalDate" name="feativalDate" value="<%= f.getFesTerm() %>">
 								<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">아티스트 모집 기간</td>
+						<td class="label">아티스트 모집 기간 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-			                <div class="input-group dategroup">
-								<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">
-								<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-							</div>
+							<input type="hidden" name="artistStrDate" value="<%=recstr[0]%>">
+			                <div class="input-group artdategroup">
+                            	<input type="text" class="form-control datestyle" id="artistStrDate" value="<%= recstr[0] %>" disabled>
+								<span id="datePickerStyle">&nbsp;&nbsp;-&nbsp;&nbsp;</span> 
+                            	<input type="text" class="form-control mydatepicker datestyle" id="artistEndDate" name="artistEndDate" value="<%= recstr[1] %>">
+                            	<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                            </div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label" rowspan=2>행사 장소</td>
+						<td class="label" rowspan=2>행사 장소 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<input type="text" class="form-control input-default enroll" id="zonecodeInput" readonly/>&nbsp;
-							<input type="button" class="btn mb-1 btn-dark" onClick="openDaumZipAddress();" value = "우편번호"/><br>							
-							<input type="text" class="form-control input-default enroll" id="addressInput" readonly/>
-							<input type="text" class="form-control input-default enroll" id="detailAddressInput" placeholder="상세주소"/>
+							<input type="text" class="form-control input-default enroll inputValCk" id="zonecodeInput" name="zonecodeInput" value="<%= splitzone[0] %>" readonly/>&nbsp;
+							<input type="button" class="btn mb-1 btn-dark" onClick="openDaumZipAddress();" value = "우편번호"/><br>
+							
+							<input type="text" class="form-control input-default enroll inputValCk" id="addressInput" name="addressInput" value="<%= splitaddress[0] %>" readonly/>
+							<input type="text" class="form-control input-default enroll" id="detailAddressInput" name="detailAddressInput" placeholder="상세주소"/>
 							<div id="wrap"></div>
 						</td>
 					</tr>
@@ -220,40 +354,60 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="label">공연비</td>
+						<td class="label">공연비 &nbsp;<span class="text-danger">*</span></td>
 						<td>
 							<div class="input-group" id="moneyRange">
-								<input type="text" name="start" class="form-control input-default enroll" readonly> 
-								<span id="datePickerStyle">&nbsp;&nbsp;~&nbsp;&nbsp;</span> 
-								<input type="text" name="end" class="form-control input-default enroll" readonly>
+								<input type="text" id="moneyMin" name="moneyMin" class="form-control input-default enroll inputValCk" placeholder="최소금액">
+								<span id="payPickerStyle">&nbsp;&nbsp;~&nbsp;&nbsp;</span> 
+								<input type="text" id="moneyMax" name="moneyMax" class="form-control input-default enroll inputValCk" placeholder="최대금액">
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="label">모집 인원 수<br>(팀 수)</td>
+						<td class="label">모집 인원 수 &nbsp;<span class="text-danger">*</span><br>(팀 수)</td>
 						<td>
-							<input type="number" class="form-control input-default enroll" min=1 max=20>
+							<input type="number" id="needCount" name="needCount" class="form-control input-default enroll inputValCk" min=<%= artcount %> max=20 value="<%= f.getRecCount() %>">
 						</td>
 					</tr>
 					<tr>
-						<td class="label">행사 포스터</td>
+						<td class="label">행사 포스터 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<div class="input-group mb-3 postergroup">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input">
-									<label class="custom-file-label">파일을 선택해주세요</label>
+                            <div class="form-row align-items-center colauto">
+                            <div class="col-auto postergroup">
+								<div class="input-group mb-3">
+									<div class="custom-file clickpos">
+										<input type="file" accept="image/*" name="posterPath" class="custom-file-input posterPath" onchange="reviewUploadImg(this,'0');">
+										<label class="custom-file-label inputTextCk" id="posterPath"><%= f.getPosPath() %></label>
+									</div>
 								</div>
+								<input type="hidden" name="oripos" value="<%= f.getPosPath() %>">
+								<input type="hidden" id="postri" name="postri">
+							</div>
+							
+	                        <div class="col-auto">
+								<img src="<%= request.getContextPath() %>/img/trash.png" class="deleteImg" id="deletePos">
+							</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="label">행사 배너</td>
 						<td>
-							<div class="input-group mb-3 postergroup">
-								<div class="custom-file">
-									<input type="file" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
-									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
+                            <div class="form-row align-items-center colauto">
+                            <div class="col-auto postergroup">
+								<div class="input-group mb-3">
+									<div class="custom-file clickban">
+										<input type="file" accept="image/*" name="bannerPath" class="custom-file-input bannerPath" onchange="reviewUploadImg(this,'1');">
+										<label class="custom-file-label" id="bannerPath"></label>
+									</div>
 								</div>
+								<input type="hidden" id="oriban" name="oriban">
+								<input type="hidden" id="bantri" name="bantri">
+							</div>
+							
+	                        <div class="col-auto">
+								<img src="<%= request.getContextPath() %>/img/trash.png" class="deleteImg" id="deleteBan">
+							</div>
 							</div>
 						</td>
 					</tr>
@@ -263,19 +417,31 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="label">행사 설명</td>
+						<td class="label">행사 설명 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<textarea id="festivalInfo" rows="10" cols="80"></textarea>
+							<textarea id="festivalInfo" name="festivalInfo" class="inputValCk" rows="10" cols="80"><%= f.getFesInfo() %></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td class="label">관람비</td>
 						<td>
-							<div class="input-group mb-3 feesize" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
-								<input type="text" class="form-control input-default" disabled>
-								<div class="input-group-append">
-									<span class="input-group-text">&#8361;</span>
+                            <div class="form-row align-items-center colauto">
+                            <div class="col-auto feesize">
+								<div class="input-group mb-3" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
+									<input type="text" id="inputfee" name="inputfee" class="form-control input-default" disabled>
+									<div class="input-group-append">
+										<span class="input-group-text">&#8361;</span>
+									</div>
 								</div>
+							</div>
+							
+                            <div class="col-auto feeop">
+                                <div class="form-check mb-2">
+								<label class="form-check-label">
+									<input type="checkbox" class="form-check-input" id="freeChk" name="freeChk"> 무료
+								</label>
+								</div>
+							</div>
 							</div>
 						</td>
 					</tr>
@@ -283,7 +449,7 @@
 						<td class="label">티켓 구매처</td>
 						<td>
 							<div class="input-group mb-3 urlsize" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
-								<input type="text" class="form-control input-default" disabled>
+								<input type="text" id="inputurl" name="inputurl" class="form-control input-default" disabled>
 								<div class="input-group-append">
 									<span class="input-group-text">https://example.com</span>
 								</div>
@@ -306,24 +472,152 @@
 					</tr>
 					<tr>
 						<td class="tdcenter" colspan=2>
-							<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
+							<input type="submit" class="btn mb-1 btn-dark" id="updateSubmit" value="저장">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn mb-1 btn-dark" value="취소">
+							<input type="button" class="btn mb-1 btn-dark" onclick="window.history.back();" value="취소">
 						</td>
 					</tr>
 				</table>
+				<input type="hidden" id="status" name="status">
 			</form>
 		</div>
 		</div>
     </section>
+    <script>
+		
+		$('.clickpos').change(function() { posflag = true; $('#postri').val('true'); console.log("posflag : " + posflag); });
+		$('.clickban').change(function() { banflag = true; $('#bantri').val('true'); console.log("banflag : " + banflag); });
+		
+		$('#deletePos').click(function() {
+			if($('#posterPath').text() != "파일을 선택해주세요") {
+    			$('.posterPath').val('');
+    			$('#postri').val('delete');
+    			$('#posterPath').text('파일을 선택해주세요');
+    			posflag = true;
+			}
+		});
+		$('#deleteBan').click(function() {
+			if($('#bannerPath').text() != "파일을 선택해주세요") {
+    			$('.bannerPath').val('');
+    			$('#bantri').val('delete');
+    			$('#bannerPath').text('파일을 선택해주세요');
+    			banflag = true;
+			}
+		});
+		
+    	$(function() {
+    		$('#moneyMin, #moneyMax').on({'keyup':function() {
+    			var regExp = /[^0-9]/gi;
+    			var val = $(this).val().trim();
+				
+    			if(regExp.test(val) == true) {
+    				$(this).val(null);
+    			}
+    		}})
+	    	
+	    	$(".inputValCk, .inputTextCk").change(function() {
+	    		if($(this).val())
+	    			$(this).css('border', '1px solid #ced4da');
+	    	});
+    		
+    		$('#needCount').change(function() {
+    			if(parseInt($('#needCount').val()) > <%= artcount %>) {
+    				$('#moneyMax').attr('readonly', false);
+    			}
+    		});
+    	});
+		
+	    function submitForm() {
+	    	var idStr = "";
+	    	var emptyCk = false;
+	    	
+	    	$(".inputValCk").filter(function() {
+	    		if(!$(this).val()) {
+	    			idStr+=$(this).attr('id')+" / ";
+	    			emptyCk = true;
+	    			return true;
+	    		}
+	    	}).css('border', '1px solid red');
+	    	
+	    	$(".inputTextCk").filter(function() {
+	    		if(($(this).text() == "파일을 선택해주세요") || (!$(this).text())) {
+	    			idStr+=$(this).attr('id')+" / ";
+	    			emptyCk = true;
+	    			return true;
+	    		}
+	    	}).css('border', '1px solid red');
+	    	
+	    	console.log(idStr);
+
+	    	if(emptyCk == true) {
+	    		alert('필수항목을 기재해주세요');
+	    	} else {
+	    		var fesday = $('#feativalDate').val();
+	    		var artend = $('#artistEndDate').val();
+	    		
+	    		var fesSplit = fesday.split(" - ");
+	    		var artSplit = artday.split(" - ");
+				
+	    		var fesStrSplit = fesSplit[0].split("/");
+	    		var fesstrday = new Date(fesStrSplit[2], parseInt(fesStrSplit[0])-1, fesStrSplit[1]);
+				
+	    		var artEndSplit = artend.split("/");
+	    		var artendday = new Date(artEndSplit[2], parseInt(artEndSplit[0])-1, artEndSplit[1]);
+	    		
+	    		today.setHours(0,0,0,0);
+	    		
+	    		if($('#feativalDate').attr('disabled') == true) {
+		    		if(artendday.getTime() > fesstrday.getTime()) {
+		    			alert("아티스트 모집 기간은 행사 기간 이전에 마감되어야 합니다");
+		        		return false;
+		    		} else if (artendday.getTime() < <%= recstr[0] %>) {
+		    			alert("아티스트 모집 마감 날짜가 시작 날짜보다 빠릅니다");
+		        		return false;
+		    		}
+	    		} else {
+		    		if($('#feativalDate').val() != <%= f.getFesTerm() %>) {
+			    		if (fesstrday.getTime() < today.getTime()) {
+			    			alert("오늘 이전의 날짜는 등록할 수 없습니다");
+			        		return false;
+			    		}
+		    		}
+		    		
+		    		if(artendday.getTime() > fesstrday.getTime()) {
+		    			alert("아티스트 모집 기간은 행사 기간 이전에 마감되어야 합니다");
+		        		return false;
+		    		} else if (artendday.getTime() < <%= recstr[0] %>) {
+		    			alert("아티스트 모집 마감 날짜가 시작 날짜보다 빠릅니다");
+		        		return false;
+		    		}
+	    		}
+				
+	    		<%--
+	    		if((posflag == false && $('#posterPath').val() == '<%= f.getPosPath() %>') && (banflag == false && $('#bannerPath').val() == '<%= f.getBanPath() %>')) {
+	    		--%>
+	    		//if(posflag == true) { $('#postri').val('true'); }
+	    		//if(banflag == true) { $('#bantri').val('true'); }
+	    	}
+	    	
+	    	return false;
+	    }
+
+	    function reviewUploadImg(fileObj, where) {
+	    	var filePath = fileObj.value;
+	    	var fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+	    	var fileKind = fileName.split(".")[1];
+	    	
+	    	if(where == '0') {
+	    		$("#posterPath").text(fileName);
+	    	} else {
+	    		$("#bannerPath").text(fileName);
+	    	}
+	    }
+    </script>
     
     <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f12f8983e3395277ce748044a97f80ae&libraries=services"></script>
 	<script>
-		var address = '서울 강남구 테헤란로14길 6';
-		var zonecode = "";
-		
-		function fesMapSetting() {
+		function fesMapSetting(address) {
 			var mapContainer = document.getElementById('fesmap'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -352,8 +646,7 @@
 			
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            //content: '<div style="width:auto;display:inline-block;white-space:nowrap;text-align:center;padding:7px 0;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
-			        	content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
+			            content: '<div style="text-align:center;padding:7px 0;white-space:nowrap;">&nbsp;&nbsp;' + address + '&nbsp;&nbsp;</div>'
 			        });
 			        infowindow.open(map, marker);
 			
@@ -363,7 +656,15 @@
 			});
 		}
 		
+		var sechi = ($('section').css('height')).split("px");
 		function openDaumZipAddress() {
+			var splitSection = ($('section').css('height')).split("px");
+			if(parseInt(sechi[0]) == parseInt(splitSection[0])) {
+				$('section').css('height', (parseInt(sechi[0]) + 620) + 'px');
+			} else {
+				$('section').css('height', sechi[0] + 'px');
+			}
+			
 	        // 우편번호 찾기 화면을 넣을 element를 지정
 	        var element_wrap = document.getElementById("wrap");
 	
@@ -376,10 +677,9 @@
 	                    jQuery("#address_detail").focus();
 	                    address = data.address;
 	                    zonecode = data.zonecode;
-	                   	console.log(data.zonecode);
 	                    $('#addressInput').val(address);
 	                    $('#zonecodeInput').val(zonecode);
-	                    mapSetting();
+	                    fesMapSetting();
 	                }
 	
 	                // 사용자가 값을 주소를 선택해서 레이어를 닫을 경우

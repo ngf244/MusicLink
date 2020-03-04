@@ -21,16 +21,16 @@ import festival.model.vo.Festival;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class FestivalInsertServlet
+ * Servlet implementation class FestivalUpdateServlet
  */
-@WebServlet("/insert.fes")
-public class FestivalInsertServlet extends HttpServlet {
+@WebServlet("/update.fes.do")
+public class FestivalUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalInsertServlet() {
+    public FestivalUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -60,7 +60,8 @@ public class FestivalInsertServlet extends HttpServlet {
 					saveFiles.add(multipartRequest.getFilesystemName(name));
 				}
 			}
-			
+
+			String fesCode = multipartRequest.getParameter("fesCode");
 			String fesName = multipartRequest.getParameter("fesName");
 			
 			String zonecodeInput = multipartRequest.getParameter("zonecodeInput");
@@ -69,6 +70,7 @@ public class FestivalInsertServlet extends HttpServlet {
 			String fesLoc = zonecodeInput + "&" + addressInput + "/" + detailAddressInput;
 	
 			String fesTerm = multipartRequest.getParameter("feativalDate");
+			if(fesTerm == null) fesTerm = multipartRequest.getParameter("hide_feativalDate");
 			String fesInfo = multipartRequest.getParameter("festivalInfo");
 			
 			int minPay = Integer.parseInt(multipartRequest.getParameter("moneyMin"));
@@ -78,28 +80,77 @@ public class FestivalInsertServlet extends HttpServlet {
 			int recCount = Integer.parseInt(multipartRequest.getParameter("needCount"));
 			String recTerm = multipartRequest.getParameter("artistStrDate") + " - " + multipartRequest.getParameter("artistEndDate");
 			
+			String postri = multipartRequest.getParameter("postri");
+			String bantri = multipartRequest.getParameter("bantri");
+			
 			String banPath = "";
 			String posPath = "";
-			if(saveFiles.size() == 1) {
-				posPath = saveFiles.get(0);
+			
+			if(bantri.equals("true")) {
+				if(saveFiles.size() > 1) {
+					banPath = saveFiles.get(0);
+					
+					File deleteFile = new File(savePath + multipartRequest.getParameter("oriban"));
+					deleteFile.delete();
+				}
+			} else if(bantri.equals("delete")) {
+				banPath = null;
+				
+				File deleteFile = new File(savePath + multipartRequest.getParameter("oriban"));
+				deleteFile.delete();
 			} else {
-				banPath = saveFiles.get(0);
-				posPath = saveFiles.get(1);
+				banPath = multipartRequest.getParameter("oriban");
+			}
+			
+			if(postri.equals("true")) {
+				if(saveFiles.size() == 1) posPath = saveFiles.get(0);
+				else posPath = saveFiles.get(1);
+				
+				File deleteFile = new File(savePath + multipartRequest.getParameter("oripos"));
+				deleteFile.delete();
+			} else {
+				posPath = multipartRequest.getParameter("oripos");
 			}
 			
 			String secOp = multipartRequest.getParameter("secretOp");
 			if(secOp == null) secOp = "N";
 			else if(secOp.equals("on")) secOp = "Y";
 			
-			System.out.println(fesName + ", " + fesLoc + ", " + fesTerm + ", " + fesInfo + ", " + payRange + ", " + recCount + ", " + recTerm + ", " + posPath + ", " + banPath + ", " + secOp);
+			String ticFreeOp = "";
+			String ticUrl = "";
+			int ticFee = 0;
+			String status = multipartRequest.getParameter("status");
+			if(status.equals("true")) {
+				ticFreeOp = multipartRequest.getParameter("freeChk");
+				if(ticFreeOp == null) ticFreeOp = "N";
+				else if(ticFreeOp.equals("on")) ticFreeOp = "Y";
+				
+				if(ticFreeOp.equals("N")) {
+					if(multipartRequest.getParameter("inputfee") != null) {
+						ticFee = Integer.parseInt(multipartRequest.getParameter("inputfee"));
+					}
+				}
+				
+				ticUrl = multipartRequest.getParameter("inputurl");
+			}
 			
 			String userCode = ((Member)request.getSession().getAttribute("loginUser")).getUserCode();
-			Festival festival = new Festival(fesName, fesLoc, fesTerm, fesInfo, payRange, recCount, recTerm, posPath , banPath, secOp, userCode);
 			
-			int result = new FestivalService().insertFestival(festival);
+			Festival festival = null;
+			if(status.equals("true")) {
+				System.out.println(fesName + ", " + fesLoc + ", " + fesTerm + ", " + fesInfo + ", " + payRange + ", " + recCount + ", " + recTerm + ", "
+						+ posPath + ", " + banPath + ", " + ticFreeOp + ", " + ticFee + ", " + ticUrl + ", " + secOp);
+				festival = new Festival(fesCode, fesName, fesLoc, fesTerm, fesInfo, payRange, recCount, recTerm, posPath , banPath, secOp , ticFee, ticUrl, userCode, ticFreeOp);
+			} else {
+				System.out.println(fesName + ", " + fesLoc + ", " + fesTerm + ", " + fesInfo + ", " + payRange + ", " + recCount + ", " + recTerm + ", "
+						+ posPath + ", " + banPath + ", " + secOp);
+				festival = new Festival(fesCode, fesName, fesLoc, fesTerm, fesInfo, payRange, recCount, recTerm, posPath , banPath, secOp , userCode);
+			}
+			
+			int result = new FestivalService().updateFestival(festival, status);
 			
 			if(result > 0) {
-				System.out.println("행사 등록 성공");
+				System.out.println("행사 수정 성공");
 				response.sendRedirect("list.fes");
 			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
@@ -107,9 +158,10 @@ public class FestivalInsertServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				System.out.println("행사 등록 실패");
+				System.out.println("행사 수정 실패");
 				response.sendRedirect("list.fes");
 			}
+			
 		}
 	}
 
