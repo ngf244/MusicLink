@@ -10,10 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.sun.org.apache.regexp.internal.REProgram;
 
+import authorPage.model.vo.ArtistJoinInfo;
+import authorPage.model.vo.CompanyJoinInfo;
 import authorPage.model.vo.Follow;
 import authorPage.model.vo.ReportPage;
 import member.model.vo.Member;
@@ -255,7 +258,6 @@ public class AuthorDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(userCode);
 		return userCode;
 	}
 
@@ -361,6 +363,272 @@ public class AuthorDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<ArtistJoinInfo> getArtistJoinList(Connection conn) {
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistJoinInfo> arr = new ArrayList<ArtistJoinInfo>();
+		ArrayList<String> user_codes = new ArrayList<String>();
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		
+		String query1 = prop.getProperty("getArtistJoinCode");
+		String query2 = prop.getProperty("getArtistJoinList_detail");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query1);
+			
+			while(rset.next()) {
+				String code = rset.getString("USER_CODE");
+				user_codes.add(code);
+				hMap.put(code, rset.getString("REQUEST_DATE"));
+			}
+			
+			
+			for(int i = 0; i < user_codes.size(); i++) {
+				pstmt = conn.prepareStatement(query2);
+				String code = user_codes.get(i);
+				pstmt.setString(1, code);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					ArtistJoinInfo aj = new ArtistJoinInfo();
+					aj.setAt_code(rset.getString(1));
+					aj.setActiveName(rset.getString(2));
+					aj.setPeopleNum(rset.getString(3));
+					aj.setGenre(rset.getString(4));
+					aj.setAt_class(rset.getString(5));
+					aj.setPic1(rset.getString(6));
+					aj.setOne_introduce(rset.getString(7));
+					aj.setMul_introduce(rset.getString(8));
+					aj.setRecord(rset.getString(9));
+					aj.setDebutDate(rset.getString(10));
+					aj.setInsta(rset.getString(12));
+					aj.setTwitter(rset.getString(13));
+					aj.setFacebook(rset.getString(14));
+					String requestDate = hMap.get(code);
+					aj.setRequestDate(requestDate);
+					
+					
+					arr.add(aj);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			close(stmt);
+		}
+		
+		return arr;
+	}
+
+	public ArtistJoinInfo getArtistJoinInfo(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArtistJoinInfo ai = new ArtistJoinInfo();
+		String query = prop.getProperty("getArtistJoinInfo");
+		String query2 = prop.getProperty("getArtistJoinInfo2");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				ai.setAt_code(rset.getString(1));
+				ai.setActiveName(rset.getString(2));
+				ai.setPeopleNum(rset.getString(3));
+				ai.setGenre(rset.getString(4));
+				ai.setAt_class(rset.getString(5));
+				ai.setPic1(rset.getString(6));
+				ai.setOne_introduce(rset.getString(7));
+				ai.setMul_introduce(rset.getString(8));
+				ai.setRecord(rset.getString(9));
+				ai.setDebutDate(rset.getString(10));
+				ai.setInsta(rset.getString(12));
+				ai.setTwitter(rset.getString(13));
+				ai.setFacebook(rset.getString(14));
+			}
+			close(pstmt);
+			close(rset);
+			
+			
+			pstmt = conn.prepareStatement(query2);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				ai.setAvisrc(rset.getString("GALLERY_MEDIA_PATH"));
+			}
+			if(rset.next()) {
+				ai.setPic2(rset.getString("GALLERY_MEDIA_PATH"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return ai;
+	}
+
+	public int acceptJoin(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("acceptJoin");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int sendMessage(Connection conn, String userCode, String message) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("sendMessage");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			pstmt.setString(2, message);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteRequest(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteRequest");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<CompanyJoinInfo> getComapnyJoinList(Connection conn) {
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<CompanyJoinInfo> arr = new ArrayList<CompanyJoinInfo>();
+		ArrayList<String> user_codes = new ArrayList<String>();
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		
+		String query1 = prop.getProperty("getComapnyJoinCode");
+		String query2 = prop.getProperty("getComapnyJoinList_detail");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query1);
+			
+			while(rset.next()) {
+				String code = rset.getString("USER_CODE");
+				user_codes.add(code);
+				hMap.put(code, rset.getString("REQUEST_DATE"));
+			}
+//			System.out.println("code : "+ user_codes);
+//			System.out.println("hMap : " + hMap);
+			
+			for(int i = 0; i < user_codes.size(); i++) {
+				pstmt = conn.prepareStatement(query2);
+				String code = user_codes.get(i);
+				pstmt.setString(1, code);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					CompanyJoinInfo cj = new CompanyJoinInfo();
+					cj.setCoCode(rset.getString("USER_CODE"));
+					cj.setChargePerson(rset.getString("USER_NAME"));
+					cj.setCoAddress(rset.getString("CP_ADDRESS"));
+					cj.setCoPhone(rset.getString("CP_PHONENUM"));
+					cj.setCoName(rset.getString("CP_NAME"));
+					String requestDate = hMap.get(code);
+					cj.setRequestDate(requestDate);
+					
+//					System.out.println("cj : "+cj);
+					
+					arr.add(cj);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			close(stmt);
+		}
+		
+		return arr;
+	}
+
+	public CompanyJoinInfo getCompanyJoinInfo(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		CompanyJoinInfo cj = new CompanyJoinInfo();
+		
+		String query = prop.getProperty("getComapnyJoinList_detail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cj.setCoCode(rset.getString("USER_CODE"));
+				cj.setChargePerson(rset.getString("USER_NAME"));
+				cj.setCoAddress(rset.getString("CP_ADDRESS"));
+				cj.setCoPhone(rset.getString("CP_PHONENUM"));
+				cj.setCoName(rset.getString("CP_NAME"));
+				cj.setChargePhone(rset.getString("USER_PHONE"));
+				cj.setEmail(rset.getString("USER_EMAIL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return cj;
 	}
 	
 }

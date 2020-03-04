@@ -1,9 +1,7 @@
 package authorPage.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import authorPage.model.service.AuthorService;
-import authorPage.model.vo.Follow;
-import member.model.vo.Member;
+import authorPage.model.vo.ArtistJoinInfo;
+import authorPage.model.vo.CompanyJoinInfo;
 
 /**
- * Servlet implementation class showUserDetail
+ * Servlet implementation class requestList_company
  */
-@WebServlet("/showUserDetail.au")
-public class showUserDetail extends HttpServlet {
+@WebServlet("/requestList.co")
+public class requestList_company extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public showUserDetail() {
+    public requestList_company() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,32 +32,11 @@ public class showUserDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		ArrayList<CompanyJoinInfo> arr = new AuthorService().getCompanyJoinList();
 		
-		String userCode = new AuthorService().getUserCode(userId);
-		
-		userId = userCode;
-		
-		int type = new AuthorService().checkUserClass(userId);
-		
-		Member mem = new AuthorService().selectUser(userId);
-		
-		String img = null;
-		if(type == 2) {
-			String imgPath = new AuthorService().getPicture(userId);
-			img = imgPath;
-//			img = imgPath.substring(imgPath.length()-19, imgPath.length());
-		}
-		String path = "views/authorPage/showUserDetail.jsp";
-		
-		ArrayList<Follow> fArr= new AuthorService().selectFollow(mem.getUserCode());
-		
-		request.setAttribute("type", type);
-		request.setAttribute("mem", mem);
-		request.setAttribute("img", img);
-		request.setAttribute("fArr", fArr);
+		request.setAttribute("arr", arr);
+		String path = "views/authorPage/joinAcceptPage_planner1.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
-		
 	}
 
 	/**
