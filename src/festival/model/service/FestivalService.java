@@ -67,7 +67,7 @@ public class FestivalService {
 		Connection conn = getConnection();
 		
 		Festival festival = new FestivalDAO().selectFestival(conn, fcode);
-
+		
 		close(conn);
 		return festival;
 	}
@@ -79,15 +79,6 @@ public class FestivalService {
 
 		close(conn);
 		return artistArr;
-	}
-
-	public LinkedHashMap<Festival, ArrayList<String>> selectBannerList() {
-		Connection conn = getConnection();
-		
-		LinkedHashMap<Festival, ArrayList<String>> banMap = new FestivalDAO().selectBannerList(conn);
-		
-		close(conn);
-		return banMap;
 	}
 
 	public int getApListCount() {
@@ -148,6 +139,48 @@ public class FestivalService {
 		
 		close(conn);
 		return fArr;
+	}
+
+	public int selectArtistCount(String fcode) {
+		Connection conn = getConnection();
+		
+		int count = new FestivalDAO().selectArtistCount(conn, fcode);
+		
+		close(conn);
+		return count;
+	}
+
+	public int updateFestival(Festival festival, String status) {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().updateFestival(conn, festival, status);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public LinkedHashMap<Festival, ArrayList<String>> selectRandomList(int i) {
+		Connection conn = getConnection();
+		
+		LinkedHashMap<Festival, ArrayList<String>> promMap = new FestivalDAO().selectRandomList(conn, i);
+		
+		close(conn);
+		return promMap;
+	}
+
+	public int getGeade(String cpCode) {
+		Connection conn = getConnection();
+		
+		int grade = new FestivalDAO().getGeade(conn, cpCode);
+		
+		close(conn);
+		return grade;
 	}
 	
 }

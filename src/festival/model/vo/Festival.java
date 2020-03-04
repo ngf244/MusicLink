@@ -23,12 +23,13 @@ public class Festival {
 	
 	public Festival() {}
 	
-	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String banPath) {
+	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String posPath, String banPath) {
 		super();
 		this.fesCode = fesCode;
 		this.fesTerm = fesTerm;
 		this.recCount = recCount;
 		this.recTerm = recTerm;
+		this.posPath = posPath;
 		this.banPath = banPath;
 	}
 	
@@ -57,13 +58,14 @@ public class Festival {
 	}
 	
 	
-	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, int recCount, String recTerm,
-			String posPath, String banPath, String secOp, int ticFee, String cpCode) {
+	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String payRange, int recCount, String recTerm,
+			String posPath, String banPath, String secOp, int ticFee, String cpCode, String ticFreeOp) {
 		super();
 		this.fesCode = fesCode;
 		this.fesName = fesName;
 		this.fesLoc = fesLoc;
 		this.fesTerm = fesTerm;
+		this.payRange = payRange;
 		this.recCount = recCount;
 		this.recTerm = recTerm;
 		this.posPath = posPath;
@@ -71,6 +73,7 @@ public class Festival {
 		this.secOp = secOp;
 		this.ticFee = ticFee;
 		this.cpCode = cpCode;
+		this.ticFreeOp = ticFreeOp;
 	}
 
 	public Festival(String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
@@ -90,7 +93,7 @@ public class Festival {
 	}
 
 	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
-			String recTerm, String posPath, String banPath, String secOp, int ticFee, String ticUrl, String cpCode) {
+			String recTerm, String posPath, String banPath, String secOp, int ticFee, String ticUrl, String cpCode, String ticFreeOp) {
 		super();
 		this.fesCode = fesCode;
 		this.fesName = fesName;
@@ -106,10 +109,25 @@ public class Festival {
 		this.ticFee = ticFee;
 		this.ticUrl = ticUrl;
 		this.cpCode = cpCode;
+		this.ticFreeOp = ticFreeOp;
 	}
 	
-	
-	
+	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange,
+			int recCount, String recTerm, String posPath, String banPath, String secOp, String cpCode) {
+		super();
+		this.fesCode = fesCode;
+		this.fesName = fesName;
+		this.fesLoc = fesLoc;
+		this.fesTerm = fesTerm;
+		this.fesInfo = fesInfo;
+		this.payRange = payRange;
+		this.recCount = recCount;
+		this.recTerm = recTerm;
+		this.posPath = posPath;
+		this.banPath = banPath;
+		this.secOp = secOp;
+		this.cpCode = cpCode;
+	}
 
 	public String getFesCode() {
 		return fesCode;
