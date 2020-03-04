@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 
+import festival.model.vo.AppFestival;
 import festival.model.vo.Festival;
 import member.model.vo.Member;
 
@@ -700,6 +701,39 @@ public class FestivalDAO {
 		}
 		
 		return map;
+	}
+
+	public ArrayList<AppFestival> selectMyAppFesList(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AppFestival> afList = null;
+		
+		String query = prop.getProperty("selectMyAppFesList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			afList = new ArrayList<AppFestival>();
+			while(rset.next()) {
+				AppFestival af = new AppFestival(rset.getString("FES_CODE"),
+												 rset.getString("AP_FES_YN"),
+												 rset.getDate("AP_FES_TIME"),
+												 rset.getString("FES_NAME"),
+												 rset.getString("FES_LOCATION"),
+												 rset.getString("FES_TERM"),
+												 rset.getString("USER_NAME"));
+				afList.add(af);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return afList;
 	}
 
 }
