@@ -73,7 +73,7 @@
                     <tr style="border: 1px groove black; height: 40px; line-height: 40px;">
                         <th>신고번호</th>
                         <th>대상 아이디</th>
-                        <th>신고자 아이디</th>
+                        <th>신고자 회원번호</th>
                         <th>사유</th>
                         <th>신고일자</th>
                     </tr>

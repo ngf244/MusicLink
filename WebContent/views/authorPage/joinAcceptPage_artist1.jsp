@@ -1,5 +1,10 @@
+<%@page import="authorPage.model.vo.ArtistJoinInfo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<ArtistJoinInfo> arr = (ArrayList<ArtistJoinInfo>)request.getAttribute("arr");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,8 +29,8 @@
     .requestBox-li2{background-color: green; position: absolute; width: 10%; height: 15%; left: 35%; top: 5%;}
     .requestBox-li3{background-color: green; position: absolute; width: 20%; height: 15%; right: 5%; top: 5%;}
     .requestBox-li4{background-color: beige; position: absolute; width: 60%; height: 50%; left: 35%; top: 25%;}
-    .requestBox-reject{background-color: blue; position: absolute; width: 20%; height: 15%; left: 40%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
-    .requestBox-showDetail{background-color: red; position: absolute; width: 20%; height: 15%; left: 70%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
+    /* .requestBox-reject{background-color: blue; position: absolute; width: 20%; height: 15%; left: 40%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;} */
+    .requestBox-showDetail{background-color: red; position: absolute; width: 60%; height: 15%; left: 35%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
 
 </style>
 </head>
@@ -38,32 +43,17 @@
         
             <!-- ul의 포지션을 relative를 놓아서 이후 absolute들이 ul의 범위 안에서 놀 수 있도록 유도 -->
             <div class="requestBox" >
+            <%for(int i = 0; i < arr.size(); i++){ %>
                 <ul>
-                    <li class="requestBox-li1">사진 넣는 공간</li>
-                    <li class="requestBox-li2">이름</li class="requestBox-li1">
-                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
-                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
-                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
+                    <li class="requestBox-li1"><img src="views/artistProfile_uploadFiles/<%=arr.get(i).getPic1()%>"></li>
+                    <li class="requestBox-li2"><%=arr.get(i).getActiveName() %></li class="requestBox-li1">
+                    <li class="requestBox-li3"><%=arr.get(i).getRequestDate() %></li class="requestBox-li1">
+                    <li class="requestBox-li4"><%=arr.get(i).getOne_introduce() %></li class="requestBox-li1">
+                    <li style="display: none;"><%=arr.get(i).getAt_code()%></li>
                     <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
                 </ul>
-                <ul>
-                    <li class="requestBox-li1">사진 넣는 공간</li>
-                    <li class="requestBox-li2">이름</li class="requestBox-li1">
-                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
-                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
-                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
-                    <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
-                </ul>
-                <ul>
-                    <li class="requestBox-li1">사진 넣는 공간</li>
-                    <li class="requestBox-li2">이름</li class="requestBox-li1">
-                    <li class="requestBox-li3">요청 일시</li class="requestBox-li1">
-                    <li class="requestBox-li4">자기소개</li class="requestBox-li1">
-                    <li><button class="requestBox-reject">거절 및 사유 보내기</button></li>
-                    <li><button class="requestBox-showDetail">상세보기</button class="requestBox-li1"></li>
-                </ul>
+             <% } %>
             </div>
-        
         </div>
 
 
@@ -92,6 +82,16 @@
     $(".map-h1").click(function(){
         $(".map").css("display","none");
     });
+
+    $('.requestBox-showDetail').click(function () {
+        var userCode = $(this).parent().parent().children().eq(4).text();
+        console.log(userCode);
+
+        location.href = "<%=request.getContextPath()%>/requestDetail.at?userCode="+userCode;
+
+
+    })
+
     
 	//new WOW().init();
 	
