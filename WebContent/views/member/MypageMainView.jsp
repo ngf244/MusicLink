@@ -284,25 +284,27 @@
             
             <div class="postInfo">
                 <div class="write">
-                    <ul><b>갤러리 게시판</b></ul>
+                    <h4><b>갤러리 게시판</b></h4>
                         <% if(gList.isEmpty()){ %>
-                        <li>작성하신 글이 없습니다.</li>
+                        <div>작성하신 글이 없습니다.</div>
                         <% } else{
             					for(Gallery g : gList){
             			%>
-                        <li><a href=""><%= g.getGlTitle() %></a></li>
+                        <div onclick="goGalDetail();" style="cursor: pointer;">- <%= g.getGlTitle() %></div>
+				        <input type="hidden" name="qnaCode" value="">
 				        <%		}
 		            	   }
 		            	%>                                                    
                 </div>
                 <div class="comment" style="float: left;">
-                    <ul><b>Q&A</b></ul>
+                    <h4><b>Q&A</b></h4>
                        <% if(qList.isEmpty()){ %>
-                        <li>작성하신 글이 없습니다.</li>
+                        <div>작성하신 글이 없습니다.</div>
                         <% } else{
             					for(QnA q : qList){
             			%>
-                        <li><a href=""><%= q.getQnaTitle() %></a></li>
+                        <div onclick="goQnaDetail();" style="cursor: pointer;"><input type="hidden" name="qnaCode" value="">- <%= q.getQnaTitle() %></div>
+				        
 				        <%		}
 		            	   }
 		            	%>
@@ -424,6 +426,20 @@
         		}
         		
 
+        	}
+        	
+        	function goQnaDetail(){
+            	var qnaCode = $(this).children().eq(0).val();
+            	console.log(qnaCode);
+            	
+            	location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;       		
+        	}
+        	
+        	function goGalDetail(){
+        		var galCode = $(this).children().eq(0).val();
+        		console.log(galCode);
+        		
+        		location.href='<%= request.getContextPath() %>/detail.gal?galCode=' + galCode;  
         	}
         </script>
 

@@ -26,7 +26,7 @@
     .now-D{text-align: center; display: inline-block;}
     
     /**/
-    .plan-schedule{width:100%; border-bottom: 1px solid black; height:300px; margin-top: 50px;}
+    .plan-schedule{width:100%; border-bottom: 1px solid black; height:300px; margin-top: 50px; font-family: 'Noto Sans KR', sans-serif;}
     .ps-img{width: 15%; height:200px; background:#ccc; float: left; margin-left: 50px;}
     .ps-title{width: 50%; height: 300px; float:left; padding-left:20px; margin-left: 30px;}
     .ps-title>p{font-size: 14pt;}

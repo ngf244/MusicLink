@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import festival.model.dao.FestivalDAO;
+import festival.model.vo.AppFestival;
 import festival.model.vo.Festival;
 import member.model.vo.Member;
 
@@ -193,6 +194,14 @@ public class FestivalService {
 		
 		close(conn);
 		return map;
+	}
+
+	public ArrayList<AppFestival> selectMyAppFesList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<AppFestival> afList = new FestivalDAO().selectMyAppFesList(conn, userCode);
+		
+		close(conn);
+		return afList;
 	}
 	
 }
