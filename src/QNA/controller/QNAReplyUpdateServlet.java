@@ -8,24 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class QNAReplyUpdateServlet
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/updateReply.qna")
+public class QNAReplyUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public QNAReplyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,19 +32,15 @@ public class QNAdetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String qnaCode = request.getParameter("qnaCode");
 		
-		QNAService service = new QNAService();
+		int result = new QNAService().updateReply(qnaCode);
 		
-		QnA qna = service.selectQnA(qnaCode);
-		
-		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
+		String page = "";
+		if(result > 0) {
+			page = "/detail.qna?qnaCode=" + qnaCode;
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
+			request.setAttribute("msg", "댓글 수정에 실패하였습니다.");
 		}
-
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}

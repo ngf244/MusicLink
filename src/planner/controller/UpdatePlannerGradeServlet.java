@@ -1,4 +1,4 @@
-package QNA.controller;
+package planner.controller;
 
 import java.io.IOException;
 
@@ -8,24 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
-import member.model.vo.Member;
+import planner.model.service.PlannerService;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class InsertPlannerGradeServlet
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/update.pgrd")
+public class UpdatePlannerGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public UpdatePlannerGradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +30,34 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaCode = request.getParameter("qnaCode");
+		String cpCode = request.getParameter("cpCode");
+		int grade = Integer.parseInt(request.getParameter("grade"));
 		
-		QNAService service = new QNAService();
+		PlannerService service = new PlannerService();
 		
-		QnA qna = service.selectQnA(qnaCode);
+		int nowGrade = service.selectPlannerGrade(cpCode);
+		int totalGrade = 0;
+		int result = 0;
+		
+		if(nowGrade == 0) {
+			result = service.updatePlannerGrade(cpCode, grade);
+		} else {
+			totalGrade = (nowGrade + grade)/2; 
+			result = service.updatePlannerGrade(cpCode, totalGrade);
+		}
 		
 		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
+		if(result > 0) {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "입력 완료!");
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
+			request.setAttribute("msg", "평점 입력에 실패하였습니다.");
 		}
-
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
 	}
 
 	/**

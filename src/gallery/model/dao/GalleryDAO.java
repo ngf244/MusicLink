@@ -87,7 +87,7 @@ public class GalleryDAO {
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
-			System.out.println("나의 포스트 갯수 : " + result);
+			System.out.println("나의 갤러리게시물 갯수 : " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -96,6 +96,40 @@ public class GalleryDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Gallery> selectRecentMyGalList(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Gallery> gList = null;
+		
+		String query = prop.getProperty("selectRecentMyGalList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			gList = new ArrayList<Gallery>();
+			
+			while(rset.next()) {
+				Gallery g = new Gallery(rset.getString("GL_CODE"),
+									    rset.getString("GL_TITLE"),
+									    rset.getString("GL_CONTENT"),
+									    rset.getDate("GL_DATE"),
+									    rset.getInt("GL_READCNT"),
+									    rset.getString("GL_STATUS"),
+									    rset.getString("USER_CODE"));
+				gList.add(g);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return gList;
 	}
 
 }

@@ -11,11 +11,12 @@
 <title>Insert title here</title>
 <style>
 	.sec-nav>li>ul{font-size: 12pt; font-family: 'Noto Sans KR', sans-serif;}
+	.sec-mtxt:hover{cursor: pointer;}
 </style>
 </head>
 <body>
         <div class="sec-line"></div>
-        <h1 class="sec-mtxt">MyPage<p>-Main</p></h1>
+        <h1 class="sec-mtxt" onclick="myPage();">MyPage<p>-Main</p></h1>
         <ul class="sec-nav">
             <li class="sec-menu-1 smenu">INFORMATION
                 <ul class="s-smenu">
@@ -40,7 +41,7 @@
             <% } else if(loginUserConfirm.getUserClass().equals("2")){ %>
             <li class="sec-menu-4 smenu">FESTIVAL
                 <ul class="s-smenu">
-                    <li><a href="#">공연스케줄</a></li>
+                    <li onclick="MySchedule();"><a href="#">공연스케줄</a></li>
                     <li><a href="#">지원한 행사</a></li>
                     <li><a href="#">러브콜(receive)</a></li>
                     <li><a href="#">행사 후기</a></li>
@@ -58,6 +59,10 @@
         </ul>   
         	
 <script>
+	function myPage(){
+		location.href="<%= request.getContextPath() %>/myPage.me";
+	}
+
 	function becomeAT(){
 		location.href="<%= request.getContextPath() %>/views/artist/BecomeArtistForm.jsp";
 	}
@@ -84,6 +89,10 @@
 	
 	function MyPost(){
 		location.href="<%= request.getContextPath() %>/list.mPost";
+	}
+	
+	function MySchedule(){
+		location.href="<%= request.getContextPath() %>/list.mSche";
 	}
 </script>    
     

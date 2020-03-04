@@ -1,5 +1,7 @@
 package festival.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import festival.model.vo.Festival;
-
-import static common.JDBCTemplate.*;
+import member.model.vo.Member;
 
 public class FestivalDAO {
 	private Properties prop = new Properties();
@@ -675,6 +676,7 @@ public class FestivalDAO {
 		return fArr;
 	}
 
+
 	public int selectArtistCount(Connection conn, String fcode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -773,8 +775,44 @@ public class FestivalDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
+    
 		return result;
+  }  
+    
+	public LinkedHashMap<Festival, Member> selectMySchedule(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LinkedHashMap<Festival, Member> map = null;
+		
+		String query = prop.getProperty("selectMySchedule");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			map = new LinkedHashMap<Festival, Member>();
+			
+			while(rset.next()) {
+				Festival f = new Festival(rset.getString("FES_NAME"),
+										  rset.getString("FES_LOCATION"),
+										  rset.getString("FES_TERM"),
+										  rset.getString("FES_POSTER_PATH"),
+										  rset.getString("USER_CODE"));
+				Member m = new Member(rset.getString("USER_NAME"),
+									  rset.getString("USER_EMAIL"),
+									  rset.getString("USER_PHONE"));
+				map.put(f, m);
+			}
+
+    } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return map;
 	}
 
 }
