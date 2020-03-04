@@ -73,7 +73,9 @@
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
     %>
-    <% System.out.println("jsp(listCount) : "+ listCount); %>
+    <% System.out.println("jsp(listCount) : "+ listCount); 
+    System.out.println("jsp(listsize) : "+ list.size());
+    %>
 	<section style="z-index: 1;">
 		<div id="categoryArea">
 			<div id="block"></div><br>
@@ -83,6 +85,9 @@
 		
 		<div id="contentArea">
 			<div class="table-responsive">
+			<% if(loginUser != null) { %>
+				<input type="hidden" id="loginUserId" value="<%= loginUser.getUserCode() %>">
+			<% } %>
 				<table class="table">
 					<thead>
 						<tr>
@@ -103,7 +108,7 @@
 					%>
 						<tr>
 							<th><%= q.getQnaCode() %><input type="hidden" value='<%= q.getQnaCode() %>'></th>
-							<td id="qnaWriter"><%= q.getQnaWriter() %></td>
+							<td><%= q.getQnaWriter() %><input type="hidden" id="qnaWriterId" value='<%= q.getUserCode() %>'></td>
 							<td><%= q.getQnaTitle() %></td>
 							<td><%= q.getQnaDate() %></td>
 							<td>
@@ -211,11 +216,19 @@
 				$(this).parent().css('background', 'none');
 			}).click(function(){
 				var qnaCode = $(this).parent().children().children('input').val();
-				
+				var qnaWriterId = $(this).parent().children().children('#qnaWriterId').val();
+				<% if(loginUser != null) { %>
+				var loginUserId = $('#loginUserId').val();
+				<% } %>
 				
 				// 로그인 한 사람만 상세보기 이용할 수 있게하기
 				<% if(loginUser != null) { %>
-					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
+					if(loginUserId == qnaWriterId){
+						location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
+					} else{
+						alert('작성자만 게시글을 볼 수 있습니다.');
+					}
+					
 				<% } else if(loginManager != null) {%>
 					location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;
 				<% } else { %>
