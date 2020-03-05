@@ -39,7 +39,7 @@ public class QNAListServlet extends HttpServlet {
 		
 		QNAService service = new QNAService();
 		
-		int listCount = service.getListCount();	// 게시판 리스트 개수
+		int listCount = service.getListCount(); // 게시판 리스트 개수
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수
@@ -53,7 +53,7 @@ public class QNAListServlet extends HttpServlet {
 			// 페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 		
-		limit = 10;
+limit = 10;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
