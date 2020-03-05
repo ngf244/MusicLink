@@ -83,14 +83,14 @@
     .subTitle{font-size:20px; font-weight:bold;}
     
     .promotionImgArea{margin-top:20px; width:70%; display:inline-block; overflow:hidden;}
-    .promClick{width:150px; height:220px; overflow:hidden; background:lightgray;}
+    .promClick{width:150px; height:220px; background:lightgray; display:inline-block; text-align:right;}
     .promotionImg{width:auto; height:100%;}
     .alignspan{font-size:11px; margin-top: 193px; margin-right:7px;}
     
     #hrstyle{border:0.4px solid lightgray; margin-top:9%;}
     
     #listArea{margin-top:9%; margin-left:10%; margin-right:10%; /*background:yellow;*/}
-    #listCategory{font-size:20px;}
+    #listCategory{font-size:18px;}
     #secondCategory{width:105%; margin-top:5%; margin-bottom:80px;}
     /*#listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}*/
     
@@ -193,12 +193,12 @@
 							int status = 0;
 							if (today.getTime() > endFesDate.getTime()) { //지난행사
 								status = 3;
-							} else if (banArtlist.size() < banFes.getRecCount() && today.getTime() <= endRecDate.getTime()) { //모집행사
+							} else if (banArtlist.size() < banFes.getRecCount() && today.getTime() <= endRecDate.getTime()) { //모집중행사
 								status = 1;
 							} else if (banArtlist.size() == banFes.getRecCount() && today.getTime() <= endFesDate.getTime()) { //확정행사
 								status = 2;
-							} else if (today.getTime() > endRecDate.getTime()) { //확정행사
-								status = 2;
+							} else if (today.getTime() > endRecDate.getTime()) { //모집마감행사
+								status = 5;
 							} %>
 						<div class="banClick">
 							<input type="hidden" value="<%= banFes.getFesCode() %>">
@@ -218,37 +218,30 @@
 						<div class="promClick">
 							<input type="hidden" value="<%= fulFes.getFesCode() %>">
 							<input type="hidden" value="2">
-							<img class="promotionImg" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>" alt="" />
-							<%-- <div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;"></div> --%>
+							<div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;">
+								<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
+							</div>
 						</div>
-						<%--
-						<div class="promotionImg">
-							<input type="hidden" value="<%= fulFes.getFesCode() %>">
-							<input type="hidden" value="2">
-							<div style="margin:0; padding:0; background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;"></div>
-							<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-						</div>
-						 --%>
 				<%		}
 				   } %>
 				</div>
 			</div>
-			
+			<!-- badge badge-pill badge-info -->
 			<div class="promotionArea">
 				<label class="subTitle">아티스트 모집 행사</label><br>
 				
-				<div class="promotionImgArea" id="ingFes" data-slick='{"slidesToShow": <%= ingmap.size() %>, "slidesToScroll": <%= ingmap.size() %>}'>
+				<div class="promotionImgArea" id="ingFes" data-slick='{"slidesToShow": 5, "slidesToScroll": 5}'>
 				<% if(ingmap != null) {
 						for(Festival ingFes : ingmap.keySet()) { %>
 						<div class="promClick">
 							<input type="hidden" value="<%= ingFes.getFesCode() %>">
 							<input type="hidden" value="1">
-							<img class="promotionImg" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= ingFes.getPosPath() %>" alt="" />
-							<%-- <div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;"></div> --%>
+							<div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= ingFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;">
+								<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
+							</div>
 						</div>
 				<%		}
 				   } %>
-				   <!-- <span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span> -->
 				</div>
 			</div>
 			
@@ -303,6 +296,12 @@
 							scrollTop: scrollPosition
 						}, 500);
 					<%  break;
+					case 5: %>
+						$('#recCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
 					}%>
 				})
 			</script>
@@ -314,6 +313,8 @@
 					<label class="category pointer" id="ingCategory">아티스트 모집 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
 					<label class="category pointer" id="fullCategory">아티스트 확정 행사</label>
+					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
+					<label class="category pointer" id="recCategory">아티스트 모집 마감 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
 					<label class="category pointer" id="endCategory">지난 행사</label>
 				</div>
@@ -412,9 +413,9 @@
 									addtext = "아티스트 확정";
 									status = 2;
 								} else if (today.getTime() > endRecDate.getTime()) { 
-									addcls = "badge badge-pill badge-danger";
-									addtext = "아티스트 확정";
-									status = 2;
+									addcls = "badge badge-pill badge-info";
+									addtext = "아티스트 모집 마감";
+									status = 4;
 								} %>
 					<div class="festival">
 						<input type="hidden" value="<%= f.getFesCode() %>">
@@ -577,6 +578,10 @@
 				category = 4;
 				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
 			});
+			$('#recCategory').click(function() {
+				category = 5;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
 			
 			$('.banClick').click(function() {
 				var fcode = $(this).children().eq(0).val();
@@ -593,7 +598,7 @@
 				var status = $(this).children().eq(1).val();
 				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
 			});
-    	})
+    	});
     </script>
     
     <h1 class="htext">F E S T I V A L</h1>

@@ -80,6 +80,7 @@ public class FestivalListServlet extends HttpServlet {
 			request.setAttribute("banmap", banmap);
 			request.setAttribute("fulmap", fulmap);
 			request.setAttribute("ingmap", ingmap);
+			
 			request.setAttribute("category", category);
 		} else {
 			page = "views/common/errorPage.jsp";
