@@ -56,7 +56,9 @@ public class QNADAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<QnA> list = null;
-		int posts = 10; // 한페이지에 보여질 게시글 개수
+		
+		int posts = 10; // 한 페이지에 보여질 게시글 개수
+		
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
 		System.out.println("DAO(currentPage, startRow, endRow) : " + currentPage + "," + startRow + "," + endRow);
