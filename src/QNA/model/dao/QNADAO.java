@@ -84,6 +84,7 @@ public class QNADAO {
 								rs.getString("mn_code"),
 								rs.getString("user_code"));
 				list.add(q);
+				System.out.println("list 카운트 ");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,6 +93,7 @@ public class QNADAO {
 			close(pstmt);
 		}
 		
+		System.out.println("DAO(list.size) : " + list.size());
 		return list;
 	}
 
