@@ -41,8 +41,8 @@
          <div id="menuList2">
              등록 관리
              <div class="menuSelect2">
-                     <div class="menuSelect2-1">아티스트 등록 관리</div>
-                     <div class="menuSelect2-2">기획자 등록 관리</div>
+                     <div class="menuSelect2-1"><a href="<%=request.getContextPath()%>/requestList.at">아티스트 등록 관리</a></div>
+                     <div class="menuSelect2-2"><a href="<%=request.getContextPath()%>/requestList.co">기획자 등록 관리</a></div>
              </div>
          </div>
      </div>

@@ -48,6 +48,7 @@
     #nowDay{display: inline-block;}
 
     .nowDayArea{margin-left: 34%; font-size: 30px;}
+    .month-D{width: 100%; min-height: 80px; text-align: center; background:rgba(0,0,0, 0.8); border-radius: 10px; margin-bottom: 30px; color:#fff;}
     /* 끝 */
     
     /* 행사리스트 부분 */
@@ -200,7 +201,7 @@
             </div>
             
             <div id="pictureBrowser">
-                <div id="monthDays"></div>
+                <div id="monthDays" class="month-D"></div>
                 <br>
                 <div class="nowDayArea">
                     <button id="prev" class="moveBtn" onclick="prev();">&lt;prev</button>&nbsp;&nbsp;
@@ -278,7 +279,7 @@
 
 							String fesTerm = f.getFesTerm();
 							String endFes[] = fesTerm.split(" - ");
-							String dateSplit[] = (endFes[endFes.length-1]).split("/");
+							String dateSplit[] = (endFes[0]).split("/");
 							
 							int month = 0;
 							int day = 0;

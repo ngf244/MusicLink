@@ -23,7 +23,31 @@ public class Festival {
 	
 	public Festival() {}
 	
-	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String posPath, String banPath) {
+	public Festival(String fesName, String fesLoc, String fesTerm) {
+		super();
+		this.fesName = fesName;
+		this.fesLoc = fesLoc;
+		this.fesTerm = fesTerm;
+	}
+	
+	public Festival(String fesName, String fesLoc, String fesTerm, String posPath) {
+		super();
+		this.fesName = fesName;
+		this.fesLoc = fesLoc;
+		this.fesTerm = fesTerm;
+		this.posPath = posPath;
+	}
+	
+	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String banPath) {
+		super();
+		this.fesCode = fesCode;
+		this.fesTerm = fesTerm;
+		this.recCount = recCount;
+		this.recTerm = recTerm;
+		this.banPath = banPath;
+	}
+  
+  public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String posPath, String banPath) {
 		super();
 		this.fesCode = fesCode;
 		this.fesTerm = fesTerm;
@@ -33,12 +57,13 @@ public class Festival {
 		this.banPath = banPath;
 	}
 	
-	public Festival(String fesName, String fesLoc, String fesTerm, String posPath) {
+	public Festival(String fesName, String fesLoc, String fesTerm, String posPath, String cpCode) {
 		super();
 		this.fesName = fesName;
 		this.fesLoc = fesLoc;
 		this.fesTerm = fesTerm;
 		this.posPath = posPath;
+		this.cpCode = cpCode;
 	}
 
 	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,

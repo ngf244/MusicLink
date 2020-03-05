@@ -1,6 +1,7 @@
-package QNA.controller;
+package artist.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
+import festival.model.service.FestivalService;
+import festival.model.vo.Festival;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class ArtistMyScheduleListServlet
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/list.mSche")
+public class ArtistMyScheduleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public ArtistMyScheduleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +34,24 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaCode = request.getParameter("qnaCode");
+		HttpSession session = request.getSession();
 		
-		QNAService service = new QNAService();
-		
-		QnA qna = service.selectQnA(qnaCode);
+		String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+		FestivalService service = new FestivalService();
+		LinkedHashMap<Festival, Member> map = service.selectMySchedule(userCode);
 		
 		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
+		if(map != null) {
+			page = "views/artist/MySchedule.jsp";
+			request.setAttribute("map", map);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
+			request.setAttribute("msg", "나의 스케줄 조회에 실패하였습니다.");
 		}
-
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
 	}
 
 	/**

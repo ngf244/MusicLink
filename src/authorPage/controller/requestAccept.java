@@ -1,31 +1,25 @@
-package QNA.controller;
+package authorPage.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
-import member.model.vo.Member;
+import authorPage.model.service.AuthorService;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class requestAccept_artist
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/accept.at")
+public class requestAccept extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public requestAccept() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +28,32 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaCode = request.getParameter("qnaCode");
+		String userCode = request.getParameter("userCode");
+		String where = request.getParameter("where");
 		
-		QNAService service = new QNAService();
+		int result = new AuthorService().acceptJoin(userCode);
 		
-		QnA qna = service.selectQnA(qnaCode);
+		String page = "";
 		
-		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
+		if(result>0) {
+			if(where.equals("art")) {
+				page = "requestList.at";
+			}
+			else if(where.equals("com")) {
+				page = "requestList.co";
+			}
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
+			System.out.println("committed 변경 실패");
 		}
-
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		
+		response.sendRedirect(page);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -153,7 +153,7 @@
     
     $('table tr:gt(0)').click(function () {
         console.log(this);
-        var userId = $(this).children().first().text();
+        var userId = $(this).children().eq(1).text();
         console.log(userId);
         location.href='<%=request.getContextPath()%>/showUserDetail.au?userId='+userId;
     })

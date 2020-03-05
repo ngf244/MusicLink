@@ -178,6 +178,7 @@ zzzrod
 		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px;
 	}
 #mnBtn{text-align: right;}
+#contentText{ resize:none; text-align: center; line-height: 30px; overflow-y: hidden; height: 30px;}
 </style>
 </head>
 <body>
@@ -223,7 +224,11 @@ zzzrod
 						</div>
 						<div id="collapse<%= i %>" class="collapse"
 							data-parent="#accordion-two">
-							<div class="card-body" id="contentDiv"><%= list.get(i).getFaqContent() %></div>
+							<div class="card-body" id="contentDiv">
+								<%= list.get(i).getFaqContent() %>
+								<%-- <textarea id="contentText" cols="100" onkeyup="this.style.height='26px'; this.style.height = this.scrollHeight + 'px';" readonly>
+								<%= list.get(i).getFaqContent() %></textarea> --%>
+							</div>
 						<% if(loginManager != null) {%>
 							<div id="mnBtn">
 								<input type="hidden" name="faqCode" id="faqCode<%= i %>" value="<%= list.get(i).getFaqNum() %>">

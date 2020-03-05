@@ -116,6 +116,38 @@ public class QNAService {
 		return list;
 	}
 
+	public ArrayList<QnA> selectRecentMyQnAList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<QnA> qList = new QNADAO().selectRecentMyQnAList(conn, userCode);
+		close(conn);
+		return qList;
+	}
+
+	public int deleteReply(String qnaCode) {
+		Connection conn = getConnection();
+		int result = new QNADAO().deleteReply(conn, qnaCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int updateReply(String qnaCode) {
+		Connection conn = getConnection();
+		int result = new QNADAO().updateReply(conn, qnaCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 	
 
 

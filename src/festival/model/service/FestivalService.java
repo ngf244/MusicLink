@@ -1,13 +1,18 @@
 package festival.model.service;
 
-import festival.model.dao.FestivalDAO;
-import festival.model.vo.Festival;
-
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import festival.model.dao.FestivalDAO;
+import festival.model.vo.AppFestival;
+import festival.model.vo.Festival;
+import member.model.vo.Member;
 
 public class FestivalService {
 
@@ -141,6 +146,7 @@ public class FestivalService {
 		return fArr;
 	}
 
+
 	public int selectArtistCount(String fcode) {
 		Connection conn = getConnection();
 		
@@ -181,6 +187,21 @@ public class FestivalService {
 		
 		close(conn);
 		return grade;
+  }
+	public LinkedHashMap<Festival, Member> selectMySchedule(String userCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<Festival, Member> map = new FestivalDAO().selectMySchedule(conn, userCode);
+		
+		close(conn);
+		return map;
+	}
+
+	public ArrayList<AppFestival> selectMyAppFesList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<AppFestival> afList = new FestivalDAO().selectMyAppFesList(conn, userCode);
+		
+		close(conn);
+		return afList;
 	}
 	
 }

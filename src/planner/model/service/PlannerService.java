@@ -1,12 +1,12 @@
 package planner.model.service;
 
+import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import member.model.dao.MemberDAO;
 import planner.model.dao.PlannerDAO;
 import planner.model.vo.Planner;
 
@@ -26,6 +26,26 @@ public class PlannerService {
 		}
 		
 		return result1 * result2;
+	}
+
+	public int updatePlannerGrade(String cpCode, int grade) {
+		Connection conn = getConnection();
+		int result = new PlannerDAO().updatePlannerGrade(conn, cpCode, grade);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int selectPlannerGrade(String cpCode) {
+		Connection conn = getConnection();
+		int nowGrade = new PlannerDAO().selectPlannerGrade(conn, cpCode);
+		close(conn);
+		return nowGrade;
 	}
 
 }

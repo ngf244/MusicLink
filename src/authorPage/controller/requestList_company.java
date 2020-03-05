@@ -1,31 +1,29 @@
-package QNA.controller;
+package authorPage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
-import member.model.vo.Member;
+import authorPage.model.service.AuthorService;
+import authorPage.model.vo.ArtistJoinInfo;
+import authorPage.model.vo.CompanyJoinInfo;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class requestList_company
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/requestList.co")
+public class requestList_company extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public requestList_company() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +32,11 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaCode = request.getParameter("qnaCode");
+		ArrayList<CompanyJoinInfo> arr = new AuthorService().getCompanyJoinList();
 		
-		QNAService service = new QNAService();
-		
-		QnA qna = service.selectQnA(qnaCode);
-		
-		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
-		}
-
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		request.setAttribute("arr", arr);
+		String path = "views/authorPage/joinAcceptPage_planner1.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**

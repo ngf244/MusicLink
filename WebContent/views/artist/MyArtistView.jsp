@@ -24,7 +24,7 @@
 
 	<script src="../js/jquery-3.4.1.min.js"></script>	
 
-    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
+    <%-- <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet"> --%>
 
 <title>나의 아티스트</title>
 <style>

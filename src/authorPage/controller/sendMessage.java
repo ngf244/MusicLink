@@ -1,31 +1,25 @@
-package QNA.controller;
+package authorPage.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import QNA.model.service.QNAService;
-import QNA.model.vo.QnA;
-import member.model.vo.Manager;
-import member.model.vo.Member;
+import authorPage.model.service.AuthorService;
 
 /**
- * Servlet implementation class QNAdetailServlet
+ * Servlet implementation class sendMessage
  */
-@WebServlet("/detail.qna")
-public class QNAdetailServlet extends HttpServlet {
+@WebServlet("/send.message")
+public class sendMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAdetailServlet() {
+    public sendMessage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +28,19 @@ public class QNAdetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaCode = request.getParameter("qnaCode");
+		String message = request.getParameter("message");
+		String userCode = request.getParameter("userCode");
 		
-		QNAService service = new QNAService();
+		int result = new AuthorService().sendMessage(message, userCode);
+		int result2 = new AuthorService().deleteRequset(userCode);
 		
-		QnA qna = service.selectQnA(qnaCode);
-		
-		String page = null;
-		if(qna != null) {
-			page = "views/QNA/QNADetail.jsp";
-			request.setAttribute("qna", qna);
+		if(result > 0 && result2 > 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println("메세지 전송 성공");
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
+			System.out.println("메세지 전송 실패");
 		}
-
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		
 	}
 
 	/**

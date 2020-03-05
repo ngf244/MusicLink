@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.*, artist.model.vo.*, festival.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.*, artist.model.vo.*, festival.model.vo.*, QNA.model.vo.QnA, gallery.model.vo.*"%>
 <%
 	Member member = (Member)request.getAttribute("member");
 	Artist artist = (Artist)request.getAttribute("artist");
 	String atFileName = (String)session.getAttribute("atFileName");
 	System.out.println(member);
+	
 	ArrayList<FollowArtist> list = (ArrayList<FollowArtist>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -50,7 +51,8 @@
 		imgPath = "artistProfile_uploadFiles/" + atFileName;  
 	}
 	
-	
+	ArrayList<Gallery> gList = (ArrayList<Gallery>)request.getAttribute("gList");
+	ArrayList<QnA> qList = (ArrayList<QnA>)request.getAttribute("qList");
 	
 %>
 <!DOCTYPE html>
@@ -234,7 +236,8 @@
 	  overflow: visible;
 	  clip: auto;
 	  white-space: normal; 
-	}  
+	}
+	
 </style>
 </head>
 <body>
@@ -281,21 +284,32 @@
             
             <div class="postInfo">
                 <div class="write">
-                    <ul><b>내가 작성한 글</b></ul>
-                        <li><a href="">01.17 공연 행사 사진들</a></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>                            
+                    <h4><b>갤러리 게시판</b></h4>
+                        <% if(gList.isEmpty()){ %>
+                        <div>작성하신 글이 없습니다.</div>
+                        <% } else{
+            					for(Gallery g : gList){
+            			%>
+                        <div onclick="goGalDetail();" style="cursor: pointer;">- <%= g.getGlTitle() %></div>
+				        <input type="hidden" name="qnaCode" value="">
+				        <%		}
+		            	   }
+		            	%>                                                    
                 </div>
-                <div class="comment">
-                    <ul><b>내가 작성한 댓글</b></ul>
-                        <li><a href="">멋져요!!!</a></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                <div class="comment" style="float: left;">
+                    <h4><b>Q&A</b></h4>
+                       <% if(qList.isEmpty()){ %>
+                        <div>작성하신 글이 없습니다.</div>
+                        <% } else{
+            					for(QnA q : qList){
+            			%>
+                        <div onclick="goQnaDetail();" style="cursor: pointer;"><input type="hidden" name="qnaCode" value="">- <%= q.getQnaTitle() %></div>
+				        
+				        <%		}
+		            	   }
+		            	%>
                 </div>
+                <div style="clear:both:"></div>
             </div>
 
             <div class="followView">
@@ -412,6 +426,20 @@
         		}
         		
 
+        	}
+        	
+        	function goQnaDetail(){
+            	var qnaCode = $(this).children().eq(0).val();
+            	console.log(qnaCode);
+            	
+            	location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;       		
+        	}
+        	
+        	function goGalDetail(){
+        		var galCode = $(this).children().eq(0).val();
+        		console.log(galCode);
+        		
+        		location.href='<%= request.getContextPath() %>/detail.gal?galCode=' + galCode;  
         	}
         </script>
 

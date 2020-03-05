@@ -24,4 +24,11 @@ public class GalleryService {
 		return result;
 	}
 
+	public ArrayList<Gallery> selectRecentMyGalList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<Gallery> gList = new GalleryDAO().selectRecentMyGalList(conn, userCode);
+		close(conn);
+		return gList;
+	}
+
 }
