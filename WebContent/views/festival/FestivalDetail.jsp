@@ -4,6 +4,8 @@
 <%
 	Festival f = (Festival)request.getAttribute("festival");
 	ArrayList<String> artistArr = (ArrayList<String>)request.getAttribute("artistArr");
+	ArrayList<String> userApList = (ArrayList<String>)request.getAttribute("userApList");
+	
 	int status = (int)request.getAttribute("status");
 	int grade = (int)request.getAttribute("grade");
 	
@@ -243,9 +245,32 @@
 						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
 						<% } else if(status == 3) { %>
 						<span class="badge badge-pill badge-light alignspan">지난 행사</span>
+						<% } else if(status == 4) { %>
+						<span class="badge badge-pill badge-info alignspan">아티스트 모집 마감</span>
 						<% } %>
 					</div>
 				</div>
+				
+				<script>
+				function approach() {
+					<% if(loginUser != null) { %>
+						$.ajax({
+							url: 'approachFes.do',
+							type: 'post',
+							data: {usercode: '<%= loginUser.getUserCode() %>', fescode: '<%= f.getFesCode() %>'},
+							success: function(data) {
+							    $('#apBtn').attr('id', 'apBtn');
+							    $('#apBtn').attr('class', 'btn mb-1 btn-secondary changeBtn');
+							    $('#apBtn').attr('disabled', true);
+								$('#apBtn').val('지원 완료');
+							},
+							error: function(data) {
+								console.log('실패');
+							}
+						});
+					<% } %>
+				}
+				</script>
 				
 				<div id="festivalInfoArea">
 					<table id="infoTable">
@@ -364,8 +389,25 @@
 						
 						<% if(loginUser != null) { %>
 							<% if(loginUser.getUserClass().equals("2") && status == 1) {%> //아티스트 & 행사지원 & 모집중인행사만
-								$('.changeBtn').attr('id', 'apBtn');
-								$('.changeBtn').val('행사 지원');
+							
+							<% for(int i = 0; i < userApList.size(); i++) {
+								  if((userApList.get(i)).equals(f.getFesCode())) { %>
+								    $('#apBtn').attr('id', 'apBtn');
+								    $('#apBtn').attr('class', 'btn mb-1 btn-secondary changeBtn');
+								    $('#apBtn').attr('disabled', true);
+									$('#apBtn').val('지원 완료');
+							<%      break;
+								  }
+								  if(i == userApList.size() - 1) { %>
+								    $('#apBtn').attr('id', 'apBtn');
+								    $('#apBtn').attr('class', 'btn mb-1 btn-warning changeBtn');
+								    $('#apBtn').attr('onclick', 'approach();');
+									$('#apBtn').val('행사 지원');
+							<%    }
+							   } %>
+								
+								//$('.changeBtn').attr('id', 'apBtn');
+								//$('.changeBtn').val('행사 지원');
 								$('section').css('height', size + 920 + 'px');
 							<% } else if(loginUser.getUserClass().equals("3") && loginUser.getUserCode().equals(f.getCpCode()) && status != 3) { %> //기획자 & 행사수정 & 지난행사 제외
 								$('.changeBtn').attr('id', 'upBtn');
@@ -403,24 +445,6 @@
 				window.open("http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=19018834", "_blank");
 			}});
 		});
-		
-		function approach(where) {
-			<%--
-			$.ajax({
-				url: 'approachFes.do',
-				type: 'post',
-				data: {usercode: '<%= loginUser.getUserCode() %>', fescode: where.parentElement.parentElement.children[0].value},
-				success: function(data) {
-					where.className = 'btn mb-1 btn-secondary approachBtn';
-					where.innerHTML = '지원 완료';
-					where.disabled = true;
-				},
-				error: function(data) {
-					console.log('실패');
-				}
-			});
-			--%>
-		}
 		
 		//var address = "";
 		//var addressDetail = "흰물결아트센터";

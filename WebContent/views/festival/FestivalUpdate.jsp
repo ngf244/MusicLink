@@ -5,9 +5,6 @@
 	Festival f = (Festival)request.getAttribute("festival");
 	int artcount = (int)request.getAttribute("artcount");
 	
-	System.out.println("artcount : " + artcount);
-	System.out.println("f.getRecCount() : " + f.getRecCount());
-	
 	String fulLoc = f.getFesLoc();
 	String splitzone[] = fulLoc.split("&");
 	String splitaddress[] = splitzone[1].split("/");
@@ -225,7 +222,7 @@
 					$('#moneyMax').attr('readonly', true);
 					
 					$('#status').val('true');
-				<% } else if(artcount > 0 && artcount < f.getRecCount()) { System.out.println("artcount > 0"); %> //아티스트 모집 중 & 확정 아티스트 1명 이상
+				<% } else if(artcount > 0 && artcount < f.getRecCount()) { %> //아티스트 모집 중 & 확정 아티스트 1명 이상
 					$('#alert').css('visibility', 'visible');
 					
 					$('#fesName').attr('readonly', true);
@@ -235,7 +232,7 @@
 					$('#freeChk').attr('disabled', true);
 					
 					$('#status').val('false');
-				<% } else { System.out.println("else"); %> //아티스트 모집 중 & 확정 아티스트 0명
+				<% } else {%> //아티스트 모집 중 & 확정 아티스트 0명
 					$('#alert').css('visibility', 'hidden');
 					/*
 					var addalter = {

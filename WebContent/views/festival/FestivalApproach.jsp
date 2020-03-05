@@ -189,6 +189,11 @@
 							category = 4;
 							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
 						});
+						
+						$('.festival').click(function() {
+							var fcode = $(this).children().eq(0).val();
+							location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status=1";
+						});
 					});
 					
 					
@@ -226,8 +231,6 @@
 							for(Festival f : fArr) { %>
 					<div class="festival">
 						<input type="hidden" id="hidfescode" value="<%= f.getFesCode() %>">
-						<input type="hidden" value="아티스트 모집 중">
-						<!-- <div class="promotionDetailImg"></div> -->
 						<div style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;" class="promotionDetailImg"></div>
 						
 						<div class="festivalInfo">
