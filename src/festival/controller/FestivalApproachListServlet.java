@@ -35,14 +35,26 @@ public class FestivalApproachListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int category = 0;
+		String searchType = "";
+		String searchText = "";
+		if(request.getParameter("searchText") != null) {
+			searchType = request.getParameter("searchType");
+			searchText = request.getParameter("searchText");
+		}
+		
+		int category = 1;
 		if(request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));
 		}
 		
 		FestivalService service = new FestivalService();
 		
-		int listCount = service.getApListCount();
+		int listCount = 0;
+		if(searchText.equals("")) {
+			listCount = service.getApListCount();
+		} else {
+			listCount = service.getApSearchListCount(searchType, searchText);
+		}
 		
 		int currentPage; //현재 페이지 표시
 		int limit; 		 //한 페이지에 표시될 페이지 수
@@ -66,7 +78,13 @@ public class FestivalApproachListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList<Festival> fArr = service.selectApList(currentPage, category);
+		
+		ArrayList<Festival> fArr = null;
+		if(searchText.equals("")) {
+			fArr = service.selectApList(currentPage, category);
+		} else {
+			fArr = service.selectApSearchList(currentPage, category, searchType, searchText);
+		}
 		
 		String usercode = ((Member)request.getSession().getAttribute("loginUser")).getUserCode();
 		ArrayList<String> userApList = service.selectUserApList(usercode);
@@ -77,6 +95,9 @@ public class FestivalApproachListServlet extends HttpServlet {
 			request.setAttribute("fArr", fArr);
 			request.setAttribute("userApList", userApList);
 			request.setAttribute("pi", pi);
+
+			request.setAttribute("searchType", searchType);
+			request.setAttribute("searchText", searchText);
 			
 			request.setAttribute("category", category);
 		} else {
