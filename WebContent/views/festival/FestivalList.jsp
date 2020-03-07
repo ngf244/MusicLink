@@ -90,7 +90,7 @@
     #hrstyle{border:0.4px solid lightgray; margin-top:9%;}
     
     #listArea{margin-top:9%; margin-left:10%; margin-right:10%; /*background:yellow;*/}
-    #listCategory{font-size:18px;}
+    #listCategory{font-size:19px;}
     #secondCategory{width:105%; margin-top:5%; margin-bottom:80px;}
     /*#listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}*/
     
@@ -310,11 +310,11 @@
 				<div id="listCategory">
 					<label class="category pointer" id="allCategory">전체 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category pointer" id="ingCategory">아티스트 모집 행사</label>
+					<label class="category pointer" id="ingCategory">모집 중 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category pointer" id="fullCategory">아티스트 확정 행사</label>
+					<label class="category pointer" id="fullCategory">확정 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category pointer" id="recCategory">아티스트 모집 마감 행사</label>
+					<label class="category pointer" id="recCategory">모집 마감 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
 					<label class="category pointer" id="endCategory">지난 행사</label>
 				</div>

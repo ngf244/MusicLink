@@ -34,7 +34,7 @@ public class FestivalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int category = 0;
+		int category = 1;
 		if(request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));
 		}
