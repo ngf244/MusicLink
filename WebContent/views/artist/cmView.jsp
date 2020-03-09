@@ -4,7 +4,7 @@
 <%@ page import="community.CommunityDAO" %>
 <%@ page import="community.Community" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"> 
 <head>
 <meta charset="utf-8">
 

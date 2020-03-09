@@ -7,7 +7,7 @@
 <jsp:setProperty name="gallery" property="glTitle"/>
 <jsp:setProperty name="gallery" property="glContent"/> 
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="utf-8">
 <title>갤러리 게시판 작성</title>

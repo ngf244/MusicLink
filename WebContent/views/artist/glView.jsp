@@ -4,7 +4,7 @@
 <%@ page import="gallery.GalleryDAO2" %>
 <%@ page import="gallery.Gallery2" %>
 <!DOCTYPE html>
-<html lang="ko"> 
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 

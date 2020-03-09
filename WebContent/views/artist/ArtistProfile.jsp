@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head> 
 <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link href="css/slick.css" rel="stylesheet" />

@@ -6,7 +6,7 @@
 <jsp:useBean id="community" class="community.Community" scope="page" />
 <jsp:setProperty name="community" property="cmTitle"/>
 <jsp:setProperty name="community" property="cmContent"/>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="utf-8">

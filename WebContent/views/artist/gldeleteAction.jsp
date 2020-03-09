@@ -4,7 +4,7 @@
 <%@ page import="gallery.Gallery2" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html> 
 <head>
 <meta charset="utf-8">
