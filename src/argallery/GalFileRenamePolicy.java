@@ -1,4 +1,4 @@
-package gallery;
+package argallery;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

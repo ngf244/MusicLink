@@ -1,4 +1,4 @@
-package gallery;
+package argallery;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

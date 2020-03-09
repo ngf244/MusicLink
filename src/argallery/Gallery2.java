@@ -1,4 +1,4 @@
-package gallery;
+package argallery;
 
 public class Gallery2 {
 	

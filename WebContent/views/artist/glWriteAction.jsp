@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="gallery.GalleryDAO2" %>
+<%@ page import="argallery.GalleryDAO2" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="gallery" class="gallery.Gallery2" scope="page" />
+<jsp:useBean id="gallery" class="argallery.Gallery2" scope="page" />
 <jsp:setProperty name="gallery" property="glTitle"/>
 <jsp:setProperty name="gallery" property="glContent"/> 
 <!DOCTYPE html>
