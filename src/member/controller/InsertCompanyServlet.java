@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.dao.CompanyDAO;
 import member.model.service.CompanyService;
 import member.model.vo.Company;
 import member.model.vo.Member;
@@ -49,8 +50,10 @@ public class InsertCompanyServlet extends HttpServlet {
 		
 		int result = new CompanyService().insertCompany(member, company);
 		
+		int result2 = new CompanyService().insertAtReq(companyId);
+		
 		String page = "";
-		if(result > 0) {
+		if(result > 0 && result2 > 0) {
 			page = "index.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";
