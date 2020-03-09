@@ -56,7 +56,6 @@ public class GalleryDAO {
 									    rset.getString("GL_TITLE"),
 									    rset.getString("GL_CONTENT"),
 									    rset.getDate("GL_DATE"),
-									    rset.getInt("GL_READCNT"),
 									    rset.getString("GL_STATUS"),
 									    rset.getString("USER_CODE"));
 				gList.add(g);
@@ -117,7 +116,6 @@ public class GalleryDAO {
 									    rset.getString("GL_TITLE"),
 									    rset.getString("GL_CONTENT"),
 									    rset.getDate("GL_DATE"),
-									    rset.getInt("GL_READCNT"),
 									    rset.getString("GL_STATUS"),
 									    rset.getString("USER_CODE"));
 				gList.add(g);

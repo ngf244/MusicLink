@@ -286,7 +286,7 @@
                 <div class="write">
                     <h4><b>갤러리 게시판</b></h4>
                         <% if(gList.isEmpty()){ %>
-                        <div>작성하신 글이 없습니다.</div>
+                        <div>- 작성하신 글이 없습니다.</div>
                         <% } else{
             					for(Gallery g : gList){
             			%>
@@ -299,7 +299,7 @@
                 <div class="comment" style="float: left;">
                     <h4><b>Q&A</b></h4>
                        <% if(qList.isEmpty()){ %>
-                        <div>작성하신 글이 없습니다.</div>
+                        <div>- 작성하신 글이 없습니다.</div>
                         <% } else{
             					for(QnA q : qList){
             			%>
@@ -324,7 +324,7 @@
 		                <li class="follow-nav">상태</li>
 		            </ul>
 	            <% if(list.isEmpty()){ %>
-	            	<div style="text-align: center;">팔로잉한 아티스트가 없습니다.</div>
+	            	<div style="text-align: center;"><br>팔로잉한 아티스트가 없습니다.</div>
 				<% } else{
             			for(FollowArtist fa : list){
             	%>
