@@ -21,6 +21,10 @@ public class Festival {
 	private String cpName;
 	private String ticFreeOp;
 	
+	/*현호 추가*/
+	private Date fesDate;
+	private String fesRecruit;
+	
 	public Festival() {}
 	
 	public Festival(String fesCode, String fesTerm, int recCount, String recTerm, String banPath) {
@@ -39,7 +43,7 @@ public class Festival {
 		this.fesTerm = fesTerm;
 		this.posPath = posPath;
 	}
-
+	
 	public Festival(String fesCode, String fesName, String fesLoc, String fesTerm, String fesInfo, String payRange, int recCount,
 			String recTerm, String posPath, String secOp, String cpCode) {
 		super();
@@ -108,7 +112,17 @@ public class Festival {
 		this.cpCode = cpCode;
 	}
 	
-	
+	/*현호 추가*/
+	public Festival(String fesCode, String fesName, String fesTerm, String recTerm, Date fesDate, String fesRecruit, String cpCode) {
+		super();
+		this.fesCode = fesCode;
+		this.fesName = fesName;
+		this.fesTerm = fesTerm;
+		this.recTerm = recTerm;
+		this.fesDate = fesDate;
+		this.fesRecruit = fesRecruit;
+		this.cpCode = cpCode;
+	}
 	
 
 	public String getFesCode() {
@@ -239,5 +253,21 @@ public class Festival {
 		this.cpName = cpName;
 	}
 	
+	/*현호 추가*/
+	public Date getFesDate() {
+		return fesDate;
+	}
+
+	public void setFesDate(Date fesDate) {
+		this.fesDate = fesDate;
+	}
+	
+	public String getFesRecruit() {
+		return fesRecruit;
+	}
+
+	public void setFesRecruit(String fesRecruit) {
+		this.fesRecruit = fesRecruit;
+	}
 	
 }

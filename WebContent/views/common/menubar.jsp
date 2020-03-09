@@ -19,7 +19,9 @@
 	<header style='position:fixed; top:0; z-index:2;'> 
         <nav> 
             <div class="logo">
-            <a href="<%= request.getContextPath() %>/index.jsp">logo</a> 
+            <a href="<%= request.getContextPath() %>/index.jsp">
+				<img src="<%= request.getContextPath() %>/img/logoml.png" style="width:180px; height:100px;">
+			</a> 
             </div>
             <div id="toggle">
                 <div class="span" id="one"></div>

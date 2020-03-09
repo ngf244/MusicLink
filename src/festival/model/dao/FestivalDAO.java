@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 
+import artist.model.vo.Artist;
 import festival.model.vo.Festival;
+import festival.model.vo.FestivalApply;
+import member.model.vo.Member;
 
 import static common.JDBCTemplate.*;
 
@@ -663,6 +666,69 @@ public class FestivalDAO {
 		}
 		
 		return fArr;
+	}
+
+	public ArrayList<Festival> selectFList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Festival> list = null;
+		
+		String query = prop.getProperty("selectFList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+
+			list = new ArrayList<Festival>();
+			
+			while(rs.next()) {
+				list.add(new Festival(rs.getString("fes_code"),
+									  rs.getString("fes_name"),
+									  rs.getString("fes_term"),
+									  rs.getString("recruit_term"),
+									  rs.getDate("fes_date"),
+									  rs.getString("fes_recruit"),
+									  rs.getString("user_code")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		System.out.println(list + "젠장뭐때문인지 알수가없다");
+		return list;
+	}
+
+	public ArrayList<FestivalApply> selectappList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<FestivalApply> list = null;
+		
+		String query = prop.getProperty("selectappList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			list = new ArrayList<FestivalApply>();
+			
+			while(rs.next()) {
+				list.add(new FestivalApply(rs.getDate("ap_fes_time"),
+										   rs.getString("fes_code"),
+										   rs.getString("at_name"),
+										   rs.getString("fes_term"),
+										   rs.getString("pay_range"),
+										   rs.getString("flcode")));
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		System.out.println(list + "dao에서 넘어오냐");
+		return list;
 	}
 
 }
