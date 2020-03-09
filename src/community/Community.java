@@ -2,48 +2,48 @@ package community;
 
 public class Community {
 	
-	private int CM_CODE;
-	private String USER_CODE;
-	private String CM_TITLE;
-	private String CM_DATE;
-	private String CM_CONTENT;
-	private int CM_STATUS;
+	private int cmCode;
+	private String cmTitle;
+	private String cmDate;
+	private String cmContent;
+	private int cmStatus;
+	private String userCode;
 	
-	public int getCM_CODE() {
-		return CM_CODE;
+	public int getCmCode() {
+		return cmCode;
 	}
-	public void setCM_CODE(int cM_CODE) {
-		CM_CODE = cM_CODE;
+	public void setCmCode(int cmCode) {
+		this.cmCode = cmCode;
 	}
-	public String getUSER_CODE() {
-		return USER_CODE;
+	public String getCmTitle() {
+		return cmTitle;
 	}
-	public void setUSER_CODE(String uSER_CODE) {
-		USER_CODE = uSER_CODE;
+	public void setCmTitle(String cmTitle) {
+		this.cmTitle = cmTitle;
 	}
-	public String getCM_TITLE() {
-		return CM_TITLE;
+	public String getCmDate() {
+		return cmDate;
 	}
-	public void setCM_TITLE(String cM_TITLE) {
-		CM_TITLE = cM_TITLE;
+	public void setCmDate(String cmDate) {
+		this.cmDate = cmDate;
 	}
-	public String getCM_DATE() {
-		return CM_DATE;
+	public String getCmContent() {
+		return cmContent;
 	}
-	public void setCM_DATE(String cM_DATE) {
-		CM_DATE = cM_DATE;
+	public void setCmContent(String cmContent) {
+		this.cmContent = cmContent;
 	}
-	public String getCM_CONTENT() {
-		return CM_CONTENT;
+	public int getCmStatus() {
+		return cmStatus;
 	}
-	public void setCM_CONTENT(String cM_CONTENT) {
-		CM_CONTENT = cM_CONTENT;
+	public void setCmStatus(int cmStatus) {
+		this.cmStatus = cmStatus;
 	}
-	public int getCM_STATUS() {
-		return CM_STATUS;
+	public String getUserCode() {
+		return userCode;
 	}
-	public void setCM_STATUS(int cM_STATUS) {
-		CM_STATUS = cM_STATUS;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 	
 	

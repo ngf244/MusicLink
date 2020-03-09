@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="community.Community" %>
 <%@ page import="community.CommunityDAO" %>
+<%@ page import="community.Community" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,81 +50,26 @@
 </style>
 </head>
 <body>
-	<%
-		String USER_CODE = null;
-		if (session.getAttribute("USER_CODE") != null){
-			USER_CODE = (String) session.getAttribute("USER_CODE");
+    <%@ include file="../common/menubar.jsp" %>
+    
+    <%
+		String userCode = null;
+		if (session.getAttribute("userCode") != null){
+			userCode = (String) session.getAttribute("userCode");
 		}
-		int CM_CODE = 0;
-		if (request.getParameter("CM_CODE") != null){
-			CM_CODE = Integer.parseInt(request.getParameter("CM_CODE"));
+		int cmCode = 0;
+		if(request.getParameter("cmCode") != null){
+			cmCode = Integer.parseInt(request.getParameter("cmCode"));
 		}
-		if (CM_CODE == 0){
+		if (cmCode == 0){
 			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('유효하지 않은 글입니다')");
-			script.println("history.back()");
-			script.println("</script>");
+    		script.println("<script>");
+    		script.println("alert('유효하지 않은 글입니다.')");
+    		script.println("history.back()");
+    		script.println("/<script>");
 		}
-		Community community = new CommunityDAO().getCommunity(CM_CODE);
+		Community community = new CommunityDAO().getCommunity(cmCode);
 	%>
-    <header>
-        <nav>
-            <div class="logo">
-            logo
-            </div>
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
-        </nav>
-
-        <div id="resize">
-            <ul class="menu">
-                <li class="m-name1 m-name">
-                    <a href="#" class="m-mname m-mname1"> M u s i c L i n k</a>
-                    <ul class="hidden-manu1 drop">
-                        <li class="menu-h"><a href="#">About us</a></li>
-                        <li class="menu-h"><a href="#">F A Q</a></li>
-                        <li class="menu-h"><a href="#">Q &#38; A</a></li>
-                    </ul>
-                </li>
-                <li class="m-name2 m-name">
-                    <a href="#" class="m-mname m-mname2">A r t i s t</a>
-                    <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name3 m-name">
-                    <a href="#" class="m-mname m-mname3">F e s t i v a l</a>
-                    <ul class="hidden-manu3 drop">
-                        <li class="menu-h"><a href="#">F - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
-                    </ul>
-                </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
-            </ul>
-        </div>
-        <div class="side-icon">
-            <div class="image1 icon">
-                <a href="#" class="icon-a"><img src="../img/user.png" alt="" /></a>
-            </div>
-            <div class="image2 icon">
-                <a href="#" ><img src="../img/bell.png" alt="" /></a>
-            </div>
-            <div class="image3 icon">
-                <img src="../img/pin.png" alt="" />
-            </div>
-            <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
-            </div>
-        </div>    
-    </header>   
    
     <section style="z-index: 1;">
     	<div id="categoryArea">
@@ -137,25 +82,25 @@
 				<table id="inputTable">
 					<tr>
 						<td class="board_title labeltd">제목</td>
-						<td class="board_title"><%= community.getCM_TITLE() %></td>
+						<td class="board_title"><%= community.getCmTitle() %></td>
 					</tr>
 					<tr>
 						<td class="board_content labeltd">내용</td>
-						<td class="board_content"><%= community.getCM_CONTENT() %></td>
+						<td class="board_content"><%= community.getCmContent()  %></td>
 					</tr>
-					<%
-						if(USER_CODE != null && USER_CODE.equals(community.getUSER_CODE())) {
-					%>
 					<tr>
 						<td></td>
+						<%
+							if(userCode != null && userCode.equals(community.getUserCode())) {
+						%>
 						<td id="btntd">
-							<a href="update.jsp?CM_CODE=<%= CM_CODE %>" class="btn mb-1 btn-secondary" id="updateBtn">수정</a>
-							<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?CM_CODE=<%= CM_CODE %>" class="btn mb-1 btn-secondary" id="deleteBtn">삭제</a>
+							<a href="cmupdate.jsp?cmCode=<%= cmCode %>" class="btn mb-1 btn-secondary" id="updateBtn">수정</a>
+							<a href="cmdeleteAction.jsp?cmCode=<%= cmCode %>" class="btn mb-1 btn-secondary" id="deleteBtn">삭제</a>
 						</td>
+						<%
+							} 
+						%>
 					</tr>
-					<%
-						}
-					%>
 				</table>
 			</div>
 		</div>
@@ -163,43 +108,8 @@
     <h1 class="htext">수정해주세요</h1>
     
     
-    <footer>
-        <div class="ft-text">
-            <h2 class="ft-text1 ft-h1">The most important step is understanding and.</h2><br>
-            <h2 class="ft-text1 ft-h2">Empathizing with project.</h2>
-        </div>
-        <h1 class="ft-txt1">뮤직링크는 e비지니스 엔터테인먼트 입니다.</h1>
-        <h1 class="ft-txt2">MUSIC LINK</h1>
-        <div class="ft-content">
-            <div class="content-left">
-                <div class="left-top">
-                    <ul class="lt">COMPANY
-                        <li>(주)뮤직링크</li>
-                    </ul>
-                    <ul class="rt">ADDRESS
-                        <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F</li>
-                    </ul>
-                </div>
-                <div class="left-bot">
-                    <ul class="lbl">BUSINESS LICENSE
-                        <li>000-11-22222</li>
-                    </ul>
-                    <ul class="lbm">TEL
-                        <li>02-562-2378</li>
-                    </ul>
-                    <ul class="lbr">E-MAIL
-                        <li>qkrtlsdn@qkr.tlsdn</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-right">
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    R E Q E U S T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-                <a href="#">&nbsp;&nbsp;&nbsp;
-                    L O C A T I O N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#62;</a>
-            </div>
-        </div>
-    </footer>
+   <%@ include file="../common/footer.jsp" %>
+   
     <div class="map">
         <div class="map-bg">
             <h1 class="map-h1">&#215;</h1>

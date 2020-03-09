@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="gallery.GalleryDAO" %>
+<%@ page import="gallery.Gallery" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,7 +34,7 @@
     #hrstyle{border:0.4px solid lightgray; margin-top:1%;}
     
     .artistBtn {width: 100%; height: 40px;}
-    .newpage {float: left; width: 25%; height: 100%; border: 1px; outline: none; font-size: 16px; font-weight: bold; color: #fff; background-color: #a6a6a6;}
+    .newpage {float: left; width: 33.3%; height: 100%; border: 1px; outline: none; font-size: 16px; font-weight: bold; color: #fff; background-color: #a6a6a6;}
 
     .table-responsive {text-align: center; border-radius: 3px; box-shadow: 0px;}
     
@@ -59,6 +63,17 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
+    
+    <%
+		String userCode = null;
+		if (session.getAttribute("userCode") != null){
+			userCode = (String) session.getAttribute("userCode");
+		}
+		int pageNumber = 1;
+		if (request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+	%>
    
     <section style="z-index: 1;">
        <div id="categoryArea">
@@ -72,110 +87,52 @@
                 <label class="subTitle">갤러리 게시판</label><br>
                 <hr id="hrstyle">
                 <div class="artistBtn">
-                    <button type="button" class="newpage" onClick="location.href='artistprofile.html'">프로필</button>
-                    <button type="button" class="newpage" onClick="location.href='reviewgrade.html'">별점/리뷰</button>
-                    <button type="button" class="newpage" onClick="location.href='community.html'">소통 게시판</button>
-                    <button type="button" class="newpage" onClick="location.href='gallery.html'">갤러리 게시판</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistProfile.jsp'">프로필</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistCommuntiy.jsp'">소통 게시판</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistGallery.jsp'">갤러리 게시판</button>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>작성자</th>
                             <th>제목</th>
                             <th>작성일</th>
                         </tr>
                     </thead>
                     <tbody>
+                   		<%
+	                    	GalleryDAO galleryDAO = new GalleryDAO();
+	                    	ArrayList<Gallery> list = galleryDAO.getList(pageNumber);
+	                    	for(int i = 0; i < list.size(); i++) {
+	                    %>
                         <tr>
-                            <th>1</th>
-                            <td>게시판 주인</td>
-                            <td>A</td>
-                            <td>2020-02-06</td>
+                            <td><%= list.get(i).getGlCode() %></td>
+                            <td><a href="glView.jsp?glCode=<%= list.get(i).getGlCode() %>"><%= list.get(i).getGlTitle() %></a></td>
+                            <td><%= list.get(i).getGlDate() %></td>
                         </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>게시판 주인</td>
-                            <td>R</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>게시판 주인</td>
-                            <td>T</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>4</th>
-                            <td>게시판 주인</td>
-                            <td>I</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>5</th>
-                            <td>게시판 주인</td>
-                            <td>S</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>6</th>
-                            <td>게시판 주인</td>
-                            <td>T</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>7</th>
-                            <td>게시판 주인</td>
-                            <td>!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>8</th>
-                            <td>게시판 주인</td>
-                            <td>!!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>9</th>
-                            <td>게시판 주인</td>
-                            <td>!!!!</td>
-                            <td>2020-02-06</td>
-                        </tr>
-                        <tr>
-                            <th>10</th>
-                            <td>게시판 주인</td>
-                            <td>?????</td>
-                            <td>2020-02-06</td>
-                        </tr>
+                        <% 
+	                    	}
+	                    %>
                     </tbody>
                 </table>
             </div>
             <div class='paginaArea' align='center'>
-            <!-- 맨 처음으로 -->
-                <button class="btn_style">&lt;&lt;</button>
-                
-                <!-- 이전 페이지로 -->
-                <button class="btn_style" id="beforeBtn">&lt;</button>
-                
-                <!-- 10개의 페이지 목록 -->
-                <button class="btn_style" id="numBtn">1</button>
-                <button class="btn_style" id="numBtn">2</button>
-                <button class="btn_style" id="numBtn">3</button>
-                <button class="btn_style" id="numBtn">4</button>
-                
-                
-                <!-- 다음 페이지로 -->
-                <button class="btn_style" id="afterBtn">&gt;</button>
-                
-                <!-- 맨 끝으로 -->
-                <button class="btn_style">&gt;&gt;</button>
-                
+            	<%
+           			if(pageNumber != 1) {
+           		%>
+                	<a href="views.artist.ArtistCommunity.jsp?pageNumber=<%=pageNumber - 1%>" class="btn_style">이전</a>
+                <%
+           			} if(galleryDAO.nextPage(pageNumber + 1)) {
+                %>
+                	<a href="views.artist.ArtistCommunity.jsp?pageNumber=<%=pageNumber + 1%>" class="btn_style">다음</a>
+                <%
+           			}
+                %>
                 <div id="write_box">
-                    <button class="btn_style" id="write">글쓰기</button>
+                    <button type="submit" class="btn_style" id="write" onClick="location.href='ArtistGalleryWrite.jsp'">글쓰기</button>
                 </div>
             </div>
            </div>
-        </div>
     </section>
     <h1 class="htext">A - r a n k</h1>
     

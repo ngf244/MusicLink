@@ -1,4 +1,4 @@
-package community;
+package gallery;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 
-public class CommunityDAO {
+public class GalleryDAO {
 	
 	private Connection conn;
 	private ResultSet rs;
 	
-	public CommunityDAO() {
+	public GalleryDAO() {
 		try {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "MUSICLINK";
@@ -39,7 +39,7 @@ public class CommunityDAO {
 	}
 	
 	public int getNext() {
-		String SQL = "SELECT CM_CODE FROM ML_COMMU ORDER BY CM_CODE DESC";
+		String SQL = "SELECT GL_CODE FROM ML_GALLERY ORDER BY GL_CODE DESC";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -53,14 +53,14 @@ public class CommunityDAO {
 		return -1;
 	}
 	
-	public int ArtistBoardWrite(String cmTitle, String cmContent, String userCode) {
+	public int ArtistGalleryWrite(String glTitle, String glContent, String userCode) {
 		String SQL = "INSERT INTO ML_COMMU VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
-			pstmt.setString(2, cmTitle);
+			pstmt.setString(2, glTitle);
 			pstmt.setString(3, getDate());
-			pstmt.setString(4, cmContent);
+			pstmt.setString(4, glContent);
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, userCode);
 			return pstmt.executeUpdate();
@@ -70,22 +70,22 @@ public class CommunityDAO {
 		return -1;
 	}
 	
-	public ArrayList<Community> getList(int pageNumber){
-		String SQL = "SELECT FROM ML_COMMU WHERE CM_CODE < ? AND CM_STATUS = 1 ORDER BY CM_CODE DESC LIMIT 10";
-		ArrayList<Community> list = new ArrayList<Community>();
+	public ArrayList<Gallery> getList(int pageNumber){
+		String SQL = "SELECT FROM ML_GALLERY WHERE GL_CODE < ? AND GL_STATUS = 1 ORDER BY GL_CODE DESC LIMIT 10";
+		ArrayList<Gallery> list = new ArrayList<Gallery>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Community community = new Community();
-				community.setCmCode(rs.getInt(1));
-				community.setCmTitle(rs.getString(2));
-				community.setCmDate(rs.getString(3));
-				community.setCmContent(rs.getString(4));
-				community.setCmStatus(rs.getInt(5));
-				community.setUserCode(rs.getString(6));
-				list.add(community);
+				Gallery gallery = new Gallery();
+				gallery.setGlCode(rs.getInt(1));
+				gallery.setGlTitle(rs.getString(2));
+				gallery.setGlDate(rs.getString(3));
+				gallery.setGlContent(rs.getString(4));
+				gallery.setGlStatus(rs.getInt(5));
+				gallery.setUserCode(rs.getString(6));
+				list.add(gallery);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class CommunityDAO {
 	}
 	
 	public boolean nextPage(int pageNumber) {
-		String SQL = "SELECT FROM ML_COMMU WHERE CM_CODE < ? AND CM_STATUS = 1";
+		String SQL = "SELECT FROM ML_GALLERY WHERE GL_CODE < ? AND GL_STATUS = 1";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
@@ -108,21 +108,21 @@ public class CommunityDAO {
 		return false; 
 	}
 	
-	public Community getCommunity(int cmCode) {
-		String SQL = "SELECT FROM ML_COMMU WHERE CM_CODE = ?";
+	public Gallery getGallery(int glCode) {
+		String SQL = "SELECT FROM ML_GALLERY WHERE GL_CODE = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, cmCode);
+			pstmt.setInt(1, glCode);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				Community community = new Community();
-				community.setCmCode(rs.getInt(1));
-				community.setCmTitle(rs.getString(2));
-				community.setCmDate(rs.getString(3));
-				community.setCmContent(rs.getString(4));
-				community.setCmStatus(rs.getInt(5));
-				community.setUserCode(rs.getString(6));
-				return community;
+				Gallery gallery = new Gallery();
+				gallery.setGlCode(rs.getInt(1));
+				gallery.setGlTitle(rs.getString(2));
+				gallery.setGlDate(rs.getString(3));
+				gallery.setGlContent(rs.getString(4));
+				gallery.setGlStatus(rs.getInt(5));
+				gallery.setUserCode(rs.getString(6));
+				return gallery;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,24 +130,24 @@ public class CommunityDAO {
 		return null; 
 	}
 	
-	public int cmupdate(int cmCode, String cmTitle, String cmContent) {
-		String SQL = "UPDATE ML_COMMU SET CM_TITLE = ? , CM_CONTENT = ? WHERE CM_CODE = ?";
+	public int glupdate(int glCode, String glTitle, String glContent) {
+		String SQL = "UPDATE ML_GALLERY SET GL_TITLE = ? , GL_CONTENT = ? WHERE GL_CODE = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, cmTitle);
-			pstmt.setString(2, cmContent);
-			pstmt.setInt(3, cmCode);
+			pstmt.setString(1, glTitle);
+			pstmt.setString(2, glContent);
+			pstmt.setInt(3, glCode);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return -1;
 	}
-	public int cmdelete(int cmCode) {
-		String SQL = "UPDATE ML_COMMU SET CM_STATUS = 0 WHERE CM_CODE = ?";
+	public int gldelete(int glCode) {
+		String SQL = "UPDATE ML_GALLERY SET GL_STATUS = 0 WHERE GL_CODE = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, cmCode);
+			pstmt.setInt(1, glCode);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

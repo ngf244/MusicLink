@@ -3,7 +3,6 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="gallery.GalleryDAO" %>
 <%@ page import="gallery.Gallery" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +19,7 @@
     <link href="../css/slick-theme.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/mfooter.css" rel="stylesheet" />
-<title>갤러리 게시판 작성</title>
+<title>소통 게시판 작성</title>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 20%; position: relative;
     background: #fff;} 
@@ -37,16 +36,12 @@
 	#table_show{width: 85%; margin-left: auto; margin-right: auto; text-align:center;}
 	.board_title{padding: 10px; /*border-bottom: 2px solid lightgray;*/ height: 20px; vertical-align: middle;}
 	.board_content{padding: 10px;}
-	
 	#btntd{text-align: right;}
 	.labeltd{width:12%; font-size: 15px;}
 	
 	#inputTable{width:100%;}
 	.inputboard{height:40px;}
 	.inputtextarea{border-radius: 4px; resize:none;}
-	
-	.imagegroup{width:50%; text-align:left; top:25%; transform: translateY(25%);}
-	.custom-file-label{color:gray;}
 	
 	#updateBtn{margin-right: 2%;}
 	#btntd button{margin-top: 1%;}
@@ -56,45 +51,55 @@
 </head>
 <body>
     <%@ include file="../common/menubar.jsp" %>
+    
+    <%
+		String userCode = null;
+		if (session.getAttribute("userCode") != null){
+			userCode = (String) session.getAttribute("userCode");
+		}
+		int glCode = 0;
+		if(request.getParameter("glCode") != null){
+			glCode = Integer.parseInt(request.getParameter("glCode"));
+		}
+		if (glCode == 0){
+			PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('유효하지 않은 글입니다.')");
+    		script.println("history.back()");
+    		script.println("/<script>");
+		}
+		Gallery gallery = new GalleryDAO().getGallery(glCode);
+	%>
    
     <section style="z-index: 1;">
     	<div id="categoryArea">
 			<div id="block"></div><br>
 			<label id="inBigCategory">MUSICLINK</label> 
-			<label id="inSmallCategory"> - Artist 맘대로 (갤러리게시글 작성)</label>
+			<label id="inSmallCategory"> - Artist 맘대로 (소통게시글 작성)</label>
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
 				<table id="inputTable">
 					<tr>
 						<td class="board_title labeltd">제목</td>
-						<td class="board_title">
-							<input type="text" class="form-control input-default inputboard" placeholder="제목을 입력해주세요">
-						</td>
-					</tr>
-					<tr>
-						<td class="board_content labeltd">사진 첨부</td>
-						<td class="board_content">
-							<div class="input-group mb-3 imagegroup">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input">
-									<label class="custom-file-label">이미지를 첨부해주세요</label>
-								</div>
-							</div>
-						</td>
+						<td class="board_title"><%= gallery.getGlTitle() %></td>
 					</tr>
 					<tr>
 						<td class="board_content labeltd">내용</td>
-						<td class="board_content">
-							<textarea class="form-control h-150px inputtextarea" rows="10" placeholder="내용을 입력해주세요 / 스토리보드에 내용있길래 내용넣었어요"></textarea>
-						</td>
+						<td class="board_content"><%= gallery.getGlContent()  %></td>
 					</tr>
 					<tr>
 						<td></td>
+						<%
+							if(userCode != null && userCode.equals(gallery.getUserCode())) {
+						%>
 						<td id="btntd">
-							<button type="submit" class="btn mb-1 btn-secondary" id="updateBtn">등록</button>
-							<button type="button" class="btn mb-1 btn-secondary" id="deleteBtn">취소</button>
+							<a href="glupdate.jsp?glCode=<%= glCode %>" class="btn mb-1 btn-secondary" id="updateBtn">수정</a>
+							<a href="gldeleteAction.jsp?glCode=<%= glCode %>" class="btn mb-1 btn-secondary" id="deleteBtn">삭제</a>
 						</td>
+						<%
+							} 
+						%>
 					</tr>
 				</table>
 			</div>
@@ -102,8 +107,9 @@
     </section>
     <h1 class="htext">수정해주세요</h1>
     
-    <%@ include file="../common/footer.jsp" %>
     
+   <%@ include file="../common/footer.jsp" %>
+   
     <div class="map">
         <div class="map-bg">
             <h1 class="map-h1">&#215;</h1>

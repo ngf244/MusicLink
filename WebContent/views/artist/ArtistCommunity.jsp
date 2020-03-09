@@ -34,7 +34,7 @@
     #hrstyle{border:0.4px solid lightgray; margin-top:1%;}
 
     .artistBtn {width: 100%; height: 40px;}
-    .newpage {float: left; width: 25%; height: 100%; border: 1px; outline: none; font-size: 16px; font-weight: bold; color: #fff; background-color: #a6a6a6;}
+    .newpage {float: left; width: 33.3%; height: 100%; border: 1px; outline: none; font-size: 16px; font-weight: bold; color: #fff; background-color: #a6a6a6;}
 
     .table-responsive {text-align: center; border-radius: 3px; box-shadow: 0px;}
     
@@ -64,9 +64,9 @@
 </head>
 <body>
 	<%
-		String USER_CODE = null;
-		if (session.getAttribute("USER_CODE") != null){
-			USER_CODE = (String) session.getAttribute("USER_CODE");
+		String userCode = null;
+		if (session.getAttribute("userCode") != null){
+			userCode = (String) session.getAttribute("userCode");
 		}
 		int pageNumber = 1;
 		if (request.getParameter("pageNumber") != null){
@@ -87,16 +87,14 @@
                 <label class="subTitle">소통 게시판</label><br>
                 <hr id="hrstyle">
                 <div class="artistBtn">
-                    <button type="button" class="newpage" onClick="location.href='artistprofile.html'">프로필</button>
-                    <button type="button" class="newpage" onClick="location.href='reviewgrade.html'">별점/리뷰</button>
-                    <button type="button" class="newpage" onClick="location.href='community.html'">소통 게시판</button>
-                    <button type="button" class="newpage" onClick="location.href='gallery.html'">갤러리 게시판</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistProfile.jsp'">프로필</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistCommuntiy.jsp'">소통 게시판</button>
+                    <button type="button" class="newpage" onClick="location.href='ArtistGallery.jsp'">갤러리 게시판</button>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>작성자</th>
                             <th>제목</th>
                             <th>작성일</th>
                         </tr>
@@ -108,10 +106,9 @@
 	                    	for(int i = 0; i < list.size(); i++) {
 	                    %>
 	                    <tr>
-                            <td><%= list.get(i).getCM_CODE() %></td>
-                            <td><%= list.get(i).getUSER_CODE() %></td>
-                            <td><a href="view.jsp?CM_CODE=<%= list.get(i).getCM_CODE() %>"><%= list.get(i).getCM_TITLE() %></a></td>
-                            <td><%= list.get(i).getCM_DATE()%></td>
+                            <td><%= list.get(i).getCmCode() %></td>
+                            <td><a href="cmView.jsp?cmCode=<%= list.get(i).getCmCode() %>"><%= list.get(i).getCmTitle() %></a></td>
+                            <td><%= list.get(i).getCmDate() %></td>
                         </tr>
 	                    <% 
 	                    	}
@@ -133,7 +130,7 @@
            			}
                 %>
                 <div id="write_box">
-                    <button class="btn_style" id="write" onClick="location.href='ArtistBoardWrite.jsp'">글쓰기</button>
+                    <button type="submit" class="btn_style" id="write" onClick="location.href='ArtistBoardWrite.jsp'">글쓰기</button>
                 </div>
             </div>
            </div>
