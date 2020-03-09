@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class GalleryDAO {
 	
 	private Connection conn;
-	private ResultSet rs;
+	private ResultSet rs; 
 	
 	public GalleryDAO() {
 		try {

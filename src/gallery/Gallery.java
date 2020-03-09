@@ -7,7 +7,7 @@ public class Gallery {
 	private String glDate;
 	private String glContent;
 	private int glStatus;
-	private String userCode;
+	private String userCode; 
 	
 	public int getGlCode() {
 		return glCode;
