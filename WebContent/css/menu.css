@@ -14,7 +14,7 @@ nav{width:100%; position:fixed; z-index:99999; }
 .logo{position: absolute; top:50px; left:100px; width: 180px; height: 100px; background:#000; color:#999; text-align: center; line-height: 100px;}
 
 
-#toggle{position:absolute; top:50px; right:100px; width:30px; height:40px; cursor:pointer; }
+#toggle{position:absolute; top:50px; right:100px; width:30px; height:40px; cursor:pointer; z-index: 999999999999999;}
 #toggle .span{height:4px; background-color:#000; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; backface-visibility:hidden; margin:5px auto;}
 #toggle.on #one{-webkit-transform:rotate(45deg) translateX(3px) translateY(4px); transform:rotate(45deg) translateX(3px) translateY(4px);}
 #toggle.on #two{opacity:0; filter:alpha(opacity=0);}

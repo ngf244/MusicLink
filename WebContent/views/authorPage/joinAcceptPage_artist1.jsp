@@ -16,22 +16,23 @@
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 300px; position: relative;
     background: #fff; height:750px;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:185px; left:30%; color: rgb(224, 224, 224);} 
     
     /* selection common */
     #sectionBox {position: relative;  width: 100%; height: 100%;}
     #sectionBox div{position: absolute;}
     /* common end */
     
-    .requestBox{background-color: beige; width: 80%; height: 80%; bottom: 5%; left: 10%;}
-    .requestBox ul{background-color: yellow; position: relative; width: 100%; height: 23%; left: 0%; margin-top: 10px;}
-    .requestBox-li1{background-color: violet; position: absolute; width: 30%; height: 100%; left: 0%;}
-    .requestBox-li2{background-color: green; position: absolute; width: 10%; height: 15%; left: 35%; top: 5%;}
-    .requestBox-li3{background-color: green; position: absolute; width: 20%; height: 15%; right: 5%; top: 5%;}
-    .requestBox-li4{background-color: beige; position: absolute; width: 60%; height: 50%; left: 35%; top: 25%;}
+    .requestBox{width: 80%; height: 80%; bottom: 5%; left: 10%;}
+    .requestBox ul{position: relative; width: 100%; height: 23%; left: 0%; margin-top: 10px; border: outset;}
+    .requestBox ul:hover{box-shadow: 5px 5px 3px 2px gray;}
+    .requestBox-li1{position: absolute; width: 30%; height: 100%; left: 0%; background-color: blanchedalmond;}
+    .requestBox-li2{position: absolute; width: 10%; height: 15%; left: 35%; top: 5%; border: ridge; text-align: center;}
+    .requestBox-li3{position: absolute; width: 20%; height: 15%; right: 5%; top: 5%; border: ridge; text-align: center;}
+    .requestBox-li4{position: absolute; width: 60%; height: 50%; left: 35%; top: 25%; border: groove;}
     /* .requestBox-reject{background-color: blue; position: absolute; width: 20%; height: 15%; left: 40%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;} */
     .requestBox-showDetail{background-color: red; position: absolute; width: 60%; height: 15%; left: 35%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
-
+    .requestBox-showDetail:hover{cursor: pointer; background-color: blue;}
 </style>
 </head>
 <body>
@@ -71,7 +72,7 @@
 <script src="js/slick.min.js"></script>
 <script>
 
-	$("#toggle").click(function(){
+	/* $("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
 	});
@@ -81,7 +82,7 @@
     });
     $(".map-h1").click(function(){
         $(".map").css("display","none");
-    });
+    }); */
 
     $('.requestBox-showDetail').click(function () {
         var userCode = $(this).parent().parent().children().eq(4).text();
