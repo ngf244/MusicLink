@@ -4,10 +4,14 @@
 <%
 	Festival f = (Festival)request.getAttribute("festival");
 	ArrayList<String> artistArr = (ArrayList<String>)request.getAttribute("artistArr");
+	ArrayList<String> userApList = (ArrayList<String>)request.getAttribute("userApList");
+	
+	int status = (int)request.getAttribute("status");
+	int grade = (int)request.getAttribute("grade");
 	
 	String fullLoc = "";
 	String spLoc[] = f.getFesLoc().split("/");
-
+	
 	String mapLoc[] = spLoc[0].split("&");
 
 	if (spLoc.length > 1) {
@@ -165,7 +169,7 @@
 		display: inline-block;
 		vertical-align: top;
 		margin-top: 2%;
-		margin-bottom: 7%;
+		margin-bottom: 10%;
 	}
 	
 	#festivalInfoArea {
@@ -208,7 +212,7 @@
 		border-radius: 4px;
 	}
 	
-	#apBtn{width: 25%; margin-top: 3%;}
+	#apBtn, #upBtn{width: 25%; margin-top: 5%;}
 	
 	footer .ft-content {
 		width: 70%;
@@ -235,9 +239,38 @@
 				
 				<div id="festivalPosterArea">
 					<div id="promotionImg">
+						<% if(status == 1) { %>
 						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
+						<% } else if(status == 2) { %>
+						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
+						<% } else if(status == 3) { %>
+						<span class="badge badge-pill badge-light alignspan">지난 행사</span>
+						<% } else if(status == 4) { %>
+						<span class="badge badge-pill badge-info alignspan">아티스트 모집 마감</span>
+						<% } %>
 					</div>
 				</div>
+				
+				<script>
+				function approach() {
+					<% if(loginUser != null) { %>
+						$.ajax({
+							url: 'approachFes.do',
+							type: 'post',
+							data: {usercode: '<%= loginUser.getUserCode() %>', fescode: '<%= f.getFesCode() %>'},
+							success: function(data) {
+							    $('#apBtn').attr('id', 'apBtn');
+							    $('#apBtn').attr('class', 'btn mb-1 btn-secondary changeBtn');
+							    $('#apBtn').attr('disabled', true);
+								$('#apBtn').val('지원 완료');
+							},
+							error: function(data) {
+								console.log('실패');
+							}
+						});
+					<% } %>
+				}
+				</script>
 				
 				<div id="festivalInfoArea">
 					<table id="infoTable">
@@ -253,13 +286,18 @@
 							<td>행사 장소</td>
 							<td><%= fullLoc %></td>
 						</tr>
-						<% if(loginUser != null) {
-							 if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
+						<% 
+						
+						DecimalFormat formatter = new DecimalFormat("###,###");
+						if(loginUser != null) {
+							 if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) { 
+							 	if(status == 1) { %>
 						<tr>
 							<td>모집 아티스트 수<br>(팀 수)</td>
 							<td><%= f.getRecCount() %>팀</td>
 						</tr>
-						<%  
+						<%  	}
+							
 							String artistStr = "";
 							
 							for(int i = 0; i < artistArr.size(); i++) {
@@ -281,8 +319,6 @@
 							int strPay = Integer.parseInt((f.getPayRange().split("~"))[0]);
 							int endPay = Integer.parseInt((f.getPayRange().split("~"))[1]);
 							
-							DecimalFormat formatter = new DecimalFormat("###,###");
-							
 							String printPay = formatter.format(strPay) + "&#8361; ~ " + formatter.format(endPay) + "&#8361;";
 						%>
 						<tr>
@@ -298,11 +334,35 @@
 						</tr>
 						<%   }
 						   } %>
+						<% if(f.getTicFee() != 0) {
+							String printFee = formatter.format(f.getTicFee()) + "&#8361;";
+						%>
+						<tr>
+							<td>관람비</td>
+							<td>
+								<%= printFee %> &nbsp;&nbsp;
+								<% if(f.getTicUrl() != "") { %>
+									<span id="ticketLink">(티켓 구매처 : 인터파크)</span>
+								<% } %>
+							</td>
+						</tr>
+						<% } %>
+						<%
+							String printStar = "";
+							for(int i = 0; i < 5; i++) {
+								if(grade > 0) {
+									printStar += "★";
+									grade--;
+								} else {
+									printStar += "☆";
+								}
+							}
+						%>
 						<tr>
 							<td>주최사</td>
 							<td>
 								<%= f.getCpName() %> &nbsp;&nbsp;
-								<span id="companyStar">★ ★ ★ ★ ☆</span>	
+								<span id="companyStar"><%= printStar %></span>	
 							</td>
 						</tr>
 						<tr>
@@ -317,27 +377,57 @@
 				<br>
 				<div id="fesmap"></div>
 				
-				<% if(loginUser != null) {
-					  if(loginUser.getUserClass().equals("2")) {%>
-				<input type="button" class="btn mb-1 btn-warning" id="apBtn" value="행사 지원">
-				<script>
-					size = '134%';
-					$('section').css('height', size);
-				</script>
-				<%    } else { %>
-				<script>
-					size = '135%';
-					$('section').css('height', size);
-					$('#festivalPosterArea').css('margin-bottom', '13%');
-				</script>
-				<%	  }
-				   } else { %>
-				<script>
-					size = '130%';
-					$('section').css('height', size);
-				</script>
-				<% } %>
+				<input type="button" class="btn mb-1 btn-warning changeBtn" id="apBtn" value="행사 지원">
 				
+				<script>
+					$(function() {
+						var split_tab = $('#infoTable').css('height').split('px');
+						var split_pos = $('#promotionImg').css('height').split('px');
+						var size = 0;
+						if((parseInt(split_tab[0])-20) < parseInt(split_pos[0])) size = parseInt(split_pos[0]);
+						else size = parseInt(split_tab[0])-20;
+						
+						<% if(loginUser != null) { %>
+							<% if(loginUser.getUserClass().equals("2") && status == 1) {%> //아티스트 & 행사지원 & 모집중인행사만
+							
+							<% for(int i = 0; i < userApList.size(); i++) {
+								  if((userApList.get(i)).equals(f.getFesCode())) { %>
+								    $('#apBtn').attr('id', 'apBtn');
+								    $('#apBtn').attr('class', 'btn mb-1 btn-secondary changeBtn');
+								    $('#apBtn').attr('disabled', true);
+									$('#apBtn').val('지원 완료');
+							<%      break;
+								  }
+								  if(i == userApList.size() - 1) { %>
+								    $('#apBtn').attr('id', 'apBtn');
+								    $('#apBtn').attr('class', 'btn mb-1 btn-warning changeBtn');
+								    $('#apBtn').attr('onclick', 'approach();');
+									$('#apBtn').val('행사 지원');
+							<%    }
+							   } %>
+								
+								//$('.changeBtn').attr('id', 'apBtn');
+								//$('.changeBtn').val('행사 지원');
+								$('section').css('height', size + 920 + 'px');
+							<% } else if(loginUser.getUserClass().equals("3") && loginUser.getUserCode().equals(f.getCpCode()) && status != 3) { %> //기획자 & 행사수정 & 지난행사 제외
+								$('.changeBtn').attr('id', 'upBtn');
+								$('.changeBtn').val('행사 수정');
+								$('.changeBtn').click(function() {
+									location.href='<%= request.getContextPath() %>/update.fes?fcode=<%= f.getFesCode() %>'
+								});
+								$('section').css('height', size + 920 + 'px');
+							<% } else { %> //일반 유저 & 모집 마감된 행사 - 아티스트 & 해당 행사를 등록하지 않은 기획자
+								$('.changeBtn').css('visibility', 'hidden');
+								$('#festivalPosterArea').css('margin-bottom', '6%');
+								$('section').css('height', size + 850 + 'px');
+							<% } %>
+						<% } else { %> //로그인 안한 사람
+							$('.changeBtn').css('visibility', 'hidden');
+							$('#festivalPosterArea').css('margin-bottom', '6%');
+							$('section').css('height', size + 850 + 'px');
+						<% } %>
+					});
+				</script>
 			</div>
 		</div>
 		</div>
@@ -353,7 +443,7 @@
 				$(this).css('color', '#76838f');
 			}, 'click':function() {
 				window.open("http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=19018834", "_blank");
-			}})
+			}});
 		});
 		
 		//var address = "";

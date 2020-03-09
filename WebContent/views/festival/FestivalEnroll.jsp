@@ -103,10 +103,10 @@
     section {width:70%; height:220%; padding-bottom:60px; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 21%; position: relative;
     background: #fff; display: block;}
     */
-    section {width:70%; height:220%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
+    section {width:70%; height:220%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: -128px; position: relative;
     background: #fff; padding-top: 0px; padding-bottom:10%;}
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: -9%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top: 16.8%; left: 50%; transform: translateX(-50%); color: rgb(224, 224, 224);}
 	
     #scale{transform:scale(1.2);}
     
@@ -128,8 +128,10 @@
     
     #fesName{width:70%;}
     
-    #datePickerStyle{background: #000; color: white; line-height: 35px;}
-    .dategroup{width: 250px;}
+    #payPickerStyle{background: #000; color: white; line-height: 35px;}
+    #datePickerStyle{background: #000; color: white; width:25px; line-height: 3; text-align:center;}
+    .dategroup{width: 300px;}
+    .artdategroup{width: 300px;}
     .datestyle{border-radius: 4px;}
     
     #wrap{display:none; border:1px solid #DDDDDD; width:500px; margin-top:5px;}
@@ -145,6 +147,8 @@
     .postergroup{width:60%; top:25%; transform: translateY(25%);}
     #posterPath, #bannerPath{font-size:13px; overflow:hidden;}
     
+    .deleteImg{width:auto; height:25px; margin-top:8px; margin-left:10px;}
+    
     .space{margin:0; padding:0;}
     
     .tdcenter{text-align:center; color: #DB0000;}
@@ -157,6 +161,10 @@
     
 	<%@ include file="../../views/common/menubar.jsp" %>
     
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	
     <!-- 행사 지원 코딩 시작 -->
 	<section style="z-index: 1;">
 		<div id="scale">
@@ -199,10 +207,13 @@
 					<tr>
 						<td class="label">아티스트 모집 기간 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-			                <div class="input-group dategroup">
-								<input class="form-control input-daterange-datepicker datestyle" type="text" id="artistDate" name="artistDate" value="<%=strDate%> - <%=endDate%>">
-								<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-							</div>
+							<input type="hidden" name="artistStrDate" value="<%=strDate%>">
+			                <div class="input-group artdategroup">
+                            	<input type="text" class="form-control datestyle" id="artistStrDate" value="<%=strDate%>" disabled>
+								<span id="datePickerStyle">&nbsp;&nbsp;-&nbsp;&nbsp;</span> 
+                            	<input type="text" class="form-control mydatepicker datestyle" id="artistEndDate" name="artistEndDate" value="<%=endDate%>">
+                            	<span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                            </div>
 						</td>
 					</tr>
 					<tr>
@@ -226,7 +237,7 @@
 						<td>
 							<div class="input-group" id="moneyRange">
 								<input type="text" id="moneyMin" name="moneyMin" class="form-control input-default enroll inputValCk" placeholder="최소금액">
-								<span id="datePickerStyle">&nbsp;&nbsp;~&nbsp;&nbsp;</span> 
+								<span id="payPickerStyle">&nbsp;&nbsp;~&nbsp;&nbsp;</span> 
 								<input type="text" id="moneyMax" name="moneyMax" class="form-control input-default enroll inputValCk" placeholder="최대금액">
 							</div>
 						</td>
@@ -240,22 +251,38 @@
 					<tr>
 						<td class="label">행사 포스터 &nbsp;<span class="text-danger">*</span></td>
 						<td>
-							<div class="input-group mb-3 postergroup">
-								<div class="custom-file test">
-									<input type="file" accept="image/*" multiple="multiple" name="posterPath" class="custom-file-input" onchange="reviewUploadImg(this,'0');">
-									<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
+                            <div class="form-row align-items-center colauto">
+                            <div class="col-auto postergroup">
+								<div class="input-group mb-3">
+									<div class="custom-file clickpos">
+										<input type="file" accept="image/*" name="posterPath" class="custom-file-input posterPath" onchange="reviewUploadImg(this,'0');">
+										<label class="custom-file-label inputTextCk" id="posterPath">파일을 선택해주세요</label>
+									</div>
 								</div>
+							</div>
+							
+	                        <div class="col-auto">
+								<img src="<%= request.getContextPath() %>/img/trash.png" class="deleteImg" id="deletePos">
+							</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="label">행사 배너</td>
 						<td>
-							<div class="input-group mb-3 postergroup">
-								<div class="custom-file">
-									<input type="file" accept="image/*" multiple="multiple" name="bannerPath" class="custom-file-input" onchange="reviewUploadImg(this,'1');">
-									<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
+                            <div class="form-row align-items-center colauto">
+                            <div class="col-auto postergroup">
+								<div class="input-group mb-3">
+									<div class="custom-file clickban">
+										<input type="file" accept="image/*" name="bannerPath" class="custom-file-input bannerPath" onchange="reviewUploadImg(this,'1');">
+										<label class="custom-file-label" id="bannerPath">파일을 선택해주세요</label>
+									</div>
 								</div>
+							</div>
+							
+	                        <div class="col-auto">
+								<img src="<%= request.getContextPath() %>/img/trash.png" class="deleteImg" id="deleteBan">
+							</div>
 							</div>
 						</td>
 					</tr>
@@ -288,7 +315,7 @@
 						<td class="tdcenter" colspan=2>
 							<input type="submit" class="btn mb-1 btn-dark" id="enrollSubmit" value="등록">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn mb-1 btn-dark" value="취소">
+							<input type="button" class="btn mb-1 btn-dark" onclick="window.history.back();" value="취소">
 						</td>
 					</tr>
 				</table>
@@ -301,6 +328,19 @@
     <script>
     	
     	$(function() {
+    		$('#deletePos').click(function() {
+    			if($('#posterPath').text() != "파일을 선택해주세요") {
+        			$('.posterPath').val('');
+        			$('#posterPath').text('파일을 선택해주세요');
+    			}
+    		});
+    		$('#deleteBan').click(function() {
+    			if($('#bannerPath').text() != "파일을 선택해주세요") {
+	    			$('.bannerPath').val('');
+	    			$('#bannerPath').text('파일을 선택해주세요');
+    			}
+    		});
+    		
     		$('#moneyMin, #moneyMax').on({'keyup':function() {
     			var regExp = /[^0-9]/gi;
     			var val = $(this).val().trim();
@@ -313,21 +353,6 @@
 	    	$(".inputValCk, .inputTextCk").change(function() {
 	    		if($(this).val())
 	    			$(this).css('border', '1px solid #ced4da');
-	    	})
-	    	
-	    	var thistop = "";
-	    	$('.datestyle').focus(function() {
-	    		if($(this).attr('id') == 'feativalDate') {
-					thistop = ($('#feativalDate').css('top')).split("px");
-			    	$('.datepicker').css('top', (parseInt(thistop[0])+395) + 'px');
-	    		} else {
-					thistop = ($('#artistDate').css('top')).split("px");
-			    	$('.datepicker').css('top', (parseInt(thistop[0])+495) + 'px');
-	    		}
-	    	});
-	    	
-	    	$('.datepicker').focus(function() {
-		    	$('.datepicker').css('top', $('#feativalDate').css('top'));
 	    	})
     	})
     	
@@ -344,7 +369,7 @@
 	    	}).css('border', '1px solid red');
 	    	
 	    	$(".inputTextCk").filter(function() {
-	    		if(($(this).text().trim() == "파일을 선택해주세요") || (!$(this).text())) {
+	    		if(($(this).text() == "파일을 선택해주세요") || (!$(this).text())) {
 	    			idStr+=$(this).attr('id')+" / ";
 	    			emptyCk = true;
 	    			return true;
@@ -352,33 +377,31 @@
 	    	}).css('border', '1px solid red');
 	    	
 	    	console.log(idStr);
-
+			
 	    	if(emptyCk == true) {
 	    		alert('필수항목을 기재해주세요');
 	    	} else {
 	    		var fesday = $('#feativalDate').val();
-	    		var artday = $('#artistDate').val();
+	    		var artend = $('#artistEndDate').val();
 	    		
 	    		var fesSplit = fesday.split(" - ");
-	    		var artSplit = artday.split(" - ");
 				
 	    		var fesStrSplit = fesSplit[0].split("/");
 	    		var fesstrday = new Date(fesStrSplit[2], parseInt(fesStrSplit[0])-1, fesStrSplit[1]);
-	    		
-	    		var artStrSplit = artSplit[0].split("/");
-	    		var artstrday = new Date(artStrSplit[2], parseInt(artStrSplit[0])-1, artStrSplit[1]);
-	    		var today = new Date();
 				
-	    		var artEndSplit = artSplit[1].split("/");
+	    		var artEndSplit = artend.split("/");
 	    		var artendday = new Date(artEndSplit[2], parseInt(artEndSplit[0])-1, artEndSplit[1]);
 	    		
 	    		today.setHours(0,0,0,0);
 	    		
-	    		if (fesstrday.getTime() < today.getTime() || artstrday.getTime() < today.getTime()) {
+	    		if (fesstrday.getTime() < today.getTime()) {
 	    			alert("오늘 이전의 날짜는 등록할 수 없습니다");
 	        		return false;
 	    		} else if(artendday.getTime() > fesstrday.getTime()) {
 	    			alert("아티스트 모집 기간은 행사 기간 이전에 마감되어야 합니다");
+	        		return false;
+	    		} else if (artendday.getTime() < <%= strDate %>) {
+	    			alert("아티스트 모집 마감 날짜가 시작 날짜보다 빠릅니다");
 	        		return false;
 	    		}
 	    	}
@@ -444,11 +467,16 @@
 			    } 
 			});
 		}
-		
-		var sechi = "";
+
+		var sechi = ($('section').css('height')).split("px");
 		function openDaumZipAddress() {
-			sechi = ($('section').css('height')).split("px");
-			$('section').css('height', parseInt(sechi[0]) + 600 + 'px');
+			var splitSection = ($('section').css('height')).split("px");
+			if(parseInt(sechi[0]) == parseInt(splitSection[0])) {
+				$('section').css('height', (parseInt(sechi[0]) + 620) + 'px');
+			} else {
+				$('section').css('height', sechi[0] + 'px');
+			}
+			
 	        // 우편번호 찾기 화면을 넣을 element를 지정
 	        var element_wrap = document.getElementById("wrap");
 	

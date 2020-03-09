@@ -42,7 +42,7 @@ public class QNAdetailServlet extends HttpServlet {
 		
 		String page = null;
 		if(qna != null) {
-			page = "views/QNA/QNAList.jsp";
+			page = "views/QNA/QNADetail.jsp";
 			request.setAttribute("qna", qna);
 		} else {
 			page = "views/common/errorPage.jsp";

@@ -46,7 +46,7 @@ public class ArtistUnFollowServlet extends HttpServlet {
 			page = "/myPage.me";
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시판 수정에 실패하였습니다.");
+			request.setAttribute("msg", "아티스트 언팔에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);

@@ -39,7 +39,7 @@ public class QNAListServlet extends HttpServlet {
 		
 		QNAService service = new QNAService();
 		
-		int listCount = service.getListCount();	// 게시판 리스트 개수
+		int listCount = service.getListCount(); // 게시판 리스트 개수
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수

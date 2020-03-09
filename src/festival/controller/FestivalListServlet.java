@@ -34,7 +34,7 @@ public class FestivalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int category = 0;
+		int category = 1;
 		if(request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));
 		}
@@ -67,7 +67,9 @@ public class FestivalListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		LinkedHashMap<Festival, ArrayList<String>> map = service.selectList(currentPage, category);
 		
-		LinkedHashMap<Festival, ArrayList<String>> banmap = service.selectBannerList();
+		LinkedHashMap<Festival, ArrayList<String>> banmap = service.selectRandomList(0);
+		LinkedHashMap<Festival, ArrayList<String>> fulmap = service.selectRandomList(1);
+		LinkedHashMap<Festival, ArrayList<String>> ingmap = service.selectRandomList(2);
 		
 		String page = null;
 		if(map != null && banmap!= null) {
@@ -76,6 +78,9 @@ public class FestivalListServlet extends HttpServlet {
 			request.setAttribute("pi", pi);
 			
 			request.setAttribute("banmap", banmap);
+			request.setAttribute("fulmap", fulmap);
+			request.setAttribute("ingmap", ingmap);
+			
 			request.setAttribute("category", category);
 		} else {
 			page = "views/common/errorPage.jsp";

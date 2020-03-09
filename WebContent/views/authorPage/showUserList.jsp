@@ -15,10 +15,10 @@
     <link href="../../css/mfooter.css" rel="stylesheet" />
 <title>Insert title here</title>
 <style>
-    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 300px; position: relative;
+    section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 300px;  position: relative; 
     background: #fff; height:750px;}
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:185px; left:30%; color: rgb(224, 224, 224);} 
     /* selection common */
     #sectionBox {position: relative; background-color: white; width: 100%; height: 100%;}
     #sectionBox div{position: absolute;}
@@ -139,7 +139,7 @@
 <script src="js/slick.min.js"></script>
 <script>
 
-	$("#toggle").click(function(){
+<%-- 	$("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
 	});
@@ -149,11 +149,11 @@
     });
     $(".map-h1").click(function(){
         $(".map").css("display","none");
-    });
+    }); --%>
     
     $('table tr:gt(0)').click(function () {
         console.log(this);
-        var userId = $(this).children().first().text();
+        var userId = $(this).children().eq(1).text();
         console.log(userId);
         location.href='<%=request.getContextPath()%>/showUserDetail.au?userId='+userId;
     })

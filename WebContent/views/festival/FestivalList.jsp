@@ -20,6 +20,8 @@
 	}
 	
 	LinkedHashMap<Festival, ArrayList<String>> banmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("banmap");
+	LinkedHashMap<Festival, ArrayList<String>> fulmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("fulmap");
+	LinkedHashMap<Festival, ArrayList<String>> ingmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("ingmap");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -70,24 +72,25 @@
     #block{background: #8AFF00; width: 55px; height: 8px; margin-top: 50px; margin-left: 2px;}
     
     #banner{width:100%; height:400px; overflow:hidden;}
-    #banner_paging_area{text-align:center; position:absolute; top:490px; left: 50%; transform: translateX(-50%);}
-    #banner_paging{color: white; font-size: 10px;}
     #banner_left, #banner_right{border:0; background: none; color: white;}
     
+    .banner div {width:100%; height:400px; overflow:hidden;}
+    .banner div img {width:100%; height:auto; position: absolute; top: 50%; transform: translateY(-50%);}
     .banClick{text-align:right; background-color:light-gray;}
     .alignspanban{margin-bottom : 50px; margin-right: 50px;}
     
     .promotionArea{margin-top:8%; text-align:center;}
     .subTitle{font-size:20px; font-weight:bold;}
-    .promotionImgArea{margin-top:20px; width:100%;}
-    .promotionImgArea input{}
-    .promotionImg{width:150px; height:210px; background:lightgray; display:inline-block; vertical-align:middle; text-align:right;}
-    .alignspan{font-size:11px; margin-top: 186px; margin-right:4px;}
+    
+    .promotionImgArea{margin-top:20px; width:70%; display:inline-block; overflow:hidden;}
+    .promClick{width:150px; height:220px; background:lightgray; display:inline-block; text-align:right;}
+    .promotionImg{width:auto; height:100%;}
+    .alignspan{font-size:11px; margin-top: 193px; margin-right:7px;}
     
     #hrstyle{border:0.4px solid lightgray; margin-top:9%;}
     
     #listArea{margin-top:9%; margin-left:10%; margin-right:10%; /*background:yellow;*/}
-    #listCategory{font-size:20px;}
+    #listCategory{font-size:19px;}
     #secondCategory{width:105%; margin-top:5%; margin-bottom:80px;}
     /*#listSort{font-size:14px; width:35%; text-align:left; float: left; margin-left:5%;}*/
     
@@ -122,8 +125,23 @@
     
     footer .ft-content{width:70%; !important;}
     
-    .banner div {width:100%; height:400px; overflow:hidden;}
-    .banner div img {width:100%; height:auto; position: absolute; top: 50%; transform: translateY(-50%);}
+	.slick-arrow{
+		z-index: 2;
+		position:absolute;
+		top: 50%;
+		width: 50px;
+		height: 50px;
+		transform: translateY(-25px);
+	}
+	.slick-prev.slick-arrow{ left: 0; }
+	.slick-next.slick-arrow{ right: 0; }
+	.slick-dots{ 
+		text-align: center;
+	}
+	.slick-dots li{
+		display: inline-block;
+		margin: 0 5px;
+	}
     
 </style>
 </head>
@@ -147,38 +165,86 @@
 							ArrayList<String> banArtlist = banmap.get(banFes);
 							
 							String fesTerm = banFes.getFesTerm();
+							String recTerm = banFes.getRecTerm();
 							String endFes[] = fesTerm.split(" - ");
-							String dateSplit[] = (endFes[endFes.length-1]).split("/");
+							String endRec[] = recTerm.split(" - ");
+							String fesSplit[] = (endFes[endFes.length-1]).split("/");
+							String recSplit[] = (endRec[endRec.length-1]).split("/");
 							
 							int month = 0;
 							int day = 0;
 							int year = 0;
 							if(endFes.length > 1) {
-								month = Integer.parseInt(dateSplit[0]);
-								day = Integer.parseInt(dateSplit[1]);
-								year = Integer.parseInt(dateSplit[2]);
+								month = Integer.parseInt(fesSplit[0]);
+								day = Integer.parseInt(fesSplit[1]);
+								year = Integer.parseInt(fesSplit[2]);
 							}
 
 							Date endFesDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
 							Date today = new Date(new GregorianCalendar().getTimeInMillis());
 							
-							String banaddtext = "";
-							if (today.getTime() > endFesDate.getTime()) {
-								banaddtext = "지난 행사";
-							} else if (banArtlist.size() < banFes.getRecCount()) {
-								banaddtext = "아티스트 모집 중";
-							} else if (banArtlist.size() == banFes.getRecCount()) {
-								banaddtext = "아티스트 확정";
+							if(endRec.length > 1) {
+								month = Integer.parseInt(recSplit[0]);
+								day = Integer.parseInt(recSplit[1]);
+								year = Integer.parseInt(recSplit[2]);
+							}
+							Date endRecDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
+							
+							int status = 0;
+							if (today.getTime() > endFesDate.getTime()) { //지난행사
+								status = 3;
+							} else if (banArtlist.size() < banFes.getRecCount() && today.getTime() <= endRecDate.getTime()) { //모집중행사
+								status = 1;
+							} else if (banArtlist.size() == banFes.getRecCount() && today.getTime() <= endFesDate.getTime()) { //확정행사
+								status = 2;
+							} else if (today.getTime() > endRecDate.getTime()) { //모집마감행사
+								status = 5;
 							} %>
 						<div class="banClick">
 							<input type="hidden" value="<%= banFes.getFesCode() %>">
-							<input type="hidden" value="<%= banaddtext %>">
+							<input type="hidden" value="<%= status %>">
 							<img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= banFes.getBanPath() %>" alt="" />
 						</div>
 				<%		}
 					} %>
 			</div>
-			  
+			
+			<div class="promotionArea">
+				<label class="subTitle">아티스트 확정 행사</label><br>
+				
+				<div class="promotionImgArea" id="fulFes" data-slick='{"slidesToShow": 5, "slidesToScroll": 5}'>
+				<% if(fulmap != null) {
+						for(Festival fulFes : fulmap.keySet()) { %>
+						<div class="promClick">
+							<input type="hidden" value="<%= fulFes.getFesCode() %>">
+							<input type="hidden" value="2">
+							<div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= fulFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;">
+								<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
+							</div>
+						</div>
+				<%		}
+				   } %>
+				</div>
+			</div>
+			<!-- badge badge-pill badge-info -->
+			<div class="promotionArea">
+				<label class="subTitle">아티스트 모집 행사</label><br>
+				
+				<div class="promotionImgArea" id="ingFes" data-slick='{"slidesToShow": 5, "slidesToScroll": 5}'>
+				<% if(ingmap != null) {
+						for(Festival ingFes : ingmap.keySet()) { %>
+						<div class="promClick">
+							<input type="hidden" value="<%= ingFes.getFesCode() %>">
+							<input type="hidden" value="1">
+							<div class="promotionImg" style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= ingFes.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;">
+								<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
+							</div>
+						</div>
+				<%		}
+				   } %>
+				</div>
+			</div>
+			
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 			<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 			<script type="text/javascript" src="<%= request.getContextPath() %>/js/slick.min.js"></script>
@@ -194,53 +260,9 @@
 			    	});
 					
 					$('#fulFes').slick();
+					$('#ingFes').slick();
 			    });
 			</script>
-			
-			<div class="promotionArea">
-				<label class="subTitle">아티스트 확정 행사</label><br>
-				
-				<div class="promotionImgArea" id="fulFes" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-danger alignspan">아티스트 확정</span>
-					</div>
-				</div>
-			</div>
-			
-			<div class="promotionArea">
-				<label class="subTitle">아티스트 모집 행사</label><br>
-				<div class="promotionImgArea">
-					<input type="button" value="<">
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
-					</div>
-					<div class="promotionImg">
-						<span class="badge badge-pill badge-success alignspan">아티스트 모집 중</span>
-					</div>
-					<input type="button" value=">">
-				</div>
-			</div>
 			
 			<hr id="hrstyle">
 			
@@ -274,6 +296,12 @@
 							scrollTop: scrollPosition
 						}, 500);
 					<%  break;
+					case 5: %>
+						$('#recCategory').css({'color':'black', 'font-weight':'bold'});
+						$("html, body").animate({
+							scrollTop: scrollPosition
+						}, 500);
+					<%  break;
 					}%>
 				})
 			</script>
@@ -282,9 +310,11 @@
 				<div id="listCategory">
 					<label class="category pointer" id="allCategory">전체 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category pointer" id="ingCategory">아티스트 모집 행사</label>
+					<label class="category pointer" id="ingCategory">모집 중 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
-					<label class="category pointer" id="fullCategory">아티스트 확정 행사</label>
+					<label class="category pointer" id="fullCategory">확정 행사</label>
+					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
+					<label class="category pointer" id="recCategory">모집 마감 행사</label>
 					<label class="category">&nbsp;&nbsp; | &nbsp;&nbsp;</label>
 					<label class="category pointer" id="endCategory">지난 행사</label>
 				</div>
@@ -342,8 +372,11 @@
 								}
 								
 								String fesTerm = f.getFesTerm();
+								String recTerm = f.getRecTerm();
 								String endFes[] = fesTerm.split(" - ");
+								String endRec[] = recTerm.split(" - ");
 								String dateSplit[] = (endFes[endFes.length-1]).split("/");
+								String recSplit[] = (endRec[endRec.length-1]).split("/");
 								
 								int month = 0;
 								int day = 0;
@@ -353,27 +386,40 @@
 									day = Integer.parseInt(dateSplit[1]);
 									year = Integer.parseInt(dateSplit[2]);
 								}
-
+								
 								Date endFesDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
 								Date today = new Date(new GregorianCalendar().getTimeInMillis());
 								
-								long minus = today.getTime() - endFesDate.getTime();
+								if(endRec.length > 1) {
+									month = Integer.parseInt(recSplit[0]);
+									day = Integer.parseInt(recSplit[1]);
+									year = Integer.parseInt(recSplit[2]);
+								}
+								Date endRecDate = new Date(new GregorianCalendar(year, month-1, day).getTimeInMillis());
 								
 								String addcls = "";
 								String addtext = "";
+								int status = 0;
 								if (today.getTime() > endFesDate.getTime()) {
 									addcls = "badge badge-pill badge-light";
 									addtext = "지난 행사";
-								} else if (list.size() < f.getRecCount()) { 
+									status = 3;
+								} else if (list.size() < f.getRecCount() && today.getTime() <= endRecDate.getTime()) { 
 									addcls = "badge badge-pill badge-success";
 									addtext = "아티스트 모집 중";
-								} else if (list.size() == f.getRecCount()) { 
+									status = 1;
+								} else if (list.size() == f.getRecCount() && today.getTime() <= endFesDate.getTime()) { 
 									addcls = "badge badge-pill badge-danger";
 									addtext = "아티스트 확정";
+									status = 2;
+								} else if (today.getTime() > endRecDate.getTime()) { 
+									addcls = "badge badge-pill badge-info";
+									addtext = "아티스트 모집 마감";
+									status = 4;
 								} %>
 					<div class="festival">
 						<input type="hidden" value="<%= f.getFesCode() %>">
-						<input type="hidden" value="<%= addtext %>">
+						<input type="hidden" value="<%= status %>">
 						<%-- <img src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>" class="promotionDetailImg" /> --%>
 						<div style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;" class="promotionDetailImg"></div>
 						<div class="festivalInfo">
@@ -425,12 +471,21 @@
 									<td><%= attendArtist %></td>
 								</tr>
 								<% }
-								if(!addtext.equals("아티스트 모집 중") && (f.getTicFee() != 0)) {%>
-								<tr>
-									<td class="listlabel">관람비</td>
-									<td><%= f.getTicFee() %></td>
-								</tr>
-								<% }
+								if(!addtext.equals("아티스트 모집 중")) {
+									if(f.getTicFreeOp() != null) {
+										if(f.getTicFreeOp().equals("N")) {%>
+										<tr>
+											<td class="listlabel">관람비</td>
+											<td><%= f.getTicFee() %></td>
+										</tr>
+								<%		} else { %>
+										<tr>
+											<td class="listlabel">관람비</td>
+											<td>무료</td>
+										</tr>
+								<%		}
+									}
+								}
 								if(loginUser != null) {
 									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
 								<tr>
@@ -457,7 +512,7 @@
 					<% for(int p = startPage; p <= endPage; p++){
 						if(p == currentPage){ %>
 		                       <li class="page-item">
-		                       	<a class="page-link" href='#'><%= p %></a>
+		                       	<a class="page-link" href='#'><b><%= p %></b></a>
 		                       </li>
 						<% } else { %>			
 		                       <li class="page-item">
@@ -523,8 +578,17 @@
 				category = 4;
 				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
 			});
+			$('#recCategory').click(function() {
+				category = 5;
+				location.href = '<%= request.getContextPath() %>/list.fes?category=' + category;
+			});
 			
 			$('.banClick').click(function() {
+				var fcode = $(this).children().eq(0).val();
+				var status = $(this).children().eq(1).val();
+				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
+			});
+			$('.promClick').click(function() {
 				var fcode = $(this).children().eq(0).val();
 				var status = $(this).children().eq(1).val();
 				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
@@ -534,7 +598,7 @@
 				var status = $(this).children().eq(1).val();
 				location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status="+status;
 			});
-    	})
+    	});
     </script>
     
     <h1 class="htext">F E S T I V A L</h1>

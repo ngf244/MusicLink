@@ -36,6 +36,10 @@ public class showUserDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		
+		String userCode = new AuthorService().getUserCode(userId);
+		
+		userId = userCode;
+		
 		int type = new AuthorService().checkUserClass(userId);
 		
 		Member mem = new AuthorService().selectUser(userId);

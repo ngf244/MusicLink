@@ -76,7 +76,7 @@ public class FestivalInsertServlet extends HttpServlet {
 			String payRange = minPay + "~" + maxPay;
 			
 			int recCount = Integer.parseInt(multipartRequest.getParameter("needCount"));
-			String recTerm = multipartRequest.getParameter("artistDate");
+			String recTerm = multipartRequest.getParameter("artistStrDate") + " - " + multipartRequest.getParameter("artistEndDate");
 			
 			String banPath = "";
 			String posPath = "";
