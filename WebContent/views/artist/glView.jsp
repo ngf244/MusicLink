@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="gallery.GalleryDAO" %>
-<%@ page import="gallery.Gallery" %>
+<%@ page import="gallery.GalleryDAO2" %>
+<%@ page import="gallery.Gallery2" %>
 <!DOCTYPE html>
 <html lang="ko"> 
 <head>
@@ -68,7 +68,7 @@
     		script.println("history.back()");
     		script.println("/<script>");
 		}
-		Gallery gallery = new GalleryDAO().getGallery(glCode);
+		Gallery2 gallery = new GalleryDAO2().getGallery(glCode);
 	%>
    
     <section style="z-index: 1;">

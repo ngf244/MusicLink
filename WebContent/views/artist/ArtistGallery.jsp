@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="gallery.GalleryDAO" %>
-<%@ page import="gallery.Gallery" %>
+<%@ page import="gallery.GalleryDAO2" %>
+<%@ page import="gallery.Gallery2" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko"> 
@@ -101,8 +101,8 @@
                     </thead>
                     <tbody>
                    		<%
-	                    	GalleryDAO galleryDAO = new GalleryDAO();
-	                    	ArrayList<Gallery> list = galleryDAO.getList(pageNumber);
+	                    	GalleryDAO2 galleryDAO = new GalleryDAO2();
+	                    	ArrayList<Gallery2> list = galleryDAO.getList(pageNumber);
 	                    	for(int i = 0; i < list.size(); i++) {
 	                    %>
                         <tr>

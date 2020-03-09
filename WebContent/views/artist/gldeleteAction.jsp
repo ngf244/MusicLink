@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="gallery.GalleryDAO" %>
-<%@ page import="gallery.Gallery" %>
+<%@ page import="gallery.GalleryDAO2" %>
+<%@ page import="gallery.Gallery2" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
  			script.println("history.back()");
  			script.println("/<script>");
  		}
- 		Gallery gallery = new GalleryDAO().getGallery(glCode);
+ 		Gallery2 gallery = new GalleryDAO2().getGallery(glCode);
  		if(!userCode.equals(gallery.getUserCode())){
  			PrintWriter script = response.getWriter();
  			script.println("<script>");
@@ -42,7 +42,7 @@
  			script.println("history.back()");
  			script.println("/<script>");
  		}else {
- 				GalleryDAO galleryDAO = new GalleryDAO();
+ 				GalleryDAO2 galleryDAO = new GalleryDAO2();
     			int result = galleryDAO.gldelete(glCode);
     			if (result == -1) {
     	    		PrintWriter script = response.getWriter();

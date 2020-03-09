@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 
-public class GalleryDAO {
+public class GalleryDAO2 {
 	
 	private Connection conn;
 	private ResultSet rs; 
 	
-	public GalleryDAO() {
+	public GalleryDAO2() {
 		try {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "MUSICLINK";
@@ -70,15 +70,15 @@ public class GalleryDAO {
 		return -1;
 	}
 	
-	public ArrayList<Gallery> getList(int pageNumber){
+	public ArrayList<Gallery2> getList(int pageNumber){
 		String SQL = "SELECT FROM ML_GALLERY WHERE GL_CODE < ? AND GL_STATUS = 1 ORDER BY GL_CODE DESC LIMIT 10";
-		ArrayList<Gallery> list = new ArrayList<Gallery>();
+		ArrayList<Gallery2> list = new ArrayList<Gallery2>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Gallery gallery = new Gallery();
+				Gallery2 gallery = new Gallery2();
 				gallery.setGlCode(rs.getInt(1));
 				gallery.setGlTitle(rs.getString(2));
 				gallery.setGlDate(rs.getString(3));
@@ -108,14 +108,14 @@ public class GalleryDAO {
 		return false; 
 	}
 	
-	public Gallery getGallery(int glCode) {
+	public Gallery2 getGallery(int glCode) {
 		String SQL = "SELECT FROM ML_GALLERY WHERE GL_CODE = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, glCode);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				Gallery gallery = new Gallery();
+				Gallery2 gallery = new Gallery2();
 				gallery.setGlCode(rs.getInt(1));
 				gallery.setGlTitle(rs.getString(2));
 				gallery.setGlDate(rs.getString(3));

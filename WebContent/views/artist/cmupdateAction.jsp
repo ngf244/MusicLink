@@ -5,7 +5,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
 <meta charset="utf-8">
 <title>소통 게시판 작성</title>

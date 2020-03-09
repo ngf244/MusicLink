@@ -7,7 +7,7 @@
 <jsp:setProperty name="community" property="cmTitle"/>
 <jsp:setProperty name="community" property="cmContent"/>
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
 <meta charset="utf-8">
 <title>소통 게시판 작성</title>

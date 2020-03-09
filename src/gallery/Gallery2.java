@@ -1,6 +1,6 @@
 package gallery;
 
-public class Gallery {
+public class Gallery2 {
 	
 	private int glCode;
 	private String glTitle;

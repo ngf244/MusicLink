@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="gallery.GalleryDAO" %>
-<%@ page import="gallery.Gallery" %>
+<%@ page import="gallery.GalleryDAO2" %>
+<%@ page import="gallery.Gallery2" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko"> 

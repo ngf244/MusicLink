@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="gallery.GalleryDAO" %>
+<%@ page import="gallery.GalleryDAO2" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="gallery" class="gallery.Gallery" scope="page" />
+<jsp:useBean id="gallery" class="gallery.Gallery2" scope="page" />
 <jsp:setProperty name="gallery" property="glTitle"/>
 <jsp:setProperty name="gallery" property="glContent"/> 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
         		script.println("history.back()");
         		script.println("/<script>");
     		} else {
-    			GalleryDAO galleryDAO = new GalleryDAO();
+    			GalleryDAO2 galleryDAO = new GalleryDAO2();
     			int result = galleryDAO.ArtistGalleryWrite(gallery.getGlTitle(), gallery.getGlContent(), gallery.getUserCode());
     			if (result == -1) {
     	    		PrintWriter script = response.getWriter();
