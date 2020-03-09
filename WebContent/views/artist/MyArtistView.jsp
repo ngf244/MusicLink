@@ -31,7 +31,7 @@
     
     /* 섹션 */
  	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:1000px; padding-top: 30px; padding-bottom:10%;}
+    background: rgba(255,255,255,1); height:1300px; padding-top: 30px; padding-bottom:10%;}
     
     /* 나의 아티스트 */
     .sec-menu-views{width:78%; height:90%; padding:10px; float:left; border:1px solid rgba(255,255,255,0); box-sizing: border-box;}

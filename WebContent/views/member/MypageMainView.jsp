@@ -291,7 +291,7 @@
             					for(Gallery g : gList){
             			%>
                         <div onclick="goGalDetail();" style="cursor: pointer;">- <%= g.getGlTitle() %></div>
-				        <input type="hidden" name="qnaCode" value="">
+				        <input type="hidden" name="galCode" value="">
 				        <%		}
 		            	   }
 		            	%>                                                    
@@ -436,7 +436,7 @@
         	}
         	
         	function goGalDetail(){
-        		var galCode = $(this).children().eq(0).val();
+        		var galCode = $(this).next().val();
         		console.log(galCode);
         		
         		location.href='<%= request.getContextPath() %>/detail.gal?galCode=' + galCode;  
