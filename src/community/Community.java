@@ -1,6 +1,6 @@
 package community;
 
-public class Community { 
+public class Community {
 	
 	private int cmCode;
 	private String cmTitle;

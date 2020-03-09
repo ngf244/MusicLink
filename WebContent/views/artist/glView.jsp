@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="gallery.GalleryDAO" %>
-<%@ page import="gallery.Gallery" %> 
+<%@ page import="gallery.Gallery" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

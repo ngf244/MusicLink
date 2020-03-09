@@ -3,7 +3,7 @@
 <%@ page import="gallery.GalleryDAO" %>
 <%@ page import="gallery.Gallery" %>
 <%@ page import="java.io.PrintWriter" %>
-<% request.setCharacterEncoding("UTF-8"); %> 
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>

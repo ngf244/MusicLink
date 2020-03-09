@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="gallery.GalleryDAO" %>
 <%@ page import="gallery.Gallery" %>
-<%@ page import="java.io.PrintWriter" %> 
+<%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>

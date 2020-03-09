@@ -4,7 +4,7 @@ public class Gallery {
 	
 	private int glCode;
 	private String glTitle;
-	private String glDate; 
+	private String glDate;
 	private String glContent;
 	private int glStatus;
 	private String userCode;
