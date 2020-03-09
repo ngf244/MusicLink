@@ -3,7 +3,7 @@
 <%@ page import="community.CommunityDAO" %>
 <%@ page import="community.Community" %>
 <%@ page import="java.io.PrintWriter" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8"); %> 
 <!DOCTYPE html>
 <html>
 <head>

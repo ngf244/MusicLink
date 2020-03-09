@@ -6,7 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head> 
 <meta charset="utf-8">
 
     <link href="../css/style.css" rel="stylesheet">

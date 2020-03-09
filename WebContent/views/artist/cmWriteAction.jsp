@@ -4,7 +4,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="community" class="community.Community" scope="page" />
-<jsp:setProperty name="community" property="cmTitle"/>
+<jsp:setProperty name="community" property="cmTitle"/> 
 <jsp:setProperty name="community" property="cmContent"/>
 <!DOCTYPE html>
 <html>

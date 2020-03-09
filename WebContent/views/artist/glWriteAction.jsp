@@ -4,7 +4,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="gallery" class="gallery.Gallery" scope="page" />
-<jsp:setProperty name="gallery" property="glTitle"/>
+<jsp:setProperty name="gallery" property="glTitle"/> 
 <jsp:setProperty name="gallery" property="glContent"/>
 <!DOCTYPE html>
 <html>

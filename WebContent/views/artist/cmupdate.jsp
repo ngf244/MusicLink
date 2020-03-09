@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="community.CommunityDAO" %>
-<%@ page import="community.Community" %>
+<%@ page import="community.Community" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
