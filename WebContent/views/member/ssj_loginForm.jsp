@@ -4,6 +4,7 @@
 <%
 	/* Member loginUser = (Member)session.getAttribute("loginUser"); */
 	String msg = (String)request.getAttribute("msg");
+	String msgA = (String)request.getAttribute("msgA");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -138,6 +139,13 @@
 		$(function(){
 			if(msg != "null"){
 				$('#errorbox').text(msg);
+			}
+		});
+		
+		var msgA = "<%= msgA %>";
+		$(function(){
+			if(msgA != "null"){
+				alert("금지된 회원 입니다.");
 			}
 		});
 		
