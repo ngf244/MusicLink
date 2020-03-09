@@ -82,4 +82,36 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public int insertAtReq(Connection conn, String companyId) {
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		int result = 0;
+		String code = null;
+		
+		String query1 = prop.getProperty("insertAtReq");
+		String query2 = prop.getProperty("select");
+		
+		try {
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt2.setString(1, companyId);
+			rs = pstmt2.executeQuery();
+			if(rs.next()) {
+				code = rs.getString(1);
+			}
+			
+			pstmt = conn.prepareStatement(query1);
+			pstmt.setString(1, code);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

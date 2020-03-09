@@ -56,7 +56,7 @@
 		</div>
 		<div id="contentArea">
 			<div id="table_show">
-				<form action="<%= request.getContextPath() %>/insert.faq" method="post">
+				<form action="<%= request.getContextPath() %>/insert.faq" method="post" onsubmit="return validate();">
 					<table id="inputTable">
 						<tr>
 							<td class="qna_title labeltd">제목</td>
@@ -96,9 +96,22 @@
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
     
     <script>
-    	var str = $('#content').val();
+    	/* var str = $('#content').val();
     	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-    	$('#content').val(str);
+    	$('#content').val(str); */
+    	
+    	function validate(){
+    		if($('#title').val() == ""){
+    			alert("제목을 입력해주세요.");
+    			return false;
+    		} else if($('#content').val() == ""){
+    			alert("내용을 입력해주세요.");
+    			return false;
+    		} else{
+    			return true;
+    		}
+    	}
+    	
     </script>
 </body>
 </html>

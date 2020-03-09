@@ -13,14 +13,13 @@ public class Gallery {
 	
 	public Gallery() {}
 
-	public Gallery(String glCode, String glTitle, String glContent, Date glDate, int glReadCnt, String glStatus,
+	public Gallery(String glCode, String glTitle, String glContent, Date glDate, String glStatus,
 			String userCode) {
 		super();
 		this.glCode = glCode;
 		this.glTitle = glTitle;
 		this.glContent = glContent;
 		this.glDate = glDate;
-		this.glReadCnt = glReadCnt;
 		this.glStatus = glStatus;
 		this.userCode = userCode;
 	}

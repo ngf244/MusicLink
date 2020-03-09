@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.model.vo.*"%>
 <%
@@ -19,7 +20,9 @@
 	<header style='position:fixed; top:0; z-index:2;'> 
         <nav> 
             <div class="logo">
-            <a href="<%= request.getContextPath() %>/index.jsp">logo</a> 
+            <a href="<%= request.getContextPath() %>/index.jsp">
+				<img src="<%= request.getContextPath() %>/img/logoml.png" style="width:180px; height:100px;">
+			</a> 
             </div>
             <div id="toggle">
                 <div class="span" id="one"></div>
@@ -92,17 +95,19 @@
         </div>
         
         
-        <% if((request.getRequestURI()).indexOf("festival") != -1 && (request.getRequestURL()).indexOf("Update") == -1 && (request.getRequestURL()).indexOf("Enroll") == -1) { %>
-		<% if (loginUser != null) { %>
-			<% if(loginUser.getUserClass().equals("3")) { %>
-				<div class="side-icon-right">
-				<div class="image4 icon">
-					<img src="<%= request.getContextPath() %>/img/add.png" alt="" />
-				</div>
-			           </div>
-			<% } %>
+        <% if((request.getRequestURI()).indexOf("festival") > -1) { %>
+        <% if (loginUser != null) { %>
+	           <% if(loginUser.getUserClass().equals("3")) { %>
+	           <div class="side-icon-right">
+	              <div class="image4 icon">
+	         <img src="<%= request.getContextPath() %>/img/add.png" alt="" />
+	              </div>
+	           </div>
+			   <% } %>
+		   <% } %>
 		<% } %>
-		<% } %>
+        
+        
         
         
         <div class="side-text">
@@ -146,6 +151,7 @@
     </header>
     
     <script>
+
 	$("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
@@ -163,9 +169,6 @@
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
     });
     
-    $(".image4").click(function(){
-    	location.href = "<%=request.getContextPath()%>/views/festival/FestivalEnroll.jsp";
-    });
     
     function myPage(){
     	location.href="<%= request.getContextPath() %>/myPage.me";

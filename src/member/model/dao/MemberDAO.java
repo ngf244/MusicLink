@@ -292,6 +292,44 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int banlogin(Connection conn, String user_id) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		String result1 = null;
+		int result2 = 0;
+		
+		String qeury1 = prop.getProperty("selectCode");
+		String query2 = prop.getProperty("banlogin");
+		
+		try {
+			pstmt1 = conn.prepareStatement(qeury1);
+			pstmt1.setString(1, user_id);
+			rs1 = pstmt1.executeQuery();
+			if(rs1.next()) {
+				result1 = rs1.getString("user_code");
+			}
+			
+			pstmt2 = conn.prepareStatement(query2);
+			pstmt2.setString(1, result1);
+			rs2 = pstmt2.executeQuery();
+			if(rs2.next()) {
+				result2 = rs2.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs2);
+			close(rs1);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		
+		return result2;
+	}
+
 
 	
 

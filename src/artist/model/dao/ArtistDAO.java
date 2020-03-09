@@ -130,7 +130,7 @@ public class ArtistDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<FollowArtist> list = null;
-		int artists = 4; // 한 페이지에 보여질 게시글 개수
+		int artists = 6; // 한 페이지에 보여질 게시글 개수
 		
 		int startRow = (currentPage - 1) * artists + 1;
 		int endRow = startRow + artists - 1;		
@@ -414,7 +414,7 @@ public class ArtistDAO {
 			close(rs);
 			close(stmt);
 		}
-		System.out.println("아티스트 랭킹 리스트 3위까지 : " + list);	
+		System.out.println("아티스트 랭킹 리스트 3위까지 : " + list);
 
 		return list;
 

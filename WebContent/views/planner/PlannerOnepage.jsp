@@ -3,8 +3,9 @@
 <%@ page import="java.util.ArrayList, festival.model.vo.*" %>
 <%
 	ArrayList<Festival> flist = (ArrayList<Festival>)request.getAttribute("fList");
+	ArrayList<FestivalApply> apList = (ArrayList<FestivalApply>)request.getAttribute("apList");
 	boolean isReceive = true;
-	if(flist == null) {
+	if(apList == null) {
 		isReceive = false;
 	}
 %>
@@ -21,6 +22,9 @@
     .fe-nav{width:19.5%; display: inline-block; text-align: center; padding:10px 0; }
     .padding-1{padding:5px 0; color:#000;}
     .fe-sum{width:19.5%; display: inline-block; margin:0; padding: 0; text-align: center;}
+    
+    .btn-y{display:inline-block; background:#ccc; color:#fff; padding: 5px 5px;}
+    .btn-n{display:inline-block; background:#000; color:#fff; padding: 5px 5px;}
 </style>
 </head>
 <body>
@@ -28,34 +32,30 @@
 	<section style="z-index: 1;">
        	<%@ include file="../common/MyPage_Menubar.jsp" %>
         <div class="sec-menu-views views0">
-            <h3>등록한 행사일정</h3>
+            <h3>나의 행사에 지원한 아티스트</h3>
             <ul class="festival-event">
-                <li class="fe-nav">날짜</li>
-                <li class="fe-nav">행사명</li>
-                <li class="fe-nav">행사등록페이지</li>
+                <li class="fe-nav">지원 날짜</li>
+                <li class="fe-nav">아티스트 명</li>
+                <li class="fe-nav">아티스트 프로필</li>
                 <li class="fe-nav">모집기간</li>
-                <li class="fe-nav">상태</li>
+                <li class="fe-nav">금액</li>
             </ul>
-            
-            <div class="padding-1">
             <%	if(isReceive == true){ %>
-	            <% for(Festival f : flist){ %>
-	            	 <% if(f.getCpCode().equals(loginUser.getUserCode())){ %>
-	                <div class="fe-day fe-sum"><%= f.getFesDate() %></div>
-	                <div class="fe-name fe-sum"><%= f.getFesName() %></div>
-	                <div class="fe-page fe-sum">URL</div>
-	                <div class="fe-period fe-sum"><%= f.getRecTerm() %></div>
-	                <div class="fe-yn fe-sum">
-						<% if( f.getFesRecruit().equals("Y") ){ %>
-						<div class="feBtni">모집중</div>
-						<% } else { %>
-						<div class="feBtnf">모집완료</div>
-						<% } %>
-					</div>
-	                <% } %>
-	            <% } %>
+           		<% for(FestivalApply fa : apList){ %>
+           			<% if(fa.getPlCode().equals(loginUser.getUserCode())){ %>
+		            <div class="padding-1">
+		                <div class="fe-day fe-sum"><%= fa.getApFesTime() %></div>
+		                <div class="fe-name fe-sum" onclick="btn-yn();"><%= fa.getAtCode() %></div>
+		                <div class="fe-page fe-sum">
+		                	<div class="btn-y">수락</div>
+		                	<div class="btn-n">거절</div>
+		                </div>
+		                <div class="fe-period fe-sum"><%= fa.getFesTerm() %></div>
+		                <div class="fe-yn fe-sum"><%= fa.getPayRange() %></div>
+		            </div>
+           			 <%  } %>
+            	<% } %>
             <% } %>
-            </div>
             
         </div>
     </section>
