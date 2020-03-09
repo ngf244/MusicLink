@@ -1,18 +1,32 @@
 package festival.model.service;
 
+
+import festival.model.dao.FestivalDAO;
+import festival.model.vo.Festival;
+import festival.model.vo.FestivalApply;
+import member.model.vo.Member;
+
+import static common.JDBCTemplate.*;
+
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+
+import artist.model.dao.ArtistDAO;
+import artist.model.vo.Artist;
 
 import festival.model.dao.FestivalDAO;
 import festival.model.vo.AppFestival;
 import festival.model.vo.Festival;
 import member.model.vo.Member;
+
 
 public class FestivalService {
 
@@ -147,6 +161,30 @@ public class FestivalService {
 	}
 
 
+	public ArrayList<Festival> selectFList() {
+		Connection conn = getConnection();
+		ArrayList<Festival> list = null;
+		
+		FestivalDAO dao = new FestivalDAO();
+		
+		list = dao.selectFList(conn);
+		return list;
+	}
+
+	public ArrayList<FestivalApply> selectapplyList() {
+		Connection conn = getConnection();
+		ArrayList<FestivalApply> list = null;
+		
+		FestivalDAO dao = new FestivalDAO();
+		
+		list = dao.selectappList(conn);
+		
+		return list;
+	}
+
+	
+
+
 	public int selectArtistCount(String fcode) {
 		Connection conn = getConnection();
 		
@@ -203,5 +241,6 @@ public class FestivalService {
 		close(conn);
 		return afList;
 	}
+
 	
 }
