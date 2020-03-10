@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="QNA.model.vo.QnA" project="MusicLink" file="/MusicLink/src/QNA/model/vo/QnA.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1428" y="552"/>    
+    <position height="-1" width="-1" x="1371" y="507"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="QNA.model.vo.PageInfo" project="MusicLink" 
     file="/MusicLink/src/QNA/model/vo/PageInfo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1109" y="526"/>    
+    <position height="-1" width="-1" x="1080" y="507"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="QNA.model.service.QNAService" project="MusicLink" 
     file="/MusicLink/src/QNA/model/service/QNAService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="319" y="572"/>    
+    <position height="-1" width="-1" x="237" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="QNA.model.dao.QNADAO" project="MusicLink" 
     file="/MusicLink/src/QNA/model/dao/QNADAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="711" y="584"/>    
+    <position height="-1" width="-1" x="576" y="537"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
