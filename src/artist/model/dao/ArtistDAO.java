@@ -778,6 +778,72 @@ public class ArtistDAO {
 		}
 			return rList;
 	}
+
+	public Artist selectArtistDetail(Connection conn, String atCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Artist a = null;
+		
+		String query = prop.getProperty("selectArtistDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, atCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				a = new Artist(rset.getString("AT_CODE"),
+							   rset.getString("AT_NAME"),
+							   rset.getInt("AT_MEMBER"),
+							   rset.getString("AT_GENRE"),
+							   rset.getString("AT_CLASS"),
+							   rset.getString("PROFILE_PIC_PATH"),
+							   rset.getString("AT_ONELINE"),
+							   rset.getString("AT_INTRO"),
+							   rset.getString("AT_RECORD"),
+							   rset.getDate("AT_DEBUT"),
+							   rset.getInt("AT_GRADE"),
+							   rset.getString("AT_INSTA"),
+							   rset.getString("AT_TWITTER"),
+							   rset.getString("AT_FACEBOOK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return a;
+	}
+	public int selectFollowCount(Connection conn, String atCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int count = 0;
+		
+		String query = prop.getProperty("selectFollowCount");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, atCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+
 		
 	
 	public int insertLoveCall(Connection conn, String artistCode, String fesCode, String message) {
@@ -798,6 +864,7 @@ public class ArtistDAO {
 			close(pstmt);
 		}
 		return result;
+
 
 	}		
 	

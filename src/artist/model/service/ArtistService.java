@@ -280,4 +280,18 @@ public class ArtistService {
 		close(conn);
 		return rList;
 	}
+
+	public Artist selectArtistDetail(String atCode) {
+		Connection conn = getConnection();
+		Artist artist = new ArtistDAO().selectArtistDetail(conn, atCode);
+		close(conn);
+		return artist;
+	}
+
+	public int selectFollowCount(String atCode) {
+		Connection conn = getConnection();
+		int count = new ArtistDAO().selectFollowCount(conn, atCode);
+		close(conn);
+		return count;
+	}
 }
