@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
+import artist.model.vo.ArtistRank;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.Festival;
 import gallery.model.dao.GalleryDAO;
@@ -229,5 +230,19 @@ public class ArtistService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int getArtistRankListCount() {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().getArtistRankListCount(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<ArtistRank> selectAtRankList(int currentPage) {
+		Connection conn = getConnection();
+		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage);
+		close(conn);
+		return rList;
 	}
 }
