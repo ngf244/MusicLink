@@ -26,7 +26,7 @@
 <style>
  	/* 섹션 */
 	section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: rgba(255,255,255,1); height:2100px; padding-top: 30px; padding-bottom:10%;}
+    background: rgba(255,255,255,1); height:2200px; padding-top: 30px; padding-bottom:10%;}
     
     /* 시작 */
     #menuList div div {display: none;}
@@ -299,7 +299,7 @@
 			             %>   
 							<div class="eventArea">
 		                    <div class="eventImage">
-		                        <img width="190px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>">
+		                        <img width="180px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>">
 		                    </div>
 		                    
 		                    <div class="eventInfo">
