@@ -50,7 +50,7 @@
             <% } else if(loginUserConfirm.getUserClass().equals("3")){ %>
             <li class="sec-menu-5 smenu">FESTIVAL
                 <ul class="s-smenu">
-                    <li><a href="#">등록한 행사</a></li>
+                    <li><a href="<%= request.getContextPath() %>/register.me">등록한 행사</a></li>
                     <li><a href="" target="_self">러브콜(send)</a></li>
                     <li><a href="" target="_self">아티스트 후기</a></li>
                 </ul>

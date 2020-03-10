@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -92,6 +93,38 @@ public class NoticeDAO {
 		
 		return list;
 	}
-
+	public ArrayList<Notice> selectNoticeListtwo(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ArrayList<Notice> list = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectNoticeListtwo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Notice>();
+			
+			while(rset.next()) { 
+				Notice n = new Notice(rset.getString("NOTICE_CODE"),
+									  rset.getString("USER_CODE"),
+									  rset.getString("NOTICE_CLASS"),
+									  rset.getString("NOTICE_CONTENTS"),
+									  rset.getDate("NOTICE_TIME"));
+				list.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("서비스단 리스트 3번째"+list);
+		return list;
+	}
 
 }

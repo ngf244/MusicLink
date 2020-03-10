@@ -24,6 +24,13 @@ public class NoticeService {
 		close(conn);
 		return list;	
 	}
+	public ArrayList<Notice> selectNoticeListtwo(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<Notice> list = new NoticeDAO().selectNoticeListtwo(conn, userCode);
+		System.out.println("서비스단 리스트 2번째"+list);
+		close(conn);
+		return list;	
+	}
 
 
 	

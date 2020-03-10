@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.*"%>
+    pageEncoding="UTF-8" import="member.model.vo.*, payment.model.vo.*, java.util.ArrayList, notice.model.vo.*"%>
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Manager loginManager = (Manager)session.getAttribute("loginManager");
+	PayMent payment = (PayMent)session.getAttribute("payment");
+	ArrayList<Notice> nolist = (ArrayList<Notice>)session.getAttribute("list");
+	System.out.println("민수형 땡유"+nolist);
+	
 %> 
 
 <!DOCTYPE html>
@@ -114,37 +118,44 @@
             </div>
         <% if(loginUser != null){
         	String uName = loginUser.getUserName();
-    		String uId = loginUser.getUserId();	
+    		String uId = loginUser.getUserId();
        	%>
 
         <div class="user-wrap">
             <div class="user-nickName"><%= uName %></div>
             <div class="user-id"><%= uId %></div>
             <div class="user-coin">
-                <lable>coin</lable><lable style="margin-left:15px;">20</lable>
+                <lable>coin</lable><lable style="margin-left:15px;"><%= payment.getPayAmount() %></lable>
             </div>
             <div class="user-mypage" onclick="myPage();">마이페이지</div>
-            <div class="user-charging">충전</div>
+            <div class="user-charging" onclick="purchaset();">충 전</div>
         </div>
         <div class="alram-wrap">
+        	<%-- <% if(nolist.isEmpty()){ %>
+	            	<div>알림 내역이 없습니다.</div> --%>
+			<% 
+            		for(Notice n : nolist){
+            %>
             <div class="alram-con">
                 <div class="alram-img"></div>
-                <div class="alram-time"></div>
-                <div class="alram-msg"></div>
-                <div class="alram-close"></div>
+                <div class="alram-msg">
+                	<% 
+	                	String noticeClass = "";
+	                	switch(n.getNoticeClass()) {
+	                	case "1": noticeClass ="팔로잉(following)"; break;
+	                	case "2": noticeClass ="러브콜(receive)"; break;
+	                	case "3": noticeClass ="러브콜(accept)"; break;
+	                	case "4": noticeClass ="행사지원(apply)"; break;
+	                	case "5": noticeClass ="행사지원수락(accept)"; break;
+	                	}
+                	%>
+                <%= n.getNoticeContents() %>
+                </div>
+                <div class="alram-close" id="arClose">x</div>
             </div>
-            <div class="alram-con">
-                <div class="alram-img"></div>
-                <div class="alram-time"></div>
-                <div class="alram-msg"></div>
-                <div class="alram-close"></div>
-            </div>
-            <div class="alram-con">
-                <div class="alram-img"></div>
-                <div class="alram-time"></div>
-                <div class="alram-msg"></div>
-                <div class="alram-close"></div>
-            </div>
+            <%	    }
+           	   
+           	%> 
         </div>
         <% } %>
     </header>
@@ -168,9 +179,16 @@
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
     });
     
+    $("#arClose").click(function(){
+    	$(this).parent().css("display","none");
+    });
+    
     
     function myPage(){
     	location.href="<%= request.getContextPath() %>/myPage.me";
+	}
+    function purchaset(){
+    	location.href="<%= request.getContextPath() %>/views/member/Purchaset.jsp";
 	}
     
 	</script>

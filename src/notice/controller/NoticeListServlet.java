@@ -68,13 +68,14 @@ public class NoticeListServlet extends HttpServlet {
 		ArrayList<Notice> list = service.selectNoticeList(currentPage, userCode);
 		
 		System.out.println(pi);
-		System.out.println(list);
+		System.out.println("서블릿 리스트"+list);
 		
 		String page = null;
 		
+		
 		if(list != null) {
 			page = "views/member/MypageNoticeView.jsp";
-			request.setAttribute("list", list);
+			session.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
 			page = "views/common/errorPage.jsp";

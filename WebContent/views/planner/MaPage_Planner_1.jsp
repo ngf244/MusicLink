@@ -47,7 +47,7 @@
 	                <div class="fe-period fe-sum"><%= f.getRecTerm() %></div>
 	                <div class="fe-yn fe-sum">
 						<% if( f.getFesRecruit().equals("Y") ){ %>
-						<div class="feBtni">모집중</div>
+						<div class="feBtni"><a href="<%= request.getContextPath() %>/festivalapply.me">모집중</a></div>
 						<% } else { %>
 						<div class="feBtnf">모집완료</div>
 						<% } %>
