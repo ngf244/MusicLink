@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Fugaz+One&display=swap" rel="stylesheet">
 
-
+ 
 
 <head>
 <meta charset="UTF-8">
@@ -209,7 +209,7 @@
                 </div>
             </div> 
             <div class="ranking-box">
-                <div class="vedio-left"></div>
+                <iframe class="vedio-left" src="https://www.youtube.com/embed/-GyHsYQ7Y_g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="rank-right">
                     <div class="rank-left-1">
                         <div class="lr-top lrank">1</div>

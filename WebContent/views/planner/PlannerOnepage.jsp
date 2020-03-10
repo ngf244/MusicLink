@@ -8,7 +8,7 @@
 	if(apList == null) {
 		isReceive = false;
 	}
-%>
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,8 +47,40 @@
 		                <div class="fe-day fe-sum"><%= fa.getApFesTime() %></div>
 		                <div class="fe-name fe-sum" onclick="btn-yn();"><%= fa.getAtCode() %></div>
 		                <div class="fe-page fe-sum">
-		                	<div class="btn-y">수락</div>
-		                	<div class="btn-n">거절</div>
+		                	<button class="btn-y" value="Y" name="Y">수락</button>
+		                	<button class="btn-n" value="N" name="N">거절</button>
+		                	<div class="choice" style="display:none;">완료</div>
+		                	<script>
+		                	$('.btn-y').click(function(){
+		            			var name = $('.btn-y').val();
+		            			$.ajax({
+		            				url: 'testy.do',
+		            				data: {name:name},
+		            				type: 'get',
+		            				success: function(data){
+		            					console.log('서버 성공 시 호출되는 함수');
+		            				}
+		            			});
+		            			$('.btn-n').css('display', 'none');
+		            			$('.btn-y').css('display', 'none');
+		            			$('.choice').css('display', 'block');
+		            		});
+		                	$('.btn-n').click(function(){
+		            			var name = $('.btn-n').val();
+		            			$.ajax({
+		            				url: 'testn.do',
+		            				data: {name:name}, 
+		            				type: 'get',
+		            				success: function(data){
+		            					console.log('서버 성공 시 호출되는 함수');
+		            				}
+		            			});
+		            			$('.btn-n').css('display', 'none');
+		            			$('.btn-y').css('display', 'none');
+		            			$('.choice').css('display', 'block');sxwe
+		            		});
+		                	
+		                	</script>
 		                </div>
 		                <div class="fe-period fe-sum"><%= fa.getFesTerm() %></div>
 		                <div class="fe-yn fe-sum"><%= fa.getPayRange() %></div>

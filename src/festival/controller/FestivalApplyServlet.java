@@ -45,7 +45,7 @@ public class FestivalApplyServlet extends HttpServlet {
 			request.setAttribute("msg", "행사등록페이지 조회에실패하였습니다.");
 			page = "views/common/errorPage.jsp";
 		}
-		System.out.println(sList +"이건뭘까?왜안넘어와?");
+		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}

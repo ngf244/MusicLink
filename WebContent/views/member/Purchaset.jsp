@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	 /* String payment = (String)request.getAttribute("payment"); */
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +54,7 @@
         		<img src="<%= request.getContextPath() %>/img/202002261251.jpg">
         	</div>
         	<div class="pcc-right">
-        		<form>
+        		<form action="<%= request.getContextPath() %>/payment.me" method="post">
         			<ul class="pcc-rwap">
         				<li class="pcc-name">
         					<label>선택</label>
@@ -139,13 +142,13 @@
 		        
 		        /**/
 		        
-		        
 		        var faction = $('form');
 		        <%-- faction.action = "<%= request.getContextPath() %>"; --%>
-		        faction.action = "<%= request.getContextPath() %>/payment.me";
+		       <%--  faction.action = "<%= request.getContextPath() %>/payment.me";
 		        faction.method = "post";
-		        console.log(price_value);
+		        console.log(price_value); --%>
 		        
+		        faction.submit();
 		        fin = true;
 		        
 		    } else {
@@ -155,8 +158,8 @@
 		        alert(msg);
 		    }
 		    if(fin){
-		    	alert(msg);		    	
-		    	faction.submit();
+		    	alert(msg);	
+		    	
 		    }
 		    
 		    
