@@ -1,5 +1,18 @@
+<%@page import="festival.model.vo.PageInfo"%>
+<%@page import="artist.model.vo.Artist"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Artist> arr = (ArrayList<Artist>)request.getAttribute("arr");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,8 +44,8 @@
     .promotionImgArea{margin-top:120px; width:100%; }
     .promotionImgArea input{}
     .promotionImg{width:200px; height:px; background:lightgray; display:inline-block; vertical-align:middle;}
-    .follow{font-size:11px; margin-top:260px; height:30px; width:50%; float:left;}
-    .request{font-size:11px; margin-top:260px; height:30px; width:50%; float:right;}
+    .follow{font-size:11px; margin-top:1.5px; height:30px; width:50%; float:left;}
+    .request{font-size:11px; margin-top:1.5px; height:30px; width:50%; float:right;}
     #hrstyle{border:0.4px solid lightgray; margin-top:1%;}
    
     .ar-line{width:100%; height:40px; background:rgba(0,0,0,0.8);}
@@ -59,48 +72,53 @@
                 <div class="ar-line">
                     <div class="line-box">
                     <select class="select-box">
-                        <option>장르를 선택하세요.</option>
-                        <option>댄스</option>
-                        <option>발라드</option>
-                        <option>랩/힙합</option>
-                        <option>락</option>
-                        <option>트로트</option>
+                        <option value="전체">전체</option>
+                        <option value="댄스">댄스</option>
+                        <option value="발라드">발라드</option>
+                        <option value="랩/힙합">랩/힙합</option>
+                        <option value="락">락</option>
+                        <option value="트로트">트로트</option>
+                        <option value="기타">기타</option>
                     </select>
                     </div>
                 </div>
+            </div>
 
                 <div class="promotionImgArea">
-                    <input type="button" value="<">
+                <%for(int i=0; i<arr.size(); i++){ %>
                     <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
+                   		<img src="<%=request.getContextPath() %>/artistProfile_uploadFiles/<%=arr.get(i).getAtPicPath()%>" style="width: 100%; height: 250px">
+                    	<input type="hidden" value="<%=arr.get(i).getAtCode()%>">
+                        <button class="follow" id="fol<%=i %>" onclick="fol_click(this);">팔로우</button>
+                        <button class="request" id="fes<%=i %>" onclick="fes_click(this);">행사요청</button>
                     </div>
-                    <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
-                    </div>
-                    <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
-                     </div>
-                     <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
-                    </div>
-                    <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
-                    </div>
-                    <div class="promotionImg">
-                        <button class="follow" id="fol" onclick="fol_clcik();">팔로우</button>
-                        <button class="request" id="fes" onclick="fes_clcik();">행사요청</button>
-                    </div>
-                    <input type="button" value=">">
-                </div>
+                <%} %>
+                <br>
+                    <input type="button" value=&lt id="beforeBtn" onclick="location.href='<%= request.getContextPath() %>/ArtistList.go?currentPage=<%=currentPage-1 %>'">
+	                <script>
+					if(<%= currentPage %> <= 1){
+						var before = $('#beforeBtn');
+						before.attr('disabled', 'true');
+					}
+					</script>
+            <% for(int p = startPage; p <= endPage; p++){ %>
+				<% if(p == currentPage){ %>
+					<button id="choosen" disabled><%= p %></button>
+				<% } else{ %>
+					<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/ArtistList.go?currentPage=<%= p %>'"><%= p %></button>
+				<% } %>
+			<% } %>
+                    <input type="button" value=&gt id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/ArtistList.go?currentPage=<%=currentPage+1 %>'">
+                    <script>
+					if(<%= currentPage %> = <%= maxPage%>){
+						var before = $('#afterBtn');
+						before.attr('disabled', 'true');
+					}
+					</script>
             </div>
         </div>
     </section>
-    <h1 class="htext" align="cneter">A - l i s t</h1>
+    <h1 class="htext" align="center">A - l i s t</h1>
     
    <%@ include file="../common/footer.jsp" %>
     
@@ -125,7 +143,11 @@
     });    
 	//new WOW().init();
 	
-	function fol_clcik(){
+    $('.select-box').click(function () {
+        console.log(this);
+    })
+
+	function fol_click(){
         if (confirm("팔로우 하시겠습니까?") == true){    //확인
             document.form.submit();
         }else{   //취소
@@ -133,7 +155,7 @@
         }
     }
 
-    function fes_clcik(){
+    function fes_click(){
         if (confirm("행사요청을 보내시겠습니까?") == true){    //확인
             document.form.submit();
         }else{   //취소

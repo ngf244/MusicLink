@@ -597,5 +597,72 @@ public class ArtistDAO {
 		
 		return userCode;
 	}
+	public ArrayList<Artist> getArtistList(Connection conn, int currentPage, String Genre) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int posts = 5;
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		ArrayList<Artist> arr = new ArrayList<Artist>();
+		String query = prop.getProperty("getArtistList");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, Genre);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Artist a = new Artist();
+				a.setAtCode(rset.getString("AT_CODE"));
+				a.setAtName(rset.getString("AT_NAME"));
+				a.setAtMember(Integer.parseInt(rset.getString("AT_MEMBER")));
+				a.setAtGenre(rset.getString("AT_GENRE"));
+				a.setAtClass(rset.getString("AT_CLASS"));
+				a.setAtPicPath(rset.getString("PROFILE_PIC_PATH"));
+				a.setAtOneLine(rset.getString("AT_ONELINE"));
+				a.setAtIntro(rset.getString("AT_INTRO"));
+				a.setAtRecode(rset.getString("AT_RECORD"));
+				a.setAtDebutDate(rset.getDate("AT_DEBUT"));
+				a.setAtGrade(Integer.parseInt(rset.getString("AT_GRADE")));
+				a.setAtInsta(rset.getString("AT_INSTA"));
+				a.setAtTwitter(rset.getString("AT_TWITTER"));
+				a.setAtFacebook(rset.getString("AT_FACEBOOK"));
+				
+				arr.add(a);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return arr;
+	}
+	public int getListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
 
 }
