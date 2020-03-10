@@ -101,7 +101,7 @@
 					</tr>
 				</table>
 			</form>
-			<!-- 관리자 댓글 -->
+			<!-- 관리자 댓글 작성 -->
 			<form class="table_show" id="form2" action="<%= request.getContextPath() %>/insertReply.qna" method="post">
 			<table id="qna_comment">
 				<% if(loginManager != null) { %>
@@ -118,9 +118,6 @@
 							<td id="replyS1">답변 : </td>
 							<td colspan="2" id="replyS2">
 								<%= qna.getQnaComContent() %>
-								<%-- <textarea cols="110" class="replyContent" name="replyContent" id="replyContent" style="resize:none;" readonly>
-								<%= qna.getQnaComContent() %>
-								</textarea> --%>
 							</td>
 						</tr>
 						<tr>
@@ -130,7 +127,7 @@
 							</td>
 						</tr>
 					<% } %>
-				<!-- 회원 댓글 -->
+				<!-- 댓글 뷰 -->
 				<% } else { %>
 					<% if(qna.getQnaComYN().equals("Y")) { %>
 						<tr>
