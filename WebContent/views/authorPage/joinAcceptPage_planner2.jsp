@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
     section{width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
-    background: #fff; height:1100px; font-family: "Roboto", sans-serif;} 
+    background: #fff; min-height:650px; font-family: "Roboto", sans-serif;} 
     
     .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:140px; left:50%; transform: translateX(-50%); color: rgb(224, 224, 224);} 
     

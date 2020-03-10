@@ -23,8 +23,8 @@
     #sectionBox div{position: absolute;}
     /* common end */
     
-    .requestBox{width: 80%; height: 80%; bottom: 5%; left: 10%;}
-    .requestBox ul{position: relative; width: 100%; height: 23%; left: 0%; margin-top: 10px; border: outset;}
+    .requestBox{width: 80%; height: 80%; bottom: 5%; left: 10%; overflow: auto;}
+    .requestBox ul{position: relative; width: 98%; height: 23%; left: 0%; margin-top: 10px; border: outset;}
     .requestBox ul:hover{box-shadow: 5px 5px 3px 2px gray;}
     .requestBox-li1{position: absolute; width: 30%; height: 100%; left: 0%; background-color: blanchedalmond;}
     .requestBox-li2{position: absolute; width: 10%; height: 15%; left: 35%; top: 5%;; border: ridge; text-align: center;}

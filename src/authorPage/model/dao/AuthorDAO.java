@@ -630,5 +630,33 @@ public class AuthorDAO {
 		
 		return cj;
 	}
+
+	public int changeUserClass(Connection conn, String userCode, String where) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("changeUserClass");
+		String userClass = "";
+		if(where.equals("art")) {
+			userClass = "2";
+		} else if(where.equals("com")) {
+			userClass = "3";
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userClass);
+			pstmt.setString(2, userCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

@@ -252,4 +252,20 @@ public class AuthorService {
 		return cj;
 	}
 
+	public int changeUserClass(String userCode, String where) {
+		Connection conn = getConnection();
+		
+		int result = new AuthorDAO().changeUserClass(conn, userCode, where);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
