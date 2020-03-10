@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import artist.model.vo.Artist;
+import artist.model.vo.ArtistRank;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.Festival;
 
@@ -663,6 +664,77 @@ public class ArtistDAO {
 		}
 		
 		return result;
+	}
+	
+	public int getArtistRankListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getArtistRankListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
+	public ArrayList<ArtistRank> selectAtRankList(Connection conn, int currentPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistRank> rList = null;
+		
+		int artists = 5; // 한 페이지에 보여질 게시글 개수
+        
+        int startRow = (currentPage - 1) * artists + 1;
+        int endRow = startRow + artists - 1;
+		
+		String query = prop.getProperty("selectAtRankList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			rList = new ArrayList<ArtistRank>();
+			
+			while(rset.next()) {
+				ArtistRank a = new ArtistRank(rset.getString("AT_CODE"),
+											  rset.getString("AT_NAME"),
+											  rset.getInt("AT_MEMBER"),
+											  rset.getString("AT_GENRE"),
+											  rset.getString("AT_CLASS"),
+											  rset.getString("PROFILE_PIC_PATH"),
+											  rset.getString("AT_ONELINE"),
+											  rset.getString("AT_INTRO"),
+											  rset.getString("AT_RECORD"),
+											  rset.getDate("AT_DEBUT"),
+											  rset.getInt("AT_GRADE"),
+											  rset.getString("AT_INSTA"),
+											  rset.getString("AT_TWITTER"),
+											  rset.getString("AT_FACEBOOK"),
+											  rset.getInt("RNUM"));
+				rList.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}		
+		
+		return rList;
 	}
 
 }
