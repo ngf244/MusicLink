@@ -98,16 +98,16 @@
         </div>
         
         
-        <% if((request.getRequestURI()).indexOf("festival") > -1) { %>
-        <% if (loginUser != null) { %>
-	           <% if(loginUser.getUserClass().equals("3")) { %>
-	           <div class="side-icon-right">
-	              <div class="image4 icon">
-	         <img src="<%= request.getContextPath() %>/img/add.png" alt="" />
-	              </div>
-	           </div>
-			   <% } %>
-		   <% } %>
+        <% if((request.getRequestURI()).indexOf("festival") != -1 && (request.getRequestURL()).indexOf("Update") == -1 && (request.getRequestURL()).indexOf("Enroll") == -1) { %>
+		<% if (loginUser != null) { %>
+			<% if(loginUser.getUserClass().equals("3")) { %>
+				<div class="side-icon-right">
+				<div class="image4 icon">
+					<img src="<%= request.getContextPath() %>/img/add.png" alt="" />
+				</div>
+			           </div>
+			<% } %>
+		<% } %>
 		<% } %>
         
         
