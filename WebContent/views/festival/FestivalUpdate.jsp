@@ -262,6 +262,7 @@
 					<% } else { %>
 						$('#secretOp').attr('selected', 'false');
 						$('#inputfee').val(<%= f.getTicFee() %>);
+						$('#inputurl').val(<%= f.getTicUrl() %>);
 					<% } %>
 				<% } %>
 				
