@@ -1,6 +1,8 @@
 package festival.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +32,25 @@ public class FestivalApproachServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usercode = request.getParameter("usercode");
 		String fescode = request.getParameter("fescode");
+
+		int result2 = new FestivalService().getMoney(usercode);
 		
-		int result = new FestivalService().approachFestival(usercode, fescode);
+		int result = 0;
+		if(result2 >= 2000) {
+			result = new FestivalService().approachFestival(usercode, fescode);
+		}
 		
 		if(result > 0) {
 			System.out.println(usercode + "님 " + fescode + "행사에 지원 완료");
 		} else {
 			System.out.println(usercode + "님 " + fescode + "행사에 지원 실패");
 		}
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.flush();
+		out.close();
 	}
 
 	/**
