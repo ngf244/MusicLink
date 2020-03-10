@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import artist.model.vo.Artist;
+import artist.model.vo.ArtistRank;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.Festival;
 
@@ -597,5 +598,207 @@ public class ArtistDAO {
 		
 		return userCode;
 	}
+	public ArrayList<Artist> getArtistList(Connection conn, int currentPage, String Genre) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int posts = 5;
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		ArrayList<Artist> arr = new ArrayList<Artist>();
+		String query = prop.getProperty("getArtistList");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, Genre);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Artist a = new Artist();
+				a.setAtCode(rset.getString("AT_CODE"));
+				a.setAtName(rset.getString("AT_NAME"));
+				a.setAtMember(Integer.parseInt(rset.getString("AT_MEMBER")));
+				a.setAtGenre(rset.getString("AT_GENRE"));
+				a.setAtClass(rset.getString("AT_CLASS"));
+				a.setAtPicPath(rset.getString("PROFILE_PIC_PATH"));
+				a.setAtOneLine(rset.getString("AT_ONELINE"));
+				a.setAtIntro(rset.getString("AT_INTRO"));
+				a.setAtRecode(rset.getString("AT_RECORD"));
+				a.setAtDebutDate(rset.getDate("AT_DEBUT"));
+				a.setAtGrade(Integer.parseInt(rset.getString("AT_GRADE")));
+				a.setAtInsta(rset.getString("AT_INSTA"));
+				a.setAtTwitter(rset.getString("AT_TWITTER"));
+				a.setAtFacebook(rset.getString("AT_FACEBOOK"));
+				
+				arr.add(a);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return arr;
+	}
+	public int getListCount(Connection conn, String g) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
+	public int addArtistFollower(Connection conn, String artistCode, String followerCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("addArtistFollower");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, followerCode);
+			pstmt.setString(2, artistCode);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public LinkedHashMap<String, String> getFesList(Connection conn, String loginUserCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
+		String query = prop.getProperty("getFesList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginUserCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.put(rset.getString(1), rset.getString(2));
+      }
+    } catch (SQLException e) {
+         e.printStackTrace();
+    } finally {
+       close(rset);
+       close(pstmt);
+    }
+      
+      return list;
+  }
+	public int getArtistRankListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getArtistRankListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
+	public ArrayList<ArtistRank> selectAtRankList(Connection conn, int currentPage, String genre) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistRank> rList = null;
+		
+		int artists = 5; // 한 페이지에 보여질 게시글 개수
+        
+        int startRow = (currentPage - 1) * artists + 1;
+        int endRow = startRow + artists - 1;
+		
+		String query = prop.getProperty("selectAtRankList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, genre);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			rList = new ArrayList<ArtistRank>();
+			
+			while(rset.next()) {
+				ArtistRank a = new ArtistRank(rset.getString("AT_CODE"),
+											  rset.getString("AT_NAME"),
+											  rset.getInt("AT_MEMBER"),
+											  rset.getString("AT_GENRE"),
+											  rset.getString("AT_CLASS"),
+											  rset.getString("PROFILE_PIC_PATH"),
+											  rset.getString("AT_ONELINE"),
+											  rset.getString("AT_INTRO"),
+											  rset.getString("AT_RECORD"),
+											  rset.getDate("AT_DEBUT"),
+											  rset.getInt("AT_GRADE"),
+											  rset.getString("AT_INSTA"),
+											  rset.getString("AT_TWITTER"),
+											  rset.getString("AT_FACEBOOK"),
+											  rset.getInt("RNUM"));
+				rList.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+			return rList;
+	}
+		
+	
+	public int insertLoveCall(Connection conn, String artistCode, String fesCode, String message) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertLoveCall");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, message);
+			pstmt.setString(2, fesCode);
+			pstmt.setString(3, artistCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+	}		
+	
 }

@@ -54,9 +54,8 @@
                 <li class="m-name2 m-name">
                     <a href="#" class="m-mname m-mname2">A r t i s t</a>
                     <ul class="hidden-manu2 drop">
-                        <li class="menu-h"><a href="#">p r o f i l e</a></li>
-                        <li class="menu-h"><a href="#">A - l i s t</a></li>
-                        <li class="menu-h"><a href="#">r a n k</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/ArtistList.go">A - l i s t</a></li>
+                        <li class="menu-h"><a href="<%= request.getContextPath() %>/list.atrank">r a n k</a></li>
                     </ul>
                 </li>
                 <li class="m-name3 m-name">
@@ -70,11 +69,13 @@
                     <% } %>
                     </ul>
                 </li>
-                <li class="m-name4 m-name">
-                    <a href="#" class="m-mname m-mname4">C a n l d e r</a>
-                </li>
+                
                 <li class="m-name5 m-name">
+                	<% if(loginManager != null) { %>
                     <a href="<%= request.getContextPath() %>/showUserList.au" class="m-mname m-mname4">A D M I N</a>
+                    <% } else if(loginUser != null) { %>
+                    <a href="<%= request.getContextPath() %>/myPage.me" class="m-mname m-mname4">M Y P A G E</a>
+                    <% } %>
                 </li>
             </ul>
         </div>

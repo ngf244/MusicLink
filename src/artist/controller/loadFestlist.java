@@ -1,27 +1,32 @@
-package festival.controller;
+package artist.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import festival.model.service.FestivalService;
+import com.google.gson.Gson;
+
+import artist.model.service.ArtistService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class FestivalApproachServlet
+ * Servlet implementation class loadFestlist
  */
-@WebServlet("/approachFes.do")
-public class FestivalApproachServlet extends HttpServlet {
+@WebServlet("/loadlist.load")
+public class loadFestlist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalApproachServlet() {
+    public loadFestlist() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,34 +35,25 @@ public class FestivalApproachServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usercode = request.getParameter("usercode");
-		String fescode = request.getParameter("fescode");
-
-		int result2 = new FestivalService().getMoney(usercode);
+		HttpSession session = request.getSession();
 		
-		int result = 0;
-		if(result2 >= 2000) {
-			result = new FestivalService().approachFestival(usercode, fescode);
-		}
+		Member m = (Member)session.getAttribute("loginUser");
 		
-		if(result > 0) {
-			System.out.println(usercode + "님 " + fescode + "행사에 지원 완료");
-		} else {
-			System.out.println(usercode + "님 " + fescode + "행사에 지원 실패");
-		}
+		String loginUserCode = m.getUserCode();
+		
+		LinkedHashMap<String, String> fesList = new ArtistService().getFesList(loginUserCode);
+		
+		System.out.println(fesList);
 		
 		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
-		out.flush();
-		out.close();
+		new Gson().toJson(fesList, response.getWriter());
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

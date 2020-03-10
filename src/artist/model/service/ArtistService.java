@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
+import artist.model.vo.ArtistRank;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.Festival;
 import gallery.model.dao.GalleryDAO;
@@ -209,5 +210,74 @@ public class ArtistService {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Artist> getArtistList(int currentPage, String Genre) {
+		Connection conn = getConnection();
+		
+		ArrayList<Artist> arr = new ArtistDAO().getArtistList(conn, currentPage, Genre);
+		
+		close(conn);
+		
+		return arr;
+	}
+
+	public int getListCount(String g) {
+		Connection conn = getConnection();
+		
+		int result = new ArtistDAO().getListCount(conn, g);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int addArtistFollower(String artistCode, String followerCode) {
+		Connection conn = getConnection();
+		
+		int result = new ArtistDAO().addArtistFollower(conn, artistCode, followerCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public LinkedHashMap<String, String> getFesList(String loginUserCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<String, String> list = new ArtistDAO().getFesList(conn, loginUserCode);
+		close(conn);
+		return list;
+	}
+
+	public int insertLoveCall(String artistCode, String fesCode, String message) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertLoveCall(conn, artistCode, fesCode, message);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+  }
+	public int getArtistRankListCount() {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().getArtistRankListCount(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<ArtistRank> selectAtRankList(int currentPage, String genre) {
+		Connection conn = getConnection();
+		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage, genre);
+		close(conn);
+		return rList;
 	}
 }

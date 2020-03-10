@@ -242,5 +242,14 @@ public class FestivalService {
 		return afList;
 	}
 
+	public int getMoney(String usercode) {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().getMoney(conn, usercode);
+
+		close(conn);
+		return result;
+	}
+
 	
 }

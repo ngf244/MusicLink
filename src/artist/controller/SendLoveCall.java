@@ -1,27 +1,27 @@
-package festival.controller;
+package artist.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import festival.model.service.FestivalService;
+import com.google.gson.Gson;
+
+import artist.model.service.ArtistService;
 
 /**
- * Servlet implementation class FestivalApproachServlet
+ * Servlet implementation class SendLoveCall
  */
-@WebServlet("/approachFes.do")
-public class FestivalApproachServlet extends HttpServlet {
+@WebServlet("/sendLoveCall.send")
+public class SendLoveCall extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FestivalApproachServlet() {
+    public SendLoveCall() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +30,22 @@ public class FestivalApproachServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usercode = request.getParameter("usercode");
-		String fescode = request.getParameter("fescode");
-
-		int result2 = new FestivalService().getMoney(usercode);
+		String artistCode = request.getParameter("artistCode");
+		String fesCode = request.getParameter("fesCode");
+		String message = request.getParameter("message");
+		System.out.println(artistCode);
+		System.out.println(fesCode);
+		System.out.println(message);
 		
-		int result = 0;
-		if(result2 >= 2000) {
-			result = new FestivalService().approachFestival(usercode, fescode);
-		}
+		int result = new ArtistService().insertLoveCall(artistCode, fesCode, message);
 		
-		if(result > 0) {
-			System.out.println(usercode + "님 " + fescode + "행사에 지원 완료");
+		if(result>0) {
+			System.out.println("러브콜 전송 성공");
 		} else {
-			System.out.println(usercode + "님 " + fescode + "행사에 지원 실패");
+			System.out.println("러브콜 전송 실패 ㅅㅂ");
 		}
 		
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
-		out.flush();
-		out.close();
+		response.getWriter().println(result);
 	}
 
 	/**
