@@ -268,7 +268,7 @@
 								$('#apBtn').val('지원 완료');
 							},
 							error: function(data) {
-								console.log('실패');
+								alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');
 							}
 						});
 					<% } %>
