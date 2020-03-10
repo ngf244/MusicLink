@@ -226,11 +226,13 @@
                     <div class="ar-line">
                     <div class="line-box">
                     <select class="select-box">
-                        <option>카테고리를 선택하세요.</option>
-                        <option>주간</option>
-                        <option>팔로우</option>
-                        <option>등등</option>
-                        <option>기타</option>
+                        <option value="전체 순위">전체 순위</option>
+                        <option value="발라드 순위">발라드 순위</option>
+                        <option value="댄스 순위">댄스 순위</option>
+                        <option value="랩/힙합 순위">랩/힙합 순위</option>
+                        <option value="ROCK 순위">ROCK 순위</option>
+                        <option value="트로트 순위">트로트 순위</option>
+                        <option value="기타 순위">기타 순위</option>
                     </select>
                     </div>
                     </div>
@@ -258,7 +260,8 @@
             		%>
                     
                         <div class="rr-top rrank">
-                            <div class="at-photo">
+                            <div class="at-photo" onclick="">
+                            	<input type="hidden" name="atCode" value="">
                                 <img src="artistProfile_uploadFiles/<%= ar.getAtPicPath() %>">
                             </div>
                             <div class="at-nickName">
@@ -359,7 +362,11 @@
     
 	//new WOW().init();
 	
-	
+	$('.select-box').change(function() {
+        var genre = $(this).val();
+        
+        location.href="<%= request.getContextPath() %>/list.atrank?genre=" + genre;
+    })
 </script>
 </body>
 </html>

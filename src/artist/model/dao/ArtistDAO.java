@@ -689,7 +689,7 @@ public class ArtistDAO {
 		
 		return result;
 	}
-	public ArrayList<ArtistRank> selectAtRankList(Connection conn, int currentPage) {
+	public ArrayList<ArtistRank> selectAtRankList(Connection conn, int currentPage, String genre) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<ArtistRank> rList = null;
@@ -703,8 +703,9 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, genre);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			rList = new ArrayList<ArtistRank>();

@@ -239,9 +239,9 @@ public class ArtistService {
 		return result;
 	}
 
-	public ArrayList<ArtistRank> selectAtRankList(int currentPage) {
+	public ArrayList<ArtistRank> selectAtRankList(int currentPage, String genre) {
 		Connection conn = getConnection();
-		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage);
+		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage, genre);
 		close(conn);
 		return rList;
 	}
