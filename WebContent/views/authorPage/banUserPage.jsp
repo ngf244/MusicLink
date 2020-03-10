@@ -70,7 +70,7 @@
                 <button class="searchBox-submitButton">검색</button>
             </div>
 
-            <div style="position: absolute; width: 80%; height: 27%; top: 25%; left: 10%;">
+            <div style="position: absolute; width: 80%; height: 27%; top: 25%; left: 10%; overflow: auto;">
                 <table style="position: absolute; width: 100%; left: 0%; text-align: center;">
                     <tr style="border: 1px groove black; height: 40px; line-height: 40px;">
                         <th>신고번호</th>

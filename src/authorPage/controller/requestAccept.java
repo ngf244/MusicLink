@@ -32,10 +32,11 @@ public class requestAccept extends HttpServlet {
 		String where = request.getParameter("where");
 		
 		int result = new AuthorService().acceptJoin(userCode);
+		int result2 = new AuthorService().changeUserClass(userCode, where);
 		
 		String page = "";
 		
-		if(result>0) {
+		if(result>0 && result2>0) {
 			if(where.equals("art")) {
 				page = "requestList.at";
 			}

@@ -114,9 +114,6 @@
 						<input type="hidden" name="where" value="art">
 							<div id="titleImgArea">
 								<img id="titleImg" src="<%=request.getContextPath()%>/artistProfile_uploadFiles/<%=ai.getPic1()%>">
-								<div class="textImg">
-									<img id="clickImg" src="<%= request.getContextPath()%>/img_s/black.png"> click
-								</div>
 							</div>
 						</td>
 						<td class="label" id="labelA">활동명</td>
