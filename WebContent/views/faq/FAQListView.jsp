@@ -226,8 +226,6 @@ zzzrod
 							data-parent="#accordion-two">
 							<div class="card-body" id="contentDiv">
 								<%= list.get(i).getFaqContent() %>
-								<%-- <textarea id="contentText" cols="100" onkeyup="this.style.height='26px'; this.style.height = this.scrollHeight + 'px';" readonly>
-								<%= list.get(i).getFaqContent() %></textarea> --%>
 							</div>
 						<% if(loginManager != null) {%>
 							<div id="mnBtn">

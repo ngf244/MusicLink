@@ -225,7 +225,7 @@
 						}
 					});
 				} else{
-					$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');;
+					$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');
 					userId.focus();
 				}
 		}
