@@ -49,7 +49,7 @@
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 250px; position: relative;
     background: #fff; height:800px;} 
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);}
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:135px; left:35%; color: rgb(224, 224, 224);}
 
     #categoryArea{position: absolute; top: 2%; left: 3%; display: inline;}
     #contentArea{padding-top: 12%; text-align:center;}
