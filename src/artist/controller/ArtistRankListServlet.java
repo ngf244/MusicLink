@@ -59,7 +59,23 @@ public class ArtistRankListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList<ArtistRank> rList = service.selectAtRankList(currentPage); 
+		
+		String genre = "전체 순위";
+		if(request.getParameter("genre")!= null) {
+			genre = request.getParameter("genre");
+		}
+		
+		switch(genre) {
+		case "전체 순위" : genre = "%%"; break;
+		case "발라드 순위" : genre = "%발라드%"; break;
+		case "댄스 순위" : genre = "%댄스%"; break;
+		case "랩/힙합 순위" : genre = "%랩/힙합%"; break;
+		case "ROCK 순위" : genre = "%ROCK%"; break;
+		case "트로트 순위" : genre = "%트로트%"; break;
+		case "기타 순위" : genre = "%기타%"; break;
+		}
+		
+		ArrayList<ArtistRank> rList = service.selectAtRankList(currentPage, genre); 
 		
 		System.out.println("pi" + pi);
 		System.out.println("rList" + rList);
