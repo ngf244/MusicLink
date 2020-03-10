@@ -22,6 +22,15 @@
 	LinkedHashMap<Festival, ArrayList<String>> banmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("banmap");
 	LinkedHashMap<Festival, ArrayList<String>> fulmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("fulmap");
 	LinkedHashMap<Festival, ArrayList<String>> ingmap = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("ingmap");
+	
+	String url = "";
+	if (!searchText.equals("")) {
+		url = request.getContextPath() + "/search.fes?searchType=" + searchType + "&searchText=" + searchText + "&category=" + category + "&";
+	} else if(category != 0) {
+		url = request.getContextPath() + "/list.fes?category=" + category + "&";
+	} else {
+		url = request.getContextPath() + "/list.fes?";
+	}
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -503,7 +512,7 @@
 				<div id="pagingarea">
                	<ul class="pagination">
                		<li class="page-item prev">
-               			<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= currentPage-1 %>' aria-label="Previous">
+               			<a class="page-link" href='<%= url %>currentPage=<%= currentPage-1 %>' aria-label="Previous">
                				<span aria-hidden="true">&laquo;</span>
 							<span class="sr-only">Previous</span>
 						</a>
@@ -516,12 +525,12 @@
 		                       </li>
 						<% } else { %>			
 		                       <li class="page-item">
-		                       	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= p %>'><%= p %></a>
+		                       	<a class="page-link" href='<%= url %>currentPage=<%= p %>'><%= p %></a>
 		                       </li>
 		                <% }
 					   } %>
 		            <li class="page-item next">
-                    	<a class="page-link" href='<%= request.getContextPath() %>/list.fes?currentPage=<%= currentPage + 1 %>' aria-label="Next">
+                    	<a class="page-link" href='<%= url %>currentPage=<%= currentPage + 1 %>' aria-label="Next">
                     		<span aria-hidden="true">&raquo;</span>
                     		<span class="sr-only">Next</span>
                        	</a>
@@ -546,7 +555,7 @@
     
     <script>
     	$(function() {
-    		<% int sectionHeiht = 238 + ((map.size()-1) * 28); %>
+    		<% int sectionHeiht = 255 + ((map.size()-1) * 28); %>
     		$('section').css('height', '<%= sectionHeiht %>%');
     		
     		for(var i = 2; i < 5; i++) {

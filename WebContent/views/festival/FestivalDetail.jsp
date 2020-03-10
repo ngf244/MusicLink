@@ -322,6 +322,7 @@
 						<%
 							}
 							
+							if(status == 1) { 
 							int strPay = Integer.parseInt((f.getPayRange().split("~"))[0]);
 							int endPay = Integer.parseInt((f.getPayRange().split("~"))[1]);
 							
@@ -338,10 +339,22 @@
 							<td>아티스트 모집 기간</td>
 							<td><%= f.getRecTerm() %></td>
 						</tr>
-						<%   }
+						<%  } 
+							}
 						   } %>
-						<% if(f.getTicFee() != 0) {
-							String printFee = formatter.format(f.getTicFee()) + "&#8361;";
+						   
+						<% 
+							if(status == 3 || status == 2) {
+								String printFee = "";
+							if(f.getTicFreeOp() != null) {
+								if(f.getTicFreeOp().equals("Y")) {
+									printFee = "무료";
+								} else {
+									printFee = formatter.format(f.getTicFee()) + "&#8361;";
+								}
+							} else {
+								printFee = formatter.format(f.getTicFee()) + "&#8361;";
+							}
 						%>
 						<tr>
 							<td>관람비</td>
@@ -352,7 +365,7 @@
 								<% } %>
 							</td>
 						</tr>
-						<% } %>
+						<% 	} %>
 						<%
 							String printStar = "";
 							for(int i = 0; i < 5; i++) {
