@@ -210,4 +210,24 @@ public class ArtistService {
 		
 		return result;
 	}
+
+	public ArrayList<Artist> getArtistList(int currentPage, String Genre) {
+		Connection conn = getConnection();
+		
+		ArrayList<Artist> arr = new ArtistDAO().getArtistList(conn, currentPage, Genre);
+		
+		close(conn);
+		
+		return arr;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		
+		int result = new ArtistDAO().getListCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 }

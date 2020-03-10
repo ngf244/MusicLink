@@ -33,6 +33,7 @@
     /* .requestBox-reject{background-color: blue; position: absolute; width: 20%; height: 15%; left: 40%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;} */
     .requestBox-showDetail{background-color: red; position: absolute; width: 60%; height: 15%; left: 35%; bottom: 5%; border-radius: 25px; text-align: center; border-style: outset;}
     .requestBox-showDetail:hover{cursor: pointer; background-color: blue;}
+    img{width: 100%; height: 100%}
 </style>
 </head>
 <body>
@@ -46,7 +47,7 @@
             <div class="requestBox" >
             <%for(int i = 0; i < arr.size(); i++){ %>
                 <ul>
-                    <li class="requestBox-li1"><img src="<%=request.getContextPath() %>/views/artistProfile_uploadFiles/<%=arr.get(i).getPic1()%>"></li>
+                    <li class="requestBox-li1"><img src="<%=request.getContextPath() %>/artistProfile_uploadFiles/<%=arr.get(i).getPic1()%>"></li>
                     <li class="requestBox-li2"><%=arr.get(i).getActiveName() %></li class="requestBox-li1">
                     <li class="requestBox-li3"><%=arr.get(i).getRequestDate() %></li class="requestBox-li1">
                     <li class="requestBox-li4"><%=arr.get(i).getOne_introduce() %></li class="requestBox-li1">
