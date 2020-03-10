@@ -262,10 +262,13 @@
 							type: 'post',
 							data: {usercode: '<%= loginUser.getUserCode() %>', fescode: '<%= f.getFesCode() %>'},
 							success: function(data) {
-							    $('#apBtn').attr('id', 'apBtn');
-							    $('#apBtn').attr('class', 'btn mb-1 btn-secondary changeBtn');
-							    $('#apBtn').attr('disabled', true);
-								$('#apBtn').val('지원 완료');
+								if(data > 0) {
+									where.className = 'btn mb-1 btn-secondary approachBtn';
+									where.innerHTML = '지원 완료';
+									where.disabled = true;
+								} else {
+									alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');
+								}
 							},
 							error: function(data) {
 								alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');

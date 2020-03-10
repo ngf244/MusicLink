@@ -219,9 +219,13 @@
 							type: 'post',
 							data: {usercode: '<%= loginUser.getUserCode() %>', fescode: where.parentElement.parentElement.children[0].value},
 							success: function(data) {
-								where.className = 'btn mb-1 btn-secondary approachBtn';
-								where.innerHTML = '지원 완료';
-								where.disabled = true;
+								if(data > 0) {
+									where.className = 'btn mb-1 btn-secondary approachBtn';
+									where.innerHTML = '지원 완료';
+									where.disabled = true;
+								} else {
+									alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');
+								}
 							},
 							error: function(data) {
 								alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');
@@ -299,7 +303,8 @@
 						</div>
 						
 						<div id="appArea">
-							<% for(int i = 0; i < userApList.size(); i++) {
+							<% if(userApList.size() != 0) {
+								for(int i = 0; i < userApList.size(); i++) {
 								  if((userApList.get(i)).equals(f.getFesCode())) { %>
 									<button type="button" class="btn mb-1 btn-secondary approachBtn" disabled>지원 완료</button>
 							<%      break;
@@ -307,7 +312,10 @@
 								  if(i == userApList.size() - 1) { %>
                                     <button class="btn mb-1 btn-warning approachBtn" onclick="approach(this);">행사 지원</button>
 							<%    }
-							   } %>
+							    }
+							   } else { %>
+                                    <button class="btn mb-1 btn-warning approachBtn" onclick="approach(this);">행사 지원</button>
+							<% } %>
 						</div>
 					</div>
 					<% }
