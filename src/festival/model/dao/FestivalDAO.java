@@ -553,11 +553,11 @@ public class FestivalDAO {
 
 	public int approachFestival(Connection conn, String usercode, String fescode) {
 		PreparedStatement pstmt = null;
-		//PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt2 = null;
 		int result = 0;
 		
 		String query = prop.getProperty("approachFes");
-		//String query2 = prop.getProperty("approachMoney");
+		String query2 = prop.getProperty("approachMoney");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -565,21 +565,18 @@ public class FestivalDAO {
 			pstmt.setString(2, usercode);
 			
 			result = pstmt.executeUpdate();
-			/*
-			System.out.println("query : " + result);
 			if(result > 0) {
 				pstmt2 = conn.prepareStatement(query2);
 				pstmt2.setString(1, usercode);
 				
 				result = pstmt2.executeUpdate();
-				System.out.println("query2 : " + result);
 			} else {
 				result = 0;
-			}*/
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//close(pstmt2);
+			close(pstmt2);
 			close(pstmt);
 		}
 		
