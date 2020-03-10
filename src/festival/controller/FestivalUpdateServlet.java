@@ -87,12 +87,10 @@ public class FestivalUpdateServlet extends HttpServlet {
 			String posPath = "";
 			
 			if(bantri.equals("true")) {
-				if(saveFiles.size() > 1) {
-					banPath = saveFiles.get(0);
-					
-					File deleteFile = new File(savePath + multipartRequest.getParameter("oriban"));
-					deleteFile.delete();
-				}
+				banPath = saveFiles.get(0);
+				
+				File deleteFile = new File(savePath + multipartRequest.getParameter("oriban"));
+				deleteFile.delete();
 			} else if(bantri.equals("delete")) {
 				banPath = null;
 				

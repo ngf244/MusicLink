@@ -72,7 +72,7 @@
     #festivalList{display:block; margin-top:8%;}
     .promotionDetailImg{
     	width:138px;
-    	height:174px;
+    	height:193px;
     	background:lightgray;
     	display:inline-block;
     	vertical-align:top;
@@ -359,7 +359,7 @@
     </section>
     <script>
 		$(function() {
-			<% int sectionHeiht = 87 + ((fArr.size()-1) * 28); %>
+			<% int sectionHeiht = 87 + ((fArr.size()-1) * 32); %>
     		$('section').css('height', '<%= sectionHeiht %>%');
 			var scrollPosition = $("#hrstyle").offset().top;
 

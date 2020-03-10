@@ -106,7 +106,7 @@ public class FestivalDAO {
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		ResultSet rset4 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
@@ -227,7 +227,7 @@ public class FestivalDAO {
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		ResultSet rset4 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 		
 		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
@@ -497,7 +497,7 @@ public class FestivalDAO {
 		PreparedStatement pstmt2 = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		ArrayList<Festival> fArr = null;
 		
@@ -631,7 +631,7 @@ public class FestivalDAO {
 		PreparedStatement pstmt2 = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		ArrayList<Festival> fArr = null;
 		

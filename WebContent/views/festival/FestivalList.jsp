@@ -104,7 +104,7 @@
     #festivalList{display:block; margin-top:8%;}
     .promotionDetailImg{
     	width:138px;
-    	height:174px;
+    	height:193px;
     	background:lightgray;
     	display:inline-block;
     	vertical-align:top;
