@@ -38,7 +38,8 @@
        		</div>
        		<br>
        		<div class="login1" id="ment2">
-       			일반 회원가입 후 회원 종류(아티스트와 기획자)를 변경할 수 있습니다.
+       			일반 회원가입 후 회원 종류(아티스트와 기획자)를 변경할 수 있습니다.<br>
+       			아티스트 회원가입을 원하시는 회원님은 일반 회원가입을 선택하시면 됩니다.
        		</div>
        		<div class="login1" id="choose">
        			<div class="div_ch" id="userJoin" onclick="userJoin();">

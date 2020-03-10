@@ -197,7 +197,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="label">사진 첨부</td>
+						<td class="label">활동사진 첨부</td>
 						<td colspan="3" class="fileBox">
 							<input type="text" name="potoFile" id="potoFile" class="text-file" readonly>
 							<label for="uploadBtn1" class="btn_file">첨부파일</label>
@@ -205,7 +205,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="label">동영상 첨부</td>
+						<td class="label">활동동영상 첨부</td>
 						<td colspan="3" class="fileBox">
 							<input type="url" name="videoFile" id="videoFile" class="text-file" placeholder="동영상링크 주소를 넣어주세요.">
 						</td>
