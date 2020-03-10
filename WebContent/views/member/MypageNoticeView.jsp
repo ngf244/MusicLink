@@ -179,7 +179,7 @@
                 <li class="notice-nav" style="width: 350px;">메시지 내용</li>
             </ul>
             <% if(list.isEmpty()){ %>
-	            	<div>알림 내역이 없습니다.</div>
+	            	<div style="text-align: center;"><br>알림 내역이 없습니다.</div>
 			<% } else{
             		for(Notice n : list){
             %>

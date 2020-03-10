@@ -57,7 +57,7 @@ public class FestivalSearchServlet extends HttpServlet {
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
@@ -68,6 +68,10 @@ public class FestivalSearchServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		LinkedHashMap<Festival, ArrayList<String>> map = service.selectSearchList(currentPage, category, searchType, searchText);
+
+		LinkedHashMap<Festival, ArrayList<String>> banmap = service.selectRandomList(0);
+		LinkedHashMap<Festival, ArrayList<String>> fulmap = service.selectRandomList(1);
+		LinkedHashMap<Festival, ArrayList<String>> ingmap = service.selectRandomList(2);
 		
 		String page = null;
 		if(map != null) {
@@ -77,6 +81,10 @@ public class FestivalSearchServlet extends HttpServlet {
 			
 			request.setAttribute("searchType", searchType);
 			request.setAttribute("searchText", searchText);
+			
+			request.setAttribute("banmap", banmap);
+			request.setAttribute("fulmap", fulmap);
+			request.setAttribute("ingmap", ingmap);
 			
 			request.setAttribute("category", category);
 		} else {

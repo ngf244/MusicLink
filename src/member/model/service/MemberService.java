@@ -116,5 +116,15 @@ public class MemberService {
 		return result;	
 	}
 
+	public int banlogin(String user_id) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().banlogin(conn, user_id);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 }

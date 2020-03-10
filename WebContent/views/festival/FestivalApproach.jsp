@@ -72,7 +72,7 @@
     #festivalList{display:block; margin-top:8%;}
     .promotionDetailImg{
     	width:138px;
-    	height:174px;
+    	height:193px;
     	background:lightgray;
     	display:inline-block;
     	vertical-align:top;
@@ -80,7 +80,9 @@
     }
     .alignspanlist{font-weight: bold;}
     .festival{display:inline-block; width:80%; margin-top: 50px; text-align:left;}
-    .festivalInfo{display:inline-block; width:75%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
+    .festivalInfo{display:inline-block; width:67%; margin-top: 5px; margin-left: 13px; /*background:orange;*/}
+    #appArea{display:inline-block; width:10%;}
+    
     .festivalInfo span, label, button{vertical-align:middle;}
     #artistNotice{font-size:13px; color: white; background: green; margin-right: 10px;}
     #festivalName{font-size:17px;}
@@ -171,27 +173,46 @@
 							$('#lowPaySort').css({'color':'black', 'font-weight':'bold'});
 						<%  break;
 						}%>
-
+						
 						var category = <%= category %>;
+						var searchType = $('#searchType').val();
+						var searchText = $('#searchText').val();
 						$('#timeSort').click(function() {
 							category = 1;
-							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+							if(searchText != "")
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category+'&searchType='+searchType+'&searchText='+searchText;
+							else
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category;
 						});
 						$('#recTimeSort').click(function() {
 							category = 2;
-							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+							if(searchText != "")
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category+'&searchType='+searchType+'&searchText='+searchText;
+							else
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category;
 						});
 						$('#highPaySort').click(function() {
 							category = 3;
-							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+							if(searchText != "")
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category+'&searchType='+searchType+'&searchText='+searchText;
+							else
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category;
 						});
 						$('#lowPaySort').click(function() {
 							category = 4;
-							location.href = '<%= request.getContextPath() %>/aplist.fes?category=' + category;
+							if(searchText != "")
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category+'&searchType='+searchType+'&searchText='+searchText;
+							else
+								location.href = '<%= request.getContextPath() %>/aplist.fes?category='+category;
+						});
+						
+						$('.promotionDetailImg, .festivalInfo').click(function() {
+							var fcode = $(this).parent().children().eq(0).val();
+							location.href = "<%= request.getContextPath() %>/detail.fes?fcode="+fcode+"&status=1";
 						});
 					});
 					
-
+					
 					function approach(where) {
 						$.ajax({
 							url: 'approachFes.do',
@@ -203,7 +224,7 @@
 								where.disabled = true;
 							},
 							error: function(data) {
-								console.log('실패');
+								alert('행사 지원에 실패했습니다. 포인트 잔액을 확인 해주세요.');
 							}
 						});
 					}
@@ -226,23 +247,11 @@
 							for(Festival f : fArr) { %>
 					<div class="festival">
 						<input type="hidden" id="hidfescode" value="<%= f.getFesCode() %>">
-						<input type="hidden" value="아티스트 모집 중">
-						<!-- <div class="promotionDetailImg"></div> -->
 						<div style="background-image:url('<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>'); background-size: auto 100%; background-repeat: no-repeat; background-position: center center;" class="promotionDetailImg"></div>
 						
 						<div class="festivalInfo">
 							<span class="badge badge-pill badge-success alignspanlist">아티스트 모집 중</span> &nbsp;
 							<label id="festivalName"><%= f.getFesName() %></label>
-							
-							<% for(int i = 0; i < userApList.size(); i++) {
-								  if((userApList.get(i)).equals(f.getFesCode())) { %>
-									<button type="button" class="btn mb-1 btn-secondary approachBtn" disabled>지원 완료</button>
-							<%      break;
-								  }
-								  if(i == userApList.size() - 1) { %>
-									<button type="button" class="btn mb-1 btn-warning approachBtn" onclick="approach(this);">행사 지원</button>
-							<%    }
-							   } %>
 							
 							<table class="festivalDetail">
 								<tr>
@@ -288,6 +297,18 @@
 								</tr>
 							</table>
 						</div>
+						
+						<div id="appArea">
+							<% for(int i = 0; i < userApList.size(); i++) {
+								  if((userApList.get(i)).equals(f.getFesCode())) { %>
+									<button type="button" class="btn mb-1 btn-secondary approachBtn" disabled>지원 완료</button>
+							<%      break;
+								  }
+								  if(i == userApList.size() - 1) { %>
+                                    <button class="btn mb-1 btn-warning approachBtn" onclick="approach(this);">행사 지원</button>
+							<%    }
+							   } %>
+						</div>
 					</div>
 					<% }
 					} %>
@@ -305,7 +326,7 @@
 					<% for(int p = startPage; p <= endPage; p++){
 						if(p == currentPage){ %>
 		                       <li class="page-item">
-		                       	<a class="page-link" href='#'><%= p %></a>
+		                       	<a class="page-link" href='#'><b><%= p %></b></a>
 		                       </li>
 						<% } else { %>			
 		                       <li class="page-item">
@@ -338,7 +359,7 @@
     </section>
     <script>
 		$(function() {
-			<% int sectionHeiht = 87 + ((fArr.size()-1) * 28); %>
+			<% int sectionHeiht = 87 + ((fArr.size()-1) * 32); %>
     		$('section').css('height', '<%= sectionHeiht %>%');
 			var scrollPosition = $("#hrstyle").offset().top;
 

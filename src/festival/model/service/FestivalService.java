@@ -1,5 +1,6 @@
 package festival.model.service;
 
+
 import festival.model.dao.FestivalDAO;
 import festival.model.vo.Festival;
 import festival.model.vo.FestivalApply;
@@ -7,12 +8,25 @@ import member.model.vo.Member;
 
 import static common.JDBCTemplate.*;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
+
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
+
+import festival.model.dao.FestivalDAO;
+import festival.model.vo.AppFestival;
+import festival.model.vo.Festival;
+import member.model.vo.Member;
+
 
 public class FestivalService {
 
@@ -72,7 +86,7 @@ public class FestivalService {
 		Connection conn = getConnection();
 		
 		Festival festival = new FestivalDAO().selectFestival(conn, fcode);
-
+		
 		close(conn);
 		return festival;
 	}
@@ -84,15 +98,6 @@ public class FestivalService {
 
 		close(conn);
 		return artistArr;
-	}
-
-	public LinkedHashMap<Festival, ArrayList<String>> selectBannerList() {
-		Connection conn = getConnection();
-		
-		LinkedHashMap<Festival, ArrayList<String>> banMap = new FestivalDAO().selectBannerList(conn);
-		
-		close(conn);
-		return banMap;
 	}
 
 	public int getApListCount() {
@@ -155,6 +160,7 @@ public class FestivalService {
 		return fArr;
 	}
 
+
 	public ArrayList<Festival> selectFList() {
 		Connection conn = getConnection();
 		ArrayList<Festival> list = null;
@@ -177,5 +183,64 @@ public class FestivalService {
 	}
 
 	
+
+
+	public int selectArtistCount(String fcode) {
+		Connection conn = getConnection();
+		
+		int count = new FestivalDAO().selectArtistCount(conn, fcode);
+		
+		close(conn);
+		return count;
+	}
+
+	public int updateFestival(Festival festival, String status) {
+		Connection conn = getConnection();
+		
+		int result = new FestivalDAO().updateFestival(conn, festival, status);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public LinkedHashMap<Festival, ArrayList<String>> selectRandomList(int i) {
+		Connection conn = getConnection();
+		
+		LinkedHashMap<Festival, ArrayList<String>> promMap = new FestivalDAO().selectRandomList(conn, i);
+		
+		close(conn);
+		return promMap;
+	}
+
+	public int getGeade(String cpCode) {
+		Connection conn = getConnection();
+		
+		int grade = new FestivalDAO().getGeade(conn, cpCode);
+		
+		close(conn);
+		return grade;
+  }
+	public LinkedHashMap<Festival, Member> selectMySchedule(String userCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<Festival, Member> map = new FestivalDAO().selectMySchedule(conn, userCode);
+		
+		close(conn);
+		return map;
+	}
+
+	public ArrayList<AppFestival> selectMyAppFesList(String userCode) {
+		Connection conn = getConnection();
+		ArrayList<AppFestival> afList = new FestivalDAO().selectMyAppFesList(conn, userCode);
+		
+		close(conn);
+		return afList;
+	}
+
 	
 }

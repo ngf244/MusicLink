@@ -41,10 +41,9 @@
             <% } else if(loginUserConfirm.getUserClass().equals("2")){ %>
             <li class="sec-menu-4 smenu">FESTIVAL
                 <ul class="s-smenu">
-                    <li><a href="#">공연스케줄</a></li>
-                    <li><a href="#">지원한 행사</a></li>
+                    <li onclick="MySchedule();"><a href="#">공연스케줄</a></li>
+                    <li onclick="ApplyFes();"><a href="#">지원한 행사</a></li>
                     <li><a href="#">러브콜(receive)</a></li>
-                    <li><a href="#">행사 후기</a></li>
                 </ul>
             </li>
             <% } else if(loginUserConfirm.getUserClass().equals("3")){ %>
@@ -52,7 +51,6 @@
                 <ul class="s-smenu">
                     <li><a href="<%= request.getContextPath() %>/register.me">등록한 행사</a></li>
                     <li><a href="" target="_self">러브콜(send)</a></li>
-                    <li><a href="" target="_self">아티스트 후기</a></li>
                 </ul>
             </li>
             <% } %>
@@ -90,6 +88,15 @@
 	function MyPost(){
 		location.href="<%= request.getContextPath() %>/list.mPost";
 	}
+	
+	function MySchedule(){
+		location.href="<%= request.getContextPath() %>/list.mSche";
+	}
+	
+	function ApplyFes(){
+		location.href="<%= request.getContextPath() %>/list.mAppF";
+	}
+	
 </script>    
     
 </body>

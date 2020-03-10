@@ -178,6 +178,10 @@
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
     });
     
+    $(".image4").click(function(){
+    	location.href = "<%=request.getContextPath()%>/views/festival/FestivalEnroll.jsp";
+    });
+    
     $("#arClose").click(function(){
     	$(this).parent().css("display","none");
     });

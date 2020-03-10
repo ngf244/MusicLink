@@ -1,5 +1,7 @@
 package festival.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,12 +14,18 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 
+
 import artist.model.vo.Artist;
 import festival.model.vo.Festival;
 import festival.model.vo.FestivalApply;
 import member.model.vo.Member;
 
 import static common.JDBCTemplate.*;
+
+import festival.model.vo.AppFestival;
+import festival.model.vo.Festival;
+import member.model.vo.Member;
+
 
 public class FestivalDAO {
 	private Properties prop = new Properties();
@@ -98,7 +106,7 @@ public class FestivalDAO {
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		ResultSet rset4 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
@@ -126,13 +134,15 @@ public class FestivalDAO {
 										  rset.getString("fes_name"),
 										  rset.getString("fes_location"),
 										  rset.getString("fes_term"),
+										  rset.getString("pay_range"),
 										  rset.getInt("recruit_num"),
 										  rset.getString("recruit_term"),
 										  rset.getString("fes_poster_path"),
 										  rset.getString("fes_banner_path"),
 										  rset.getString("secret_option"),
 										  rset.getInt("ticket_fee"),
-										  rset.getString("cp_code"));
+										  rset.getString("cp_code"),
+										  rset.getString("fee_free_op"));
 				
 				pstmt4 = conn.prepareStatement(query4);
 				pstmt4.setString(1, f.getCpCode());
@@ -217,7 +227,7 @@ public class FestivalDAO {
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
 		ResultSet rset4 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 		
 		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
@@ -246,13 +256,15 @@ public class FestivalDAO {
 								 rset.getString("fes_name"),
 								 rset.getString("fes_location"),
 								 rset.getString("fes_term"),
+								 rset.getString("pay_range"),
 								 rset.getInt("recruit_num"),
 								 rset.getString("recruit_term"),
 								 rset.getString("fes_poster_path"),
 								 rset.getString("fes_banner_path"),
 								 rset.getString("secret_option"),
 								 rset.getInt("ticket_fee"),
-								 rset.getString("cp_code"));
+								 rset.getString("cp_code"),
+								 rset.getString("fee_free_op"));
 
 				pstmt4 = conn.prepareStatement(query4);
 				pstmt4.setString(1, f.getCpCode());
@@ -329,7 +341,8 @@ public class FestivalDAO {
 										rs.getString("secret_option"),
 										rs.getInt("ticket_fee"),
 										rs.getString("ticket_url"),
-										rs.getString("user_code"));
+										rs.getString("user_code"),
+										rs.getString("fee_free_op"));
 				
 				pstmt2 = conn.prepareStatement(query2);
 				pstmt2.setString(1, festival.getCpCode());
@@ -392,16 +405,16 @@ public class FestivalDAO {
 		return artistArr;
 	}
 
-	public LinkedHashMap<Festival, ArrayList<String>> selectBannerList(Connection conn) {
+	public LinkedHashMap<Festival, ArrayList<String>> selectRandomList(Connection conn, int i) {
 		Statement stmt = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
 		ResultSet rset3 = null;
-		LinkedHashMap<Festival, ArrayList<String>> banmap = null;
+		LinkedHashMap<Festival, ArrayList<String>> map = null;
 		
-		String query = prop.getProperty("selectRandomFestival");
+		String query = prop.getProperty(i + "_selectRandomFestival");
 		String query2 = prop.getProperty("findArtist");
 		String query3 = prop.getProperty("findArtistName");
 		
@@ -409,7 +422,7 @@ public class FestivalDAO {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
 			
-			banmap = new LinkedHashMap<Festival, ArrayList<String>>();
+			map = new LinkedHashMap<Festival, ArrayList<String>>();
 			Festival f = null;
 			ArrayList<String> artistArr = null;
 			while(rset.next()) {
@@ -417,6 +430,7 @@ public class FestivalDAO {
 								 rset.getString("fes_term"),
 								 rset.getInt("recruit_num"),
 								 rset.getString("recruit_term"),
+								 rset.getString("fes_poster_path"),
 								 rset.getString("fes_banner_path"));
 				
 				pstmt2 = conn.prepareStatement(query2);
@@ -437,16 +451,20 @@ public class FestivalDAO {
 					}
 				}
 				
-				banmap.put(f, artistArr);
+				map.put(f, artistArr);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset3);
+			close(rset2);
 			close(rset);
+			close(pstmt3);
+			close(pstmt2);
 			close(stmt);
 		}
 		
-		return banmap;
+		return map;
 	}
 
 	public int getApListCount(Connection conn) {
@@ -479,7 +497,7 @@ public class FestivalDAO {
 		PreparedStatement pstmt2 = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		ArrayList<Festival> fArr = null;
 		
@@ -535,9 +553,11 @@ public class FestivalDAO {
 
 	public int approachFestival(Connection conn, String usercode, String fescode) {
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		int result = 0;
 		
 		String query = prop.getProperty("approachFes");
+		String query2 = prop.getProperty("approachMoney");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -545,9 +565,18 @@ public class FestivalDAO {
 			pstmt.setString(2, usercode);
 			
 			result = pstmt.executeUpdate();
+			if(result > 0) {
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setString(1, usercode);
+				
+				result = pstmt2.executeUpdate();
+			} else {
+				result = 0;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(pstmt2);
 			close(pstmt);
 		}
 		
@@ -613,7 +642,7 @@ public class FestivalDAO {
 		PreparedStatement pstmt2 = null;
 		ResultSet rset = null;
 		ResultSet rset2 = null;
-		int posts = 10; //한 페이지에 보여질 게시글 개수
+		int posts = 5; //한 페이지에 보여질 게시글 개수
 
 		ArrayList<Festival> fArr = null;
 		
@@ -667,6 +696,7 @@ public class FestivalDAO {
 		
 		return fArr;
 	}
+
 
 	public ArrayList<Festival> selectFList(Connection conn) {
 		Statement stmt = null;
@@ -729,6 +759,178 @@ public class FestivalDAO {
 		}
 		System.out.println(list + "dao에서 넘어오냐");
 		return list;
+  }
+
+	public int selectArtistCount(Connection conn, String fcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int count = 0;
+		
+		String query = prop.getProperty("artistCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, fcode);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+
+	public int updateFestival(Connection conn, Festival festival, String status) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "";
+		if(status.equals("true")) query = prop.getProperty("updateFestival");
+		else query = prop.getProperty("updateFestival_f");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			if(status.equals("true")) {
+				pstmt.setString(1, festival.getFesName());
+				pstmt.setString(2, festival.getFesLoc());
+				pstmt.setString(3, festival.getFesTerm());
+				pstmt.setString(4, festival.getFesInfo());
+				pstmt.setString(5, festival.getPayRange());
+				pstmt.setInt(6, festival.getRecCount());
+				pstmt.setString(7, festival.getRecTerm());
+				pstmt.setString(8, festival.getPosPath());
+				pstmt.setString(9, festival.getBanPath());
+				pstmt.setString(10, festival.getSecOp());
+				pstmt.setInt(11, festival.getTicFee());
+				pstmt.setString(12, festival.getTicUrl());
+				pstmt.setString(13, festival.getCpCode());
+				pstmt.setString(14, festival.getTicFreeOp());
+				pstmt.setString(15, festival.getFesCode());
+			} else {
+				pstmt.setString(1, festival.getFesName());
+				pstmt.setString(2, festival.getFesLoc());
+				pstmt.setString(3, festival.getFesTerm());
+				pstmt.setString(4, festival.getFesInfo());
+				pstmt.setString(5, festival.getPayRange());
+				pstmt.setInt(6, festival.getRecCount());
+				pstmt.setString(7, festival.getRecTerm());
+				pstmt.setString(8, festival.getPosPath());
+				pstmt.setString(9, festival.getBanPath());
+				pstmt.setString(10, festival.getSecOp());
+				pstmt.setString(11, festival.getCpCode());
+				pstmt.setString(12, festival.getFesCode());
+			}
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getGeade(Connection conn, String cpCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getGrade");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cpCode);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+    
+		return result;
+  }  
+    
+	public LinkedHashMap<Festival, Member> selectMySchedule(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LinkedHashMap<Festival, Member> map = null;
+		
+		String query = prop.getProperty("selectMySchedule");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			map = new LinkedHashMap<Festival, Member>();
+			
+			while(rset.next()) {
+				Festival f = new Festival(rset.getString("FES_NAME"),
+										  rset.getString("FES_LOCATION"),
+										  rset.getString("FES_TERM"),
+										  rset.getString("FES_POSTER_PATH"),
+										  rset.getString("USER_CODE"));
+				Member m = new Member(rset.getString("USER_NAME"),
+									  rset.getString("USER_EMAIL"),
+									  rset.getString("USER_PHONE"));
+				map.put(f, m);
+			}
+
+    } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return map;
+	}
+
+	public ArrayList<AppFestival> selectMyAppFesList(Connection conn, String userCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AppFestival> afList = null;
+		
+		String query = prop.getProperty("selectMyAppFesList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userCode);
+			rset = pstmt.executeQuery();
+			
+			afList = new ArrayList<AppFestival>();
+			while(rset.next()) {
+				AppFestival af = new AppFestival(rset.getString("FES_CODE"),
+												 rset.getString("AP_FES_YN"),
+												 rset.getDate("AP_FES_TIME"),
+												 rset.getString("FES_NAME"),
+												 rset.getString("FES_LOCATION"),
+												 rset.getString("FES_TERM"),
+												 rset.getString("USER_NAME"));
+				afList.add(af);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return afList;
+
 	}
 
 }

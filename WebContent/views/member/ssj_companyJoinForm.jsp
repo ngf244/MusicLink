@@ -298,6 +298,7 @@
 	$('#user_name').change(function(){
 		if(nameCheck.test($(this).val())){
 			nameChecked = true;
+			$('#nameResult').text('');
 		} else{
 			$('#nameResult').text('알맞는 이름을 입력하세요').css('color', 'red');
 		}

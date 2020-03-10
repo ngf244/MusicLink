@@ -200,7 +200,7 @@
                 <li class="post-nav" style="width: 20%;">작성일</li>
             </ul>
             <% if(gList.isEmpty()){ %>
-					<div style="text-align: center;">작성한 글이 없습니다.</div>
+					<div style="text-align: center;"><br>작성한 글이 없습니다.</div>
 			<% } else{ 		
 					for(Gallery g : gList){            
             %>
@@ -251,7 +251,7 @@
                 <li class="post-nav" style="width: 20%;">작성일</li>
             </ul>
             <% if(commList.isEmpty()){ %>
-					<div style="text-align: center;">작성한 글이 없습니다.</div>
+					<div style="text-align: center;"><br>작성한 글이 없습니다.</div>
 			<% } else{ 		
 					for(Community c : commList){            
             %>
@@ -302,7 +302,7 @@
                 <li class="post-nav" style="width: 20%;">작성일</li>
             </ul>
             <% if(qList.isEmpty()){ %>
-					<div style="text-align: center;">작성한 글이 없습니다.</div>
+					<div style="text-align: center;"><br>작성한 글이 없습니다.</div>
 			<% } else{ 		
 					for(QnA q : qList){            
             %>

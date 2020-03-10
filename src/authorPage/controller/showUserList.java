@@ -54,8 +54,6 @@ public class showUserList extends HttpServlet {
 		request.setAttribute("artistMem", artistMem);
 		request.setAttribute("companyMem", companyMem);
 		
-		System.out.println(memArr.size());
-		
 		String path = "views/authorPage/showUserList.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
 		

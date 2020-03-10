@@ -41,6 +41,10 @@
 		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
 		line-height: 1.5; padding: 4px 10px; margin: 7px; margin-top: 40px; width: 60px; font-size: 15px;
 	}
+	.detail_btn2{
+		border-radius: 0.5rem; white-space: nowrap; border: 1px solid transparent; background-color: #7780b7; color: white; 
+		line-height: 1.5; padding: 4px 10px; margin: 7px; width: 60px; font-size: 15px;
+	}
 	#replyBtn{width: 80px; margin-top: 7px;}
 	.detail{width: 100%;}
 	#qna_comment{margin-top: 10px; border-radius: 0.2rem; padding: 10px; vertical-align: middle;}
@@ -48,6 +52,8 @@
 	.replyContent{font-size: 17px;}
 	#replyS1{font-size: 19px; padding-left: 10px; width: 50px; vertical-align: top; line-height: 25px;}
 	#replyS2{font-size: 19px; padding-left: 10px; width: 1100px; line-height: 25px;}
+	#replyS3{font-size: 19px; padding-left: 10px; line-height: 25px; text-align: center;}
+	#replybutton{text-align: right;}
 </style>
 </head>
 <body>
@@ -95,25 +101,47 @@
 					</tr>
 				</table>
 			</form>
-			<!-- 댓글 작성 -->
-			<form class="table_show" action="<%= request.getContextPath() %>/insertReply.qna" method="post">
+			<!-- 관리자 댓글 작성 -->
+			<form class="table_show" id="form2" action="<%= request.getContextPath() %>/insertReply.qna" method="post">
 			<table id="qna_comment">
-				<% if(loginManager != null && qna.getQnaComYN().equals("N")) { %>
-				<tr>
-					<td><label id="label_comment">답변 : </label></td>
-					<td><textarea rows="1" cols="110" class="replyContent" name="replyContent" id="replyContent" style="resize:none;"></textarea></td>
-					<td><button type="submit" class="detail_btn" id="replyBtn">댓글등록</button></td>
-				</tr>
-				<% } %>
-			<!-- 댓글 게시 -->
-				<% if(qna.getQnaComYN().equals("Y")) { %>
-					<tr>
-						<td id="replyS1">답변 : </td>
-						<td colspan="2" id="replyS2"><%= qna.getQnaComContent() %></td>
-					</tr>
+				<% if(loginManager != null) { %>
+					<% if(qna.getQnaComYN().equals("N")) { %>
+						<tr>
+							<td><label id="label_comment">답변 : </label></td>
+							<td>
+							<textarea rows="2" cols="110" class="replyContent" name="replyContent" id="replyContent" style="resize:none;"><% if(qna.getQnaComContent() != null) { %><%= qna.getQnaComContent() %><% } %></textarea>
+							</td>
+							<td><button type="submit" class="detail_btn" id="replyBtn">댓글등록</button></td>
+						</tr>
+					<% } else { %>
+						<tr>
+							<td id="replyS1">답변 : </td>
+							<td colspan="2" id="replyS2">
+								<%= qna.getQnaComContent() %>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" id="replybutton">
+								<button type="button" onclick="updateReply();" class="detail_btn2" id="updateBtn">수정</button>
+								<button type="button" onclick="deleteReply();" class="detail_btn2" id="deleteBtn">삭제</button>
+							</td>
+						</tr>
+					<% } %>
+				<!-- 댓글 뷰 -->
+				<% } else { %>
+					<% if(qna.getQnaComYN().equals("Y")) { %>
+						<tr>
+							<td id="replyS1">답변 : </td>
+							<td colspan="2" id="replyS2"><%= qna.getQnaComContent() %></td>
+						</tr>
+					<% } else { %>
+						<tr>
+							<td colspan="3" id="replyS3">답변 대기 중 입니다.</td>
+						</tr>
+					<% } %>
 				<% } %>
 			</table>
-			<input type="hidden" value="<%= qna.getQnaCode() %>" name="qnaCode">
+			<input type="hidden" value="<%= qna.getQnaCode() %>" name="qnaCode" id="form2QnaCode">
 			</form>
 		</div>
     </section>
@@ -161,6 +189,19 @@
 				$('#form1').submit();
 			}
 		}
+	    
+	    function deleteReply(){
+	    	var bool = confirm('삭제하시겠습니까?');
+	    	if(bool){
+	    		$('#form2').attr('action','<%=request.getContextPath()%>/deleteReply.qna');
+				$('#form2').submit();
+			}
+	    }
+	    
+	    function updateReply(){
+	    	$('#form2').attr('action','<%=request.getContextPath()%>/updateReply.qna');
+			$('#form2').submit();
+	    }
 	</script>
 
 </body>

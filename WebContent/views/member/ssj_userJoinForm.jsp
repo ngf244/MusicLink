@@ -225,7 +225,7 @@
 						}
 					});
 				} else{
-					$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');;
+					$('#idResult').text('6~15자 영문 소문자와 숫자 조합 조건을 만족하지 않았습니다.').css('color', 'red');
 					userId.focus();
 				}
 		}
@@ -233,6 +233,7 @@
 		$('#user_name').change(function(){
 			if(nameCheck.test($(this).val())){
 				nameChecked = true;
+				$('#nameResult').text('');
 			} else{
 				$('#nameResult').text('알맞는 이름을 입력하세요').css('color', 'red');
 			}

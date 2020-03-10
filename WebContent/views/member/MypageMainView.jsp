@@ -94,7 +94,7 @@
     .profileInfo{display: inline-block; margin-left: 10%; line-height: 20px;}
     
     .listArea{line-height: 30px;}
-    .postInfo{line-height: 30px; margin-left: 10%; width: 75%; padding-left: 5%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
+    .postInfo{line-height: 30px; margin-left: 10%; width: 75%; height: 220px; padding-left: 5%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
     .write{width: 45%; display: inline-block;}
     .comment{width: 45%; display: inline-block;}
     .write a {display: inline-block;}
@@ -284,25 +284,27 @@
             
             <div class="postInfo">
                 <div class="write">
-                    <ul><b>갤러리 게시판</b></ul>
+                    <h4><b>갤러리 게시판</b></h4>
                         <% if(gList.isEmpty()){ %>
-                        <li>작성하신 글이 없습니다.</li>
+                        <div>- 작성하신 글이 없습니다.</div>
                         <% } else{
             					for(Gallery g : gList){
             			%>
-                        <li><a href=""><%= g.getGlTitle() %></a></li>
+                        <div onclick="goGalDetail();" style="cursor: pointer;">- <%= g.getGlTitle() %></div>
+				        <input type="hidden" name="galCode" value="">
 				        <%		}
 		            	   }
 		            	%>                                                    
                 </div>
                 <div class="comment" style="float: left;">
-                    <ul><b>Q&A</b></ul>
+                    <h4><b>Q&A</b></h4>
                        <% if(qList.isEmpty()){ %>
-                        <li>작성하신 글이 없습니다.</li>
+                        <div>- 작성하신 글이 없습니다.</div>
                         <% } else{
             					for(QnA q : qList){
             			%>
-                        <li><a href=""><%= q.getQnaTitle() %></a></li>
+                        <div onclick="goQnaDetail();" style="cursor: pointer;"><input type="hidden" name="qnaCode" value="">- <%= q.getQnaTitle() %></div>
+				        
 				        <%		}
 		            	   }
 		            	%>
@@ -322,7 +324,7 @@
 		                <li class="follow-nav">상태</li>
 		            </ul>
 	            <% if(list.isEmpty()){ %>
-	            	<div style="text-align: center;">팔로잉한 아티스트가 없습니다.</div>
+	            	<div style="text-align: center;"><br>팔로잉한 아티스트가 없습니다.</div>
 				<% } else{
             			for(FollowArtist fa : list){
             	%>
@@ -424,6 +426,20 @@
         		}
         		
 
+        	}
+        	
+        	function goQnaDetail(){
+            	var qnaCode = $(this).children().eq(0).val();
+            	console.log(qnaCode);
+            	
+            	location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;       		
+        	}
+        	
+        	function goGalDetail(){
+        		var galCode = $(this).next().val();
+        		console.log(galCode);
+        		
+        		location.href='<%= request.getContextPath() %>/detail.gal?galCode=' + galCode;  
         	}
         </script>
 

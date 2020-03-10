@@ -52,6 +52,8 @@ public class LoginServlet extends HttpServlet {
 		Manager manager = new Manager(user_id, userPwd);
 		Manager loginManager = new ManagerService().loginManager(manager);
 		
+		int result = new MemberService().banlogin(user_id);
+		
 		/*현호*/
 		
 		PayMent payment = new PaymentService().selectPayment(loginUser);
@@ -60,7 +62,12 @@ public class LoginServlet extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
-		if(loginUser != null) {
+		
+		if(result > 0) {
+			request.setAttribute("msgA", "금지된 회원입니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/ssj_loginForm.jsp");
+			view.forward(request, response);
+		} else if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session = request.getSession();
 			session.setMaxInactiveInterval(2400);  // 로그인 40분 유지

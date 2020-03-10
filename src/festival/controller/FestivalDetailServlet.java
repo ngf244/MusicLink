@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import festival.model.service.FestivalService;
 import festival.model.vo.Festival;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class FestivalDetailServlet
@@ -32,23 +33,32 @@ public class FestivalDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fcode = request.getParameter("fcode");
-		String status = request.getParameter("status");
+		int status = Integer.parseInt(request.getParameter("status"));
 		
 		FestivalService service = new FestivalService();
 		
 		Festival festival = service.selectFestival(fcode);
 		ArrayList<String> artistArr = service.findArtist(fcode);
+		int grade = service.getGeade(festival.getCpCode());
+		
+		String usercode = "";
+		ArrayList<String> userApList = null;
+		if(request.getSession().getAttribute("loginUser") != null) {
+			if(((Member)request.getSession().getAttribute("loginUser")).getUserClass().equals("2")) {
+				usercode = ((Member)request.getSession().getAttribute("loginUser")).getUserCode();
+				userApList = service.selectUserApList(usercode);
+			}
+		}
 		
 		String page = null;
 		if(festival != null) {
 			request.setAttribute("festival", festival);
 			request.setAttribute("artistArr", artistArr);
+			request.setAttribute("status", status);
+			request.setAttribute("grade", grade);
+			request.setAttribute("userApList", userApList);
 			
-			if(status.equals("아티스트 모집 중")) {
-				page = "views/festival/FestivalDetail_approach.jsp";
-			} else {
-				page = "views/festival/FestivalDetail_end.jsp";
-			}
+			page = "views/festival/FestivalDetail.jsp";
 		} else {
 			request.setAttribute("msg", "행사 상세보기에 실패하였습니다.");
 			page = "views/common/errorPage.jsp";

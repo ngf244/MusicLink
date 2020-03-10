@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import authorPage.model.dao.AuthorDAO;
+import authorPage.model.vo.ArtistJoinInfo;
+import authorPage.model.vo.CompanyJoinInfo;
 import authorPage.model.vo.Follow;
 import authorPage.model.vo.ReportPage;
 import member.model.vo.Member;
@@ -117,8 +119,6 @@ public class AuthorService {
 		
 		int result = new AuthorDAO().deleteReport(conn, userCode);
 		
-		System.out.println("deleteResult : " + result);
-		
 		if (result > 0 ) {
 			commit(conn);
 		}
@@ -159,6 +159,110 @@ public class AuthorService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<ArtistJoinInfo> getArtistJoinList() {
+		Connection conn = getConnection();
+		
+		ArrayList<ArtistJoinInfo> arr = new AuthorDAO().getArtistJoinList(conn);
+		
+		close(conn);
+		
+		return arr;
+	}
+
+	public ArtistJoinInfo getArtistJoinInfo(String userCode) {
+		Connection conn = getConnection();
+		
+		ArtistJoinInfo ai = new AuthorDAO().getArtistJoinInfo(conn, userCode);
+		
+		close(conn);
+		
+		return ai;
+	}
+
+	public int acceptJoin(String userCode) {
+		Connection conn = getConnection();
+		
+		int result = new AuthorDAO().acceptJoin(conn, userCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int sendMessage(String message, String userCode) {
+		Connection conn = getConnection();
+		
+		int result = new AuthorDAO().sendMessage(conn, userCode, message);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteRequset(String userCode) {
+		Connection conn = getConnection();
+		
+		int result = new AuthorDAO().deleteRequest(conn, userCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<CompanyJoinInfo> getCompanyJoinList() {
+		Connection conn = getConnection();
+		
+		ArrayList<CompanyJoinInfo> arr = new AuthorDAO().getComapnyJoinList(conn);
+		
+		close(conn);
+		
+		return arr;
+	}
+
+	public CompanyJoinInfo getCompanyJoinInfo(String userCode) {
+		Connection conn = getConnection();
+		
+		CompanyJoinInfo cj = new AuthorDAO().getCompanyJoinInfo(conn, userCode);
+		
+		close(conn);
+		
+		return cj;
+	}
+
+	public int changeUserClass(String userCode, String where) {
+		Connection conn = getConnection();
+		
+		int result = new AuthorDAO().changeUserClass(conn, userCode, where);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
 		close(conn);
 		
 		return result;

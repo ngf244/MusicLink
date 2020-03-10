@@ -54,18 +54,18 @@
 			<label id="inSmallCategory"> - Q&A WRITE</label>
 		</div>
 		<div id="contentArea">
-			<form id="table_show" action="<%= request.getContextPath()%>/insert.qna" method="post">
+			<form id="table_show" action="<%= request.getContextPath()%>/insert.qna" method="post" onsubmit="return validate();">
 				<table id="inputTable">
 					<tr>
 						<td class="qna_title labeltd">제목</td>
 						<td class="qna_title">
-							<input type="text" class="form-control input-default inputqna" name="title" placeholder="제목을 입력해주세요">
+							<input type="text" class="form-control input-default inputqna" name="title" id="title" placeholder="제목을 입력해주세요">
 						</td>
 					</tr>
 					<tr>
 						<td class="qna_content labeltd">내용</td>
 						<td class="qna_content">
-							<textarea class="form-control h-150px inputtextarea" id="content" name="content" rows="10" placeholder="내용을 입력해주세요"></textarea>
+							<textarea class="form-control h-150px inputtextarea" id="content" name="content" id="content" rows="10" placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -122,6 +122,19 @@
     <script src="<%= request.getContextPath() %>/js/settings.js"></script>
     <script src="<%= request.getContextPath() %>/js/gleek.js"></script>
     <script src="<%= request.getContextPath() %>/js/styleSwitcher.js"></script>
-
+	
+	<script>
+		function validate(){
+			if($('#title').val() == ""){
+				alert("제목을 입력해주세요.");
+				return false;
+			} else if($('#content').val() == ""){
+				alert("내용을 입력해주세요.");
+				return false;
+			} else{
+				return true;
+			}
+		}
+	</script>
 </body>
 </html>

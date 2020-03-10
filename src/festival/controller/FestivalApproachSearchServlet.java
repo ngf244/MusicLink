@@ -37,13 +37,10 @@ public class FestivalApproachSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
-		int category = 0;
-		if(request.getParameter("category") != null) {
-			category = Integer.parseInt(request.getParameter("category"));
-		}
+		int category = 1;
 		
 		FestivalService service = new FestivalService();
-
+		
 		int listCount = service.getApSearchListCount(searchType, searchText);
 		
 		int currentPage; //현재 페이지 표시
@@ -58,7 +55,7 @@ public class FestivalApproachSearchServlet extends HttpServlet {
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;

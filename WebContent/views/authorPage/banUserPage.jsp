@@ -16,7 +16,7 @@
     section {width:70%; margin:0 auto; box-shadow: 5px 5px 10px 8px lightgray; margin-top: 300px; position: relative;
     background: #fff; height:750px;}
     
-    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:355px; left:30%; color: rgb(224, 224, 224);} 
+    .htext{text-align: center; font-size: 100px; height:0; position: absolute; top:205px; left:30%; color: rgb(224, 224, 224);} 
     
     /* selection common */
     #sectionBox {position: relative; background-color: white; width: 100%; height: 100%;}
@@ -24,7 +24,7 @@
     /* common end */
 
     /* section 3 */
-    .searchBox{width: 50%; height: 5%; top: 16%; left: 24%; z-index: 1;}
+    .searchBox{width: 50%; height: 5%; top: 16%; left: 24%;  z-index: 1; }
     .searchBox-inputText{width: 75%; height: 85%;}
     .searchBox-submitButton{width: 20%; height: 100%; right: 0%;}
     
@@ -35,12 +35,14 @@
     .userDetailBox-nameBox{width: 50%; height: 24%; top: 0%; right: 5%;}
     .userDetailBox-addressBox{width: 50%; height: 24%; top: 33%; right: 5%;}
     .userDetailBox-usertypeBox{width: 50%; height: 24%; top: 66%; right: 5%;}
+
+    table tr~tr:hover{color: red; border-bottom: 1px solid red; cursor: pointer;}
     
     fieldset{border: 1px solid black; height: 100%;}
     legend{font-size: large;}
     input[readonly]{width: 99%; height: 55%; margin-top: 10px;}
 
-    button[type="button"]{background-color: red; float: right;}
+    button[type="button"]{background-color: red; float: right; cursor: pointer;}
 
     .districtReason{width: 20%; height: 30%; bottom: 15%; left: 14%;}
 
@@ -56,7 +58,7 @@
 
 </style>
 </head>
-<body>
+<body>i
     <%@ include file="../common/menubar.jsp" %>   
    
     <section style="z-index: 1;">
@@ -68,12 +70,12 @@
                 <button class="searchBox-submitButton">검색</button>
             </div>
 
-            <div style="background-color: yellow; position: absolute; width: 80%; height: 27%; top: 25%; left: 10%;">
-                <table style="background-color: yellow; position: absolute; width: 100%; left: 0%; text-align: center;">
+            <div style="position: absolute; width: 80%; height: 27%; top: 25%; left: 10%; overflow: auto;">
+                <table style="position: absolute; width: 100%; left: 0%; text-align: center;">
                     <tr style="border: 1px groove black; height: 40px; line-height: 40px;">
                         <th>신고번호</th>
                         <th>대상 아이디</th>
-                        <th>신고자 아이디</th>
+                        <th>신고자 회원번호</th>
                         <th>사유</th>
                         <th>신고일자</th>
                     </tr>
@@ -152,7 +154,7 @@
 <script src="js/slick.min.js"></script>
 <script>
 
-	$("#toggle").click(function(){
+	/* $("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
 	});
@@ -162,7 +164,7 @@
     });
     $(".map-h1").click(function(){
         $(".map").css("display","none");
-    });
+    }); */
     
     function restrictSubmit() {
         var check = confirm("정말 재제 하시겠습니까?");
