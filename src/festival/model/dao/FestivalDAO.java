@@ -933,4 +933,30 @@ public class FestivalDAO {
 
 	}
 
+	public int getMoney(Connection conn, String usercode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String query = prop.getProperty("getMoney");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, usercode);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt(1);
+				System.out.println(result);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

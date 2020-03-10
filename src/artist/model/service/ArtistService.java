@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 
 import artist.model.dao.ArtistDAO;
 import artist.model.vo.Artist;
+import artist.model.vo.ArtistRank;
 import artist.model.vo.FollowArtist;
 import festival.model.vo.Festival;
 import gallery.model.dao.GalleryDAO;
@@ -231,6 +232,7 @@ public class ArtistService {
 		return result;
 	}
 
+
 	public int addArtistFollower(String artistCode, String followerCode) {
 		Connection conn = getConnection();
 		
@@ -264,5 +266,18 @@ public class ArtistService {
 		}
 		close(conn);
 		return result;
+  }
+	public int getArtistRankListCount() {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().getArtistRankListCount(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<ArtistRank> selectAtRankList(int currentPage, String genre) {
+		Connection conn = getConnection();
+		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage, genre);
+		close(conn);
+		return rList;
 	}
 }
