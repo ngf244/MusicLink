@@ -29,7 +29,7 @@ public class NoticeDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 	
 	public int getNoticeListCount(Connection conn, String userCode) {
 		PreparedStatement pstmt = null;

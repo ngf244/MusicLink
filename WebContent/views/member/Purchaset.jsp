@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	 /* String payment = (String)request.getAttribute("payment"); */
-%>
+%> 
 <!DOCTYPE html>
 <html>
 <head>

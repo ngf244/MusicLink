@@ -5,7 +5,6 @@
 	Manager loginManager = (Manager)session.getAttribute("loginManager");
 	PayMent payment = (PayMent)session.getAttribute("payment");
 	ArrayList<Notice> nolist = (ArrayList<Notice>)session.getAttribute("list");
-	System.out.println("민수형 땡유"+nolist);
 	
 %> 
 

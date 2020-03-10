@@ -26,7 +26,7 @@ public class PaymentService {
 		}
 		return result;
 	}
-
+ 
 	public PayMent selectPayment(Member loginUser) {
 		Connection conn = getConnection();
 		PaymentDAO pmDAO = new PaymentDAO();

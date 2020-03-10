@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <%@ page import="java.util.ArrayList, festival.model.vo.*" %>
 <%
 	ArrayList<Festival> flist = (ArrayList<Festival>)request.getAttribute("fList");

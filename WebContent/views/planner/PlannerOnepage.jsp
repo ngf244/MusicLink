@@ -8,7 +8,7 @@
 	if(apList == null) {
 		isReceive = false;
 	}
-%>
+%> 
 <!DOCTYPE html>
 <html>
 <head>

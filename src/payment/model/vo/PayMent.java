@@ -19,7 +19,7 @@ public class PayMent {
 	}
 
 
-
+ 
 	public PayMent(int payAmount, String userCode) {
 		super();
 		this.payAmount = payAmount;

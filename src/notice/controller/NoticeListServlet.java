@@ -71,7 +71,7 @@ public class NoticeListServlet extends HttpServlet {
 		System.out.println("서블릿 리스트"+list);
 		
 		String page = null;
-		
+		 
 		
 		if(list != null) {
 			page = "views/member/MypageNoticeView.jsp";
