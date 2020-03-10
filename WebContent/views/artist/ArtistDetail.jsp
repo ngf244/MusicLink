@@ -121,7 +121,7 @@
 							
                             <tr align="left" style="margin-top: 5px;">
                                 <td class="td1"><b>평점</b></td>
-                                <td class="td2" id="artistStar"><%= printStar %></td>
+                                <td class="td2" id="artistStar"><b><%= printStar %></b></td>
                             </tr>                            
                         </table>
                     </div>
@@ -138,7 +138,21 @@
                         <%= a.getAtRecode() %>
                     </div>
                     <div class="com5" style="padding: 15px;">
-                        <iframe width="520" height="300" src="https://www.youtube.com/embed/Utyzs3sqGLo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    	<% 
+                    	String url = "";
+                    	if(a.getAtCode().equals("UC1")){
+                    		url = "https://www.youtube.com/embed/Utyzs3sqGLo";
+                    	} else if(a.getAtCode().equals("UC2")){
+                    		url = "https://www.youtube.com/embed/SdDqpb6r0vM";
+                    	} else if(a.getAtCode().equals("UC3")){
+                    		url = "https://www.youtube.com/embed/o_nxIQTM_B0";
+                    	} else if(a.getAtCode().equals("UC4")){
+                    		url = "https://www.youtube.com/embed/RG2em0_Z7Do";
+                    	}
+                    	%>
+                    
+                    
+                        <iframe width="520" height="300" src="<%= url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -170,9 +184,21 @@
 	//new WOW().init();
 	
 	$('.follow').click(function() {
-		var atCode = $(this).next().eq(0).val();
-		console.log(atCode);
-		
+		var artistCode = $(this).next().eq(0).val();
+		console.log(artistCode);
+        if (confirm("팔로우 하시겠습니까?") == true){    //확인
+            $.ajax({
+                url : '<%=request.getContextPath()%>/artistFollow.do',
+                data : {artistCode : artistCode},
+                type : 'get',
+                success : function(data){
+                    console.log(data);
+                    alert(data);
+                }
+            })
+        }else{   //취소
+            return;
+        }
 	});
 </script>
 <script src="js/cal.js"></script>
