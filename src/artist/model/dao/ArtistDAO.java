@@ -642,16 +642,17 @@ public class ArtistDAO {
 		}
 		return arr;
 	}
-	public int getListCount(Connection conn) {
-		Statement stmt = null;
+	public int getListCount(Connection conn, String g) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("getListCount");
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				result = rset.getInt(1);
@@ -660,12 +661,53 @@ public class ArtistDAO {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return result;
 	}
-	
+
+	public int addArtistFollower(Connection conn, String artistCode, String followerCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("addArtistFollower");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, followerCode);
+			pstmt.setString(2, artistCode);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public LinkedHashMap<String, String> getFesList(Connection conn, String loginUserCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
+		String query = prop.getProperty("getFesList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginUserCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.put(rset.getString(1), rset.getString(2));
+      }
+    } catch (SQLException e) {
+         e.printStackTrace();
+    } finally {
+       close(rset);
+       close(pstmt);
+    }
+      
+      return list;
+  }
 	public int getArtistRankListCount(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -733,9 +775,97 @@ public class ArtistDAO {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}		
-		
-		return rList;
+		}
+			return rList;
 	}
 
+	public Artist selectArtistDetail(Connection conn, String atCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Artist a = null;
+		
+		String query = prop.getProperty("selectArtistDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, atCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				a = new Artist(rset.getString("AT_CODE"),
+							   rset.getString("AT_NAME"),
+							   rset.getInt("AT_MEMBER"),
+							   rset.getString("AT_GENRE"),
+							   rset.getString("AT_CLASS"),
+							   rset.getString("PROFILE_PIC_PATH"),
+							   rset.getString("AT_ONELINE"),
+							   rset.getString("AT_INTRO"),
+							   rset.getString("AT_RECORD"),
+							   rset.getDate("AT_DEBUT"),
+							   rset.getInt("AT_GRADE"),
+							   rset.getString("AT_INSTA"),
+							   rset.getString("AT_TWITTER"),
+							   rset.getString("AT_FACEBOOK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return a;
+	}
+	public int selectFollowCount(Connection conn, String atCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int count = 0;
+		
+		String query = prop.getProperty("selectFollowCount");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, atCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+
+		
+	
+	public int insertLoveCall(Connection conn, String artistCode, String fesCode, String message) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertLoveCall");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, message);
+			pstmt.setString(2, fesCode);
+			pstmt.setString(3, artistCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+
+	}		
+	
 }

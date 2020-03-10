@@ -222,16 +222,51 @@ public class ArtistService {
 		return arr;
 	}
 
-	public int getListCount() {
+	public int getListCount(String g) {
 		Connection conn = getConnection();
 		
-		int result = new ArtistDAO().getListCount(conn);
+		int result = new ArtistDAO().getListCount(conn, g);
 		
 		close(conn);
 		
 		return result;
 	}
 
+
+	public int addArtistFollower(String artistCode, String followerCode) {
+		Connection conn = getConnection();
+		
+		int result = new ArtistDAO().addArtistFollower(conn, artistCode, followerCode);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public LinkedHashMap<String, String> getFesList(String loginUserCode) {
+		Connection conn = getConnection();
+		LinkedHashMap<String, String> list = new ArtistDAO().getFesList(conn, loginUserCode);
+		close(conn);
+		return list;
+	}
+
+	public int insertLoveCall(String artistCode, String fesCode, String message) {
+		Connection conn = getConnection();
+		int result = new ArtistDAO().insertLoveCall(conn, artistCode, fesCode, message);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+  }
 	public int getArtistRankListCount() {
 		Connection conn = getConnection();
 		int result = new ArtistDAO().getArtistRankListCount(conn);
@@ -244,5 +279,19 @@ public class ArtistService {
 		ArrayList<ArtistRank> rList = new ArtistDAO().selectAtRankList(conn, currentPage, genre);
 		close(conn);
 		return rList;
+	}
+
+	public Artist selectArtistDetail(String atCode) {
+		Connection conn = getConnection();
+		Artist artist = new ArtistDAO().selectArtistDetail(conn, atCode);
+		close(conn);
+		return artist;
+	}
+
+	public int selectFollowCount(String atCode) {
+		Connection conn = getConnection();
+		int count = new ArtistDAO().selectFollowCount(conn, atCode);
+		close(conn);
+		return count;
 	}
 }

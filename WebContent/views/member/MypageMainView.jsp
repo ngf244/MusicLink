@@ -290,7 +290,7 @@
                         <% } else{
             					for(Gallery g : gList){
             			%>
-                        <div onclick="goGalDetail();" style="cursor: pointer;">- <%= g.getGlTitle() %></div>
+                        <div style="cursor: pointer;"><input type="hidden" name="galCode" valeu="<%= g.getGlCode() %>">- <%= g.getGlTitle() %></div>
 				        <input type="hidden" name="galCode" value="">
 				        <%		}
 		            	   }
@@ -303,7 +303,7 @@
                         <% } else{
             					for(QnA q : qList){
             			%>
-                        <div onclick="goQnaDetail();" style="cursor: pointer;"><input type="hidden" name="qnaCode" value="">- <%= q.getQnaTitle() %></div>
+                        <div class="qnaArea" style="cursor: pointer;"><input type="hidden" name="qnaCode" value="<%= q.getQnaCode() %>">- <%= q.getQnaTitle() %></div>
 				        
 				        <%		}
 		            	   }
@@ -428,19 +428,17 @@
 
         	}
         	
-        	function goQnaDetail(){
-            	var qnaCode = $(this).children().eq(0).val();
-            	console.log(qnaCode);
-            	
-            	location.href='<%= request.getContextPath() %>/detail.qna?qnaCode=' + qnaCode;       		
-        	}
+        	$('.qnaArea').click(function() {
+        		var qnaCode = $(this).children().eq(0).val();
+        		console.log(qnaCode);
+        		location.href = "<%= request.getContextPath() %>/detail.qna?qnaCode=" + qnaCode;
+        	}); 
         	
-        	function goGalDetail(){
-        		var galCode = $(this).next().val();
+        	$('.galArea').click(function() {
+        		var galCode = $(this).children().eq(0).val();
         		console.log(galCode);
-        		
-        		location.href='<%= request.getContextPath() %>/detail.gal?galCode=' + galCode;  
-        	}
+        		location.href = "<%= request.getContextPath() %>/detail.gal?galCode=" + galCode;
+        	});
         </script>
 
         

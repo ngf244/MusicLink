@@ -200,7 +200,8 @@
             <div class="artist">
                 
                 <div class="artistInfo">
-                    <div class="profileBox">
+                    <div class="profileBox" style="cursor: pointer;">
+                        <input type="hidden" name="atCode" value="<%= fa.getAtCode() %>">
                         <img class="profile" src="artistProfile_uploadFiles/<%= fa.getPicPath() %>">
                     </div>
                     <div class="artistDesc">
@@ -256,7 +257,13 @@
 				if(<%= currentPage %> >= <%= maxPage %>){
 					var after = $(".next");
 					after.attr('class', 'page-item next disabled');
-				}				
+				}
+				
+				$('.profileBox').click(function() {
+					var atCode = $(this).children().eq(0).val();
+					console.log(atCode);
+					location.href = "<%= request.getContextPath() %>/detail.artist?atCode=" + atCode;
+				});
 			</script>        
         
     </section>

@@ -32,9 +32,27 @@ public class ArtistListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String Genre = "전체";
+		if(request.getParameter("Genre")!=null) {
+			Genre = request.getParameter("Genre");
+		}
+		
+		request.setAttribute("Genre", Genre);
+		String Genre2 = "";
+		switch(Genre) {
+		case "전체" : Genre2 = "%%"; break;
+		case "댄스" : Genre2 = "%댄스%"; break;
+		case "발라드" : Genre2 = "%발라드%"; break;
+		case "힙합" : Genre2 = "%힙합%"; break;
+		case "락" : Genre2 = "%락%"; break;
+		case "트로트" : Genre2 = "%트로트%"; break;
+		case "기타" : Genre2 = "%기타%"; break;
+		}
+		System.out.println("Gen2 = "+Genre2);
+		
 		ArtistService service = new ArtistService(); // 두 개의 서비스를 호출할 것이기 때문에 참조변수로 생성
 		
-		int listCount = service.getListCount(); // 게시판 리스트 개수
+		int listCount = service.getListCount(Genre2); // 게시판 리스트 개수
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수
@@ -59,21 +77,8 @@ public class ArtistListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		String Genre = "전체";
-		if(request.getParameter("Genre")!=null) {
-			Genre = request.getParameter("Genre");
-		}
 		
-		switch(Genre) {
-		case "전체" : Genre = "%%"; break;
-		case "댄스" : Genre = "%댄스%"; break;
-		case "발라드" : Genre = "%발라드%"; break;
-		case "랩/힙합" : Genre = "%랩/힙합%"; break;
-		case "락" : Genre = "%락%"; break;
-		case "트로트" : Genre = "%트로트%"; break;
-		case "기타" : Genre = "%기타%"; break;
-		}
-		ArrayList<Artist> arr = service.getArtistList(currentPage, Genre);
+		ArrayList<Artist> arr = service.getArtistList(currentPage, Genre2);
 		
 		System.out.println(arr);
 		
