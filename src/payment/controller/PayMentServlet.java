@@ -1,6 +1,8 @@
 package payment.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,20 +29,37 @@ public class PayMentServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/** 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pay = request.getParameter("price");
+		
 		
 		HttpSession session = request.getSession();
 	    String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+	    int pm = Integer.parseInt(request.getParameter("price"));
 	    
-	    PaymentService service = new PaymentService();
+	    PayMent payment = new PayMent(pm,userCode);
 	    
-	    PayMent pm1 = service.selectPayment(userCode);
 	    
-	    PayMent pm2 = service.UpdatePayment();
+	    int result = new PaymentService().insertPayment(payment);
+	    
+	    String page = "";
+		if(result > 0)  {
+			page = "views/member/Purchaset.jsp";
+			request.setAttribute("payment",  payment);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", ".......");
+		}
+		
+		
+		
+		
+		
+	    
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	    
 	}
 

@@ -94,7 +94,7 @@
     .profileInfo{display: inline-block; margin-left: 10%; line-height: 20px;}
     
     .listArea{line-height: 30px;}
-    .postInfo{line-height: 30px; margin-left: 10%; width: 75%; padding-left: 5%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
+    .postInfo{line-height: 30px; margin-left: 10%; width: 75%; height: 220px; padding-left: 5%; border-bottom: solid 1px rgb(189, 189, 189); padding-bottom: 3%;}
     .write{width: 45%; display: inline-block;}
     .comment{width: 45%; display: inline-block;}
     .write a {display: inline-block;}

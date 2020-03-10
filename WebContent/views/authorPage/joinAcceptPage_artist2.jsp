@@ -193,26 +193,44 @@
 					<tr>
 						<td class="label">동영상 첨부</td>
 						<td colspan="3" class="fileBox">
-							<input type="url" name="videoFile" id="videoFile" class="text-file" placeholder="동영상링크 주소를 넣어주세요." value="<%=ai.getAvisrc()%>">
+						<iframe width="560" height="315" src="<%=ai.getAvisrc()%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</td>
 					</tr>
 					<tr>
 						<td rowspan="3" class="label" id="label_sns">SNS</td>
 						<td colspan="3">
 							<span class="sns_class">Instargram</span>
-							<input type="url" name="instaURL" id="instaURL" class="sns-form" placeholder="인스타링크 주소를 넣어주세요." value="<%=ai.getInsta()%>">
+							<input type="text" readonly="readonly" name="instaURL" id="instaURL" class="sns-form" placeholder="인스타링크 주소를 넣어주세요." value=
+							<%if(!ai.getInsta().equals("null")) {%>
+							"<%=ai.getInsta()%>"
+							<%}else{ %>
+							""
+							<%} %>
+							>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">Twitter</span>
-							<input type="url" name="twitterURL" id="twitterURL" class="sns-form" placeholder="트위터링크 주소를 넣어주세요." value="<%=ai.getTwitter()%>">
+							<input type="text" readonly="readonly" name="twitterURL" id="twitterURL" class="sns-form" placeholder="트위터링크 주소를 넣어주세요." value=
+							<%if(!ai.getTwitter().equals("null")) {%>
+							"<%=ai.getTwitter()%>"
+							<%}else{ %>
+							""
+							<%} %>
+							>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<span class="sns_class">FaceBook</span>
-							<input type="url" name="facebookURL" id="facebookURL" class="sns-form" placeholder="페이스북링크 주소를 넣어주세요." value="<%=ai.getFacebook()%>">
+							<input type="text" readonly="readonly" name="facebookURL" id="facebookURL" class="sns-form" placeholder="페이스북링크 주소를 넣어주세요." value=
+							<%if(!ai.getFacebook().equals("null")) {%>
+							"<%=ai.getFacebook()%>"
+							<%}else{ %>
+							""
+							<%} %>
+							>
 						</td>
 					</tr>
 					<tr>

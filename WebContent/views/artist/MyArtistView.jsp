@@ -7,7 +7,7 @@
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
+	int maxPage = pi.getMaxPage(); 
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	

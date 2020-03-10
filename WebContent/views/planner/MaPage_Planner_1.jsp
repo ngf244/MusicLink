@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <%@ page import="java.util.ArrayList, festival.model.vo.*" %>
 <%
 	ArrayList<Festival> flist = (ArrayList<Festival>)request.getAttribute("fList");
@@ -47,7 +47,7 @@
 	                <div class="fe-period fe-sum"><%= f.getRecTerm() %></div>
 	                <div class="fe-yn fe-sum">
 						<% if( f.getFesRecruit().equals("Y") ){ %>
-						<div class="feBtni">모집중</div>
+						<div class="feBtni"><a href="<%= request.getContextPath() %>/festivalapply.me">모집중</a></div>
 						<% } else { %>
 						<div class="feBtnf">모집완료</div>
 						<% } %>

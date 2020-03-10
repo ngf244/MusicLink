@@ -83,7 +83,7 @@
 							int resultDday = Math.abs((int)(Math.ceil(minus/calc)));
              	%>
              	<div class="plan-schedule">
-                <div class="ps-img"><img width="160px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>"></div>
+                <div class="ps-img"><img width="170px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>"></div>
                 <div class="ps-title">
                     <p>행사명 : <%= f.getFesName() %></p>
                 <%

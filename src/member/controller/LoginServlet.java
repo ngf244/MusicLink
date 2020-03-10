@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import member.model.service.ManagerService;
 import member.model.service.MemberService;
 import member.model.vo.Manager;
 import member.model.vo.Member;
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
+/*현호*/
+import payment.model.vo.PayMent;
+import payment.model.service.PaymentService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -48,6 +54,12 @@ public class LoginServlet extends HttpServlet {
 		
 		int result = new MemberService().banlogin(user_id);
 		
+		/*현호*/
+		
+		PayMent payment = new PaymentService().selectPayment(loginUser);
+		
+		
+		
 		response.setContentType("text/html; charset=UTF-8");
 		
 		
@@ -57,8 +69,22 @@ public class LoginServlet extends HttpServlet {
 			view.forward(request, response);
 		} else if(loginUser != null) {
 			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setMaxInactiveInterval(2400);  // 로그인 40분 유지
 			session.setAttribute("loginUser", loginUser);
+			/*현호*/
+			session.setAttribute("payment", payment);
+			
+			System.out.println("페이먼트가 제대로 들어옵니까?"+payment);
+			
+			
+			
+			String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+			NoticeService service = new NoticeService();
+			
+			
+			ArrayList<Notice> list = service.selectNoticeListtwo(userCode);
+			session.setAttribute("list", list);
 			
 			response.sendRedirect("index.jsp");
 		} else if(loginManager != null) {
@@ -72,6 +98,8 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/member/ssj_loginForm.jsp");
 			view.forward(request, response);
 		}
+		
+		
 		
 	}
 

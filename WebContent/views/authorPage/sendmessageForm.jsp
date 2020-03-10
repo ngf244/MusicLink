@@ -26,7 +26,7 @@
 				data : {message:message, userCode:userCode},
 				success : function(data){
 					window.alert(data);
-					if(typeof(opener.document.enrollForm_co) != undefined){
+					if(typeof(opener.document.enrollForm_co) != 'undefined'){
 						opener.location.href="<%=request.getContextPath()%>/requestList.co";
 					} else {
 						opener.location.href="<%=request.getContextPath()%>/requestList.at";
