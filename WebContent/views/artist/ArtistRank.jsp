@@ -3,12 +3,27 @@
 <%
 	ArrayList<ArtistRank> rList = (ArrayList<ArtistRank>)request.getAttribute("rList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	String genre = (String)request.getAttribute("genre");
+		
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage(); 
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	String[] genArr = new String[7];
+	
+	switch(genre) {
+	case "전체 순위" : genArr[0] = "selected"; break;
+	case "발라드 순위" : genArr[1] = "selected"; break;
+	case "댄스 순위" : genArr[2] = "selected"; break;
+	case "랩/힙합 순위" : genArr[3] = "selected"; break;
+	case "ROCK 순위" : genArr[4] = "selected"; break;
+	case "트로트 순위" : genArr[5] = "selected"; break;
+	case "기타 순위" : genArr[6] = "selected"; break;
+	}
+	
+	
 %>    
 <!DOCTYPE html>
 <html lang="ko">
@@ -226,13 +241,13 @@
                     <div class="ar-line">
                     <div class="line-box">
                     <select class="select-box">
-                        <option value="전체 순위">전체 순위</option>
-                        <option value="발라드 순위">발라드 순위</option>
-                        <option value="댄스 순위">댄스 순위</option>
-                        <option value="랩/힙합 순위">랩/힙합 순위</option>
-                        <option value="ROCK 순위">ROCK 순위</option>
-                        <option value="트로트 순위">트로트 순위</option>
-                        <option value="기타 순위">기타 순위</option>
+                        <option value="전체 순위" <%= genArr[0] %>>전체 순위</option>
+                        <option value="발라드 순위" <%= genArr[1] %>>발라드 순위</option>
+                        <option value="댄스 순위" <%= genArr[2] %>>댄스 순위</option>
+                        <option value="랩/힙합 순위" <%= genArr[3] %>>랩/힙합 순위</option>
+                        <option value="ROCK 순위" <%= genArr[4] %>>ROCK 순위</option>
+                        <option value="트로트 순위" <%= genArr[5] %>>트로트 순위</option>
+                        <option value="기타 순위" <%= genArr[6] %>>기타 순위</option>
                     </select>
                     </div>
                     </div>
@@ -261,7 +276,7 @@
                     
                         <div class="rr-top rrank">
                             <div class="at-photo" onclick="">
-                            	<input type="hidden" name="atCode" value="">
+                            	<input type="hidden" name="atCode" value="<%= ar.getAtCode() %>">
                                 <img src="artistProfile_uploadFiles/<%= ar.getAtPicPath() %>">
                             </div>
                             <div class="at-nickName">
@@ -367,6 +382,12 @@
         
         location.href="<%= request.getContextPath() %>/list.atrank?genre=" + genre;
     })
+
+	$('.at-photo').click(function() {
+		var atCode = $(this).children().eq(0).val();
+		console.log(atCode);
+		location.href = "<%= request.getContextPath() %>/detail.artist?atCode=" + atCode;
+	});    
 </script>
 </body>
 </html>

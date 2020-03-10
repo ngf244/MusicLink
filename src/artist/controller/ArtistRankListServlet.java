@@ -65,6 +65,8 @@ public class ArtistRankListServlet extends HttpServlet {
 			genre = request.getParameter("genre");
 		}
 		
+		request.setAttribute("genre", genre);
+		
 		switch(genre) {
 		case "전체 순위" : genre = "%%"; break;
 		case "발라드 순위" : genre = "%발라드%"; break;
