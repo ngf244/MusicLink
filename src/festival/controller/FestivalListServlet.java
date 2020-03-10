@@ -34,7 +34,7 @@ public class FestivalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int category = 1;
+		int category = 0;
 		if(request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));
 		}
@@ -55,7 +55,7 @@ public class FestivalListServlet extends HttpServlet {
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;

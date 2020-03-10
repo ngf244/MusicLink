@@ -191,12 +191,15 @@
 	}
 	
 	#label {
-		width: 40%;
+		width: 37%;
 	}
 	
 	#companyStar {
 		color: #FFCD12;
 	}
+	
+	#ticketLink {cursor:pointer;}
+
 
     pre{
     line-height: 1.8em;
@@ -342,7 +345,7 @@
 							<td>
 								<%= printFee %> &nbsp;&nbsp;
 								<% if(f.getTicUrl() != "") { %>
-									<span id="ticketLink">(티켓 구매처 : 인터파크)</span>
+									<span id="ticketLink">(티켓 구매처)</span>
 								<% } %>
 							</td>
 						</tr>
@@ -368,7 +371,7 @@
 						<tr>
 							<td>행사 설명</td>
 							<td>
-								<pre><%= f.getFesInfo() %></pre>
+								<pre style="white-space: pre-wrap;"><%= f.getFesInfo() %></pre>
 							</td>
 						</tr>
 					</table>
@@ -442,7 +445,7 @@
 			}, 'mouseout':function() {
 				$(this).css('color', '#76838f');
 			}, 'click':function() {
-				window.open("http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=19018834", "_blank");
+				window.open("<%= f.getTicUrl() %>", "_blank");
 			}});
 		});
 		

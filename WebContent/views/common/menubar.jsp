@@ -95,16 +95,16 @@
         </div>
         
         
-        <% if((request.getRequestURI()).indexOf("festival") > -1) { %>
-        <% if (loginUser != null) { %>
-	           <% if(loginUser.getUserClass().equals("3")) { %>
-	           <div class="side-icon-right">
-	              <div class="image4 icon">
-	         <img src="<%= request.getContextPath() %>/img/add.png" alt="" />
-	              </div>
-	           </div>
-			   <% } %>
-		   <% } %>
+        <% if((request.getRequestURI()).indexOf("festival") != -1 && (request.getRequestURL()).indexOf("Update") == -1 && (request.getRequestURL()).indexOf("Enroll") == -1) { %>
+		<% if (loginUser != null) { %>
+			<% if(loginUser.getUserClass().equals("3")) { %>
+				<div class="side-icon-right">
+				<div class="image4 icon">
+					<img src="<%= request.getContextPath() %>/img/add.png" alt="" />
+				</div>
+			           </div>
+			<% } %>
+		<% } %>
 		<% } %>
         
         
@@ -167,6 +167,10 @@
     
     $(".image3").click(function(){
         $(".map").css({"display":"block","width":"100%","height":"100%","padding-top":"10%","opacity":"0.98", "z-index":"9"});
+    });
+    
+    $(".image4").click(function(){
+    	location.href = "<%=request.getContextPath()%>/views/festival/FestivalEnroll.jsp";
     });
     
     

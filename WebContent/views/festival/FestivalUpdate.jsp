@@ -395,7 +395,7 @@
 								<div class="input-group mb-3">
 									<div class="custom-file clickban">
 										<input type="file" accept="image/*" name="bannerPath" class="custom-file-input bannerPath" onchange="reviewUploadImg(this,'1');">
-										<label class="custom-file-label" id="bannerPath"></label>
+										<label class="custom-file-label" id="bannerPath"><%= f.getBanPath() %></label>
 									</div>
 								</div>
 								<input type="hidden" id="oriban" name="oriban">

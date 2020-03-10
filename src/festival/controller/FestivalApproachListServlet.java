@@ -68,7 +68,7 @@ public class FestivalApproachListServlet extends HttpServlet {
 			//페이지 전환 시 전달 받은 페이지로 currentPage 적용
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
