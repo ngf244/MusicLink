@@ -1,6 +1,9 @@
 package lovecall.model.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -19,6 +22,22 @@ public class LoveCallService {
 		list = dao.selectLcList(conn, userCode);
 		
 		return list;
+	}
+
+	public int upDateYCall(LoveCall lvCall) {
+		Connection conn = getConnection();
+		
+		int result = new LoveCallDAO().upDateYCall(conn, lvCall);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

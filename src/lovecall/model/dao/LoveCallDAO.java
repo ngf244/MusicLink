@@ -63,4 +63,21 @@ public class LoveCallDAO {
 		return list;
 	}
 
+	public int upDateYCall(Connection conn, LoveCall lvCall) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("upDateYCall");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, lvCall.getLcYn());
+			pstmt.setString(2, lvCall.getLcCode());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
 }
