@@ -170,7 +170,7 @@
 <script src="js/slick.min.js"></script>
 <script>
 
-	$("#toggle").click(function(){
+	/* $("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
 	});
@@ -180,7 +180,7 @@
     });
     $(".map-h1").click(function(){
         $(".map").css("display","none");
-    });    
+    });    */ 
 	//new WOW().init();
 	
 	$('.follow').click(function() {

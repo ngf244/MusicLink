@@ -361,7 +361,7 @@
 <script src="js/slick.min.js"></script>
 <script>
 
-	$("#toggle").click(function(){
+/* 	$("#toggle").click(function(){
 		$(this).toggleClass("on");
 		$("#resize").toggleClass("active");	
 	});
@@ -374,7 +374,7 @@
     });
     
     
-    
+     */
 	//new WOW().init();
 	
 	$('.select-box').change(function() {

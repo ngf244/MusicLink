@@ -81,6 +81,12 @@
 							long minus = today.getTime() - endFesDate.getTime();
 							long calc = 1000*60*60*24;
 							int resultDday = Math.abs((int)(Math.ceil(minus/calc)));
+							String dday = "";
+							if(resultDday == 0) {
+								dday = "Day";
+							} else {
+								dday = Integer.toString(resultDday);
+							}
              	%>
              	<div class="plan-schedule">
                 <div class="ps-img"><img width="170px" src="<%= request.getContextPath() %>/festival_uploadFiles/<%= f.getPosPath() %>"></div>
@@ -109,7 +115,7 @@
                     <p>기획자 이메일 : <%= m.getUserEmail() %></p>
                 </div>
                 <div class="d-day" onclick="inputGrade();">
-                    <div>D - <%= resultDday + 1 %></div>
+                    <div>D - <%= dday %></div>
                 </div>
                 <input type="hidden" name="cpCode" class="cpCode" value="<%= f.getCpCode() %>">
                 <div style="clear: both;"></div>

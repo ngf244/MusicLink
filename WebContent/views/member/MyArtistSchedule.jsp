@@ -296,6 +296,12 @@
 							long minus = today.getTime() - endFesDate.getTime();
 							long calc = 1000*60*60*24;
 							int resultDday = Math.abs((int)(Math.ceil(minus/calc)));
+							String dday = "";
+							if(resultDday == 0) {
+								dday = "Day";
+							} else {
+								dday = Integer.toString(resultDday);
+							}
 			             %>   
 							<div class="eventArea">
 		                    <div class="eventImage">
@@ -303,7 +309,7 @@
 		                    </div>
 		                    
 		                    <div class="eventInfo">
-		                        <ul><div class="d-dayArea">D - <%= resultDday + 1 %></div>
+		                        <ul><div class="d-dayArea">D - <%= dday %></div>
 		                        	<li>행사 명 : <%= f.getFesName() %></li>
 		                 		<%
 								String fullLoc = "";
