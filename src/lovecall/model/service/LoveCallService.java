@@ -40,4 +40,41 @@ public class LoveCallService {
 		return result;
 	}
 
+	public int acceptLoveCall(String lcCode, String letter, String atCode, String fesCode) {
+		Connection conn = getConnection();
+		
+		int result = new LoveCallDAO().acceptLoveCall(conn, lcCode, letter);
+		
+		if(result>0) {
+			if(letter.equals("Y")) {
+				int result2 = new LoveCallDAO().insertfesart(conn, fesCode, atCode);
+				if(result2>0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+				}
+			}else {
+				commit(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+//	public int deleteLoveCall(String lcCode, String letter) {
+//		Connection conn = getConnection();
+//		
+//		int result = new LoveCallDAO().deleteLoveCall(conn, lcCode);
+//		
+//		if(result>0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//	}
+
 }

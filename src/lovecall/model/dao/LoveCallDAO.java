@@ -1,5 +1,6 @@
 package lovecall.model.dao;
 
+import static common.JDBCTemplate.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import com.sun.xml.internal.ws.Closeable;
 
 import lovecall.model.vo.LoveCall;
 
@@ -44,12 +47,17 @@ public class LoveCallDAO {
 			list = new ArrayList<LoveCall>();
 			
 			while(rs.next()) {
-				list.add(new LoveCall(rs.getDate("SEND_TIME"),
-									  rs.getString("UNAME"),
-									  rs.getString("FES_NAME"),
-									  rs.getString("ACCEPT_YN"),
-									  rs.getString("LOVECALL_CODE"),
-									  rs.getString("FES_CODE")));
+				LoveCall lc = new LoveCall();
+				
+				lc.setAtCode(rs.getString("ATCODE"));
+				lc.setFesCode(rs.getString("FES_CODE"));
+				lc.setFesName(rs.getString("FES_NAME"));
+				lc.setLcCode(rs.getString("LOVECALL_CODE"));
+				lc.setLcYn(rs.getString("ACCEPT_YN"));
+				lc.setLcDate(rs.getDate("SEND_TIME"));
+				lc.setPlCode(rs.getString("UNAME"));
+				
+				list.add(lc);
 			}
 			
 			
@@ -79,5 +87,68 @@ public class LoveCallDAO {
 		
 		return result;
 	}
+
+	public int acceptLoveCall(Connection conn, String lcCode, String letter) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("acceptLoveCall");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, letter);
+			pstmt.setString(2, lcCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteLoveCall(Connection conn, String lcCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteLoveCall");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, lcCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertfesart(Connection conn, String fesCode, String atCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertfesart");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, fesCode);
+			pstmt.setString(2, atCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 
 }
