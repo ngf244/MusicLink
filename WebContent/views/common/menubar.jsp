@@ -136,7 +136,9 @@
             		for(Notice n : nolist){
             %>
             <div class="alram-con">
-                <div class="alram-img"></div>
+                <div class="alram-img">
+                	<img src="<%= request.getContextPath() %>/img/bell.png" class="bell-img" />
+                </div>
                 <div class="alram-msg">
                 	<% 
 	                	String noticeClass = "";
@@ -182,9 +184,10 @@
     	location.href = "<%=request.getContextPath()%>/views/festival/FestivalEnroll.jsp";
     });
     
-    $("#arClose").click(function(){
-    	$(this).parent().css("display","none");
+   	$(".alram-close").click(function(){
+       	$(this).parent().css("display","none");
     });
+    
     
     
     function myPage(){
