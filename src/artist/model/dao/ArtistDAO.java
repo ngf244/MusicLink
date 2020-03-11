@@ -140,9 +140,9 @@ public class ArtistDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setString(3, userCode);
+			pstmt.setString(1, userCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<FollowArtist>();
