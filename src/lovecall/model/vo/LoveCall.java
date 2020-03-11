@@ -21,6 +21,15 @@ public class LoveCall {
 	
 	
 	
+	public LoveCall(String plCode, String lcYn) {
+		super();
+		this.plCode = plCode;
+		this.lcYn = lcYn;
+	}
+
+
+
+
 	public LoveCall(Date lcDate, String plCode, String fesName, String lcYn, String lcCode, String fesCode) {
 		super();
 		this.lcDate = lcDate;
