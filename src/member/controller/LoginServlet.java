@@ -55,8 +55,10 @@ public class LoginServlet extends HttpServlet {
 		int result = new MemberService().banlogin(user_id);
 		
 		/*현호*/
-		
-		PayMent payment = new PaymentService().selectPayment(loginUser);
+		PayMent payment = null;
+		/*if(loginUser.getUserCode().substring(0, 1).equals("UC")) {
+		payment = new PaymentService().selectPayment(loginUser);
+		}*/
 		
 		
 		
@@ -73,9 +75,12 @@ public class LoginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(2400);  // 로그인 40분 유지
 			session.setAttribute("loginUser", loginUser);
 			/*현호*/
+			payment = new PaymentService().selectPayment(loginUser);
 			session.setAttribute("payment", payment);
 			
+			
 			System.out.println("페이먼트가 제대로 들어옵니까?"+payment);
+			
 			
 			
 			
@@ -84,6 +89,7 @@ public class LoginServlet extends HttpServlet {
 			
 			
 			ArrayList<Notice> list = service.selectNoticeListtwo(userCode);
+			
 			session.setAttribute("list", list);
 			
 			response.sendRedirect("index.jsp");
