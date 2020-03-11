@@ -44,23 +44,30 @@
                 <div class="fe-day fe-sum"><%= lc.getLcDate() %></div>
                 <div class="fe-name fe-sum"><%= lc.getPlCode() %></div>
                 <div class="fe-page fe-sum"><a href="<%= request.getContextPath() %>/detail.fes?fcode=<%= lc.getFesCode() %>&status=1"><%= lc.getFesName() %></a></div>
-                <% if(lc.getLcYn().equals("I")) { %> 
+                <% if(lc.getLcYn().equals("N")) { %> 
                 <div class="fe-yn fe-sum">
-                	<form action="" mothod="post">
-                	<input type="hidden" value="Y" name="yName">
-                	<input type="hidden" value="<%= lc.getLcCode() %>" name="lcCodey">
+                	<form action="<%=request.getContextPath() %>/lovecall.de" method="post">
+                	<input type="hidden" value="Y" name="yn">
+                	<input type="hidden" value="<%= lc.getLcCode() %>" name="lcCode">
+                	<input type="hidden" value="<%= lc.getFesCode() %>" name="fesCode">
+                	<input type="hidden" value="<%= lc.getAtCode() %>" name="atCode">
                 	<button type="submit">수락</button>
                 	</form>
-					<form action="" mothod="post">
-                	<input type="hidden" value="N" name="nName">
-                	<input type="hidden" value="<%= lc.getLcCode() %>" name="lcCoden">
+					<form action="<%=request.getContextPath() %>/lovecall.de" method="post">
+                	<input type="hidden" value="N" name="yn">
+                	<input type="hidden" value="<%= lc.getLcCode() %>" name="lcCode">
+                	<input type="hidden" value="<%= lc.getFesCode() %>" name="fesCode">
+                	<input type="hidden" value="<%= lc.getAtCode() %>" name="atCode">
                 	<button type="submit">거절</button>
                 	</form>                
                 </div>
-                <% } else { %>
-                <div class="fe-yn fe-sum">완료
+                <% } else if(lc.getLcYn().equals("Y")) { %>
+                <div class="fe-yn fe-sum">수락함
                 </div>
-                <% } %>
+                <% } else{ %>
+                <div class="fe-yn fe-sum">거절함
+                </div>
+                <%} %>
             </div>
             <% } %>
         </div>

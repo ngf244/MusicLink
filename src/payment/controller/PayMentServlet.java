@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 import payment.model.service.PaymentService;
 import payment.model.vo.PayMent;
@@ -37,17 +38,24 @@ public class PayMentServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 	    String userCode = ((Member)session.getAttribute("loginUser")).getUserCode();
+	    Member loginUser = ((Member)session.getAttribute("loginUser"));
 	    int pm = Integer.parseInt(request.getParameter("price"));
+	    
+	    
 	    
 	    PayMent payment = new PayMent(pm,userCode);
 	    
-	    
 	    int result = new PaymentService().insertPayment(payment);
+	    payment = new PaymentService().selectPayment(loginUser);
+	    
+	    /*int sum = new PaymentService().
+	    
+	    int amount = pm + */
 	    
 	    String page = "";
 		if(result > 0)  {
+			session.setAttribute("payment", payment);
 			page = "views/member/Purchaset.jsp";
-			request.setAttribute("payment",  payment);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", ".......");
