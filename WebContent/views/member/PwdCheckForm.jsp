@@ -56,6 +56,7 @@
 	/* Member loginUser = (Member)session.getAttribute("loginUser"); */
 	String userId = loginUser.getUserId();
 	String userPwd = loginUser.getUserPwd();
+	String msg = (String)request.getAttribute("msg");
 	%>   
     <section style="z-index: 1;">
     <%@ include file="../common/MyPage_Menubar.jsp" %>        
@@ -68,7 +69,7 @@
                 <p style="text-decoration: underline;">안전한 MusicLink 사용을 위하여 비밀번호를 다시 한번 확인해주세요.</p>
                 <br>
                 <br>
-                <form action='memberUpdateForm.jsp' method="post" > 
+                <form action="<%= request.getContextPath()%>/check.pwd" onsubmit="return validate();" method="post" > 
                     <table class="ConfirmFrm">
                         <tr>
                             <td><label>아이디</label></td>
@@ -77,17 +78,20 @@
 
                         <tr>
                             <td><label>비밀번호</label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="userPwd" name="userPwd" id="userPwd" required></td>
+                            <td>&nbsp;&nbsp;&nbsp;
+                            	<input type="password" class="userPwd" name="userPwd" id="userPwd">
+                            	<input type="hidden" class="user_pwd" name="user_pwd" id="user_pwd" value="<%= userPwd%>">
+                            </td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td colspan="2" class="errorbox" style="font-size:15px; text-align:center; color:red; padding-left:50px;"></td>
                         </tr>
                     </table>
                     <br>
                     <br>
                     <div class="submit">
-                        <input type="submit" onclick="pwdCheck();" class="btn" value="확인">
-                        <input type="reset" class="btn" value="취소">
+                        <input type="submit" class="btn" value="확인">
+                        <input type="reset" class="btn" value="취소" onclick="history.back(-1)">
                     </div>
                     <div class="idPwdFind"> 
                         <a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">아이디 찾기</a>&nbsp;&nbsp;<a href="FindIdPwd.jsp" target="_blank" style="display: inline-block;">비밀번호 찾기</a>
@@ -96,14 +100,22 @@
                 </form>
             </div>
             <script>
-            	function pwdCheck(){
-            		if($('#userPwd').val() != <%= userPwd %>){
-            			alert("비밀번호가 일치하지 않음");
-                		return false;
-                	}
-            		return true;
-            	}
-            
+    		function validate(){
+    			if($('#userPwd').val().trim().length == 0){
+    				alert('비밀번호를 입력해주세요.');
+    				$('#userPwd').focus();
+    				
+    				return false;
+    			}
+    			
+    			return true;
+    		}
+    		var msg = "<%= msg %>";
+    		$(function(){
+    			if(msg != "null"){
+    				$('.errorbox').text(msg);
+    			}
+    		});
             	
             </script>
         </div>

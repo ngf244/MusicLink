@@ -126,5 +126,12 @@ public class MemberService {
 		return result;
 	}
 
+	public String getPwd(String userId) {
+		Connection conn = getConnection();
+		String pwd = new MemberDAO().getPwd(conn, userId);
+		close(conn);
+		return pwd;
+	}
+
 
 }

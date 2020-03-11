@@ -73,7 +73,7 @@
     .rr-mid2{border-bottom:1px solid #000;}
     .rr-mid3{border-bottom:1px solid #000;}
     
-    .at-photo{width: 14%; height: 100%; margin-left:1%; border-radius: 30px; overflow: hidden; float:left;}
+    .at-photo{width: 14%; height: 100%; margin-left:1%; border-radius: 30px; overflow: hidden; float:left; cursor: pointer;}
     .at-photo > img{width:100%; height: inherit;}
     .at-nickName{width:20%; height:80%; float:left; margin-left:1%; display: inline-block; text-align: center; padding-top: 3%; font-weight: bold; line-height: 45px;}
     .at-nickName >p{margin:0; padding:5px 0;}
