@@ -201,7 +201,7 @@
 						<td colspan="3">
 							<span class="sns_class">Instargram</span>
 							<input type="text" readonly="readonly" name="instaURL" id="instaURL" class="sns-form" placeholder="인스타링크 주소를 넣어주세요." value=
-							<%if(!ai.getInsta().equals("null")) {%>
+							<%if(ai.getInsta()!=null) {%>
 							"<%=ai.getInsta()%>"
 							<%}else{ %>
 							""
@@ -213,7 +213,7 @@
 						<td colspan="3">
 							<span class="sns_class">Twitter</span>
 							<input type="text" readonly="readonly" name="twitterURL" id="twitterURL" class="sns-form" placeholder="트위터링크 주소를 넣어주세요." value=
-							<%if(!ai.getTwitter().equals("null")) {%>
+							<%if(ai.getTwitter()!=null) {%>
 							"<%=ai.getTwitter()%>"
 							<%}else{ %>
 							""
@@ -225,7 +225,7 @@
 						<td colspan="3">
 							<span class="sns_class">FaceBook</span>
 							<input type="text" readonly="readonly" name="facebookURL" id="facebookURL" class="sns-form" placeholder="페이스북링크 주소를 넣어주세요." value=
-							<%if(!ai.getFacebook().equals("null")) {%>
+							<%if(ai.getFacebook()!=null) {%>
 							"<%=ai.getFacebook()%>"
 							<%}else{ %>
 							""
