@@ -303,6 +303,8 @@
 							<td><%= f.getRecCount() %>팀</td>
 						</tr>
 						<%  	}
+							 }
+						}
 							
 							String artistStr = "";
 							
@@ -321,8 +323,11 @@
 						</tr>
 						<%
 							}
-							
-							if(status == 1) { 
+
+							if(loginUser != null) {
+								 if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) { 
+									if(status == 1) { 
+								
 							int strPay = Integer.parseInt((f.getPayRange().split("~"))[0]);
 							int endPay = Integer.parseInt((f.getPayRange().split("~"))[1]);
 							
@@ -339,11 +344,10 @@
 							<td>아티스트 모집 기간</td>
 							<td><%= f.getRecTerm() %></td>
 						</tr>
-						<%  } 
+						<%  		}
+								 }
 							}
-						   } %>
-						   
-						<% 
+							
 							if(status == 3 || status == 2) {
 								String printFee = "";
 							if(f.getTicFreeOp() != null) {
