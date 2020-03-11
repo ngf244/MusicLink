@@ -6,6 +6,10 @@
 	PayMent payment = (PayMent)session.getAttribute("payment");
 	ArrayList<Notice> nolist = (ArrayList<Notice>)session.getAttribute("list");
 	
+	String userclass = "";
+	if(loginUser != null) {
+		userclass = loginUser.getUserClass();
+	}
 %> 
 
 <!DOCTYPE html>
@@ -114,7 +118,7 @@
         
         
         <div class="side-text">
-                <p>&#169; 2019 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn></p>
+                <p>&#169; 2020 MUSICLINK <sapn class=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sapn> <%= userclass %></p>
             </div>
         <% if(loginUser != null){
         	String uName = loginUser.getUserName();

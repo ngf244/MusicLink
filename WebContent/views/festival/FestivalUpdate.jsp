@@ -205,18 +205,15 @@
 			$(function() {
 				var posflag = false;
 				var banflag = false;
-					
-				<% if(artcount == f.getRecCount()) { %> //아티스트 확정 (지난행사조건추가하기??)
+				
+				<% if(artcount == f.getRecCount()) {System.out.println("o");%> //아티스트 확정
 					$('#alert').css('visibility', 'visible');
-					
-					$('#inputfee').attr('disabled', false);
-					$('#inputurl').attr('disabled', false);
+
+					$('#inputfee').val('<%= f.getTicFee() %>');
+					$('#inputurl').val('<%= f.getTicUrl() %>');
 					$('#feativalDate').attr('disabled', true);
-					/*
-					$('.altertog').removeAttr('data-toggle');
-					$('.altertog').removeAttr('data-placement');
-					$('.altertog').removeAttr('title');
-					*/
+					$('#feativalDate').attr('disabled', true);
+					
 					$('#fesName').attr('readonly', true);
 					$('#moneyMin').attr('readonly', true);
 					$('#moneyMax').attr('readonly', true);
@@ -249,7 +246,7 @@
 					$('#status').val('false');
 				<% } %>
 				
-				<% if(f.getBanPath() == null) { %>
+				<% if(f.getBanPath() == null || f.getBanPath().equals("null")) { %>
 					$('#bannerPath').text('파일을 선택해주세요');
 					$('#oriban').val(null);
 				<% } else { %>
@@ -261,8 +258,6 @@
 						$('#secretOp').attr('selected', 'true');
 					<% } else { %>
 						$('#secretOp').attr('selected', 'false');
-						$('#inputfee').val(<%= f.getTicFee() %>);
-						$('#inputurl').val(<%= f.getTicUrl() %>);
 					<% } %>
 				<% } %>
 				
@@ -426,7 +421,7 @@
                             <div class="form-row align-items-center colauto">
                             <div class="col-auto feesize">
 								<div class="input-group mb-3" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
-									<input type="text" id="inputfee" name="inputfee" class="form-control input-default" disabled>
+									<input type="text" id="inputfee" name="inputfee" class="form-control input-default">
 									<div class="input-group-append">
 										<span class="input-group-text">&#8361;</span>
 									</div>
@@ -447,7 +442,7 @@
 						<td class="label">티켓 구매처</td>
 						<td>
 							<div class="input-group mb-3 urlsize" data-toggle="tooltip" data-placement="right" title="모든 아티스트 확정 시 설정 가능합니다.">
-								<input type="text" id="inputurl" name="inputurl" class="form-control input-default" disabled>
+								<input type="text" id="inputurl" name="inputurl" class="form-control input-default">
 								<div class="input-group-append">
 									<span class="input-group-text">https://example.com</span>
 								</div>

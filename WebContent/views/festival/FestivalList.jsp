@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, java.util.Date, java.util.GregorianCalendar, java.util.LinkedHashMap, festival.model.vo.PageInfo, festival.model.vo.Festival" %>
+<%@ page import = "java.util.ArrayList, java.util.Date, java.util.GregorianCalendar, java.util.LinkedHashMap, festival.model.vo.PageInfo, festival.model.vo.Festival, java.text.DecimalFormat" %>
 <%
 	LinkedHashMap<Festival, ArrayList<String>> map = (LinkedHashMap<Festival, ArrayList<String>>)request.getAttribute("map");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -480,21 +480,26 @@
 									<td><%= attendArtist %></td>
 								</tr>
 								<% }
-								if(!addtext.equals("아티스트 모집 중")) {
-									if(f.getTicFreeOp() != null) {
-										if(f.getTicFreeOp().equals("N")) {%>
-										<tr>
-											<td class="listlabel">관람비</td>
-											<td><%= f.getTicFee() %></td>
-										</tr>
-								<%		} else { %>
-										<tr>
-											<td class="listlabel">관람비</td>
-											<td>무료</td>
-										</tr>
-								<%		}
+
+								DecimalFormat formatter = new DecimalFormat("###,###");
+								String printFee = "";
+								if(f.getTicFreeOp() != null) {
+									if(f.getTicFreeOp().equals("Y")) {
+										printFee = "무료";
+									} else {
+										printFee = formatter.format(f.getTicFee()) + "&#8361;";
 									}
+								} else {
+									printFee = formatter.format(f.getTicFee()) + "&#8361;";
 								}
+								
+								if(!addtext.equals("아티스트 모집 중")) { %>
+										<tr>
+											<td class="listlabel">관람비</td>
+											<td><%= printFee %></td>
+										</tr>
+								<% }
+									
 								if(loginUser != null) {
 									if(loginUser.getUserClass().equals("2") || loginUser.getUserClass().equals("3")) {%>
 								<tr>
