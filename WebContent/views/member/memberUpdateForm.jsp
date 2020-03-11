@@ -85,11 +85,14 @@
                         </tr>
                         <tr>
                             <td>새 비밀번호<input type="hidden" name="userPwd" value="<%= userPwd %>"></td>
-                            <td><input type="password" name="newPwd"></td>
+                            <td><input type="password" name="newPwd" id="newPwd" class="pwd"></td>
                         </tr>
                         <tr>
                             <td>새 비밀번호 확인</td>
-                            <td><input type="password" name="newPwd2"></td>
+                            <td><input type="password" name="newPwd2" id="newPwd2" class="pwd"></td>
+                        </tr>
+                        <tr>
+                        	<td height="10" colspan="2"><font id="chkNotice" size="4" style="padding-left: 200px;"></font></td>
                         </tr>
                         <tr>
                             <td>이름</td>
@@ -114,15 +117,16 @@
                             <td>전화번호</td>
                             <td><input type="text" name="userPhone" value="<%= userPhone %>"></td>
                         </tr>
+						
 
                     </table>
-                    
+
                     <br>
 
                     <div class="btnArea">
                         <button type="submit" class="btn">수정</button>
                         <button type="button" class="btn" onclick="deleteMember();">탈퇴</button>
-                        <button type="reset" class="btn">취소</button>
+                        <button type="button" class="btn" onclick="history.back(-1)">취소</button>
                         <br><br>
                     </div>
                 </form>
@@ -135,6 +139,24 @@
 				$('#myInfoForm').submit();
 			}
 		}
+		
+		$(function(){
+		    $('#newPwd').keyup(function(){
+		      $('#chkNotice').html('');
+		    });
+
+		    $('#newPwd2').keyup(function(){
+
+		        if($('#newPwd').val() != $('#newPwd2').val()){
+		          $('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
+		          $('#chkNotice').attr('color', '#f82a2aa3');
+		        } else{
+		          $('#chkNotice').html('비밀번호 일치함<br><br>');
+		          $('#chkNotice').attr('color', '#199894b3');
+		        }
+
+		    });
+		});
 	</script>
             
             

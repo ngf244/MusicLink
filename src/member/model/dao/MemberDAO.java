@@ -330,6 +330,31 @@ public class MemberDAO {
 		return result2;
 	}
 
+	public String getPwd(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String pwd = "";
+		
+		String query = prop.getProperty("getPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pwd = rset.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pwd;
+	}
+
 
 	
 
