@@ -128,7 +128,7 @@
             <div class="user-nickName"><%= uName %></div>
             <div class="user-id"><%= uId %></div>
             <div class="user-coin">
-                <lable>coin</lable><lable style="margin-left:15px;"><%= payment.getPayAmount() %></lable>
+                <lable>coin</lable><div style="margin-left:15px;" class="u-coin" style="display: inline-block;"></div>
             </div>
             <div class="user-mypage" onclick="myPage();">마이페이지</div>
             <div class="user-charging" onclick="purchaset();">충 전</div>
@@ -174,6 +174,14 @@
     
 	$(".image1").click(function(){
 		$(".user-wrap").toggleClass("userOn");
+		$.ajax({
+			url: 'RefreshCoin.me',
+			type: 'get',
+			success: function(data){
+				$('.u-coin').text(data);
+				console.log(data);
+			}
+		});		
     });
         
     $(".image2").click(function(){

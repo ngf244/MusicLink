@@ -17,7 +17,11 @@ public class PayMent {
 		super();
 		this.payAmount = payAmount;
 	}
-
+	
+	public PayMent(String userCode) {
+		super();
+		this.userCode = userCode;
+	}
 
  
 	public PayMent(int payAmount, String userCode) {
