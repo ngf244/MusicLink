@@ -55,7 +55,8 @@ public class PayMentServlet extends HttpServlet {
 	    String page = "";
 		if(result > 0)  {
 			session.setAttribute("payment", payment);
-			page = "views/member/Purchaset.jsp";
+//			page = "views/member/Purchaset.jsp";
+			page = "index.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", ".......");
