@@ -206,7 +206,7 @@
 				var posflag = false;
 				var banflag = false;
 				
-				<% if(artcount == f.getRecCount()) {System.out.println("o");%> //아티스트 확정
+				<% if(artcount == f.getRecCount()) { %> //아티스트 확정
 					$('#alert').css('visibility', 'visible');
 
 					$('#inputfee').val('<%= f.getTicFee() %>');
@@ -221,6 +221,9 @@
 					$('#status').val('true');
 				<% } else if(artcount > 0 && artcount < f.getRecCount()) { %> //아티스트 모집 중 & 확정 아티스트 1명 이상
 					$('#alert').css('visibility', 'visible');
+				
+					$('#inputfee').attr('disabled', true);
+					$('#inputurl').attr('disabled', true);
 					
 					$('#fesName').attr('readonly', true);
 					$('#moneyMin').attr('readonly', true);
@@ -239,6 +242,10 @@
 					};
 					$('.altertog').attr(addalter);
 					*/
+
+					$('#inputfee').attr('disabled', true);
+					$('#inputurl').attr('disabled', true);
+					
 					$('#freeChk').attr('disabled', true);
 					$('#contentArea').css('padding-top', '5%');
 					$('section').css('height', '245%');
@@ -516,6 +523,9 @@
     		$('#needCount').change(function() {
     			if(parseInt($('#needCount').val()) > <%= artcount %>) {
     				$('#moneyMax').attr('readonly', false);
+					$('#inputfee').attr('disabled', true);
+					$('#inputurl').attr('disabled', true);
+					$('#freeChk').attr('disabled', true);
     			}
     		});
     	});
@@ -583,15 +593,13 @@
 		        		return false;
 		    		}
 	    		}
-				
-	    		<%--
-	    		if((posflag == false && $('#posterPath').val() == '<%= f.getPosPath() %>') && (banflag == false && $('#bannerPath').val() == '<%= f.getBanPath() %>')) {
-	    		--%>
-	    		//if(posflag == true) { $('#postri').val('true'); }
-	    		//if(banflag == true) { $('#bantri').val('true'); }
-	    	}
+
+				if($('#moneyMin').val() > $('#moneyMax').val()) {
+					alert('공연비의 최소금액이 최대 금액보다 높습니다.');
+				}
 	    	
 	    	return false;
+	    }
 	    }
 
 	    function reviewUploadImg(fileObj, where) {
